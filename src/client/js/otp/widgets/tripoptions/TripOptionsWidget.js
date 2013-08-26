@@ -208,7 +208,7 @@ otp.widgets.tripoptions.LocationsSelector =
         $("#"+this.id+"-endDropdown").click($.proxy(function() {
             $("#"+this.id+"-end").autocomplete("widget").show();
         }, this));
-                
+                        
 
         $("#"+this.id+"-reverseButton").click($.proxy(function() {
             var module = this.tripWidget.module;
@@ -417,7 +417,10 @@ otp.widgets.tripoptions.ModeSelector =
         this.modeControls = [];
         this.optionLookup = {};
         
-        var html = "<div class='notDraggable'>" + otp.config.locale.tripPlanner.labels.mode + ": ";
+
+        
+        
+        var html = "<div class='notDraggable'>Travel by: ";
         html += '<select id="'+this.id+'">';
         _.each(this.modes, function(text, key) {
             html += '<option>'+text+'</option>';            
