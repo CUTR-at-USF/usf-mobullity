@@ -50,20 +50,20 @@ otp.config = {
      * OTP metadata API call to center and zoom the map. The following
      * properties, when set, override that behavioir.
      */
-     
-    // initLatLng : new L.LatLng(<lat>, <lng>),
-    // initZoom : 14,
-    // minZoom : 10,
-    // maxZoom : 20,
+    
+    initLatLng : new L.LatLng(28.058499, -82.416945), // CUTR position initialized
+    initZoom : 12,
+    minZoom : 8,
+    maxZoom : 20,
 
 
     /**
      * Site name / description / branding display options
      */
 
-    siteName            : "My OTP Instance",
+    siteName            : "MoBullity",
     siteDescription     : "An OpenTripPlanner deployment.",
-    logoGraphic         : 'images/otp_logo_darkbg_40px.png',
+    logoGraphic         : 'images/usf-logo2.gif',
     // bikeshareName    : "",
 
     showLogo            : true,
@@ -91,10 +91,10 @@ otp.config = {
             defaultBaseLayer : 'MapQuest OSM',
             isDefault: true
         },
-        {
-            id : 'analyst',
-            className : 'otp.modules.analyst.AnalystModule',
-        }
+//       {
+//            id : 'analyst',
+//            className : 'otp.modules.analyst.AnalystModule',
+//        }
     ],
     
     
@@ -110,6 +110,7 @@ otp.config = {
      */
 
     geocoders : [
+
     ],
 
     
@@ -125,15 +126,15 @@ otp.config = {
 
 
     infoWidgets: [
-        {
+              {
             title: 'About',
-            content: '<p>About this site</p>',
+            content: '<p></p> <p> This is the USF MoBullity app. It is to be used for Trip Planning to and from the USF Tampa Campus.</p>',
             //cssClass: 'otp-contactWidget',
         },
         {
             title: 'Contact',
-            content: '<p>Comments? Contact us at...</p>'
-        },           
+            content: '<p> Questions or Comments? Contact us at: </p> <p> Tracy Wolf: tnwolf@mail.usf.edu <br> Mona Fathollahi: mona2@mail.usf.edu <br> Sean Barbeau: barbeau@cutr.usf.edu </p>',
+        },  
     ],
     
     
