@@ -171,27 +171,32 @@ body {
   z-index: 100;
   color: #fff;
 
-  background-color: #466069;
+/* BACKGROUND COLOR OF TOOLBAR AT TOP*/
+  background-color: #006747;
+  
 
-  background-image: linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
+  /*background-image: linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -o-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -moz-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -webkit-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -ms-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
 
-/* BACKGROUND COLOR OF TOOLBAR AT TOP*/
+
   background-image: -webkit-gradient(
   	linear,
   	left bottom,
   	left top,
   	color-stop(0, rgb(0,147,116)),
   	color-stop(1, rgb(0,103,71))
-  );
+  ); */
 }
+
+
 
 @media only screen and (min-width: 768px) {
   #branding {
-    height: 4em;
+    height: 3.5em;
+    border-bottom: 0.5em solid #9CCB3B;
   }
 }
 
@@ -238,6 +243,7 @@ body {
 
 
 /* settings widget */
+/*
 #otp-widgetManager {
     float: right;
     width: 30px;
@@ -252,10 +258,12 @@ body {
     top: 40px;
     right: 10px;
     text-align: right;
-}
+} 
+*/
 
 #addthis {
   display: none;
+  float:right;
 }
 
 /* the logo */
@@ -356,26 +364,27 @@ body {
 }
 
 #site-title {
-  font-size: 1.25em;
+  font-size: 2em;
   margin: .325em .25em;
   float: left;
   padding-left: 5px;
+  padding-right: 30px;
+  line-height: .10;
 }
 
 #site-title a {
   text-decoration: none;
-  color: #fff;
-  text-shadow: -1px -1px 1px rgba(42,101,161,0.25),
-               -1px  1px 1px rgba(42,101,161,0.25),
-                1px -1px 1px rgba(42,101,161,0.25),
-                1px  1px 1px rgba(42,101,161,0.25)
+  font-family: stencil;
+  color: #9CCB3B;
 }
+/*
 #site-title a:hover {
   text-shadow: -1px -1px 1px rgba(42,101,161,0.5),
                -1px  1px 1px rgba(42,101,161,0.75),
                 1px -1px 1px rgba(42,101,161,0.25),
                 1px  1px 1px rgba(42,101,161,0.5)
-}
+}*/
+
 #site-description {
   color: #CFC493;
   font-size: 1em;
@@ -388,7 +397,7 @@ body {
 
 /* AddThis */
 #branding .addthis_toolbox {
-  margin: 1.25em 0 0 0;
+  margin: 1.25em 0 0 1.25em;
   float: right;
   min-width: 163px;
 }
@@ -396,7 +405,7 @@ body {
 /* Navigation: Main Menu */
 #main-menu {
   padding: .25em;
-  float: right;
+  float: left;
 }
 #main-menu li {
   float: left;
@@ -406,7 +415,7 @@ body {
   color: #fff;
   font-size: 1em;
   font-weight: bold;
-  line-height: 1.75;
+  line-height: 2;
   text-decoration: none;
   padding: 0 0.75em;
   position: relative;
@@ -419,8 +428,9 @@ body {
 	/* hover color of icons in toolbar*/
   background-color: #009374;
 }
-
-
+#main-menu a:active{
+	background-color: #9CCB3B;
+}
 
 /* The Map
 -------------------------------------------------------------- */
@@ -524,7 +534,7 @@ body {
 -------------------------------------------------------------- */
   
 .otp-widget {
-  position : absolute;
+  position: absolute;
   z-index: 1000;
 }
 
@@ -535,12 +545,9 @@ body {
   border: 1px solid #acacac;
   border-top: 1px solid #bfbfbf;
   border-bottom: 1px solid #9a9a9a;
-  -webkit-border-radius: 3px;
+ /* -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
-          border-radius: 3px;
-     -moz-box-shadow: inset 0 2px 0 rgba(255,255,255,0.5);
-  -webkit-box-shadow: inset 0 2px 0 rgba(255,255,255,0.5);
-          box-shadow: inset 0 2px 0 rgba(255,255,255,0.5);
+          border-radius: 3px; */
 }
 
 .otp-widget .close {
@@ -563,10 +570,11 @@ body {
 	color: red;
 }
 
+
+/* this block changes all titles */
 .otp-widget-header {
     font-size: 16px;
     min-height: 16px;
-    /* text-shadow: -1px 1px 0 #ffffff; */
     font-weight: bold;
     margin-bottom: 5px;
     overflow: hidden;   
@@ -574,6 +582,28 @@ body {
     white-space: nowrap;
     cursor: default;
 }
+
+
+/* Custom CSS header class for the trip widget */
+.otp-defaultTripWidget-header {
+    font-size: 20px;
+    min-height: 16px;
+    font-family: SketchFlow Print;
+    letter-spacing: 2px;
+    font-weight: none; 
+    color: #fff;
+    background-color: #9CCB3B;
+    margin-bottom: 5px;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    padding-left: 8px;
+    padding-top: 10px;
+    padding-bottom: 2px;
+}
+
+
 
 .otp-widget-header-buttons {
     position: absolute;
@@ -584,7 +614,7 @@ body {
 }
 
 .otp-widget-header-button {
-	color: #666;
+	color: #006747;
 	cursor: pointer;
 	font-size: 20px;
     font-weight: bold;
@@ -594,20 +624,17 @@ body {
 	float: right;
 	width: 8px;
 	z-index: 10000;
-    /*-webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;*/
 }
 
 .otp-widget-header-minimize:hover {
 	color: red;
 }
 
-/* change size of widges in tool bar at top */
+/* change size of widgets in tool bar at top */
 .otp-defaultInfoWidget {
-    width: 35em;
-    height: 30%;
-  	overflow: auto;
+    width: 30%;
+    height: auto;
+  	overflow: hidden;
 }
   
 #otp-tripResultsWidget {
@@ -629,19 +656,14 @@ body {
 }
 
 #otp-tipWidget {
-  left: 0.5em;
   right: 0.5em;
-  bottom: 1em;
-  font-size: 85%;
-  font-weight: bold;
+  bottom: 3em;
+  width: 20em;
+  font-size: 12px;
   text-align: center;
-  padding: 0.5em;
-  text-shadow: -1px 1px #fff;
-  background-color: #e3e57a;
-  background-color: rgba(227,229,122,0.8);
-  border: 1px solid #b1b24e;
-  border-top: 1px solid #d1d263;
-  border-bottom: 1px solid #929339;
+  padding: 2.5em;
+  background-color: #80B0A6;
+  border: 1px solid #466069;
 }
 
 #otp-bikestationsWidget {
@@ -698,27 +720,42 @@ body {
 
 .otp-defaultTripWidget {
   width: auto;
-  bottom: 10px;
-  left: 10px;
+  top: 2.5em;
+  left: 0;
+  height: 100%;
+  
+  background: white;
 }
 
 .otp-defaultTripWidget hr {
   display: none;
 }
 
+
+/* trip options widget editing */
 @media only screen and (min-width: 768px) {
   .otp-defaultTripWidget {
-    width: 340px;
-    /*top: auto;
-    left: 20px;
-    bottom: 100px;*/
-    
-    padding: 10px;
+    width: 20em;
+    top: 4em;
+    border: 0;
+    left: 0;
+    height: 100%;
+    padding: 0px;
+    background-color: #fff;
+    background: white;
   }
 
   .otp-defaultTripWidget hr {
     display: block;
   }
+ 
+   .otp-defaultTripWidget-header .title {
+    display: block;
+    background: black;
+	color: rgb(255, 155, 20);
+			
+  } 
+    
 }
 
 
@@ -921,7 +958,7 @@ p#splash-text span {
 
 
 
-/* =Media Queries for Responsive Layout
+/* Media Queries for Responsive Layout
 -------------------------------------------------------------- */
 
 @media only screen and (min-width: 320px) {
@@ -961,10 +998,12 @@ p#splash-text span {
     margin-right: 1em;
   }
 
-  /* AddThis 
+  /* AddThis */
   #branding .addthis_toolbox {
     margin: 1.25em 0 0 1.25em;
-  }*/
+    float: right
+  }
+  
 
   /* Map UI */
   .leaflet-control-zoom {
@@ -974,7 +1013,7 @@ p#splash-text span {
     font-size: 10px;
   }
 
-  #otp-tipWidget {
+ #otp-tipWidget {
     left: 20px;
     right: auto;
     bottom: 2.5em;
@@ -984,7 +1023,7 @@ p#splash-text span {
     padding-right: 1em;
     padding-left: 1em;
     white-space: nowrap;
-  }
+  } 
 
   #otp-noTripWidget {
     width: 230px;
@@ -1118,7 +1157,7 @@ p#splash-text span {
   #otp-tipWidget {
     bottom: 2em;
     font-size: 1.25em;
-  }
+  } 
 
   #otp-bikestationsWidget .button {
 	  width: 16em;

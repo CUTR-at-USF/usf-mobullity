@@ -37,10 +37,15 @@ otp.modules.multimodal.MultimodalPlannerModule =
         otp.modules.planner.PlannerModule.prototype.activate.apply(this);
 
         // set up options widget
-        
+                
         var optionsWidgetConfig = {
-                title : otp.config.locale.widgets.MultimodalPlannerModule.title,
-                closeable : true,
+        		title : 'EASY START',
+        		customHeader : true, // use a custom header
+        		headerClass : 'otp-defaultTripWidget-header',
+                closeable : false,
+                minimizable : true,
+                draggable : false,
+                resizable : false,
                 persistOnClose: true,
         };
         
@@ -66,10 +71,10 @@ otp.modules.multimodal.MultimodalPlannerModule =
 
         modeSelector.addModeControl(new otp.widgets.tripoptions.MaxWalkSelector(this.optionsWidget));
         modeSelector.addModeControl(new otp.widgets.tripoptions.MaxBikeSelector(this.optionsWidget));
-        modeSelector.addModeControl(new otp.widgets.tripoptions.BikeTriangle(this.optionsWidget));
-        modeSelector.addModeControl(new otp.widgets.tripoptions.PreferredRoutes(this.optionsWidget));
-        modeSelector.addModeControl(new otp.widgets.tripoptions.BannedRoutes(this.optionsWidget));
-
+        //modeSelector.addModeControl(new otp.widgets.tripoptions.BikeTriangle(this.optionsWidget));
+        //modeSelector.addModeControl(new otp.widgets.tripoptions.PreferredRoutes(this.optionsWidget));
+        //modeSelector.addModeControl(new otp.widgets.tripoptions.BannedRoutes(this.optionsWidget));
+        //modeSelector.addModeControl(new otp.widgets.tripoptions.StartLocation(this.optionsWidget));
         modeSelector.refreshModeControls();
 
         this.optionsWidget.addSeparator();
