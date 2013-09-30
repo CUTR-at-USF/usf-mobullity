@@ -80,6 +80,7 @@ otp.modules.planner.PlannerModule =
     endName         : null,
     startLatLng     : null,
     endLatLng       : null,
+    
 
     // the defaults params, as modified in the module-specific config
     defaultQueryParams  : null,
@@ -172,6 +173,7 @@ otp.modules.planner.PlannerModule =
         	this.setEndPoint(new L.LatLng(event.latlng.lat, event.latlng.lng), true);
         }
     },
+   
     
     setStartPoint : function(latlng, update, name) {
         this.startName = (typeof name !== 'undefined') ? name : null;
@@ -202,6 +204,7 @@ otp.modules.planner.PlannerModule =
             }
         }
     },
+   
     
     setEndPoint : function(latlng, update, name) {
         this.endName = (typeof name !== 'undefined') ? name : null;
@@ -231,6 +234,7 @@ otp.modules.planner.PlannerModule =
             }
         }
     },
+    
     
     getStartOTPString : function() {
         return (this.startName !== null ? this.startName + "::" : "")
@@ -282,7 +286,7 @@ otp.modules.planner.PlannerModule =
         else
         {
             if(this.startLatLng == null || this.endLatLng == null) {
-                // TODO: alert user
+                alert("Please select a start and end location!");
                 return;
             }
             

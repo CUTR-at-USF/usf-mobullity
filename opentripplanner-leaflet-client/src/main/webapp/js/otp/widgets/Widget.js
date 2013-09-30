@@ -20,13 +20,14 @@ otp.widgets.Widget = otp.Class({
     owner           : null,
     mainDiv         : null,
     header          : null,
+    headerClass		: null,	 // custom css header class
     minimizedTab    : null,
-
+    customHeader	: false, // custom header option
     // fields that can be set via the options parameter, and default values:
     draggable       : true,
     minimizable     : true,
-    closeable       : false,
-    resizable       : false,
+    closeable       : true,
+    resizable       : true,
     showHeader      : true,
     title           : '', // string
     openInitially   : true, 
@@ -62,9 +63,11 @@ otp.widgets.Widget = otp.Class({
             this.mainDiv.addClass(this.cssClass);
         }
         
-        if(this.resizable) this.mainDiv.resizable();
+        if(this.resizable){ this.mainDiv.resizable(); }
         
-        if(this.showHeader) this.addHeader();
+        // Use a custom header class (added headerClass to point to the correct css class)
+        if(this.customHeader && this.headerClass != null){ this.addmyHeader(this.headerClass); }
+        else{ if(this.showHeader) this.addHeader(); }
         
         var this_ = this;
         if(this.draggable) {
@@ -78,6 +81,44 @@ otp.widgets.Widget = otp.Class({
         }
     },
         
+    addmyHeader : function(headerClass) {
+        var this_ = this;
+        //this.title = title;
+        this.header = $('<div class="'+this.headerClass+'">'+this.title+'</div>').appendTo(this.mainDiv); 
+        var buttons = $('<div class="otp-widget-header-buttons"></div>').appendTo(this.mainDiv);
+
+        if(this.closeable) {
+		    $("<div class='otp-widget-header-button'>&times;<div>").appendTo(buttons)
+		    .click(function(evt) {
+			    evt.preventDefault();
+			    this_.close();
+		    });				
+		}
+        if(this.minimizable) {
+            $('<div class="otp-widget-header-button">&ndash;</div>').appendTo(buttons)
+            .click(function(evt) {
+			    evt.preventDefault();
+                this_.minimize();
+            });
+        }
+
+        // set up context menu
+        this.contextMenu = new otp.core.ContextMenu(this.mainDiv, function() {
+            //console.log("widget cm clicked");
+        });
+        this.contextMenu.addItem("Minimize", function() {
+            this_.minimize();
+        }).addItem("Bring to Front", function() {
+            this_.bringToFront();            
+        }).addItem("Send to Back", function() {
+            this_.sendToBack();            
+        });
+        
+        this.header.dblclick(function() {
+            this_.bringToFront();            
+        });
+    },
+    
     addHeader : function() {
         var this_ = this;
         //this.title = title;

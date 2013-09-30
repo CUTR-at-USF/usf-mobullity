@@ -20,6 +20,7 @@ otp.core.Map = otp.Class({
 
     lmap            : null,
     layerControl    : null,
+    locationMarker : null,
     
     contextMenu             : null,
     contextMenuModuleItems  : null,
@@ -30,8 +31,6 @@ otp.core.Map = otp.Class({
     initialize : function(webapp) {
         var this_ = this;
         this.webapp = webapp;
-        
-        
                 
         //var baseLayers = {};
         var defaultBaseLayer = null;
@@ -53,7 +52,6 @@ otp.core.Map = otp.Class({
             }
         }
         
-
         var mapProps = { 
             layers  : [ defaultBaseLayer ],
             center : (otp.config.initLatLng || new L.LatLng(0,0)),
@@ -62,8 +60,29 @@ otp.core.Map = otp.Class({
         }
         if(otp.config.minZoom) mapProps['minZoom'] = otp.config.minZoom;  //_.extend(mapProps, { minZoom : otp.config.minZoom });
         if(otp.config.maxZoom) mapProps['maxZoom'] = otp.config.maxZoom; //_.extend(mapProps, { maxZoom : otp.config.maxZoom });
-
+        
         this.lmap = new L.Map('map', mapProps);
+        
+        if(otp.config.geoLocation){
+    		this.lmap.locate({setView: true, maxZoom: 15});
+    		this.lmap.on('locationfound', onLocationFound);
+    	};
+    	
+    	/* sets marker at current location */
+    	
+    	function onLocationFound(e){
+    		 /*
+            var UserIcon = L.Icon.extend({
+            options: {
+                iconUrl: resourcePath + 'images/Here.png',
+            }
+            });
+            
+            var icon = new UserIcon();*/
+    		L.marker(e.latlng).addTo(this).bindPopup('Current Location');
+    	};
+       
+    	
 
         L.control.layers(this.baseLayers).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
@@ -118,7 +137,20 @@ otp.core.Map = otp.Class({
         
         this.contextMenu = new otp.core.MapContextMenu(this);
       
-        this.activated = true;        
+        this.activated = true;
+        
+        // Add Bus Stops!!
+        var BusIcon = L.Icon.extend({
+            options: {
+                iconUrl: resourcePath + 'images/mode/bus.png'
+            }
+        });
+        
+        if (otp.config.showBusStops){
+        	var icon = new BusIcon();
+        	//L.marker().addTo(this.lmap).bindPopup('CUTR');   	
+        };
+        
     },
     
     addContextMenuItem : function(text, clickHandler) {

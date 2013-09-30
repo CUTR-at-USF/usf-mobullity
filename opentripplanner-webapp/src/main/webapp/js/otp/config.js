@@ -107,7 +107,7 @@ otp.config_defaults = {
 
         geocoder  :
         {
-            enabled : false,
+            enabled : true,
             url     : "/geocoder/geocode",  
             addressParamName : "address"
         },
