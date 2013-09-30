@@ -784,6 +784,8 @@ text-decoration: underline;
 background-image: url(images/ui/bg.gif);
 }
 
+
+/* THIS IS WHERE I CAN CHANGE THE SIDEBAR COLOR */
 .x-border-layout-ct {
 background: #fff;
 }

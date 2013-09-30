@@ -15,8 +15,7 @@
 otp.namespace("otp.core");
 
 otp.core.Webapp = otp.Class({
-
-    map     : null,
+	map     : null,
     
     modules : [ ],
     moduleMenu : null,
@@ -33,8 +32,7 @@ otp.core.Webapp = otp.Class({
     urlParams : null,
 
     initialize : function() {
-
-
+    	
         // misc. housekeeping
         
         if(typeof console == 'undefined') console = { log: function(str) {} };
@@ -110,8 +108,8 @@ otp.core.Webapp = otp.Class({
         }
         
         // create the Webapp-owned objects
-        
-        this.map = new otp.core.Map(this);        
+    	
+    	this.map = new otp.core.Map(this);
         this.transitIndex = new otp.core.TransitIndex(this);
         this.widgetManager = new otp.widgets.WidgetManager();
         
@@ -139,12 +137,10 @@ otp.core.Webapp = otp.Class({
             addThisHtml += 'addthis:url="'+otp.config.siteURL+'"\n';
             addThisHtml += 'addthis:title="'+otp.config.addThisTitle+'"\n';
             addThisHtml += 'addthis:description="'+otp.config.siteDescription+'">\n';
-            addThisHtml += '<a class="addthis_button_twitter"></a>\n';
             addThisHtml += '<a class="addthis_button_facebook"></a>\n';
-            addThisHtml += '<a class="addthis_button_google_plusone_share"></a>\n';
+            addThisHtml += '<a class="addthis_button_twitter"></a>\n';
             addThisHtml += '<a class="addthis_button_preferred_1"></a>\n';
             addThisHtml += '<a class="addthis_button_compact"></a>\n';
-            addThisHtml += '<a class="addthis_counter addthis_bubble_style"></a>\n';
             addThisHtml += '</div>';
             
             $(addThisHtml).appendTo('#branding');
@@ -260,9 +256,8 @@ otp.core.Webapp = otp.Class({
         // retrieve a saved trip, if applicable
 		//if(window.location.hash !== "")
 		//	otp.util.DataStorage.retrieve(window.location.hash.replace("#", ""), this.activeModule);
-			
-		
-    },
+        
+     },
     
     addModule : function(module, makeActive) {
         makeActive = typeof makeActive !== 'undefined' ? makeActive : false;
