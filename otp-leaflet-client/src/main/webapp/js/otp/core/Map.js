@@ -147,8 +147,8 @@ otp.core.Map = otp.Class({
         });
         
         if (otp.config.showBusStops){
-        	var icon = new BusIcon();
-        	//L.marker().addTo(this.lmap).bindPopup('CUTR');   	
+        	//var icon = new BusIcon();
+        	//L.marker().addTo(this.lmap).bindPopup('Bus Stop');   	
         };
         
     },
