@@ -54,6 +54,7 @@ otp.config = {
     
     //set init lat lng in map.js with geolocation
     geoLocation: true,
+    locatorSwitch: true,
     initLatLng : new L.LatLng(28.058499, -82.416945), 
     initZoom : 14,
     minZoom : 8,
@@ -65,7 +66,7 @@ otp.config = {
      */
 
     siteName            : "MoBullity",
-    siteDescription     : "An OpenTripPlanner deployment.",
+    siteDescription     : "An OpenTripPlanner deployment for USF.",
     logoGraphic         : 'images/usf-logo2.gif',
     // bikeshareName    : "",
 
@@ -114,11 +115,11 @@ otp.config = {
      */
 
     geocoders : [
-                 {
-                	 name: 'Search',
-                	 className: 'otp.core.Geocoder',
-                	 url: 'butts',
-                	 addressParam: 'address',
+                {
+                	 name: "Google Geocoder",
+                	 className: "otp.core.SOLRGeocoder",
+                	 url: "/opentripplanner-geocoder/geocode",
+                	 addressParam: "address",
                  }
     ],
 
@@ -156,8 +157,10 @@ otp.config = {
      */
      
     showAddThis     : true,
-    addThisPubId    : '#UF0983',
-    //addThisTitle    : 'Your title for AddThis sharing messages',
+    siteURL			: 'http://mobullity.forest.usf.edu',
+    addThisTitle    : 'Check out the MoBullity Webapp!',
+    siteDescription : 'OpenTripPlanner for USF',
+    addThisPubId    : 'ra-525818cf0207df3a',
 
 
     /**
