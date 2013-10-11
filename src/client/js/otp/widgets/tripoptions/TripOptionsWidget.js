@@ -440,15 +440,16 @@ otp.widgets.tripoptions.ModeSelector =
             html += '<option>'+text+'</option>';            
         });
         html += '</select>';
-        /*end of mode selection declaration */
         
+        /* trying to change drop down to check buttons*/
 //        html += '<form id="'+this.id+'" name="selectMode">';
 //        _.each(this.modes, function(text, key) {
-//        	html += '<input type ="radio" form="selectMode" name="mode" value=text>'; 
+//        	html += '<input type ="radio" form="selectMode" name="mode" value="'+text+'">'; 
 //        	html += ' ' + text;
 //        	html += '<br>';
 //        });
 //        html += '</form>';
+        /*end of mode selection declaration */
         
         
         html += '<div id="'+this.id+'-widgets" style="overflow: hidden;"></div>';
