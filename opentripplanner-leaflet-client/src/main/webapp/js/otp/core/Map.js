@@ -83,7 +83,7 @@ otp.core.Map = otp.Class({
     	};
        
     	
-
+    	/* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
         //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));

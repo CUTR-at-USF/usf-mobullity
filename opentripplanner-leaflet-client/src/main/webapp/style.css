@@ -243,9 +243,10 @@ body {
 
 
 /* settings widget */
-/*
+
 #otp-widgetManager {
-    float: right;
+    position: absolute;
+    right: 0px;
     width: 30px;
     height: 30px;
     margin: 10px 10px 0 0;
@@ -256,14 +257,15 @@ body {
 
 .otp-widgetManagerMenu {
     top: 40px;
-    right: 10px;
+    right: 0px;
     text-align: right;
 } 
-*/
+
 
 #addthis {
   display: none;
-  float:right;
+  position: absolute;
+  right: 50px;
 }
 
 /* the logo */

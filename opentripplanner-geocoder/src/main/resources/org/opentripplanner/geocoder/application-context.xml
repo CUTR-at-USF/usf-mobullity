@@ -66,13 +66,13 @@
 	<bean id="geocoderUSCSV" class="org.opentripplanner.geocoder.GeocoderUSCSV">
 		<property name="geocoderBaseUrl" value="http://rpc.geocoder.us/service/csv" />
 	</bean>
-	
+
 	<bean id="geocoderGoogle" class="org.opentripplanner.geocoder.google.GoogleGeocoder" />
-	
+
 	<bean id="geocoderYahoo" class="org.opentripplanner.geocoder.yahoo.YahooGeocoder">
 	    <property name="appId" value="yourappId" />
 	</bean>
-	
+
 	<bean id="geocoderNominatim" class="org.opentripplanner.geocoder.nominatim.NominatimGeocoder">
 		<property name="nominatimUrl" value="http://open.mapquestapi.com/nominatim/v1/search" />
 		<!-- Optional parameters: viewBox and resultLimit, viewbox=left,top,right,bottom -->  
