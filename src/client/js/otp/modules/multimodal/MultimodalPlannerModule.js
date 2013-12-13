@@ -22,9 +22,9 @@ otp.modules.multimodal.MultimodalPlannerModule =
     
     itinWidget  : null,
     
-    showIntermediateStops : false,
+    showIntermediateStops : true,
     
-    stopsWidget: false,
+    stopsWidget: true,
     
     routeData : null,
     
@@ -83,7 +83,9 @@ otp.modules.multimodal.MultimodalPlannerModule =
         this.optionsWidget.applyQueryParams(this.defaultQueryParams);
         
         // add stops layer
-        this.stopsLayer = new otp.layers.StopsLayer(this);
+        if(otp.config.showBusStops){
+        	this.stopsLayer = new otp.layers.StopsLayer(this);
+        };
     },
     
     routesLoaded : function() {

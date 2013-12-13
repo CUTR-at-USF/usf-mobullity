@@ -29,8 +29,8 @@ otp.core.WidgetManagerMenu =
 
         this.menu.addClass('otp-widgetManagerMenu').hide();
 
-        
         var this_ = this;
+
         this.addItem(otp.config.locale.widgets.managerMenu.minimizeAll, function() {
             var widgets = this_.webapp.activeModule.widgets;
             for(infoWidgetId in this_.webapp.infoWidgets) widgets.push(this_.webapp.infoWidgets[infoWidgetId]);
@@ -51,6 +51,8 @@ otp.core.WidgetManagerMenu =
         this.addSeparator();
         
         this.widgetItems = $("<div />").appendTo(this.menu);
+        
+        
     },
     
 

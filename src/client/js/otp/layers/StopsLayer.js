@@ -14,11 +14,21 @@
 
 otp.namespace("otp.layers");
 
-var StopIcon20 = L.Icon.extend({
+var bullrunnerStopIcon = L.Icon.extend({
+    options: {
+        iconUrl: resourcePath + 'images/busStopButton.svg',
+        shadowUrl: null,
+        iconSize: new L.Point(25,25),
+        iconAnchor: new L.Point(10, 10),
+        popupAnchor: new L.Point(0, -5)
+    }
+});
+
+var hartStopIcon = L.Icon.extend({
     options: {
         iconUrl: resourcePath + 'images/stop20.png',
         shadowUrl: null,
-        iconSize: new L.Point(20, 20),
+        iconSize: new L.Point(15,15),
         iconAnchor: new L.Point(10, 10),
         popupAnchor: new L.Point(0, -5)
     }
@@ -67,12 +77,14 @@ otp.layers.StopsLayer =
             stop.lon = stop.lon || stop.stopLon;
 
             // temporary TriMet specific code
-            if(stop.stopUrl && stop.stopUrl.indexOf("http://trimet.org") === 0) {
-                stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
-            }
+
+//            if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
+//                stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
+//            }
             //console.log(stop);
             
-            var icon = new StopIcon20();
+            var bullIcon = new bullrunnerStopIcon();
+            var hartIcon = new hartStopIcon();
             
             var context = _.clone(stop);
             context.agencyStopLinkText = otp.config.agencyStopLinkText || "Agency Stop URL";
@@ -108,11 +120,20 @@ otp.layers.StopsLayer =
                     //routeList.append('<div>'+agencyAndId+'</div>');
                 }
             }
-                    
-            L.marker([stop.lat, stop.lon], {
-                icon : icon,
-            }).addTo(this)
-            .bindPopup(popupContent.get(0));
+          
+            
+            if(stop.id.agencyId == "HART"){
+            	L.marker([stop.lat, stop.lon], {
+            		icon : hartIcon,
+            	}).addTo(this)
+            	.bindPopup(popupContent.get(0));
+            }
+            else{
+            	L.marker([stop.lat, stop.lon], {
+            		icon : bullIcon,
+            	}).addTo(this)
+            	.bindPopup(popupContent.get(0));
+            }
             
         }
     },

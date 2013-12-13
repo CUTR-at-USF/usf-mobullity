@@ -27,8 +27,8 @@ otp.widgets.ItinerariesWidget =
     
     // set to true by next/previous/etc. to indicate to only refresh the currently active itinerary
     refreshActiveOnly : false,
-    showButtonRow : true,
-    showItineraryLink : true,
+    showButtonRow : false,
+    showItineraryLink : false,
     showPrintLink : true,
     showEmailLink : true,
     showSearchLink : false,
@@ -559,7 +559,7 @@ otp.widgets.ItinerariesWidget =
             
             // show the intermediate stops, if applicable -- REPLACED BY TRIP VIEWER
             
-            /*if(this.module.showIntermediateStops) {
+            if(this.module.showIntermediateStops) {
 
                 $('<div class="otp-itin-leg-buffer"></div>').appendTo(legDiv);            
                 var intStopsDiv = $('<div class="otp-itin-leg-intStops"></div>').appendTo(legDiv);
@@ -595,7 +595,7 @@ otp.widgets.ItinerariesWidget =
                     });                    
                 }
                 intStopsListDiv.hide();
-            }*/
+            }
 
             // show the end time and stop
 

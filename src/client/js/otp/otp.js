@@ -54,7 +54,7 @@ otp.namespace = function(ns, context)
  *     var MyClass = otp.Class(Class1, Class2, prototype);
  * (end)
  * 
- * Note that instanceof reflection will only reveal Class1 as superclass.
+ * Note that instance of reflection will only reveal Class1 as superclass.
  *
  */
  

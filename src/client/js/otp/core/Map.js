@@ -71,15 +71,17 @@ otp.core.Map = otp.Class({
     	/* sets marker at current location */
     	
     	function onLocationFound(e){
-    		 /*
-            var UserIcon = L.Icon.extend({
+            var locationSpot = L.Icon.extend({
             options: {
-                iconUrl: resourcePath + 'images/Here.png',
+                iconUrl: resourcePath + 'images/locationSpot.svg',
+                iconSize: new L.Point(10,10),
             }
             });
-            
-            var icon = new UserIcon();*/
-    		L.marker(e.latlng).addTo(this).bindPopup('Current Location');
+           
+            var locSpot = new locationSpot();
+    		L.marker(e.latlng,{icon : locSpot,}).addTo(this).bindPopup('Current Location');
+    		L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3}).addTo(this);
+    		
     	};
        
     	
@@ -137,18 +139,6 @@ otp.core.Map = otp.Class({
         this.contextMenu = new otp.core.MapContextMenu(this);
       
         this.activated = true;
-        
-        // Add Bus Stops!!
-        var BusIcon = L.Icon.extend({
-            options: {
-                iconUrl: resourcePath + 'images/mode/bus.png'
-            }
-        });
-        
-        if (otp.config.showBusStops){
-        	//var icon = new BusIcon();
-        	//L.marker().addTo(this.lmap).bindPopup('Bus Stop');   	
-        };
         
     },
     

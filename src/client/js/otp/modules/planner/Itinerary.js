@@ -304,7 +304,7 @@ otp.modules.planner.Itinerary = otp.Class({
     },
     
     getTextNarrative : function(itinLink) {
-        var text = ''
+        var text = '';
         text += 'Start: '+this.getStartLocationStr()+' at '+this.getStartTimeStr()+'\n\n';
         
         for(var l=0; l<this.itinData.legs.length; l++) {

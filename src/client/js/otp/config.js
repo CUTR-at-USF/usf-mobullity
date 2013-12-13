@@ -65,7 +65,7 @@ otp.config = {
 
     siteName            : "MoBullity",
     siteDescription     : "An OpenTripPlanner deployment for USF.",
-    logoGraphic         : 'images/usf-logo2.gif',
+    logoGraphic         : 'images/USF-v-green.png',
     // bikeshareName    : "",
 
     showLogo            : true,
@@ -115,7 +115,6 @@ otp.config = {
      */
 
     geocoders : [
-<<<<<<< HEAD:src/client/js/otp/config.js
         {
             name: 'OTP built-in geocoder',
             className: 'otp.core.GeocoderBuiltin'
@@ -150,6 +149,7 @@ otp.config = {
             title: 'Contact',
             content: '<p> Questions or Comments? Contact us at: </p> <p> Sean Barbeau: barbeau@cutr.usf.edu </p>',
         },  
+
 
     ],
     
