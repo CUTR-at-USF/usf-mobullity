@@ -165,7 +165,7 @@ body {
 /* Branding (top bar) */
 
 #branding {
-  height: 2.25em;
+  height: 3.5em;
   overflow: visible;
   position: relative;
   z-index: 100;
@@ -246,6 +246,7 @@ body {
 
 #otp-widgetManager {
     position: absolute;
+    top: 0px;
     right: 0px;
     width: 30px;
     height: 30px;
@@ -478,7 +479,7 @@ body {
 }
 #main-menu a:hover {
 	/* hover color of icons in toolbar*/
-  background-color: #009374;
+  background-color: #9CCB3B;
 }
 #main-menu a:active{
 	background-color: #9CCB3B;
@@ -489,7 +490,7 @@ body {
 
 #map {
   position: absolute;
-  top: 2.25em;
+  top: 3.5em;
   right: 0;
   bottom: 0;
   left: 0;
@@ -597,9 +598,6 @@ body {
   border: 1px solid #acacac;
   border-top: 1px solid #bfbfbf;
   border-bottom: 1px solid #9a9a9a;
- /* -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px; */
 }
 
 .otp-widget .close {
@@ -623,7 +621,7 @@ body {
 }
 
 
-/* this block changes all titles */
+/* this changes all titles */
 .otp-widget-header {
     font-size: 16px;
     min-height: 16px;
@@ -634,25 +632,6 @@ body {
     white-space: nowrap;
     cursor: default;
 }
-
-
-/* Custom CSS header class for the trip widget */
-.otp-defaultTripWidget-header {
-    font-size: 20px;
-    min-height: 16px;
-    font-family: SketchFlow Print;
-    letter-spacing: 2px;
-    font-weight: none; 
-    color: #fff;
-    background-color: #9CCB3B;
-    margin-bottom: 5px;
-    overflow: hidden;   
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: default;
-    padding: 5px;
-}
-
 
 
 .otp-widget-header-buttons {
@@ -681,15 +660,24 @@ body {
 }
 
 /* change size of widgets in tool bar at top */
-.otp-defaultInfoWidget {
-    width: 30%;
-    height: auto;
-  	overflow: hidden;
+
+	.otp-defaultInfoWidget {
+ 	   width: 75%;
+ 	   height: 75%;
+ 	   overflow: hidden;
+	}
+
+@media only screen and (min-width: 768px){
+	.otp-defaultInfoWidget {
+ 	   width: 400px;
+ 	   height: auto;
+ 	 overflow: hidden;
+	}
 }
   
 #otp-tripResultsWidget {
   width: 230px;
-  height: auto;
+  height: 200px;
   left: 20px;
   bottom: 7.5em;
   display: none;
@@ -700,7 +688,6 @@ body {
   right: 0.5em;
   font-size: 85%;
   background-color: #ffa07a;
-  background-color: rgba(255,160,122,0.85);
   display: none;
 }
 
@@ -767,12 +754,29 @@ body {
 
 /* TripSummaryWidget */
 
+/* Custom CSS header class for the trip widget */
+.otp-defaultTripWidget-header {
+    font-size: 20px;
+    min-height: 16px;
+    font-family: SketchFlow Print;
+    letter-spacing: 2px;
+    font-weight: none; 
+    color: #fff;
+    background-color: #9CCB3B;
+    margin-bottom: 5px;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    padding: 5px;
+}
+
 .otp-defaultTripWidget {
   width: auto;
   height: auto;
-  top: 2.5em;
+  top: 3.5em;
   left: 0;
-  
+  padding: 0px;
   background: white;
 }
 
@@ -790,7 +794,7 @@ body {
     left: 0;
     padding: 0px;
     border: 0;
-    background-color: #fff;
+    background-color: white;
   }
 
   .otp-defaultTripWidget hr {
@@ -801,9 +805,25 @@ body {
     display: block;
     background: black;
 	color: rgb(255, 155, 20);
-			
   } 
     
+}
+
+.otp-defaultItinsWidget {
+	width: auto;
+	height: 50%;
+	position: absolute;
+	left: 0px;
+	top: 4em;
+}
+
+@media only screen and (min-width: 768px) {
+	.otp-defaultItinsWidget {
+		height: 275px;
+		width: 250px;
+		position: absolute;
+		left: 0px;
+	}
 }
 
 

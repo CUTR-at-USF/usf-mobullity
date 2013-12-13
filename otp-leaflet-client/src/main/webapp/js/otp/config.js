@@ -67,7 +67,7 @@ otp.config = {
 
     siteName            : "MoBullity",
     siteDescription     : "An OpenTripPlanner deployment for USF.",
-    logoGraphic         : 'images/usf-logo2.gif',
+    logoGraphic         : 'images/USF-v-green.png',
     // bikeshareName    : "",
 
     showLogo            : true,
@@ -146,7 +146,10 @@ otp.config = {
         },
         {
             title: 'Help',
-            content: '<p>Need Help getting started?</p><p>In order to plan a trip, you must select a start location and an end location by clicking on the map. Then choose your desired travel options and click to plan your trip.</p><p>Tip: You can also move the start and end flags around after choosing their initial location.</p> <p> Contact information for questions or comments: <br> <p> Tracy Wolf: tnwolf@mail.usf.edu <br> Mona Fathollahi: mona2@mail.usf.edu <br> Sean Barbeau: barbeau@cutr.usf.edu </p>',
+            content: '<p>Need Help getting started?</p><p>In order to plan a trip, you must select a start location and an end location by clicking on the map or typing a location into the start and end fields. Then choose your desired travel options and click Plan Trip!</p><p>Tip: If the location you are looking for does not come up in search, try adding the city to the search field to get better results. If you cant find a particular USF building just add USF to the search as well.</p>',
+        },
+        {	title: 'Contact',
+        	content: '<p> Contact information for questions or comments:</p><p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
         },
 
     ],
