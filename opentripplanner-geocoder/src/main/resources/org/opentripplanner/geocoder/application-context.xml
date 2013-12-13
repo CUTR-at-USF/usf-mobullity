@@ -81,6 +81,6 @@
 	</bean>
 
 	<bean id="geocoderServer" class="org.opentripplanner.geocoder.ws.GeocoderServer">
-		<property name="geocoder" ref="geocoderNominatim" />
+		<property name="geocoder" ref="geocoderGoogle" />
 	</bean>
 </beans>

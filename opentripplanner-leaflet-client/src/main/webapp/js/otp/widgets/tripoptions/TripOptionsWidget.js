@@ -247,9 +247,12 @@ otp.widgets.tripoptions.LocationsSelector =
                 this_.tripWidget.inputChanged();
             },
         })
-        .dblclick(function() {
-            $(this).select();
+        .change(function() {
+        	$(this).select();
         });
+//        .dblclick(function() {
+//            $(this).select();
+//        });
         return input;
     },
     
