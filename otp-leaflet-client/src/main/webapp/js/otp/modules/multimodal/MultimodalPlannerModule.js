@@ -39,7 +39,7 @@ otp.modules.multimodal.MultimodalPlannerModule =
         // set up options widget
                 
         var optionsWidgetConfig = {
-        		title : 'EASY START',
+        		title : 'TRIP PLANNER',
         		customHeader : true, // use a custom header
         		headerClass : 'otp-defaultTripWidget-header',
                 closeable : false,
