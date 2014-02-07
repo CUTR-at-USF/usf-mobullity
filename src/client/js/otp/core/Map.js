@@ -44,11 +44,11 @@ otp.core.Map = otp.Class({
 
             var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
 
-	        this.baseLayers[layerConfig.name] = layer;
+                this.baseLayers[layerConfig.name] = layer;
             if(i == 0) defaultBaseLayer = layer;            
-	        
-	        if(typeof layerConfig.getTileUrl != 'undefined') {
-        	    layer.getTileUrl = otp.config.getTileUrl;
+                
+                if(typeof layerConfig.getTileUrl != 'undefined') {
+                    layer.getTileUrl = otp.config.getTileUrl;
             }
         }
         
@@ -63,14 +63,16 @@ otp.core.Map = otp.Class({
         
         this.lmap = new L.Map('map', mapProps);
         
+        
+        /*Locates user's current location if geoLocation in config.js is true*/
         if(otp.config.geoLocation){
-    		this.lmap.locate({setView: true, maxZoom: 15});
-    		this.lmap.on('locationfound', onLocationFound);
-    	};
-    	
-    	/* sets marker at current location */
-    	
-    	function onLocationFound(e){
+                    this.lmap.locate({setView: true, maxZoom: 15});
+                    this.lmap.on('locationfound', onLocationFound);
+            };
+            
+            /* sets marker at current location */
+            
+            function onLocationFound(e){
             var locationSpot = L.Icon.extend({
             options: {
                 iconUrl: resourcePath + 'images/locationSpot.svg',
@@ -79,13 +81,18 @@ otp.core.Map = otp.Class({
             });
            
             var locSpot = new locationSpot();
-    		L.marker(e.latlng,{icon : locSpot,}).addTo(this).bindPopup('Current Location');
-    		L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3}).addTo(this);
-    		
-    	};
+                    L.marker(e.latlng,{icon : locSpot,}).addTo(this).bindPopup('Current Location');
+                    L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3}).addTo(this);
+                    
+            };
+            
+            /*Live Map stuff*/
+            function setLiveMap(){
+            	alert("butts");
+            };
        
-    	
-    	/* here are the controls for layers and zooming on the map */
+            
+            /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
         //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));
@@ -113,9 +120,9 @@ otp.core.Map = otp.Class({
         var overlays = { };
         
         if(typeof otp.config.overlayTileUrl != 'undefined') {
-	    	var overlayTileLayer = new L.TileLayer(otp.config.overlayTileUrl);
-	    	//this.lmap.addLayer(overlayTileLayer);
-	    	//overlays['Overlay'] = overlayTileLayer;
+                    var overlayTileLayer = new L.TileLayer(otp.config.overlayTileUrl);
+                    //this.lmap.addLayer(overlayTileLayer);
+                    //overlays['Overlay'] = overlayTileLayer;
         }
         
         //this.layerControl = new L.Control.Layers(baseMaps, overlays);
@@ -185,7 +192,7 @@ otp.core.Map = otp.Class({
     
     setBounds : function(bounds)
     {
-    	this.lmap.fitBounds(bounds);
+            this.lmap.fitBounds(bounds);
     },
     
     $ : function() {
@@ -194,4 +201,3 @@ otp.core.Map = otp.Class({
     
     CLASS_NAME : "otp.core.Map"
 });
-

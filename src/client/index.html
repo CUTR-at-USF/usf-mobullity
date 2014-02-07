@@ -195,7 +195,17 @@ $(document).ready(function() {
         
 });
 
-
+// Live Map Function 
+function liveMapFunc(){
+    var routeA= $('#RouteA').is(':checked');
+    var routeB= $('#RouteB').is(':checked');
+    var routeC= $('#RouteC').is(':checked');
+    var routeD= $('#RouteD').is(':checked');
+    var routeE= $('#RouteE').is(':checked');
+    var routeF= $('#RouteF').is(':checked');
+	
+	return otp.core.Map.setLiveMap();
+};
 
 </script>
 
@@ -238,7 +248,7 @@ $(document).ready(function() {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>z
+</script>
 
 </body>
 </html>

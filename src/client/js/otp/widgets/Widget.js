@@ -27,7 +27,7 @@ otp.widgets.Widget = otp.Class({
     draggable       : true,
     minimizable     : true,
     closeable       : true,
-    resizable       : true,
+    resizable       : false,
     showHeader      : true,
     title           : '', // string
     openInitially   : true, 

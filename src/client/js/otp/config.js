@@ -52,6 +52,7 @@ otp.config = {
     //set init lat lng in map.js with geolocation
     geoLocation: true,
     locatorSwitch: false,
+    //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.058499, -82.416945), 
     initZoom : 14,
     minZoom : 8,
@@ -150,7 +151,6 @@ otp.config = {
             content: '<p> Questions or Comments? Contact us at: </p> <p> Sean Barbeau: barbeau@cutr.usf.edu </p>',
         },  
 
-
     ],
     
     
@@ -171,5 +171,8 @@ otp.config = {
      
     timeFormat  : "h:mma",
     dateFormat  : "MMM Do YYYY"
+<<<<<<< HEAD:src/client/js/otp/config.js
 
+=======
+>>>>>>> Cleaned up code, made style.css more consistent, added better comments,:otp-leaflet-client/src/main/webapp/js/otp/config.js
 };

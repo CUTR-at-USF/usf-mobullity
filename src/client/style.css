@@ -173,14 +173,12 @@ body {
 
 /* BACKGROUND COLOR OF TOOLBAR AT TOP*/
   background-color: #006747;
-  
-
+ 
   /*background-image: linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -o-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -moz-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -webkit-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
   background-image: -ms-linear-gradient(bottom, rgb(68,68,68) 0%, rgb(102,102,102) 100%);
-
 
   background-image: -webkit-gradient(
   	linear,
@@ -191,8 +189,7 @@ body {
   ); */
 }
 
-
-
+/*creates the green line below the tool bar at the top*/
 @media only screen and (min-width: 768px) {
   #branding {
     height: 3.5em;
@@ -201,7 +198,6 @@ body {
 }
 
 /* Module Selector */
-
 #otp_moduleSelector {
   font-size: 11px;
   margin: 6px 10px;
@@ -243,7 +239,6 @@ body {
 
 
 /* settings widget */
-
 #otp-widgetManager {
     position: absolute;
     top: 0px;
@@ -269,6 +264,7 @@ body {
   right: 50px;
 }
 
+/*I have no done anything with the logo not sure where it is/what it is */
 /* the logo */
 #logo {
   display: none;
@@ -366,6 +362,7 @@ body {
              box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25), inset 1px 1px 1px rgba(255,255,255,0.5);
 }
 
+/*Mobullity Title at top*/
 #site-title {
   font-size: 2em;
   margin: .325em .25em;
@@ -403,10 +400,10 @@ body {
   margin: 1.25em 0 0 0;
   padding-right: 0;
   float: right;
-  min-width: 75px;
+  min-width: 100px;
 }
 
-/*Location Switch*/
+/*Location Switch: not being used but code is here just in case*/
 .onoffswitch {
     position: absolute; width: 48px;
     top: 1.25em; right: 0.5em;
@@ -453,6 +450,39 @@ body {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
+}
+
+/* Live Map Window Style Class */
+.livemap-window {
+	background: #ffffff;
+	  border: 1px solid #acacac;
+  	border-top: 1px solid #bfbfbf;
+  	border-bottom: 1px solid #9a9a9a;
+	height: auto;
+	width: 18em;
+	
+	padding: 3px;
+	position:absolute;
+	top:4em;
+	left:0em;
+}
+
+#blanket {
+background-color:#111;
+opacity: 0.65;
+filter:alpha(opacity=65);
+position:absolute;
+z-index: 9001;
+top:0px;
+left:0px;
+width:100%;
+}
+#popUpDiv {
+position:absolute;
+background-color:#eeeeee;
+width:300px;
+height:300px;
+z-index: 9002;
 }
 
 /* Navigation: Main Menu */
@@ -591,10 +621,9 @@ body {
   z-index: 1000;
 }
 
-/* widget boxes colors */
+/* Changes the widget boxes when transparent=false in widget.js */
 .otp-widget-nonTransparent {
   padding: 5px 10px;
-  background: #CFC493;
   border: 1px solid #acacac;
   border-top: 1px solid #bfbfbf;
   border-bottom: 1px solid #9a9a9a;
@@ -659,19 +688,28 @@ body {
 	color: red;
 }
 
-/* change size of widgets in tool bar at top */
+/* Welcome Widget: Popup window with information at beginning to help user*/
+   #otp-WelcomeWidget {
+    background: white;
+    position: absolute;
+    z-index: 9001;
+  } 
+
+/* Change the looks of the widget windows */
 
 	.otp-defaultInfoWidget {
  	   width: 75%;
  	   height: 75%;
  	   overflow: hidden;
+ 	   background: #CFC493;
 	}
 
 @media only screen and (min-width: 768px){
 	.otp-defaultInfoWidget {
  	   width: 400px;
  	   height: auto;
- 	 overflow: hidden;
+ 	   overflow: hidden;
+ 	   background: #CFC493;
 	}
 }
   
@@ -815,6 +853,7 @@ body {
 	position: absolute;
 	left: 0px;
 	top: 4em;
+	background: #CFC493;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1101,6 +1140,15 @@ p#splash-text span {
     padding-left: 1em;
     white-space: nowrap;
   } 
+  
+   #otp-WelcomeWidget {
+    height: 10em;
+    width: auto;
+    background: white;
+    font-size: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+  } 
 
   #otp-noTripWidget {
     width: 230px;
@@ -1232,6 +1280,11 @@ p#splash-text span {
 @media only screen and (min-width: 1024px) {
 
   #otp-tipWidget {
+    bottom: 2em;
+    font-size: 1.25em;
+  } 
+  
+    #otp-WelcomeWidget {
     bottom: 2em;
     font-size: 1.25em;
   } 
