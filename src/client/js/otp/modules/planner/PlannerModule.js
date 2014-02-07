@@ -141,7 +141,7 @@ otp.modules.planner.PlannerModule =
         
         this.activated = true;
         
-        //Set Pop up Menu to give user info on how to use the app
+        //Set Pop up Menu to give user info on how to use the app when the page firsts loads
         this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
         		"<li>View Current Live Bull Runner Bus Feed by<br>" +
         		"clicking Live Map at the top and selecting a route.</li>" +
@@ -449,6 +449,8 @@ otp.modules.planner.PlannerModule =
             // draw the polyline
             var polyline = new L.Polyline(otp.util.Geo.decodePolyline(leg.legGeometry.points));
             var weight = 8;
+            // Added specific code for the HART bus line so that the hart bus line route will be highlighted in blue
+            // Any other route will be highlighted in the default color which is green.
             if(leg.agencyId == "HART"){polyline.setStyle({ color : '#0000FF', weight: weight});}
             else{polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight});}
             this.pathLayer.addLayer(polyline);

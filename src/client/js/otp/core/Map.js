@@ -64,13 +64,13 @@ otp.core.Map = otp.Class({
         this.lmap = new L.Map('map', mapProps);
         
         
-        /*Locates user's current location if geoLocation in config.js is true*/
+        /*Locates user's current location if geoLocation in config.js is set to true*/
         if(otp.config.geoLocation){
                     this.lmap.locate({setView: true, maxZoom: 15});
                     this.lmap.on('locationfound', onLocationFound);
             };
             
-            /* sets marker at current location */
+            /* sets a marker at the current location */
             
             function onLocationFound(e){
             var locationSpot = L.Icon.extend({
@@ -88,7 +88,7 @@ otp.core.Map = otp.Class({
             
             /*Live Map stuff*/
             function setLiveMap(){
-            	alert("butts");
+            	//would like code here to set up the gtfs real time live feed
             };
        
             
