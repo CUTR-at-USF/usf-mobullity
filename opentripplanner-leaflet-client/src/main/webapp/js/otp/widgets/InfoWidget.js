@@ -32,6 +32,6 @@ otp.widgets.InfoWidget =
 	    otp.widgets.Widget.prototype.initialize.call(this, id, owner, options);
 	     
 	    this.setContent(content);
-	    this.center(); 
+	    if(this.title != "Live Map"){this.center();}
 	},
 });

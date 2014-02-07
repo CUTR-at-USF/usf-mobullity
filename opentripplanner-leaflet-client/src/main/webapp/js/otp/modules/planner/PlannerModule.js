@@ -50,6 +50,8 @@ otp.modules.planner.PlannerModule =
     noTripWidget    : null,
     tipStep         : 0,
     
+    welcomeWidget	: null,
+    
     currentRequest  : null,
     currentHash : null,
     
@@ -133,6 +135,17 @@ otp.modules.planner.PlannerModule =
         });
         
         this.activated = true;
+        
+        //Set Pop up Menu to give user info on how to use the app
+        this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
+        		"<li>View Current Live Bull Runner Bus Feed by<br>" +
+        		"clicking Live Map at the top and selecting a route.</li>" +
+        		"<li>Plan a trip by using the menu on the left.</li>" +
+        		"Click the Help button for more information.", this);
+        this.WelcomeWidget.center();
+        this.WelcomeWidget.setTitle("Welcome!");
+        this.addWidget(this.WelcomeWidget);
+        
         
         // set up primary widgets (TODO: move to bike planner module)
         /*this.tipWidget = this.createWidget("otp-tipWidget", "", this);

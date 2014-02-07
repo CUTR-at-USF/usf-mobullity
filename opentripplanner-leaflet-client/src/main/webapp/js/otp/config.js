@@ -54,6 +54,7 @@ otp.config = {
     //set init lat lng in map.js with geolocation
     geoLocation: true,
     locatorSwitch: false,
+    //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.058499, -82.416945), 
     initZoom : 14,
     minZoom : 8,
@@ -137,18 +138,28 @@ otp.config = {
     infoWidgets: [
         {
         	title: 'Live Map',
-        	content: '<p> Live map option is coming soon...</p>',
-        },
-        {
-        	title: 'Trip Planner',
-        	content: '<p> Trip planner option is coming soon.. </p>',
+        	content: '<form name="liveMapRoutes" id="liveMapRoutes" action="javascript: liveMapFunc()" method="get">\
+        		<b>Bull Runner Bus Routes:</b><br>\
+        		<input type="checkbox" id="RouteA" value="RouteA"> Route A<br>\
+        		<input type="checkbox" id="RouteB" value="RouteB"> Route B<br>\
+        		<input type="checkbox" id="RouteC" value="RouteC"> Route C<br>\
+        		<input type="checkbox" id="RouteD" value="RouteD"> Route D<br>\
+        		<input type="checkbox" id="RouteE" value="RouteE"> Route E<br>\
+        		<input type="checkbox" id="RouteF" value="RouteF"> Route F<br>\
+        		<input type="submit" value="Submit">\
+        		</form>',
+        	cssClass: 'livemap-window',
         },
         {
             title: 'Help',
-            content: '<p>Need Help getting started?</p><p>In order to plan a trip, you must select a start location and an end location by clicking on the map or typing a location into the start and end fields. Then choose your desired travel options and click Plan Trip!</p><p>Tip: If the location you are looking for does not come up in search, try adding the city to the search field to get better results. If you cant find a particular USF building just add USF to the search as well.</p>',
+            content: '<p>Need Help getting started?</p>\
+            	<p>In order to view the Bus Live Map, you must click the live map button and select the routes you want to see. Then Click submit for them to appear on the map!</p>\
+            	<p>In order to plan a trip, you must select a start location and an end location by clicking on the map or typing a location into the start and end fields.	Then choose your desired travel options and click Plan Trip!</p>\
+            	<p>Tip: If the location you are looking for does not come up in search, try adding the city to the search field to get better results. If you cant find a particular USF building just add USF to the search as well.</p>',
         },
         {	title: 'Contact',
-        	content: '<p> Contact information for questions or comments:</p><p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
+        	content: '<p> Contact information for questions or comments:</p>\
+        		<p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
         },
 
     ],
@@ -172,4 +183,3 @@ otp.config = {
     timeFormat  : "h:mma",
     dateFormat  : "MMM Do YYYY"
 };
-
