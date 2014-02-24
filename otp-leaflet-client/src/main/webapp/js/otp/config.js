@@ -139,16 +139,7 @@ otp.config = {
     infoWidgets: [
         {
         	title: 'Live Map',
-        	content: '<form name="liveMapRoutes" id="liveMapRoutes" action="javascript: liveMapFunc()" method="get">\
-        		<b>Bull Runner Bus Routes:</b><br>\
-        		<input type="checkbox" id="RouteA" value="RouteA"> Route A<br>\
-        		<input type="checkbox" id="RouteB" value="RouteB"> Route B<br>\
-        		<input type="checkbox" id="RouteC" value="RouteC"> Route C<br>\
-        		<input type="checkbox" id="RouteD" value="RouteD"> Route D<br>\
-        		<input type="checkbox" id="RouteE" value="RouteE"> Route E<br>\
-        		<input type="checkbox" id="RouteF" value="RouteF"> Route F<br>\
-        		<input type="submit" value="Submit">\
-        		</form>',
+        	content: 'Coming soon...',
         	cssClass: 'livemap-window',
         },
         {
@@ -158,10 +149,17 @@ otp.config = {
             	<p>In order to plan a trip, you must select a start location and an end location by clicking on the map or typing a location into the start and end fields.	Then choose your desired travel options and click Plan Trip!</p>\
             	<p>Tip: If the location you are looking for does not come up in search, try adding the city to the search field to get better results. If you cant find a particular USF building just add USF to the search as well.</p>',
         },
-        {	title: 'Contact',
-        	content: '<p> Contact information for questions or comments:</p>\
-        		<p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
-        },
+    {
+    	title: 'Icon Legend',
+    	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
+    		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
+    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop</p>'        	
+    },
+  {	
+	title: 'Contact',
+	content: '<p> Contact information for questions or comments:</p>\
+		<p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
+},
 
     ],
     
