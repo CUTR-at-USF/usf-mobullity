@@ -146,11 +146,18 @@ otp.config = {
         	title: 'Live Map',
         	content: '<p> Live map option is coming soon...</p>',
         },
-        {
-            title: 'Contact',
-            content: '<p> Questions or Comments? Contact us at: </p> <p> Sean Barbeau: barbeau@cutr.usf.edu </p>',
-        },  
 
+    {
+    	title: 'Icon Legend',
+    	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
+    		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
+    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop</p>'        	
+    },
+  {	
+	title: 'Contact',
+	content: '<p> Contact information for questions or comments:</p>\
+		<p>Tracy Wolf: tnwolf@mail.usf.edu<br>Mona Fathollahi: mona2@mail.usf.edu<br>Sean Barbeau: barbeau@cutr.usf.edu</p>'
+},
     ],
     
     
