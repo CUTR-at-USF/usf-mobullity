@@ -627,6 +627,7 @@ z-index: 9002;
   border: 1px solid #acacac;
   border-top: 1px solid #bfbfbf;
   border-bottom: 1px solid #9a9a9a;
+  background: #CFC493;
 }
 
 .otp-widget .close {
