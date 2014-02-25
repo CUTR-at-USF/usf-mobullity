@@ -48,6 +48,59 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="geocoderManual" class="org.opentripplanner.geocoder.manual.ManualGeocoder">
+		<property name="pois">
+			<map>
+				<entry key="ADM" value="28.0617 -82.4133" />
+				<entry key="ALC" value="28.0562 -82.4102" />
+				<entry key="DAC" value="28.0607 -82.4105" />
+				<entry key="CAM" value="28.0636 -82.4156" />
+				<entry key="BEH" value="28.0621 -82.4101" />
+				<entry key="BSF" value="28.0608 -82.4146" />
+				<entry key="BKS" value="28.0634 -82.4125" />
+				<entry key="GAR" value="28.0578 -82.4240" />
+				<entry key="BSN" value="28.0583 -82.4101" />
+				<entry key="CIC" value="28.0557 -82.4126" />
+				<entry key="CEE" value="28.0612 -82.4108" />
+				<entry key="CGS" value="28.0552 -82.4084" />
+				<entry key="CUT" value="28.0586 -82.4161" />
+				<entry key="CHE" value="28.0613 -82.4153" />
+				<entry key="CIS" value="28.0587 -82.4110" />
+				<entry key="CPR" value="28.0597 -82.4108" />
+				<entry key="FAD" value="28.0639 -82.4151" />
+				<entry key="EDU" value="28.0604 -82.4106" />
+				<entry key="ENG" value="28.0596 -82.4159" />
+				<entry key="ENB" value="28.0587 -82.4152" />
+				<entry key="ENC" value="28.0589 -82.4145" />
+
+				<entry key="ENA" value="28.0601 -82.4159" />
+				<entry key="FAO" value="28.0616 -82.4101" />
+				<entry key="FAH" value="28.0631 -82.4165" />
+				<entry key="FAS" value="28.0640 -82.4167" />
+				<entry key="SVC" value="28.0625 -82.4124" />
+				<entry key="HMS" value="28.0609 -82.4092" />
+				<entry key="LIB" value="28.0597 -82.4122" />
+				<entry key="LIF" value="28.0614 -82.4167" />
+				<entry key="LSA" value="28.0614 -82.4173" />
+				<entry key="PRS" value="28.0557 -82.4114" />
+				<entry key="NTA" value="28.0599 -82.4162" />
+				<entry key="NES" value="28.0618 -82.4152" />
+				<entry key="PHY" value="28.0598 -82.4153" />
+				<entry key="SCA" value="28.0605 -82.4158" />
+				<entry key="MUS" value="28.0646 -82.4182" />
+				<entry key="SOC" value="28.0615 -82.4092" />
+				<entry key="SHS" value="28.0636 -82.4119" />
+				<entry key="TAT" value="28.0636 -82.4145" />
+				<entry key="TAR" value="28.0640 -82.4145" />
+				<entry key="THR" value="28.0636 -82.4149" />
+				<entry key="ULH" value="28.0606 -82.4098" />
+				<entry key="UTA" value="28.0564 -82.4174" />
+				<entry key="WRB" value="28.0627 -82.4115" />
+				<entry key="TVB" value="28.0623 -82.4118" />				
+			</map>
+		</property>
+	</bean>
+
 	<bean id="geocoderMultiple"
 		class="org.opentripplanner.geocoder.GeocoderMultipleResultsStubImpl">
 		<constructor-arg ref="broadway" />
@@ -76,11 +129,17 @@
 	<bean id="geocoderNominatim" class="org.opentripplanner.geocoder.nominatim.NominatimGeocoder">
 		<property name="nominatimUrl" value="http://open.mapquestapi.com/nominatim/v1/search" />
 		<!-- Optional parameters: viewBox and resultLimit, viewbox=left,top,right,bottom -->  
-		<!-- <property name="viewBox" value="-76.32,45.69,-75.07,45.01" />
-		<property name="resultLimit" value="50" /> -->
+		<property name="viewBox" value="-83.23,28.32,-81.81,27.63" />
+		<property name="resultLimit" value="50" />
+	</bean>
+
+	<bean id="geocoderAlternatingService" class="org.opentripplanner.geocoder.AlternatingGeocoderModified">
+		<constructor-arg ref="geocoderManual" />
+		<constructor-arg ref="geocoderNominatim" />
+		<constructor-arg value="true" />
 	</bean>
 
 	<bean id="geocoderServer" class="org.opentripplanner.geocoder.ws.GeocoderServer">
-		<property name="geocoder" ref="geocoderGoogle" />
+		<property name="geocoder" ref="geocoderAlternatingService" />
 	</bean>
 </beans>
