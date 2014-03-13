@@ -138,7 +138,16 @@ otp.config = {
     infoWidgets: [
         {
         	title: 'Live Map',
-        	content: 'Coming soon...',
+        	content: 'Choose the Bull Runner routes to display:<br>\
+        		<form name="BullRunnerRoutes" id="BRroutes" onSubmit="return liveMapFunc()">\
+        		<input type="checkbox" name="routes" value="RouteA" id="RouteA"> Route A<br>\
+        		<input type="checkbox" name="routes" value="RouteB" id="RouteB"> Route B<br>\
+        		<input type="checkbox" name="routes" value="RouteC" id="RouteC"> Route C<br>\
+        		<input type="checkbox" name="routes" value="RouteD" id="RouteD"> Route D<br>\
+        		<input type="checkbox" name="routes" value="RouteE" id="RouteE"> Route E<br>\
+        		<input type="checkbox" name="routes" value="RouteF" id="RouteF"> Route F<br>\
+        		<input type="submit">\
+        		</form>',
         	cssClass: 'livemap-window',
         },
         {
