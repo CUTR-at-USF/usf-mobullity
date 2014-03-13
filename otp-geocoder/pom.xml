@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <artifactId>opentripplanner-geocoder</artifactId>
+  <artifactId>otp-geocoder</artifactId>
   <packaging>war</packaging>
   <name>OpenTripPlanner Geocoder</name>
   
@@ -14,7 +14,7 @@
   <url>http://www.opentripplanner.org</url>
 
   <build>
-    <finalName>opentripplanner-geocoder</finalName>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -40,6 +40,10 @@
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-server</artifactId>
     </dependency>
+	<dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-servlet</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -49,10 +53,6 @@
       <artifactId>jersey-client</artifactId>
       <scope>test</scope>
     </dependency>
-       <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-servlet</artifactId>
- 	</dependency>
     <dependency>
       <groupId>com.sun.jersey.contribs</groupId>
       <artifactId>jersey-spring</artifactId>
@@ -62,24 +62,6 @@
       <artifactId>json-lib</artifactId>
       <version>2.1</version>
       <classifier>jdk15</classifier>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-beanutils</groupId>
-          <artifactId>commons-beanutils</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-lang</groupId>
-          <artifactId>commons-lang</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.ws.rs</groupId>
