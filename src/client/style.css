@@ -460,7 +460,7 @@ body {
   	border-bottom: 1px solid #9a9a9a;
 	height: auto;
 	width: 18em;
-	
+
 	padding: 3px;
 	position:absolute;
 	top:4em;
@@ -713,7 +713,12 @@ z-index: 9002;
  	   background: #CFC493;
 	}
 }
-  
+
+.livemap-window {
+	background: #ffffff;
+	  border: 1px solid #acacac;
+}
+
 #otp-tripResultsWidget {
   width: 230px;
   height: 200px;
