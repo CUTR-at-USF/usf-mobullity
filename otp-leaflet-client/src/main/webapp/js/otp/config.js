@@ -53,7 +53,6 @@ otp.config = {
     
     //set init lat lng in map.js with geolocation
     geoLocation: true,
-    locatorSwitch: false,
     //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.058499, -82.416945), 
     initZoom : 14,

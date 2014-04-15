@@ -406,9 +406,9 @@ otp.widgets.tripoptions.ModeSelector =
     
     id           :  null,
 
-    modes        : { "TRANSIT,WALK" : "Bus", 
-                     //"BUS,WALK" : "Bus", 
+    modes        : { "TRANSIT,WALK" : "Bus &amp; Walk", 
                      "TRANSIT,BICYCLE" : "Bus &amp; Bicycle",
+                     //"TRANSIT" : "Bus Only", 
                     // "TRAINISH,WALK" : "Rail Only", 
                      "BICYCLE" : 'Bicycle Only',
                      "WALK" : 'Walk Only',
@@ -433,22 +433,12 @@ otp.widgets.tripoptions.ModeSelector =
         _.each(this.modes, function(text, key) {
             html += '<option>'+text+'</option>';            
         });
-        html += '</select>';
-        
-        /* trying to change drop down to check buttons*/
-//        html += '<form id="'+this.id+'" name="selectMode">';
-//        _.each(this.modes, function(text, key) {
-//        	html += '<input type ="radio" form="selectMode" name="mode" value="'+text+'">'; 
-//        	html += ' ' + text;
-//        	html += '<br>';
-//        });
-//        html += '</form>';
-        /*end of mode selection declaration */
-        
+        html += '</select>';        
         
         html += '<div id="'+this.id+'-widgets" style="overflow: hidden;"></div>';
         html += "</div>";
         $(html).appendTo(this.$());
+        
         //this.setContent(content);
         
     },
