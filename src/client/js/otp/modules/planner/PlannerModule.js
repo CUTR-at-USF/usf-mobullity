@@ -119,6 +119,29 @@ otp.modules.planner.PlannerModule =
         _.extend(this, _.clone(otp.modules.planner.defaultQueryParams));    
     },
     
+	getCookie : function()
+    {
+		var value = document.cookie.split(';');
+		return value[0];
+    },
+    
+    
+    checkCookie : function() {
+    	var test = this.getCookie();
+    	if(test != "true"){
+    		document.cookie = "true";
+            //Set Pop up Menu to give user info on how to use the app when the page firsts loads
+            this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
+            		"<li>View Current Live Bull Runner Bus Feed by<br>" +
+            		"clicking Live Map at the top and selecting a route.</li>" +
+            		"<li>Plan a trip by using the menu on the left.</li>" +
+            		"Click the Help button for more information.", this);
+            this.WelcomeWidget.center();
+            this.WelcomeWidget.setTitle("Welcome!");
+            this.addWidget(this.WelcomeWidget);
+    	}
+    },
+	
     activate : function() {
         if(this.activated) return;
         var this_ = this;
@@ -141,15 +164,9 @@ otp.modules.planner.PlannerModule =
         
         this.activated = true;
         
-        //Set Pop up Menu to give user info on how to use the app when the page firsts loads
-        this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
-        		"<li>View Current Live Bull Runner Bus Feed by<br>" +
-        		"clicking Live Map at the top and selecting a route.</li>" +
-        		"<li>Plan a trip by using the menu on the left.</li>" +
-        		"Click the Help button for more information.", this);
-        this.WelcomeWidget.center();
-        this.WelcomeWidget.setTitle("Welcome!");
-        this.addWidget(this.WelcomeWidget);
+         //This is where it will check and set a cookie for the user 
+        //to decide whether the welcome popup should be displayed or not
+        this.checkCookie();
         
         
         // set up primary widgets (TODO: move to bike planner module)
@@ -622,4 +639,3 @@ otp.modules.planner.PlannerModule =
     
     CLASS_NAME : "otp.modules.planner.PlannerModule"
 });
-

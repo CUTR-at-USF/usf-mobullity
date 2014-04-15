@@ -20,7 +20,6 @@ otp.core.Map = otp.Class({
 
     lmap            : null,
     layerControl    : null,
-    locationMarker : null,
     
     contextMenu             : null,
     contextMenuModuleItems  : null,
@@ -64,26 +63,39 @@ otp.core.Map = otp.Class({
         this.lmap = new L.Map('map', mapProps);
         
         
-        /*Locates user's current location if geoLocation in config.js is set to true*/
+       /*Locates user's current location if geoLocation in config.js is set to true*/
+        var marker = new Array();
+        var accCircle = new Array();
+        count = 0;
+        
         if(otp.config.geoLocation){
-                    this.lmap.locate({setView: true, maxZoom: 15});
+                    this.lmap.locate({watch: true});
                     this.lmap.on('locationfound', onLocationFound);
             };
             
             /* sets a marker at the current location */
+
             
-            function onLocationFound(e){
-            var locationSpot = L.Icon.extend({
-            options: {
-                iconUrl: resourcePath + 'images/locationSpot.svg',
-                iconSize: new L.Point(10,10),
-            }
-            });
-           
-            var locSpot = new locationSpot();
-                    L.marker(e.latlng,{icon : locSpot,}).addTo(this).bindPopup('Current Location');
-                    L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3}).addTo(this);
-                    
+            function onLocationFound(e){            	
+            	var locationSpot = L.Icon.extend({
+            		options: {
+            			iconUrl: resourcePath + 'images/locationSpot.svg',
+            			iconSize: new L.Point(10,10),
+            		}
+            	});
+            	temp = count;
+            	count = count + 1;
+            	var locSpot = new locationSpot();
+            	marker[count] = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
+            	accCircle[count] = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+            	this.addLayer(marker[count]);
+            	this.addLayer(accCircle[count]);
+            	this.addLayer(accCircle[count]);
+            	//if statement will make it so the map only zooms on the first function call
+            	if (count == 1){this.setView(e.latlng, 17);};
+            	//following removes the last set map marker on the last function call
+            	this.removeLayer(marker[temp]);
+            	this.removeLayer(accCircle[temp]);
             };
             
             /*Live Map stuff*/
