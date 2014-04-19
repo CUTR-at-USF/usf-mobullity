@@ -30,12 +30,12 @@ import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
 
-public class GtfsRealtimeHttpTripUpdateSource implements VehiclePositionSource, PreferencesConfigurable {
+public class GtfsRealtimeHttpVehiclePositionSource implements VehiclePositionSource, PreferencesConfigurable {
     private static final Logger LOG =
-            LoggerFactory.getLogger(GtfsRealtimeHttpTripUpdateSource.class);
+            LoggerFactory.getLogger(GtfsRealtimeHttpVehiclePositionSource.class);
 
     /**
-     * Default agency id that is used for the trip ids in the TripUpdates
+     * Default agency id that is used for the trip ids in the Vehicle Positions
      */
     @Getter
     private String agencyId;
@@ -65,11 +65,8 @@ public class GtfsRealtimeHttpTripUpdateSource implements VehiclePositionSource, 
                 updates = new ArrayList<VehiclePosition>(feedEntityList.size());
                 for (FeedEntity feedEntity : feedEntityList) {
                     updates.add(feedEntity.getVehicle());
-                    String id = feedEntity.getId();
-                    LOG.info("Added vehicle id {} to Vehicle list", id);
                 }
             }
-            else { LOG.warn("input stream is null");}
         } catch (Exception e) {
             LOG.warn("Failed to parse gtfs-rt feed from " + url + ":", e);
         }
