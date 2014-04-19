@@ -20,7 +20,6 @@ import java.util.prefs.Preferences;
 import org.opentripplanner.updater.PreferencesConfigurable;
 import org.opentripplanner.routing.graph.Graph;
 import org.opentripplanner.updater.GraphUpdaterManager;
-import org.opentripplanner.updater.GraphWriterRunnable;
 import org.opentripplanner.updater.PollingGraphUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +69,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
     private Boolean purgeExpiredData;
 
     /**
-     * Default agency id that is used for the trip ids in the TripUpdates
+     * Default agency id that is used for the trip ids in the Vehicle Positions
      */
     private String agencyId;
 
@@ -92,7 +91,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
         String sourceType = preferences.get("sourceType", null);
         if (sourceType != null) {
             if (sourceType.equals("gtfs-http")) {
-                updateSource = new GtfsRealtimeHttpTripUpdateSource();
+                updateSource = new GtfsRealtimeHttpVehiclePositionSource();
             } else {
             	throw new IllegalStateException("Invalid Source type");
             }
@@ -141,9 +140,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
             // Handle trip updates via graph writer runnable
         	//create new runnable thread with method run to update hashmaps
         	//print to console to test working
-            VehiclePositionGraphWriterRunnable runnable =
-                    new VehiclePositionGraphWriterRunnable(updates, agencyId);
-            updaterManager.execute(runnable);
+
         }
     }
 
@@ -153,6 +150,6 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
 
     public String toString() {
         String s = (updateSource == null) ? "NONE" : updateSource.toString();
-        return "Streaming stoptime updater with update source = " + s;
+        return "Streaming vehicle position updater with update source = " + s;
     }
 }
