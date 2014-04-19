@@ -22,7 +22,6 @@ import org.opentripplanner.routing.graph.Graph;
 import org.opentripplanner.updater.GraphUpdaterManager;
 import org.opentripplanner.updater.GraphWriterRunnable;
 import org.opentripplanner.updater.PollingGraphUpdater;
-import org.opentripplanner.updater.vehiclepositions.TimetableSnapshotSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -126,30 +125,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
 
     @Override
     public void setup() throws InterruptedException, ExecutionException {
-        // Create a realtime data snapshot source and wait for runnable to be executed
-        updaterManager.executeBlocking(new GraphWriterRunnable() {
-            @Override
-            public void run(Graph graph) {
-                // Only create a realtime data snapshot source if none exists already
-                TimetableSnapshotSource snapshotSource = graph.getTimetableSnapshotSource();
-                if (snapshotSource == null) {
-                    snapshotSource = new TimetableSnapshotSource(graph);
-                    // Add snapshot source to graph
-                    graph.setTimetableSnapshotSource(snapshotSource);
-                }
-
-                // Set properties of realtime data snapshot source
-                if (logFrequency != null) {
-                    snapshotSource.setLogFrequency(logFrequency);
-                }
-                if (maxSnapshotFrequency != null) {
-                    snapshotSource.setMaxSnapshotFrequency(maxSnapshotFrequency);
-                }
-                if (purgeExpiredData != null) {
-                    snapshotSource.setPurgeExpiredData(purgeExpiredData);
-                }
-            }
-        });
+       
     }
 
     /**
@@ -163,6 +139,8 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
 
         if (updates != null && updates.size() > 0) {
             // Handle trip updates via graph writer runnable
+        	//create new runnable thread with method run to update hashmaps
+        	//print to console to test working
             VehiclePositionGraphWriterRunnable runnable =
                     new VehiclePositionGraphWriterRunnable(updates, agencyId);
             updaterManager.execute(runnable);
