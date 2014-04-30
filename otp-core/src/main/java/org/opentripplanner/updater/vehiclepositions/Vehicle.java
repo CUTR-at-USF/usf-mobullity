@@ -22,6 +22,8 @@ public class Vehicle {
 
   private double lon;
   
+  private String routeId;
+  
   private long lastUpdate;  
 
   public String getId() {
@@ -46,6 +48,14 @@ public class Vehicle {
 
   public void setLon(double lon) {
     this.lon = lon;
+  }
+  
+  public void setRouteId(String routeid){
+	  this.routeId = routeid;
+  }
+  
+  public String getRouteId(){
+	  return routeId;
   }
 
   public long getLastUpdate() {
