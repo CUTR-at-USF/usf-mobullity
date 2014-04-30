@@ -14,6 +14,8 @@
 package org.opentripplanner.updater.vehiclepositions;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.prefs.Preferences;
 
@@ -24,6 +26,7 @@ import org.opentripplanner.updater.PollingGraphUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.transit.realtime.GtfsRealtime.Position;
 import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
 
 /**
@@ -42,6 +45,11 @@ import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
  */
 public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
     private static final Logger LOG = LoggerFactory.getLogger(PollingVehiclePositionsUpdater.class);
+    
+    /**
+     * Hash Map for Vehicle Positions
+     */
+    private Map<String, Vehicle> vehiclesById = new ConcurrentHashMap<String, Vehicle>();
 
     /**
      * Parent update manager. Is used to execute graph writer runnables.
@@ -133,14 +141,50 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
      */
     @Override
     public void runPolling() {
-        // Get update lists from update source
-        List<VehiclePosition> updates = updateSource.getUpdates();
-
+        // Get update lists from update source and clear hashmap
+        final List<VehiclePosition> updates = updateSource.getUpdates();
+        vehiclesById.clear();
+        
         if (updates != null && updates.size() > 0) {
-            // Handle trip updates via graph writer runnable
+            //Handle vehicle position updates
         	//create new runnable thread with method run to update hashmaps
         	//print to console to test working
-
+        	new Thread(){
+        		public void run(){
+        			for(int x = 0; x < updates.size(); x++){
+        				//Print updates array to console to show vehicle positions:
+        				//System.out.println("Veh: " + (x+1) + " Route: " + updates.get(x).getTrip().getRouteId() +" Lat: " + updates.get(x).getPosition().getLatitude() + " Long: " + updates.get(x).getPosition().getLongitude());
+        				
+        				//setting vehicle variables to set up hash map
+        				Position position = updates.get(x).getPosition();
+        				String vehicleId = updates.get(x).getVehicle().getId();
+        				String routeId = updates.get(x).getTrip().getRouteId();
+        				Vehicle v = new Vehicle();
+        				v.setId(vehicleId);
+        				v.setLat(position.getLatitude());
+        				v.setLon(position.getLongitude());
+        				v.setRouteId(routeId);
+        				v.setLastUpdate(System.currentTimeMillis());
+        				
+        				//setting up the hash map
+        				Vehicle existing = vehiclesById.get(vehicleId);
+        				if (existing == null || existing.getLat() != v.getLat() || existing.getLon() != v.getLon()) {
+        					vehiclesById.put(vehicleId, v);
+        				}
+        				else { v.setLastUpdate(existing.getLastUpdate()); }
+        			}
+        			//prints out hash map
+        			for(int y = 0; y < updates.size(); y++)
+        			{
+        				String tmp = updates.get(y).getVehicle().getId();
+        				if(vehiclesById.containsKey(tmp))
+        				{
+        					Vehicle x = vehiclesById.get(tmp);
+        					System.out.println("ID: " + x.getId() + " @ lat: " + x.getLat() + " long: " + x.getLon() + " On Route: " + x.getRouteId() + " ... Last Update: " + x.getLastUpdate());
+        				}
+        			}
+        		}
+        	}.start();
         }
     }
 
