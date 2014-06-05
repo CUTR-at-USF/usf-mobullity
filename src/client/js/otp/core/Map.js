@@ -63,7 +63,7 @@ otp.core.Map = otp.Class({
         this.lmap = new L.Map('map', mapProps);
         
         
-       /*Locates user's current location if geoLocation in config.js is set to true*/
+      /*Locates user's current location if geoLocation in config.js is set to true*/
         var marker = new Array();
         var accCircle = new Array();
         count = 0;

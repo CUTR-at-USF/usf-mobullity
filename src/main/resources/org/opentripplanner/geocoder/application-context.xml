@@ -50,16 +50,25 @@
 
 	<bean id="geocoderManual" class="org.opentripplanner.geocoder.manual.ManualGeocoder">
 		<property name="pois">
-			<map>
+			<map>				
 				<entry key="ADM" value="28.0617 -82.4133" />
+				<entry key="ALN" value="28.0617 -82.4133" />
 				<entry key="ALC" value="28.0562 -82.4102" />
-				<entry key="DAC" value="28.0607 -82.4105" />
-				<entry key="CAM" value="28.0636 -82.4156" />
+				<entry key="ACS" value="28.06316 -82.42010" />
+				<entry key="ALC" value="28.05620 -82.41024" />
+				<entry key="AOC" value="28.06691 -82.41124" />
+				<entry key="ATH" value="28.06080 -82.40523" />
+				<entry key="AUX" value="28.06817 -82.40778" />
+
 				<entry key="BEH" value="28.0621 -82.4101" />
 				<entry key="BSF" value="28.0608 -82.4146" />
 				<entry key="BKS" value="28.0634 -82.4125" />
-				<entry key="GAR" value="28.0578 -82.4240" />
 				<entry key="BSN" value="28.0583 -82.4101" />
+				<entry key="BCD" value="28.05858 -82.40470" />
+				<entry key="BPB" value="28.05603 -82.41509" />
+
+				<entry key="CMC" value="28.0598 -82.4153" />
+				<entry key="CAM" value="28.0636 -82.4156" />
 				<entry key="CIC" value="28.0557 -82.4126" />
 				<entry key="CEE" value="28.0612 -82.4108" />
 				<entry key="CGS" value="28.0552 -82.4084" />
@@ -67,36 +76,130 @@
 				<entry key="CHE" value="28.0613 -82.4153" />
 				<entry key="CIS" value="28.0587 -82.4110" />
 				<entry key="CPR" value="28.0597 -82.4108" />
-				<entry key="FAD" value="28.0639 -82.4151" />
+				<entry key="CWY" value="28.06138 -82.40826" />
+				<entry key="CHG" value="28.06512 -82.41210" />
+				<entry key="CMS" value="28.0663, -82.42524" />
+				<entry key="CPT" value="28.06522 -82.41585" />
+
+				<entry key="DAC" value="28.0607 -82.4105" />
+
 				<entry key="EDU" value="28.0604 -82.4106" />
 				<entry key="ENG" value="28.0596 -82.4159" />
 				<entry key="ENB" value="28.0587 -82.4152" />
 				<entry key="ENC" value="28.0589 -82.4145" />
-
 				<entry key="ENA" value="28.0601 -82.4159" />
+
 				<entry key="FAO" value="28.0616 -82.4101" />
 				<entry key="FAH" value="28.0631 -82.4165" />
 				<entry key="FAS" value="28.0640 -82.4167" />
-				<entry key="SVC" value="28.0625 -82.4124" />
+				<entry key="FAD" value="28.0639 -82.4151" />
+				<entry key="FPC" value="28.06549 -82.41500" />
+				<entry key="FSB" value="28.06032 -82.40978" />
+
+				<entry key="GAR" value="28.0578 -82.4240" />
+
 				<entry key="HMS" value="28.0609 -82.4092" />
-				<entry key="LIB" value="28.0597 -82.4122" />
+				<entry key="HOLLY A (HAA)" value="28.06595 -82.41109" />
+				<entry key="HOLLY B (HAB)" value="28.06597 -82.41024" />
+				<entry key="HOLLY C (HAC)" value="28.06615 -82.40946" />
+				<entry key="HOLLY D (HAD)" value="28.06529 -82.41149" />
+				<entry key="HOLLY E (HAE)" value="28.06528 -82.41088" />
+				<entry key="HOLLY F (HAF)" value="28.06527 -82.41045" />
+				<entry key="HOLLY G (HAG)" value="28.06546 -82.40966" />
+				<entry key="HOLLY H (HAH)" value="28.06547 -82.41117" />
+				<entry key="HOLLY J (HAJ)" value="28.06547 -82.41010" />
+				<entry key="HOLLY L (HAL)" value="28.06621 -82.41043" />
+				<entry key="HOLLY M (HAM)" value="28.06622 -82.41089" />
+
+				<entry key="IDR" value="28.05680 -82.41552" />
+				<entry key="ISA" value="28.06143 -82.41417" />
+
+				<entry key="JPH" value="28.05977 -82.41866" />
+
+				<entry key="USF TAMPA LIBRARY (LIB)" value="28.0597 -82.4122" />
 				<entry key="LIF" value="28.0614 -82.4167" />
 				<entry key="LSA" value="28.0614 -82.4173" />
-				<entry key="PRS" value="28.0557 -82.4114" />
+				<entry key="LRC" value="28.06818 -82.42379" />
+
+				<entry key="MHA" value="28.06721 -82.42362" />
+				<entry key="MHB" value="28.06622 -82.42341" />
+				<entry key="MHC" value="28.06788 -82.42293" />
+				<entry key="MHF" value="28.06784 -82.42168" />
+				<entry key="MARSHALL STUDENT CENTER (MSC)" value="28.0638 -82.4135" />
+				<entry key="MUS" value="28.0646 -82.4182" />
+				<entry key="MGX" value="28.06628 -82.42097" />
+				<entry key="MGY" value="28.06628 -82.42166" />
+				<entry key="MGZ" value="28.06674 -82.42162" />
+				<entry key="MAGNOLIA APTS A (MAA)" value="28.05832 -82.41895" />
+				<entry key="MAGNOLIA APTS B (MAB)" value="28.05833 -82.41808" />
+				<entry key="MDA" value="28.06498 -82.42500" />
+				<entry key="MDN" value="28.06482 -82.42406" />
+				<entry key="MAPLE SUITES A (MPA)" value="28.06515 -82.40841" />
+				<entry key="MAPLE SUITES B (MPB)" value="28.06537 -82.40873" />
+				<entry key="MAPLE SUITES C (MPC)" value="28.06516 -82.40927" />
+
 				<entry key="NTA" value="28.0599 -82.4162" />
 				<entry key="NES" value="28.0618 -82.4152" />
+				<entry key="NEC" value="28.06797 -82.42516" />
+
+				<entry key="OPM" value="28.06575 -82.41439" />
+
+				<entry key="PCD" value="28.06373 -82.41878" />
+				<entry key="PED" value="28.06132 -82.40768" />
+				<entry key="PRS" value="28.0557 -82.4114" />
 				<entry key="PHY" value="28.0598 -82.4153" />
+				<entry key="PPA" value="28.06548 -82.41463" />
+				<entry key="PPC" value="28.06575 -82.41439" />
+
+				<entry key="REC" value="28.06044 -82.40758" />
+				<entry key="ARGOS CENTER (RAR)" value="28.06432 -82.41044" />
+				<entry key="ANDROS CENTER (RAN)" value="28.06727 -82.41214" />
+				<entry key="CASTOR HALL (RBC)" value="28.06390 -82.41109" />
+				<entry key="BETA HALL (RBE)" value="28.06494 -82.40939" />
+				<entry key="CYPRESS HALL A (RCA)" value="28.06599 -82.40898" />
+				<entry key="CYPRESS HALL B (RCB)" value="28.06609 -82.40844" />
+				<entry key="CYPRESS HALL C (RCC)" value="28.06739 -82.40819" />
+				<entry key="CYPRESS HALL D (RCD" value="28.06723 -82.40866" />
+				<entry key="CYPRESS HALL E (RCE)" value="28.06671 -82.40884" />
+				<entry key="DELTA HALL (RDE)" value="28.06640 -82.41118" />
+				<entry key="EPSILON HALL (REP)" value="28.06619 -82.41250" />
+				<entry key="ETA HALL (RET)" value="28.06669 -82.41211" />
+				<entry key="IOTA HALL (RIO)" value="28.06652 -82.41033" />
+				<entry key="KAPPA HALL (RKA)" value="28.06715 -82.41027" />
+				<entry key="KOSOVE HALL (RKO)" value="28.06463 -82.41135" />
+				<entry key="LAMBDA HALL (RLA)" value="28.06761 -82.41022" />
+				<entry key="MU HALL (RMU)" value="28.06800, -82.41068" />
+				<entry key="THETA HALL (RTH)" value="28.06684 -82.40971" />
+				<entry key="ZETA HALL (RZE)" value="28.06670 -82.41264" />
+
 				<entry key="SCA" value="28.0605 -82.4158" />
-				<entry key="MUS" value="28.0646 -82.4182" />
 				<entry key="SOC" value="28.0615 -82.4092" />
 				<entry key="SHS" value="28.0636 -82.4119" />
+				<entry key="SVC" value="28.0625 -82.4124" />
+				<entry key="SPS" value="28.06007 -82.40383" />
+
 				<entry key="TAT" value="28.0636 -82.4145" />
 				<entry key="TAR" value="28.0640 -82.4145" />
 				<entry key="THR" value="28.0636 -82.4149" />
+				<entry key="TVB" value="28.0623 -82.4118" />
+
 				<entry key="ULH" value="28.0606 -82.4098" />
 				<entry key="UTA" value="28.0564 -82.4174" />
+				<entry key="UNIVERSITY POLICE (UPB)" value="28.06850 -82.40810" />
+
 				<entry key="WRB" value="28.0627 -82.4115" />
-				<entry key="TVB" value="28.0623 -82.4118" />				
+
+				<entry key="ADVENTURE ISLAND" value="28.04079 -82.41599" />
+				<entry key="BUSCH GARDENS" value="28.03445 -82.41634" />
+				<entry key="BULL MARKET" value="28.07189 -82.41420" />
+				<entry key="MUSEUM OF SCIENCE AND INDUSTRY (MOSI)" value="28.05350 -82.40463" />
+				<entry key="PUBLIX, E FOWLER AVE" value="28.05352 -82.39673" />
+				<entry key="PUBLIX, TAMPA PALMS" value="28.09971 -82.39893" />
+				<entry key="TARGET, E FLETCHER AVE" value="28.07196 -82.42810" />
+				<entry key="UNIVERSITY  MALL" value="28.05897 -82.43441" />
+				<entry key="USF POST OFFICE" value="28.06548 -82.41463" />
+				<entry key="USF THE CLAW GOLF COURSE" value="28.07247 -82.40973" />
+				<entry key="WALMART, E FLETCHER AVE" value="28.06822 -82.42862" />				
 			</map>
 		</property>
 	</bean>

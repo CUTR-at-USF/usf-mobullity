@@ -19,8 +19,8 @@ import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
 
 public interface VehiclePositionSource {
     /**
-     * Wait for one message to arrive, and decode it into a List of TripUpdates. Blocking call.
-     * @return a List<TripUpdate> potentially containing TripUpdates for several different trips,
+     * Wait for one message to arrive, and decode it into a List of VehiclePositions. Blocking call.
+     * @return a List<VehiclePosition> potentially containing VehiclePositions for several different vehicles,
      *         or null if an exception occurred while processing the message
      */
     public List<VehiclePosition> getUpdates();

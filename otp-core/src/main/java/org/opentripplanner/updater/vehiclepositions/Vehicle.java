@@ -15,54 +15,33 @@
  */
 package org.opentripplanner.updater.vehiclepositions;
 
-public class Vehicle {
-  private String id;
+import java.io.Serializable;
 
-  private double lat;
+import javax.xml.bind.annotation.XmlAttribute;
 
-  private double lon;
-  
-  private String routeId;
-  
-  private long lastUpdate;  
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-  public String getId() {
-    return id;
-  }
 
-  public void setId(String id) {
-    this.id = id;
-  }
+public class Vehicle implements Serializable{
+	private static final long serialVersionUID = 3333460609708083333L;
 
-  public double getLat() {
-    return lat;
-  }
+    @XmlAttribute
+    @JsonSerialize	
+	public String id;
+    @XmlAttribute
+    @JsonSerialize	
+    public String agencyId;
+    @XmlAttribute
+    @JsonSerialize	
+    public double lat;
+    @XmlAttribute
+    @JsonSerialize	
+    public double lon;
+    @XmlAttribute
+    @JsonSerialize	
+    public String routeId;
+    @XmlAttribute
+    @JsonSerialize	
+    public long lastUpdate;  
 
-  public void setLat(double lat) {
-    this.lat = lat;
-  }
-
-  public double getLon() {
-    return lon;
-  }
-
-  public void setLon(double lon) {
-    this.lon = lon;
-  }
-  
-  public void setRouteId(String routeid){
-	  this.routeId = routeid;
-  }
-  
-  public String getRouteId(){
-	  return routeId;
-  }
-
-  public long getLastUpdate() {
-    return lastUpdate;
-  }
-
-  public void setLastUpdate(long lastUpdate) {
-    this.lastUpdate = lastUpdate;
-  }
 }

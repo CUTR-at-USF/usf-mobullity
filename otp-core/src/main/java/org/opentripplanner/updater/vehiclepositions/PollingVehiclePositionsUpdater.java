@@ -13,6 +13,7 @@
 
 package org.opentripplanner.updater.vehiclepositions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -49,8 +50,9 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
     /**
      * Hash Map for Vehicle Positions
      */
-    private Map<String, Vehicle> vehiclesById = new ConcurrentHashMap<String, Vehicle>();
-
+    public static List<String> vehicleIds = new ArrayList<String>();
+    public static Map<String, Vehicle> vehiclesById = new ConcurrentHashMap<String, Vehicle>();
+    
     /**
      * Parent update manager. Is used to execute graph writer runnables.
      */
@@ -142,7 +144,8 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
     @Override
     public void runPolling() {
         // Get update lists from update source and clear hashmap
-        final List<VehiclePosition> updates = updateSource.getUpdates();
+    	final List<VehiclePosition> updates = updateSource.getUpdates();
+        vehicleIds.clear();
         vehiclesById.clear();
         
         if (updates != null && updates.size() > 0) {
@@ -160,29 +163,31 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
         				String vehicleId = updates.get(x).getVehicle().getId();
         				String routeId = updates.get(x).getTrip().getRouteId();
         				Vehicle v = new Vehicle();
-        				v.setId(vehicleId);
-        				v.setLat(position.getLatitude());
-        				v.setLon(position.getLongitude());
-        				v.setRouteId(routeId);
-        				v.setLastUpdate(System.currentTimeMillis());
+        				v.id = vehicleId;
+        				v.lat=position.getLatitude();
+        				v.lon=position.getLongitude();
+        				v.routeId=routeId;
+        				v.agencyId=agencyId;
+        				v.lastUpdate=System.currentTimeMillis();
         				
         				//setting up the hash map
         				Vehicle existing = vehiclesById.get(vehicleId);
-        				if (existing == null || existing.getLat() != v.getLat() || existing.getLon() != v.getLon()) {
+        				if (existing == null || existing.lat != v.lat || existing.lon != v.lon) {
+        					vehicleIds.add(vehicleId);
         					vehiclesById.put(vehicleId, v);
         				}
-        				else { v.setLastUpdate(existing.getLastUpdate()); }
+        				else { v.lastUpdate=existing.lastUpdate; }
         			}
         			//prints out hash map
-        			for(int y = 0; y < updates.size(); y++)
-        			{
-        				String tmp = updates.get(y).getVehicle().getId();
-        				if(vehiclesById.containsKey(tmp))
-        				{
-        					Vehicle x = vehiclesById.get(tmp);
-        					System.out.println("ID: " + x.getId() + " @ lat: " + x.getLat() + " long: " + x.getLon() + " On Route: " + x.getRouteId() + " ... Last Update: " + x.getLastUpdate());
-        				}
-        			}
+//        			for(int y = 0; y < updates.size(); y++)
+//        			{
+//        				String tmp = updates.get(y).getVehicle().getId();
+//        				if(vehiclesById.containsKey(tmp))
+//        				{
+//        					Vehicle x = vehiclesById.get(tmp);
+//        					System.out.println("ID: " + x.id + " @ lat: " + x.lat + " long: " + x.lon + " On Route: " + x.routeId + " ... Last Update: " + x.lastUpdate);
+//        				}
+//        			}
         		}
         	}.start();
         }
