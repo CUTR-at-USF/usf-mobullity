@@ -102,7 +102,6 @@ otp.core.Map = otp.Class({
             function setLiveMap(){
             	//would like code here to set up the gtfs real time live feed
             };
-       
             
             /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers).addTo(this.lmap);
