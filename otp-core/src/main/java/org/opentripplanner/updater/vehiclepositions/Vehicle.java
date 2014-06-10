@@ -18,9 +18,9 @@ package org.opentripplanner.updater.vehiclepositions;
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 
 public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 3333460609708083333L;
@@ -28,19 +28,19 @@ public class Vehicle implements Serializable{
     @XmlAttribute
     @JsonSerialize	
 	public String id;
-    @XmlAttribute
+    @XmlElement
     @JsonSerialize	
     public String agencyId;
-    @XmlAttribute
+    @XmlElement
     @JsonSerialize	
     public double lat;
-    @XmlAttribute
+    @XmlElement
     @JsonSerialize	
     public double lon;
-    @XmlAttribute
+    @XmlElement
     @JsonSerialize	
     public String routeId;
-    @XmlAttribute
+    @XmlElement
     @JsonSerialize	
     public long lastUpdate;  
 
