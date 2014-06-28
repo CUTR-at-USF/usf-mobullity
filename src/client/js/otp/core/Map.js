@@ -64,9 +64,11 @@ otp.core.Map = otp.Class({
         
         
       /*Locates user's current location if geoLocation in config.js is set to true*/
-        var marker = new Array();
-        var accCircle = new Array();
-        count = 0;
+        var marker = new L.marker();
+        var tempM = new L.marker();
+        var accCircle = new L.circle();
+        var tempA = new L.circle();
+        count=0;
         
         if(otp.config.geoLocation){
                     this.lmap.locate({watch: true});
@@ -74,8 +76,6 @@ otp.core.Map = otp.Class({
             };
             
             /* sets a marker at the current location */
-
-            
             function onLocationFound(e){            	
             	var locationSpot = L.Icon.extend({
             		options: {
@@ -83,25 +83,62 @@ otp.core.Map = otp.Class({
             			iconSize: new L.Point(10,10),
             		}
             	});
-            	temp = count;
-            	count = count + 1;
+            	count = count+1;
+            	tempM = marker;
+            	tempA = accCircle;
             	var locSpot = new locationSpot();
-            	marker[count] = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
-            	accCircle[count] = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
-            	this.addLayer(marker[count]);
-            	this.addLayer(accCircle[count]);
-            	this.addLayer(accCircle[count]);
+            	marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
+            	accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+            	//adds new marker and accuracy circle
+            	this.addLayer(marker);
+            	this.addLayer(accCircle);
             	//if statement will make it so the map only zooms on the first function call
             	if (count == 1){this.setView(e.latlng, 17);};
-            	//following removes the last set map marker on the last function call
-            	this.removeLayer(marker[temp]);
-            	this.removeLayer(accCircle[temp]);
+            	//following removes the last set of map markers on the last function call
+            	this.removeLayer(tempM);
+            	this.removeLayer(tempA);
             };
             
             /*Live Map stuff*/
-            function setLiveMap(){
-            	//would like code here to set up the gtfs real time live feed
+            //Bull Runner Live Bus Icon
+            var bullRunnerIcon = L.Icon.extend({
+            	options: {
+            		iconUrl : resourcePath + 'images/busLocation.png',
+            		iconSize: new L.Point(15,15)
+            	}
+            });
+            //Function to get the Vehicle Position information and set Markers
+            var vehicles = {};
+            function liveMap(){
+            	//Pulls the Vehicle Positions from the Rest API 
+            	var url = otp.config.hostname + '/' +  otp.config.restService + "/ws/vehicle_positions";
+            	$.ajax(url, {
+            			type: 'GET',
+            			dataType: 'JSON',
+            			async: false,
+            			timeout: 30000,
+            			success: function(data){
+	            			var x;
+	            			for (x = 0; x < data.vehicles.length; x++){
+	            				//console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" lat:"+data.vehicles[x].lat+" lon:"+data.vehicles[x].lon);
+	            			}
+	            			vehicles = data.vehicles;
+	            			setMarkers();
+            			}
+            	});
+            	//console.log(vehicles);
             };
+            liveMap();
+            
+        	//Sets markers for each vehicle
+            function setMarkers(){
+				var v;
+				for(v=0; v < vehicles.length; v++){
+					var brIcon = new bullRunnerIcon();
+					var coord = L.latLng(vehicles[v].lat,vehicles[v].lon);
+					busMarkers = L.marker(coord,{icon : brIcon,}).bindPopup('Bus: ' + vehicles[v].id + " Route: " + vehicles[v].routeId).addTo(this_.lmap);
+				}
+            }
        
             
             /* here are the controls for layers and zooming on the map */
