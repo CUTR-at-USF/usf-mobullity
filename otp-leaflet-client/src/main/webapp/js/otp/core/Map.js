@@ -116,11 +116,11 @@ otp.core.Map = otp.Class({
             			type: 'GET',
             			dataType: 'JSON',
             			async: false,
-            			timeout: 30000,
+            			timeout: 60000,
             			success: function(data){
 	            			var x;
 	            			for (x = 0; x < data.vehicles.length; x++){
-	            				//console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" lat:"+data.vehicles[x].lat+" lon:"+data.vehicles[x].lon);
+	            				console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" lat:"+data.vehicles[x].lat+" lon:"+data.vehicles[x].lon);
 	            			}
 	            			vehicles = data.vehicles;
 	            			setMarkers();
@@ -128,7 +128,6 @@ otp.core.Map = otp.Class({
             	});
             	//console.log(vehicles);
             };
-            liveMap();
             
         	//Sets markers for each vehicle
             function setMarkers(){
@@ -139,6 +138,9 @@ otp.core.Map = otp.Class({
 					busMarkers = L.marker(coord,{icon : brIcon,}).bindPopup('Bus: ' + vehicles[v].id + " Route: " + vehicles[v].routeId).addTo(this_.lmap);
 				}
             }
+            
+            liveMap();
+            setInterval(function(){liveMap();}, 15000);
             
             	
             /* here are the controls for layers and zooming on the map */
