@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/client/js/otp/core/Map.js
 /* This program is free software: you can redistribute it and/or
    modify it under the teMap.jsrms of the GNU Lesser General Public License
    as published by the Free Software Foundation, either version 3 of
@@ -64,7 +63,7 @@ otp.core.Map = otp.Class({
         this.lmap = new L.Map('map', mapProps);
         
         
-          /*Locates user's current location if geoLocation in config.js is set to true*/
+        /*Locates user's current location if geoLocation in config.js is set to true*/
         var marker = new L.marker();
         var tempM = new L.marker();
         var accCircle = new L.circle();
@@ -99,49 +98,6 @@ otp.core.Map = otp.Class({
             	this.removeLayer(tempM);
             	this.removeLayer(tempA);
             };
-            
-            /*Live Map stuff*/
-            //Bull Runner Live Bus Icon
-            var bullRunnerIcon = L.Icon.extend({
-            	options: {
-            		iconUrl : resourcePath + 'images/busLocation.png',
-            		iconSize: new L.Point(15,15)
-            	}
-            });
-            //Function to get the Vehicle Position information and set Markers
-            var vehicles = {};
-            function liveMap(){
-            	//Pulls the Vehicle Positions from the Rest API 
-            	var url = otp.config.hostname + '/' +  otp.config.restService + "/ws/vehicle_positions";
-            	$.ajax(url, {
-            			type: 'GET',
-            			dataType: 'JSON',
-            			async: false,
-            			timeout: 60000,
-            			success: function(data){
-	            			var x;
-	            			for (x = 0; x < data.vehicles.length; x++){
-	            				console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" lat:"+data.vehicles[x].lat+" lon:"+data.vehicles[x].lon);
-	            			}
-	            			vehicles = data.vehicles;
-	            			setMarkers();
-            			}
-            	});
-            	//console.log(vehicles);
-            };
-            
-        	//Sets markers for each vehicle
-            function setMarkers(){
-				var v;
-				for(v=0; v < vehicles.length; v++){
-					var brIcon = new bullRunnerIcon();
-					var coord = L.latLng(vehicles[v].lat,vehicles[v].lon);
-					busMarkers = L.marker(coord,{icon : brIcon,}).bindPopup('Bus: ' + vehicles[v].id + " Route: " + vehicles[v].routeId).addTo(this_.lmap);
-				}
-            }
-            
-            liveMap();
-            setInterval(function(){liveMap();}, 15000);
        
             
             /* here are the controls for layers and zooming on the map */
