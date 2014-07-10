@@ -168,6 +168,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
         				v.lon=position.getLongitude();
         				v.routeId=routeId;
         				v.agencyId=agencyId;
+        				v.bearing=position.getBearing();
         				v.lastUpdate=System.currentTimeMillis();
         				
         				//setting up the hash map
@@ -185,7 +186,7 @@ public class PollingVehiclePositionsUpdater extends PollingGraphUpdater {
 //        				if(vehiclesById.containsKey(tmp))
 //        				{
 //        					Vehicle x = vehiclesById.get(tmp);
-//        					System.out.println("ID: " + x.id + " @ lat: " + x.lat + " long: " + x.lon + " On Route: " + x.routeId + " ... Last Update: " + x.lastUpdate);
+//        					System.out.println("ID: " + x.id + " @ lat: " + x.lat + " long: " + x.lon + " On Route: " + x.routeId + " going " + x.bearing + " ... Last Update: " + x.lastUpdate);
 //        				}
 //        			}
         		}

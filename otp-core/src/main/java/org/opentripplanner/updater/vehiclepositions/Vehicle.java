@@ -39,6 +39,9 @@ public class Vehicle implements Serializable{
     public double lon;
     @XmlElement
     @JsonSerialize	
+    public float bearing;
+    @XmlElement
+    @JsonSerialize	
     public String routeId;
     @XmlElement
     @JsonSerialize	
