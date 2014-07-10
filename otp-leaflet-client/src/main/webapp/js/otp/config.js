@@ -74,6 +74,7 @@ otp.config = {
     showModuleSelector  : true,
     metric              : false,
     showBusStops		: true,
+    showBusPositions	: true,
 
 
     /**
