@@ -72,10 +72,11 @@ otp.layers.BusPositionsLayer =
 
 			this.module.addLayer("buses", this);
 			this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
+			setInterval($.proxy(this.refresh,this),5000);
 		},
 
 		refresh : function() {
-			this.clearLayers();                
+			this.clearLayers();
 			var lmap = this.module.webapp.map.lmap;
 			if(lmap.getZoom() >= this.minimumZoomForStops) {
 				this.liveMap();
@@ -83,7 +84,7 @@ otp.layers.BusPositionsLayer =
 		},
 
 		liveMap : function() {
-			var this_ = this;
+			this_ = this;
 			var url = otp.config.hostname + '/' +  otp.config.restService + "/ws/vehicle_positions";
 			$.ajax(url, {
 				type: 'GET',
@@ -99,11 +100,12 @@ otp.layers.BusPositionsLayer =
 					this_.setMarkers();
 				}
 			});
-			//console.log(this_.vehicles);
+			console.log(this_.vehicles);
 		},
 
 		setMarkers: function(){
 			var this_ = this;
+			this.clearLayers();
 			var v;
 			var a = new Array();
 			var b = new Array();
