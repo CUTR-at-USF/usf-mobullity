@@ -100,7 +100,7 @@ otp.layers.BusPositionsLayer =
 					this_.setMarkers();
 				}
 			});
-			console.log(this_.vehicles);
+//			console.log(this_.vehicles);
 		},
 
 		setMarkers: function(){
