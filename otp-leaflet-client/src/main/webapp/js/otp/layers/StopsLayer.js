@@ -24,15 +24,6 @@ var bullrunnerStopIcon = L.Icon.extend({
     }
 });
 
-var hartStopIcon = L.Icon.extend({
-    options: {
-        iconUrl: resourcePath + 'images/stop20.png',
-        shadowUrl: null,
-        iconSize: new L.Point(8,8),
-        iconAnchor: new L.Point(10, 10),
-        popupAnchor: new L.Point(0, -5)
-    }
-});
 
 otp.layers.StopsLayer = 
     otp.Class(L.LayerGroup, {
@@ -83,7 +74,6 @@ otp.layers.StopsLayer =
             //console.log(stop);
             
             var bullIcon = new bullrunnerStopIcon();
-            var hartIcon = new hartStopIcon();
             
             var context = _.clone(stop);
             context.agencyStopLinkText = otp.config.agencyStopLinkText || "Agency Stop URL";
@@ -122,10 +112,7 @@ otp.layers.StopsLayer =
           
             
             if(stop.id.agencyId == "HART"){
-            	L.marker([stop.lat, stop.lon], {
-            		icon : hartIcon,
-            	}).addTo(this)
-            	.bindPopup(popupContent.get(0));
+            	// do nothing because only want to display Bull Runner Bus Stops
             }
             else{
             	L.marker([stop.lat, stop.lon], {

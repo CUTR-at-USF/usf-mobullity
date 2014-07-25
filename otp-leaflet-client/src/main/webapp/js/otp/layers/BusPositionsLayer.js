@@ -80,6 +80,7 @@ otp.layers.BusPositionsLayer =
 			var lmap = this.module.webapp.map.lmap;
 			if(lmap.getZoom() >= this.minimumZoomForStops) {
 				this.liveMap();
+				this.setRoutes();
 			}
 		},
 
@@ -125,33 +126,50 @@ otp.layers.BusPositionsLayer =
 				var coord = L.latLng(this_.vehicles[v].lat,this_.vehicles[v].lon);
 				var bearing = this_.vehicles[v].bearing;
 				var route = this_.vehicles[v].routeId;
+				var marker;
 
 				switch (route){
 				case 'A':
 					switch(bearing){
 					case 0:
-						a.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 45:
-						a.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 90:
-						a.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 135:
-						a.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 180:
-						a.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 225:
-						a.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 270:
-						a.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					case 315:
-						a.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						a.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -160,28 +178,44 @@ otp.layers.BusPositionsLayer =
 				case 'B':
 					switch(bearing){
 					case 0:
-						b.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 45:
-						b.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 90:
-						b.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 135:
-						b.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 180:
-						b.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 225:
-						b.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 270:
-						b.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					case 315:
-						b.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						b.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -190,28 +224,44 @@ otp.layers.BusPositionsLayer =
 				case 'C':
 					switch(bearing){
 					case 0:
-						c.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 45:
-						c.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 90:
-						c.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 135:
-						c.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 180:
-						c.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 225:
-						c.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 270:
-						c.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					case 315:
-						c.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						c.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -220,28 +270,44 @@ otp.layers.BusPositionsLayer =
 				case 'D':
 					switch(bearing){
 					case 0:
-						d.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 45:
-						d.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 90:
-						d.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 135:
-						d.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 180:
-						d.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 225:
-						d.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 270:
-						d.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					case 315:
-						d.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						d.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -250,28 +316,44 @@ otp.layers.BusPositionsLayer =
 				case 'E':
 					switch(bearing){
 					case 0:
-						e.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 45:
-						e.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 90:
-						e.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 135:
-						e.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 180:
-						e.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 225:
-						e.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 270:
-						e.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					case 315:
-						e.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						e.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -280,28 +362,44 @@ otp.layers.BusPositionsLayer =
 				case 'F':
 					switch(bearing){
 					case 0:
-						f.push(L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 45:
-						f.push(L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 90:
-						f.push(L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 135:
-						f.push(L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 180:
-						f.push(L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 225:
-						f.push(L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 270:
-						f.push(L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					case 315:
-						f.push(L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route));
+						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker.on('mouseover', marker.openPopup.bind(marker));
+						f.push(marker);
 						break;
 					default:
 						console.log("Error no dir available: " + route);
@@ -311,11 +409,21 @@ otp.layers.BusPositionsLayer =
 					console.log("Error no route available: " + route);
 				}
 			}
-			L.layerGroup(a).addTo(this_);
-			L.layerGroup(b).addTo(this_);
-			L.layerGroup(c).addTo(this_);
-			L.layerGroup(d).addTo(this_);
-			L.layerGroup(e).addTo(this_);
-			L.layerGroup(f).addTo(this_);
+				L.layerGroup(a).addTo(this_);
+				L.layerGroup(b).addTo(this_);
+				L.layerGroup(c).addTo(this_);
+				L.layerGroup(d).addTo(this_);
+				L.layerGroup(e).addTo(this_);
+				L.layerGroup(f).addTo(this_);
+		},
+		
+		setRoutes : function(){
+			var routeData = this.module.webapp.transitIndex.routes;
+			if(routeData['USF Bull Runner_A']){};
+			if(routeData['USF Bull Runner_B']){};
+			if(routeData['USF Bull Runner_C']){};
+			if(routeData['USF Bull Runner_D']){};
+			if(routeData['USF Bull Runner_E']){};
+			if(routeData['USF Bull Runner_F']){};
 		},
 	});
