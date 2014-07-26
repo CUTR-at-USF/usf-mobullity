@@ -406,7 +406,7 @@ otp.widgets.tripoptions.ModeSelector =
     
     id           :  null,
 
-    modes        : otp.config.locale.tripPlanner.modes,
+    modes        : otp.config.locale.tripPlanner.with_bikeshare_mode,
 
     optionLookup : null,
     modeControls : null,
