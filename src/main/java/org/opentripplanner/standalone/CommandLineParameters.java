@@ -34,7 +34,7 @@ public class CommandLineParameters {
 
     private static final int DEFAULT_PORT = 8080;
     private static final int DEFAULT_SECURE_PORT = 8081;
-    private static final String DEFAULT_GRAPH_DIRECTORY  = "/var/otp/graphs";
+    private static final String DEFAULT_GRAPH_DIRECTORY  = "/path/to/store/graph-bundle";
     private static final String DEFAULT_CACHE_DIRECTORY  = "/var/otp/cache";
     private static final String DEFAULT_POINTSET_DIRECTORY  = "/var/otp/pointsets";
     private static final String DEFAULT_ROUTER_ID = "";

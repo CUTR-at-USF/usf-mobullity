@@ -72,9 +72,9 @@ otp.config = {
     showTitle           : true,
     showModuleSelector  : true,
     metric              : false,
-    showBullRunnerStops	: true,
+    showBullRunnerStops	: false,
     showHartBusStops	: false,
-    showBusPositions	: true,
+    showBusPositions	: false,
 
 
     /**
@@ -117,7 +117,7 @@ otp.config = {
     geocoders : [
         {
             name: 'OTP built-in geocoder',
-            className: 'otp.core.GeocoderBuiltin'
+            className: 'otp.core.Geocoder'
             // URL and query parameter do not need to be set for built-in geocoder.
         }
   //              {
@@ -146,18 +146,18 @@ otp.config = {
         	content: '<p> Live map option is coming soon...</p>',
         },
 
-    {
+        {
     	title: 'Icon Legend',
     	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
     		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
     		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br>\
     		<img src="images/busLocation.png" height="15" width="15"> : BullRunner Bus Position</p>'        	
-    },
-  {	
+        },
+        {	
 	title: 'Contact',
 	content: '<p> Contact information for questions or comments:</p>\
 		<p>Sean Barbeau: barbeau@cutr.usf.edu</p>'
-},
+        },
 
     ],
     
@@ -179,3 +179,5 @@ otp.config = {
      
     timeFormat  : "h:mma",
     dateFormat  : "MMM Do YYYY"
+    	
+}

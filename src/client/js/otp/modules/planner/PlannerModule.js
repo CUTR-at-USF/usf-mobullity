@@ -468,7 +468,7 @@ otp.modules.planner.PlannerModule =
             var weight = 8;
             // Added specific code for the HART bus line so that the hart bus line route will be highlighted in blue
             // Any other route will be highlighted in the default color which is green.
-            if(leg.agencyId == "HART"){polyline.setStyle({ color : '#0000FF', weight: weight});}
+            if(leg.agencyId == "Hillsborough Area Regional Transit"){polyline.setStyle({ color : '#0000FF', weight: weight});}
             else{polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight});}
             this.pathLayer.addLayer(polyline);
             polyline.leg = leg;
