@@ -86,7 +86,7 @@ otp.layers.BusPositionsLayer =
 
 		liveMap : function() {
 			this_ = this;
-			var url = otp.config.hostname + '/' +  otp.config.restService + "/vehicle_positions";
+			var url = otp.config.hostname + '/' + "otp/vehicle_positions";
 			$.ajax(url, {
 				type: 'GET',
 				dataType: 'JSON',

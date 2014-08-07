@@ -24,6 +24,7 @@ import org.opentripplanner.api.resource.SimpleIsochrone;
 import org.opentripplanner.api.resource.SurfaceResource;
 import org.opentripplanner.api.resource.TileService;
 import org.opentripplanner.api.resource.TimeGridWs;
+import org.opentripplanner.api.resource.VehiclePositions;
 import org.opentripplanner.index.GeocoderResource;
 import org.opentripplanner.index.IndexAPI;
 import org.slf4j.bridge.SLF4JBridgeHandler;
@@ -96,8 +97,9 @@ public class OTPApplication extends Application {
             /* Features and Filters: extend Jersey, manipulate requests and responses. */
             AuthFilter.class,
             CorsFilter.class,
-            // Enforce roles annotations defined by JSR-250
-            RolesAllowedDynamicFeature.class
+            /* Enforce roles annotations defined by JSR-250 */
+            RolesAllowedDynamicFeature.class,
+            VehiclePositions.class
         );
     }
 

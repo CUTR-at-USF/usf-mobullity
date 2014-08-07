@@ -75,7 +75,7 @@ otp.config = {
     metric              : false,
     showBullRunnerStops	: false,
     showHartBusStops	: false,
-    showBusPositions	: false,
+    showBusPositions	: true,
 
 
     /**
