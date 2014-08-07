@@ -54,6 +54,7 @@ otp.config = {
     geoLocation: true,
     //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.058499, -82.416945), 
+    usfLatLngBoundary: new Array( new L.LatLng(28.080556, -82.451454), new L.LatLng(28.032913, -82.373949) ), /* Top-Left, Bottom-Right */	
     initZoom : 14,
     minZoom : 8,
     maxZoom : 20,

@@ -77,7 +77,17 @@ otp.core.Map = otp.Class({
             };
             
             /* sets a marker at the current location */
-            function onLocationFound(e){            	
+            function onLocationFound(e){
+
+		// Ensure latlng is within bounding box, else clamp to default point
+		if (e.latlng.lat > otp.config.usfLatLngBoundary[0].lat || e.latlng.lat < otp.config.usfLatLngBoundary[1].lat ||
+			e.latlng.lng < otp.config.usfLatLngBoundary[0].lng || e.latlng.lng > otp.config.usfLatLngBoundary[1].lng) {
+			pos = otp.config.initLatLng;
+			/* Should we change e.accuracy since we changed the location? @TODO */
+			console.log("LatLng clamped to USF");
+		}
+		else pos = e.latlng;
+		         
             	var locationSpot = L.Icon.extend({
             		options: {
             			iconUrl: resourcePath + 'images/locationSpot.svg',
@@ -88,13 +98,13 @@ otp.core.Map = otp.Class({
             	tempM = marker;
             	tempA = accCircle;
             	var locSpot = new locationSpot();
-            	marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
-            	accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+            	marker = L.marker(pos,{icon : locSpot,}).bindPopup('Current Location');
+            	accCircle = L.circle(pos,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
             	//adds new marker and accuracy circle
             	this.addLayer(marker);
             	this.addLayer(accCircle);
             	//if statement will make it so the map only zooms on the first function call
-            	if (count == 1){this.setView(e.latlng, 17);};
+            	if (count == 1){this.setView(pos, 17);};
             	//following removes the last set of map markers on the last function call
             	this.removeLayer(tempM);
             	this.removeLayer(tempA);
