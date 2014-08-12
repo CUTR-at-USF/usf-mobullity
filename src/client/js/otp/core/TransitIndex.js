@@ -32,7 +32,7 @@ otp.core.TransitIndex = otp.Class({
             return;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/agencyIds';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/agencies';
         $.ajax(url, {
             dataType:   'jsonp',
             
@@ -63,7 +63,7 @@ otp.core.TransitIndex = otp.Class({
             return;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/routes';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/routes';
         $.ajax(url, {
             dataType:   'jsonp',
             
@@ -106,6 +106,7 @@ otp.core.TransitIndex = otp.Class({
         });        
     },
     
+    /* TODO: find correct url from Index API for loadVariants */
     loadVariants : function(agencyAndId, callbackTarget, callback) {
         var this_ = this;
         //console.log("loadVariants: "+agencyAndId);
@@ -139,6 +140,7 @@ otp.core.TransitIndex = otp.Class({
         
     },
     
+    /* TODO: find correct url from Index API for readVariantForTrip */
     readVariantForTrip : function(tripAgency, tripId, callbackTarget, callback) {
     
         var url = otp.config.hostname + '/' + otp.config.restService + '/transit/variantForTrip';
@@ -179,7 +181,7 @@ otp.core.TransitIndex = otp.Class({
         return null;*/
     },
 
-
+    /* TODO: find correct var url from Index API for lrunStopTimesQuery */
     runStopTimesQuery : function(agencyId, stopId, startTime, endTime, callbackTarget, callback) {
 
         if(otp.config.useLegacyMillisecondsApi) {
@@ -209,6 +211,7 @@ otp.core.TransitIndex = otp.Class({
         });
     },        
     
+    /* TODO: find correct url from Index API for loadStopsInRectangle */
     loadStopsInRectangle : function(agencyId, bounds, callbackTarget, callback) {
         var params = {
             leftUpLat : bounds.getNorthWest().lat,
@@ -235,6 +238,7 @@ otp.core.TransitIndex = otp.Class({
         });
     },
 
+    /* TODO: find correct url from Index API for loadStopsById */
     loadStopsById : function(agencyId, id, callbackTarget, callback) {
         var params = {
             id : id,
@@ -258,6 +262,7 @@ otp.core.TransitIndex = otp.Class({
         });
     },   
 
+    /* TODO: find correct url from Index API for loadStopsByName */
     loadStopsByName : function(agencyId, name, callbackTarget, callback) {
         var params = {
             name: name,
