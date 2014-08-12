@@ -28,7 +28,7 @@ otp.widgets.ItinerariesWidget =
     // set to true by next/previous/etc. to indicate to only refresh the currently active itinerary
     refreshActiveOnly : false,
     showButtonRow : false,
-    showItineraryLink : false,
+    showItineraryLink : true,
     showPrintLink : true,
     showEmailLink : true,
     showSearchLink : false,
