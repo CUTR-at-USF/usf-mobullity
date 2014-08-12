@@ -72,7 +72,7 @@ otp.core.Map = otp.Class({
         count=0;
         
         if(otp.config.geoLocation){
-                    this.lmap.locate({watch: true});
+                    this.lmap.locate({watch: true, enableHighAccuracy: true});
                     this.lmap.on('locationfound', onLocationFound);
             };
             
