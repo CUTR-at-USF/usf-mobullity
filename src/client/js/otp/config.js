@@ -5,7 +5,7 @@ otp.config = {
     /**
      * The OTP web service locations
      */
-    hostname : "http://localhost:8080",
+    hostname : "", //"http://localhost:8080",
     //municoderHostname : "http://localhost:8080",
     //datastoreUrl : 'http://localhost:9000',
 	   // In the 0.10.x API the base path is "otp-rest-servlet/ws"
@@ -54,8 +54,8 @@ otp.config = {
     geoLocation: true,
     //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.058499, -82.416945), 
-    usfLatLngBoundary: new Array( new L.LatLng(28.080556, -82.451454), new L.LatLng(28.032913, -82.373949) ), /* Top-Left, Bottom-Right */	
-    initZoom : 14,
+	mapBoundary: false,
+    initZoom : 15,
     minZoom : 8,
     maxZoom : 20,
 
