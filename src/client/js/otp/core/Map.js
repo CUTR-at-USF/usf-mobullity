@@ -71,40 +71,61 @@ otp.core.Map = otp.Class({
         var tempA = new L.circle();
         count=0;
         
-        if(otp.config.geoLocation){
-                    this.lmap.locate({watch: true, enableHighAccuracy: true});
-                    this.lmap.on('locationfound', onLocationFound);
-            };
-            
+		// Establish map boundaries from OTP
+        var url = otp.config.hostname + '/' + otp.config.restService + '/metadata';
+        $.ajax(url, {
+            data: { routerId : otp.config.routerId },            
+            dataType: 'JSON',
+            success: function(data) {				
+                this_.lmap.fitBounds([
+                    [data.lowerLeftLatitude, data.lowerLeftLongitude],
+                    [data.upperRightLatitude, data.upperRightLongitude]
+                ]);				
+				
+				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
+				
+				if(otp.config.geoLocation){
+                    this_.lmap.locate({watch: true, enableHighAccuracy: true});
+					this_.lmap.on('locationfound', onLocationFound);
+				}				
+            }
+        });		    
+		           
             /* sets a marker at the current location */
             function onLocationFound(e){
-
-		// Ensure latlng is within bounding box, else clamp to default point
-		if (e.latlng.lat > otp.config.usfLatLngBoundary[0].lat || e.latlng.lat < otp.config.usfLatLngBoundary[1].lat ||
-			e.latlng.lng < otp.config.usfLatLngBoundary[0].lng || e.latlng.lng > otp.config.usfLatLngBoundary[1].lng) {
-			pos = otp.config.initLatLng;
-			/* Should we change e.accuracy since we changed the location? @TODO */
-			console.log("LatLng clamped to USF");
-		}
-		else pos = e.latlng;
-		         
+     			
+				count = count+1;
+								
+				// 40 accuracy for wifi, 22000 for wired/city center approximations
+				if (e.accuracy >= 22000) {
+					console.log("Accuracy beyond threshold; recentering on USF.");
+					e.latlng = otp.config.initLatLng;
+					return; // dont bother adding a marker 
+				}
+				
+				// if e.latlng is outside of map boundaries (tampa), recenter on USF				
+				if ( ! otp.config.mapBoundary.contains(e.latlng)) {
+					console.log("Geolocation is outside of map boundaries; recentering on USF.");
+					e.latlng = otp.config.initLatLng;
+					return; // and don't add a marker on first load
+				}
+								
             	var locationSpot = L.Icon.extend({
             		options: {
             			iconUrl: resourcePath + 'images/locationSpot.svg',
             			iconSize: new L.Point(10,10),
             		}
             	});
-            	count = count+1;
             	tempM = marker;
             	tempA = accCircle;
             	var locSpot = new locationSpot();
-            	marker = L.marker(pos,{icon : locSpot,}).bindPopup('Current Location');
-            	accCircle = L.circle(pos,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+            	marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
+            	accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
             	//adds new marker and accuracy circle
             	this.addLayer(marker);
             	this.addLayer(accCircle);
             	//if statement will make it so the map only zooms on the first function call
-            	if (count == 1){this.setView(pos, 17);};
+            	if (count == 1){this.setView(e.latlng, 15);};
             	//following removes the last set of map markers on the last function call
             	this.removeLayer(tempM);
             	this.removeLayer(tempA);
@@ -121,23 +142,7 @@ otp.core.Map = otp.Class({
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
         //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));
-        
-      
-        if(!otp.config.initLatLng) {
-            var url = otp.config.hostname + '/' + otp.config.restService + '/metadata';
-            $.ajax(url, {
-                data: { routerId : otp.config.routerId },            
-                dataType: 'JSON',
-                success: function(data) {
-                    this_.lmap.fitBounds([
-                        [data.lowerLeftLatitude, data.lowerLeftLongitude],
-                        [data.upperRightLatitude, data.upperRightLongitude]
-                    ]);
-                }
-            });
-        }
-       
-
+                
         /*var baseMaps = {
             'Base Layer' : tileLayer 
         };*/
