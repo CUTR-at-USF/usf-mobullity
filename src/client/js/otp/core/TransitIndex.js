@@ -116,7 +116,7 @@ otp.core.TransitIndex = otp.Class({
             return;
         }
 
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/routeData';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/routes';
         $.ajax(url, {
             data: {
                 agency : route.routeData.id.agencyId,
@@ -143,11 +143,11 @@ otp.core.TransitIndex = otp.Class({
     /* TODO: find correct url from Index API for readVariantForTrip */
     readVariantForTrip : function(tripAgency, tripId, callbackTarget, callback) {
     
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/variantForTrip';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/trips' + tripId;
         $.ajax(url, {
             data: {
-                tripAgency : tripAgency,
-                tripId : tripId
+//                tripAgency : tripAgency,
+//                tripId : tripId
             },
             dataType:   'jsonp',
                 
@@ -177,11 +177,11 @@ otp.core.TransitIndex = otp.Class({
             }
         }
         
-        console.log("cound not find trip "+tripId);
+        console.log("could not find trip "+tripId);
         return null;*/
     },
 
-    /* TODO: find correct var url from Index API for lrunStopTimesQuery */
+    /* TODO: stopID resulting in a null value */
     runStopTimesQuery : function(agencyId, stopId, startTime, endTime, callbackTarget, callback) {
 
         if(otp.config.useLegacyMillisecondsApi) {
@@ -189,20 +189,20 @@ otp.core.TransitIndex = otp.Class({
             endTime *= 1000;
         }
 
-        var params = {
-            agency: agencyId,
-            id: stopId,
-            startTime : startTime, //new TransitIndex API uses seconds
-            endTime : endTime, // new TransitIndex API uses seconds
-            extended : true,
-        };
+//        var params = {
+//            agency: agencyId,
+//            id: stopId,
+//            startTime : startTime, //new TransitIndex API uses seconds
+//            endTime : endTime, // new TransitIndex API uses seconds
+//            extended : true,
+//        };
         if(otp.config.routerId !== undefined) {
             params.routerId = otp.config.routerId;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopTimesForStop';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/' + stopId + '/stopTimes';
         $.ajax(url, {
-            data:       params,
+  //          data:       params,
             dataType:   'jsonp',
                 
             success: function(data) {
@@ -211,39 +211,68 @@ otp.core.TransitIndex = otp.Class({
         });
     },        
     
-    /* TODO: find correct url from Index API for loadStopsInRectangle */
-    loadStopsInRectangle : function(agencyId, bounds, callbackTarget, callback) {
-        var params = {
-            leftUpLat : bounds.getNorthWest().lat,
-            leftUpLon : bounds.getNorthWest().lng,
-            rightDownLat : bounds.getSouthEast().lat,
-            rightDownLon : bounds.getSouthEast().lng,
-            extended : true
-        };
-        if(agencyId !== null) {
-            params.agency = agencyId;
-        }
-        if(typeof otp.config.routerId !== 'undefined') {
-            params.routerId = otp.config.routerId;
-        }
-        
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopsInRectangle';
-        $.ajax(url, {
-            data:       params,
-            dataType:   'jsonp',
-                
-            success: function(data) {
-                callback.call(callbackTarget, data);                
-            }
-        });
+    /* TODO: no errors in correct url but no stops showing on map?? */
+    loadStopsInRadius:  function(agencyId, center, callbackTarget, callback) {
+    	var params = {
+              lat: center.lat,
+              lon: center.lng,
+              radius: 1000,
+              maxLat : null,
+              minLon : null,
+              minLat : null,
+              maxLon : null,
+    	};
+    	if(agencyId !== null) {
+          params.agency = agencyId;
+      }
+      if(typeof otp.config.routerId !== 'undefined') {
+          params.routerId = otp.config.routerId;
+      }
+      
+      var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops';
+      $.ajax(url, {
+          data:       params,
+          dataType:   'jsonp',
+              
+          success: function(data) {
+              callback.call(callbackTarget, data);                
+          }
+      });
+    	
     },
+    
+//    loadStopsInRectangle : function(agencyId, bounds, callbackTarget, callback) {
+//        var params = {
+//            leftUpLat : bounds.getNorthWest().lat,
+//            leftUpLon : bounds.getNorthWest().lng,
+//            rightDownLat : bounds.getSouthEast().lat,
+//            rightDownLon : bounds.getSouthEast().lng,
+//            extended : true
+//        };
+//        if(agencyId !== null) {
+//            params.agency = agencyId;
+//        }
+//        if(typeof otp.config.routerId !== 'undefined') {
+//            params.routerId = otp.config.routerId;
+//        }
+//        
+//        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopsInRectangle';
+//        $.ajax(url, {
+//            data:       params,
+//            dataType:   'jsonp',
+//                
+//            success: function(data) {
+//                callback.call(callbackTarget, data);                
+//            }
+//        });
+//    },
 
     /* TODO: find correct url from Index API for loadStopsById */
     loadStopsById : function(agencyId, id, callbackTarget, callback) {
-        var params = {
-            id : id,
-            extended : true
-        };
+//        var params = {
+//            id : id,
+//            extended : true
+//        };
         if(agencyId !== null) {
             params.agency = agencyId;
         }
@@ -251,9 +280,9 @@ otp.core.TransitIndex = otp.Class({
             params.routerId = otp.config.routerId;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopData';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + id;
         $.ajax(url, {
-            data:       params,
+//            data:       params,
             dataType:   'jsonp',
                 
             success: function(data) {
@@ -262,27 +291,27 @@ otp.core.TransitIndex = otp.Class({
         });
     },   
 
-    /* TODO: find correct url from Index API for loadStopsByName */
-    loadStopsByName : function(agencyId, name, callbackTarget, callback) {
-        var params = {
-            name: name,
-            extended : true
-        };
-        if(agencyId !== null) {
-            params.agency = agencyId;
-        }
-        if(typeof otp.config.routerId !== 'undefined') {
-            params.routerId = otp.config.routerId;
-        }
-        
-        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopsByName';
-        $.ajax(url, {
-            data:       params,
-            dataType:   'jsonp',
-                
-            success: function(data) {
-                callback.call(callbackTarget, data);                
-            }
-        });
-    },    
+    /* TODO: Do no see anything in the IndexAPI.java for getting a stop by anything other than it's ID */
+//    loadStopsByName : function(agencyId, name, callbackTarget, callback) {
+//        var params = {
+//            name: name,
+//            extended : true
+//        };
+//        if(agencyId !== null) {
+//            params.agency = agencyId;
+//        }
+//        if(typeof otp.config.routerId !== 'undefined') {
+//            params.routerId = otp.config.routerId;
+//        }
+//        
+//        var url = otp.config.hostname + '/' + otp.config.restService + '/transit/stopsByName';
+//        $.ajax(url, {
+//            data:       params,
+//            dataType:   'jsonp',
+//                
+//            success: function(data) {
+//                callback.call(callbackTarget, data);                
+//            }
+//        });
+//    },    
 });

@@ -46,7 +46,7 @@ otp.layers.StopsLayer =
         this.clearLayers();                
         var lmap = this.module.webapp.map.lmap;
         if(lmap.getZoom() >= this.minimumZoomForStops) {
-            this.module.webapp.transitIndex.loadStopsInRectangle(null, lmap.getBounds(), this, function(data) {
+            this.module.webapp.transitIndex.loadStopsInRadius(null, lmap.getCenter(), this, function(data) {
                 this.stopsLookup = {};
                 for(var i = 0; i < data.stops.length; i++) {
                     var agencyAndId = data.stops[i].id.agencyId + "_" + data.stops[i].id.id;

@@ -5,7 +5,7 @@ otp.config = {
     /**
      * The OTP web service locations
      */
-    hostname : "", //"http://localhost:8080",
+    hostname : "http://localhost:8080",
     //municoderHostname : "http://localhost:8080",
     //datastoreUrl : 'http://localhost:9000',
 	   // In the 0.10.x API the base path is "otp-rest-servlet/ws"
@@ -73,7 +73,7 @@ otp.config = {
     showTitle           : true,
     showModuleSelector  : true,
     metric              : false,
-    showBullRunnerStops	: false,
+    showBullRunnerStops	: true,
     showHartBusStops	: false,
     showBusPositions	: true,
 
