@@ -61,9 +61,32 @@ otp.core.Map = otp.Class({
         if(otp.config.minZoom) mapProps['minZoom'] = otp.config.minZoom;  //_.extend(mapProps, { minZoom : otp.config.minZoom });
         if(otp.config.maxZoom) mapProps['maxZoom'] = otp.config.maxZoom; //_.extend(mapProps, { maxZoom : otp.config.maxZoom });
         
-        this.lmap = new L.Map('map', mapProps);
+        // http://stackoverflow.com/questions/15671949/why-does-calling-leaflets-setzoom-twice-results-on-the-second-being-ignored
+        if (L.DomUtil.TRANSITION) {
+        	L.Map.addInitHook(function() {
+        		L.DomEvent.on(this._mapPane, L.DomUtil.TRANSITION_END, function() {
+        			var zoom = this._viewActions.shift();
+        			if (zoom != undefined) {
+        				this.setView(zoom[0], zoom[1]);
+        			}
+        		}, this);
+        	});
+        }
         
-        
+        L.Map.include(!L.DomUtil.TRANSITION ? {} : {
+        	_viewActions: [],
+        	queueView: function(latlng, zoom) {
+        		if (this._animatingZoom) {
+        			this._viewActions.push([latlng, zoom]);
+        		}
+        		else {
+        			this.setView(latlng, zoom);
+        		}
+        	}
+        });
+		
+        this.lmap = new L.Map('map', mapProps);        
+		
         /*Locates user's current location if geoLocation in config.js is set to true*/
         var marker = new L.marker();
         var tempM = new L.marker();
@@ -83,11 +106,12 @@ otp.core.Map = otp.Class({
                 ]);				
 				
 				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
-				
+		
 				if(otp.config.geoLocation){
-                    this_.lmap.locate({watch: true, enableHighAccuracy: true});
+					this_.lmap.locate({watch: true, enableHighAccuracy: true});
 					this_.lmap.on('locationfound', onLocationFound);
-				}				
+				}						
+				
             }
         });		    
 		           
@@ -108,8 +132,8 @@ otp.core.Map = otp.Class({
 					console.log("Geolocation is outside of map boundaries; recentering on USF.");
 					e.latlng = otp.config.initLatLng;
 					return; // and don't add a marker on first load
-				}
-								
+				}				
+				
             	var locationSpot = L.Icon.extend({
             		options: {
             			iconUrl: resourcePath + 'images/locationSpot.svg',
@@ -125,7 +149,9 @@ otp.core.Map = otp.Class({
             	this.addLayer(marker);
             	this.addLayer(accCircle);
             	//if statement will make it so the map only zooms on the first function call
-            	if (count == 1){this.setView(e.latlng, 15);};
+            	if (count == 1){
+            	  this.queueView(e.latlng, 17);
+            	};
             	//following removes the last set of map markers on the last function call
             	this.removeLayer(tempM);
             	this.removeLayer(tempA);
