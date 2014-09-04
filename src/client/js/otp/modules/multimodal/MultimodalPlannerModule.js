@@ -83,12 +83,9 @@ otp.modules.multimodal.MultimodalPlannerModule =
         this.optionsWidget.applyQueryParams(this.defaultQueryParams);
         
         //Add layers
-        if(otp.config.showBullRunnerStops){
+        if(otp.config.showBullRunnerStops == true || otp.config.showHartBusStops == true){
         	this.stopsLayer = new otp.layers.StopsLayer(this);
         };
-        if(otp.config.showHartBusStops){
-        	this.hartStopsLayer = new otp.layers.HartStopsLayer(this);
-        }
         if(otp.config.showBusPositions){
         	this.busLayers = new otp.layers.BusPositionsLayer(this);
         }

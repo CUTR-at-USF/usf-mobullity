@@ -26,97 +26,100 @@ var hartStopIcon = L.Icon.extend({
 
 otp.layers.HartStopsLayer = 
     otp.Class(L.LayerGroup, {
-   
-    module : null,
-    
-    minimumZoomForStops : 15,
-    
-    initialize : function(module) {
-        L.LayerGroup.prototype.initialize.apply(this);
-        this.module = module;
-
-        this.stopsLookup = {};
+    	   
+        module : null,
         
-        this.module.addLayer("hartStops", this);
-        this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
-    },
-    
-    refresh : function() {
-        this.clearLayers();                
-        var lmap = this.module.webapp.map.lmap;
-        if(lmap.getZoom() >= this.minimumZoomForStops) {
-            this.module.webapp.transitIndex.loadStopsInRectangle(null, lmap.getBounds(), this, function(data) {
-                this.stopsLookup = {};
-                for(var i = 0; i < data.stops.length; i++) {
-                    var agencyAndId = data.stops[i].id.agencyId + "_" + data.stops[i].id.id;
-                    this.stopsLookup[agencyAndId] = data.stops[i];
-                }
-                this.updateStops();
-            });
-        }
-    },
-    
-    updateStops : function(stops) {
-        var stops = _.values(this.stopsLookup);
-        var this_ = this;
+        minimumZoomForStops : 15,
         
-        for(var i=0; i<stops.length; i++) {
+        initialize : function(module) {
+            L.LayerGroup.prototype.initialize.apply(this);
+            this.module = module;
 
-            var stop = stops[i];
-            stop.lat = stop.lat || stop.stopLat;
-            stop.lon = stop.lon || stop.stopLon;
-
-            // temporary TriMet specific code
-//            if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
-//                stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
-//            }
-            //console.log(stop);
+            this.stopsLookup = {};
             
-            var hartIcon = new hartStopIcon();
+            this.module.addLayer("stops", this);
+            this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
             
-            var context = _.clone(stop);
-            context.agencyStopLinkText = otp.config.agencyStopLinkText || "Agency Stop URL";
-            var popupContent = ich['otp-stopsLayer-popup'](context);
-
-            popupContent.find('.stopViewerLink').data('stop', stop).click(function() {
-                var thisStop = $(this).data('stop');
-                this_.module.stopViewerWidget.show();
-                this_.module.stopViewerWidget.setActiveTime(moment().add("hours", -otp.config.timeOffset).unix()*1000);
-                this_.module.stopViewerWidget.setStop(thisStop.id.agencyId, thisStop.id.id, thisStop.stopName);
-                this_.module.stopViewerWidget.bringToFront();
-            });
+        },
+        
+        refresh : function() {
+            this.clearLayers();                
+            var lmap = this.module.webapp.map.lmap;
+            if(lmap.getZoom() >= this.minimumZoomForStops) {
+                this.module.webapp.transitIndex.loadStopsInRadius(null, lmap.getCenter(), this, function(data) {
+                    this.stopsLookup = {};
+                    for(var i = 0; i < data.length; i++) {
+                        var agencyAndId = data[i].agency + "_" + data[i].id;
+                        this.stopsLookup[agencyAndId] = data[i];
+                    }
+                    this.updateStops();
+                });
+            }
+        },
+        
+        updateStops : function(stops) {
+            var stops = _.values(this.stopsLookup);
+            var this_ = this;
             
-            popupContent.find('.planFromLink').data('stop', stop).click(function() {
-                var thisStop = $(this).data('stop');
-                this_.module.setStartPoint(new L.LatLng(thisStop.lat, thisStop.lon), false, thisStop.stopName);
-                this_.module.webapp.map.lmap.closePopup();
-            });
+            for(var i=0; i<stops.length; i++) {
 
-            popupContent.find('.planToLink').data('stop', stop).click(function() {
-                var thisStop = $(this).data('stop');
-                this_.module.setEndPoint(new L.LatLng(thisStop.lat, thisStop.lon), false, thisStop.stopName);
-                this_.module.webapp.map.lmap.closePopup();
-            });
+                var stop = stops[i];
+                stop.lat = stop.lat || stop.stopLat;
+                stop.lon = stop.lon || stop.stopLon;
 
-            if(stop.routes) {
-                var routeList = popupContent.find('.routeList');
-                for(var r = 0; r < stop.routes.length; r++) {
-                    var agencyAndId = stop.routes[r].agencyId + '_' + stop.routes[r].id;
-                    var routeData = this.module.webapp.transitIndex.routes[agencyAndId].routeData;
-                    ich['otp-stopsLayer-popupRoute'](routeData).appendTo(routeList);
-                    // TODO: click opens RouteViewer
-                    //routeList.append('<div>'+agencyAndId+'</div>');
+                // temporary TriMet specific code
+
+//                if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
+//                    stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
+//                }
+                //console.log(stop);
+                
+                var hartIcon = new hartStopIcon();
+                
+                var context = _.clone(stop);
+                context.agencyStopLinkText = otp.config.agencyStopLinkText || "Agency Stop URL";
+                var popupContent = ich['otp-stopsLayer-popup'](context);
+
+                popupContent.find('.stopViewerLink').data('stop', stop).click(function() {
+                    var thisStop = $(this).data('stop');
+                    this_.module.stopViewerWidget.show();
+                    this_.module.stopViewerWidget.setActiveTime(moment().add("hours", -otp.config.timeOffset).unix()*1000);
+                    this_.module.stopViewerWidget.setStop(thisStop.id.agencyId, thisStop.id.id, thisStop.stopName);
+                    this_.module.stopViewerWidget.bringToFront();
+                });
+                
+                popupContent.find('.planFromLink').data('stop', stop).click(function() {
+                    var thisStop = $(this).data('stop');
+                    this_.module.setStartPoint(new L.LatLng(thisStop.lat, thisStop.lon), false, thisStop.stopName);
+                    this_.module.webapp.map.lmap.closePopup();
+                });
+
+                popupContent.find('.planToLink').data('stop', stop).click(function() {
+                    var thisStop = $(this).data('stop');
+                    this_.module.setEndPoint(new L.LatLng(thisStop.lat, thisStop.lon), false, thisStop.stopName);
+                    this_.module.webapp.map.lmap.closePopup();
+                });
+
+                if(stop.routes) {
+                    var routeList = popupContent.find('.routeList');
+                    for(var r = 0; r < stop.routes.length; r++) {
+                        var agencyAndId = stop.routes[r].agencyId + '_' + stop.routes[r].id;
+                        var routeData = this.module.webapp.transitIndex.routes[agencyAndId].routeData;
+                        ich['otp-stopsLayer-popupRoute'](routeData).appendTo(routeList);
+                        // TODO: click opens RouteViewer
+                        //routeList.append('<div>'+agencyAndId+'</div>');
+                    }
                 }
+
+               
+                if(stop.agency == "Hillsborough Area Regional Transit"){
+                	//only want to display Hart stops in this layer
+                	L.marker([stop.lat, stop.lon], {
+                		icon : hartIcon,
+                	}).addTo(this_)
+                	.bindPopup(popupContent.get(0));
+                }
+                
             }
-          
-            
-            if(stop.id.agencyId == "HART"){
-            	L.marker([stop.lat, stop.lon], {
-            		icon : hartIcon,
-            	}).addTo(this)
-            	.bindPopup(popupContent.get(0));
-            }
-            
-        }
-    },
-});
+        },
+    });

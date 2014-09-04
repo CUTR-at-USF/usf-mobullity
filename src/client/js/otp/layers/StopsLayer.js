@@ -24,6 +24,15 @@ var bullrunnerStopIcon = L.Icon.extend({
     }
 });
 
+var hartStopIcon = L.Icon.extend({
+    options: {
+        iconUrl: resourcePath + 'images/stop20.png',
+        shadowUrl: null,
+        iconSize: new L.Point(8,8),
+        iconAnchor: new L.Point(10, 10),
+        popupAnchor: new L.Point(0, -5)
+    }
+});
 
 otp.layers.StopsLayer = 
     otp.Class(L.LayerGroup, {
@@ -40,6 +49,7 @@ otp.layers.StopsLayer =
         
         this.module.addLayer("stops", this);
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
+        
     },
     
     refresh : function() {
@@ -48,9 +58,9 @@ otp.layers.StopsLayer =
         if(lmap.getZoom() >= this.minimumZoomForStops) {
             this.module.webapp.transitIndex.loadStopsInRadius(null, lmap.getCenter(), this, function(data) {
                 this.stopsLookup = {};
-                for(var i = 0; i < data.stops.length; i++) {
-                    var agencyAndId = data.stops[i].id.agencyId + "_" + data.stops[i].id.id;
-                    this.stopsLookup[agencyAndId] = data.stops[i];
+                for(var i = 0; i < data.length; i++) {
+                    var agencyAndId = data[i].agency + "_" + data[i].id;
+                    this.stopsLookup[agencyAndId] = data[i];
                 }
                 this.updateStops();
             });
@@ -75,6 +85,7 @@ otp.layers.StopsLayer =
             //console.log(stop);
             
             var bullIcon = new bullrunnerStopIcon();
+            var hartIcon = new hartStopIcon();
             
             var context = _.clone(stop);
             context.agencyStopLinkText = otp.config.agencyStopLinkText || "Agency Stop URL";
@@ -110,15 +121,21 @@ otp.layers.StopsLayer =
                     //routeList.append('<div>'+agencyAndId+'</div>');
                 }
             }
-          
-            
-            if(stop.id.agencyId == "HART"){
-            	// do nothing because only want to display Bull Runner Bus Stops
-            }
-            else{
+
+           
+            if(stop.agency == "USF_BullRunner" && otp.config.showBullRunnerStops == true){
+            	//only want to display USF BullRunner stops in this layer
             	L.marker([stop.lat, stop.lon], {
             		icon : bullIcon,
-            	}).addTo(this)
+            	}).addTo(this_)
+            	.bindPopup(popupContent.get(0));
+            }
+            
+            else if(stop.agency == "Hillsborough Area Regional Transit" && otp.config.showHartBusStops == true){
+            	//only want to display Hart stops in this layer
+            	L.marker([stop.lat, stop.lon], {
+            		icon : hartIcon,
+            	}).addTo(this_)
             	.bindPopup(popupContent.get(0));
             }
             

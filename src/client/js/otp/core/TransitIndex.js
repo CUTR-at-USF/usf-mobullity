@@ -216,7 +216,7 @@ otp.core.TransitIndex = otp.Class({
     	var params = {
               lat: center.lat,
               lon: center.lng,
-              radius: 1000,
+              radius: 1500,
               maxLat : null,
               minLon : null,
               minLat : null,
@@ -232,8 +232,7 @@ otp.core.TransitIndex = otp.Class({
       var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops';
       $.ajax(url, {
           data:       params,
-          dataType:   'jsonp',
-              
+          dataType:   'json',
           success: function(data) {
               callback.call(callbackTarget, data);                
           }
