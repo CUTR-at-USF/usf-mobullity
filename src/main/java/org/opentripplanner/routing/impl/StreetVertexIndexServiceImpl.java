@@ -378,7 +378,7 @@ public class StreetVertexIndexServiceImpl implements StreetVertexIndexService {
             if (best == null || bundle.best.score < best.best.score) {
                 if (possibleTransitLinksOnly) {
                     // assuming all platforms are tagged when they are not car streets... #1077 
-                    if (!(bundle.allowsCars() || bundle.isPlatform()))
+                    if (!(bundle.allowsWalking() || bundle.isPlatform()))
                         continue;
                 }
                 best = bundle;
