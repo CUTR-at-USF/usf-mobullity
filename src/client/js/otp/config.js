@@ -19,7 +19,7 @@ otp.config = {
     /**
      * The OTP web service locations
      */
-    hostname : "http://localhost:8080",
+    hostname : "",
     //municoderHostname : "http://localhost:8080",
     //datastoreUrl : 'http://localhost:9000',
 	   // In the 0.10.x API the base path is "otp-rest-servlet/ws"
