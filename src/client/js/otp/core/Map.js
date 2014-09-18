@@ -158,10 +158,10 @@ otp.core.Map = otp.Class({
             };
 			
 			
-            var marker = L.marker([28.058499, -82.416945]);
+  //          var marker = L.marker([28.058499, -82.416945]);
             
             this.overLayMaps ={
-            		"CUTR" : marker,
+            		//"CUTR" : marker,
             };
 	   
             /* here are the controls for layers and zooming on the map */

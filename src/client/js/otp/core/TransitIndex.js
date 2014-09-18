@@ -34,7 +34,7 @@ otp.core.TransitIndex = otp.Class({
         
         var url = otp.config.hostname + '/' + otp.config.restService + '/index/agencies';
         $.ajax(url, {
-            dataType:   'jsonp',
+            dataType:   'json',
             
             data: {
                 extended: 'true',
@@ -43,8 +43,8 @@ otp.core.TransitIndex = otp.Class({
             success: function(data) {
                 this_.agencies = {};
 
-                for(var i=0; i<data.agencies.length; i++) {
-                    var agencyData = data.agencies[i];
+                for(var i=0; i<data.length; i++) {
+                    var agencyData = data[i];
                     this_.agencies[agencyData.id] = {
                         index : i,
                         agencyData : agencyData,
@@ -65,18 +65,19 @@ otp.core.TransitIndex = otp.Class({
         
         var url = otp.config.hostname + '/' + otp.config.restService + '/index/routes';
         $.ajax(url, {
-            dataType:   'jsonp',
+            dataType:   'json',
             
             data: {
                 extended: 'true',
             },
                 
             success: function(data) {
-                if(!_.has(data, 'routes')) {
+                if(data == null) {
                     console.log("Error: routes call returned no route data. OTP Message: "+data.message);
                     return;
                 }
-                var sortedRoutes = data.routes;
+            	
+                var sortedRoutes = data;
                 sortedRoutes.sort(function(a,b) {
                     a = a.routeShortName || a.routeLongName;
                     b = b.routeShortName || b.routeLongName;
@@ -93,7 +94,7 @@ otp.core.TransitIndex = otp.Class({
                 var routes = { };
                 for(var i=0; i<sortedRoutes.length; i++) {
                     var routeData = sortedRoutes[i];
-                    var agencyAndId = routeData.id.agencyId+"_"+routeData.id.id;
+                    var agencyAndId = routeData.agency+"_"+routeData.id;
                     routes[agencyAndId] = {
                         index : i,
                         routeData : routeData,
@@ -123,7 +124,7 @@ otp.core.TransitIndex = otp.Class({
                 id : route.routeData.id.id
                 
             },
-            dataType:   'jsonp',
+            dataType:   'json',
                 
             success: function(data) {
                 //console.log(data);
@@ -149,7 +150,7 @@ otp.core.TransitIndex = otp.Class({
 //                tripAgency : tripAgency,
 //                tripId : tripId
             },
-            dataType:   'jsonp',
+            dataType:   'json',
                 
             success: function(data) {
                 //console.log("vFT result:");
@@ -203,7 +204,7 @@ otp.core.TransitIndex = otp.Class({
         var url = otp.config.hostname + '/' + otp.config.restService + '/index/' + stopId + '/stopTimes';
         $.ajax(url, {
   //          data:       params,
-            dataType:   'jsonp',
+            dataType:   'json',
                 
             success: function(data) {
                 callback.call(callbackTarget, data);                
@@ -282,7 +283,7 @@ otp.core.TransitIndex = otp.Class({
         var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + id;
         $.ajax(url, {
 //            data:       params,
-            dataType:   'jsonp',
+            dataType:   'json',
                 
             success: function(data) {
                 callback.call(callbackTarget, data);                
@@ -312,5 +313,20 @@ otp.core.TransitIndex = otp.Class({
 //                callback.call(callbackTarget, data);                
 //            }
 //        });
-//    },    
+//    },  
+    
+    loadRoutesByStopId : function(agencyAndId, callbackTarget, callback) {
+    	var agencyId = agencyAndId;
+      
+      var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + agencyId + '/routes';
+      $.ajax(url, {
+          dataType:   'json',
+          async: false,
+              
+          success: function(data) {
+        	  callback.call(callbackTarget, data);
+          },
+      	
+      });
+  },  
 });

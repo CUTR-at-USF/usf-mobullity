@@ -1,6 +1,20 @@
 otp.config = {
     debug: false,
     locale: otp.locale.English,
+    
+    //All available locales
+    //key is translation name. Must be the same as po file or .json file
+    //value is name of settings file for localization in locale subfolder
+    //File should be loaded in index.html
+    locales : {
+        'en': otp.locale.English,
+        'de': otp.locale.German,
+        'sl': otp.locale.Slovenian,
+        'fr': otp.locale.French,
+        'it': otp.locale.Italian,
+        'ca_ES': otp.locale.Catalan
+    },
+ 
 	
     /**
      * The OTP web service locations
@@ -58,6 +72,9 @@ otp.config = {
     initZoom : 15,
     minZoom : 8,
     maxZoom : 20,
+    
+    /* Whether the map should be moved to contain the full itinerary when a result is received. */
+    zoomToFitResults    : false,
 
     	  
     /**
@@ -68,11 +85,14 @@ otp.config = {
     siteDescription     : "An OpenTripPlanner deployment for USF.",
     logoGraphic         : 'images/USF-v-green.png',
     // bikeshareName    : "",
+  //Enable this if you want to show frontend language chooser
+    showLanguageChooser : true,
 
     showLogo            : true,
     showTitle           : true,
     showModuleSelector  : true,
     metric              : false,
+    
     showBullRunnerStops	: true,
     showHartBusStops	: false,
     showBusPositions	: true,
@@ -118,7 +138,7 @@ otp.config = {
     geocoders : [
         {
             name: 'OTP built-in geocoder',
-            className: 'otp.core.Geocoder'
+            className: 'otp.core.GeocoderBuiltin'
             // URL and query parameter do not need to be set for built-in geocoder.
         }
   //              {

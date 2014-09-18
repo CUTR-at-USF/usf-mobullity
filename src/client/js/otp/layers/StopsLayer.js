@@ -70,6 +70,7 @@ otp.layers.StopsLayer =
     updateStops : function(stops) {
         var stops = _.values(this.stopsLookup);
         var this_ = this;
+        var routeData = this.module.webapp.transitIndex.routes;
         
         for(var i=0; i<stops.length; i++) {
 
@@ -82,7 +83,7 @@ otp.layers.StopsLayer =
 //            if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
 //                stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
 //            }
-            //console.log(stop);
+//            console.log(stop);
             
             var bullIcon = new bullrunnerStopIcon();
             var hartIcon = new hartStopIcon();
@@ -110,12 +111,12 @@ otp.layers.StopsLayer =
                 this_.module.setEndPoint(new L.LatLng(thisStop.lat, thisStop.lon), false, thisStop.stopName);
                 this_.module.webapp.map.lmap.closePopup();
             });
-
+            
             if(stop.routes) {
                 var routeList = popupContent.find('.routeList');
                 for(var r = 0; r < stop.routes.length; r++) {
-                    var agencyAndId = stop.routes[r].agencyId + '_' + stop.routes[r].id;
-                    var routeData = this.module.webapp.transitIndex.routes[agencyAndId].routeData;
+                    var agencyAndId = stop.agency + '_' + stop.id;
+//                    var routeData = this.module.webapp.transitIndex.routes[agencyAndId].routeData;
                     ich['otp-stopsLayer-popupRoute'](routeData).appendTo(routeList);
                     // TODO: click opens RouteViewer
                     //routeList.append('<div>'+agencyAndId+'</div>');
