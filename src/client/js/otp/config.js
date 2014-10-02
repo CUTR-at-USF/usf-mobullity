@@ -139,14 +139,14 @@ otp.config = {
         {
             name: 'Geocoder',
             className: 'otp.core.Geocoder',
-            url: 'otp/routers/default/geocoder',
+            url: '/otp-geocoder/geocode',
             addressParam: 'address',
             // URL and query parameter do not need to be set for built-in geocoder.
         }
   //              {
   //              	 name: "Geocoder",
   //              	 className: "otp.core.Geocoder",
-  //              	 url: "/opentripplanner-geocoder/geocode",
+  //              	 url: "/otp-geocoder/geocode",
   //              	 addressParam: "address",
   //               }
     ],

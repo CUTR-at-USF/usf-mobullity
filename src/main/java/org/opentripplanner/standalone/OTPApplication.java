@@ -26,7 +26,6 @@ import org.opentripplanner.api.resource.TileService;
 import org.opentripplanner.api.resource.TimeGridWs;
 import org.opentripplanner.api.resource.VehiclePositions;
 import org.opentripplanner.index.GeocoderResource;
-import org.opentripplanner.index.GeocoderServer;
 import org.opentripplanner.index.IndexAPI;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
@@ -77,7 +76,6 @@ public class OTPApplication extends Application {
             IndexAPI.class,
             ExternalGeocoderResource.class,
             GeocoderResource.class,
-            GeocoderServer.class,
             SimpleIsochrone.class,
             TileService.class,
             BikeRental.class,
