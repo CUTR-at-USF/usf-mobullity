@@ -19,7 +19,7 @@ otp.config = {
     /**
      * The OTP web service locations
      */
-    hostname : "http://localhost:8080",
+    hostname : "",
     //municoderHostname : "http://localhost:8080",
     //datastoreUrl : 'http://localhost:9000',
 	   // In the 0.10.x API the base path is "otp-rest-servlet/ws"
@@ -137,8 +137,10 @@ otp.config = {
 
     geocoders : [
         {
-            name: 'OTP built-in geocoder',
-            className: 'otp.core.GeocoderBuiltin'
+            name: 'Geocoder',
+            className: 'otp.core.Geocoder',
+            url: 'otp/routers/default/geocoder',
+            addressParam: 'address',
             // URL and query parameter do not need to be set for built-in geocoder.
         }
   //              {
