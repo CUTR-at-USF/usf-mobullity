@@ -116,4 +116,14 @@ public class CandidateEdgeBundle extends ArrayList<CandidateEdge> {
         }
         return false;
     }
+
+	public boolean allowsWalking() {
+	    for (CandidateEdge ce : CandidateEdgeBundle.this) {
+	    	StreetEdge e = ce.getEdge();
+	    	if (e.getPermission().allows(StreetTraversalPermission.PEDESTRIAN)) {
+	    		return true;
+	    	}
+	    }
+		return false;
+	}
 }

@@ -139,7 +139,7 @@ otp.config = {
         {
             name: 'Geocoder',
             className: 'otp.core.Geocoder',
-            url: '/otp-geocoder/geocode',
+            //hardcoded url into otp.core.Geocoder
             addressParam: 'address',
             // URL and query parameter do not need to be set for built-in geocoder.
         }
