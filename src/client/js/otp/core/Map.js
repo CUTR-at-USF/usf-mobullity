@@ -124,6 +124,7 @@ otp.core.Map = otp.Class({
 				if (e.accuracy >= 22000) {
 					console.log("Accuracy beyond threshold; recentering on USF.");
 					e.latlng = otp.config.initLatLng;
+					this.queueView(e.latlng, 15);
 					return; // dont bother adding a marker 
 				}
 				
@@ -131,6 +132,7 @@ otp.core.Map = otp.Class({
 				if ( ! otp.config.mapBoundary.contains(e.latlng)) {
 					console.log("Geolocation is outside of map boundaries; recentering on USF.");
 					e.latlng = otp.config.initLatLng;
+					this.queueView(e.latlng, 15);
 					return; // and don't add a marker on first load
 				}				
 				
