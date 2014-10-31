@@ -469,6 +469,7 @@ otp.modules.planner.PlannerModule =
             // Added specific code for the HART bus line so that the hart bus line route will be highlighted in blue
             // Any other route will be highlighted in the default color which is green.
             if(leg.agencyId == "Hillsborough Area Regional Transit"){polyline.setStyle({ color : '#0000FF', weight: weight});}
+            if(leg.agencyId == "USF_BullRunner"){polyline.setStyle({color: '#080', weight: weight});}
             else{polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight});}
             this.pathLayer.addLayer(polyline);
             polyline.leg = leg;
@@ -569,10 +570,10 @@ otp.modules.planner.PlannerModule =
     
     getModeColor : function(mode) {
         if(mode === "WALK") return '#444';
-        if(mode === "BICYCLE") return '#0073e5';
+        if(mode === "BICYCLE") return '#9944DD';
         if(mode === "SUBWAY") return '#f00';
         if(mode === "RAIL") return '#b00';
-        if(mode === "BUS") return '#080';
+        if(mode === "BUS") return '#FF7700';
         if(mode === "TRAM") return '#800';
         if(mode === "CAR") return '#444';
         return '#aaa';
