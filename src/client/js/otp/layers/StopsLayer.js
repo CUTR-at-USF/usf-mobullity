@@ -45,11 +45,17 @@ otp.layers.StopsLayer =
         L.LayerGroup.prototype.initialize.apply(this);
         this.module = module;
 
+        this.module.stopViewerWidget = new otp.widgets.transit.StopViewerWidget('otp-'+this.id+'-StopViewerWidget', this.module);
+        
         this.stopsLookup = {};
         
         this.module.addLayer("stops", this);
-        this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
         
+        stopsLayer = { "BullRunner" : this };
+        L.control.layers(stopsLayer).addTo(this.module);
+        
+        this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
+
     },
     
     refresh : function() {
@@ -94,9 +100,10 @@ otp.layers.StopsLayer =
 
             popupContent.find('.stopViewerLink').data('stop', stop).click(function() {
                 var thisStop = $(this).data('stop');
+                              
                 this_.module.stopViewerWidget.show();
                 this_.module.stopViewerWidget.setActiveTime(moment().add("hours", -otp.config.timeOffset).unix()*1000);
-                this_.module.stopViewerWidget.setStop(thisStop.id.agencyId, thisStop.id.id, thisStop.stopName);
+                this_.module.stopViewerWidget.setStop(thisStop.agency, thisStop.id, thisStop.name);
                 this_.module.stopViewerWidget.bringToFront();
             });
             
@@ -115,8 +122,8 @@ otp.layers.StopsLayer =
             if(stop.routes) {
                 var routeList = popupContent.find('.routeList');
                 for(var r = 0; r < stop.routes.length; r++) {
-                    var agencyAndId = stop.agency + '_' + stop.id;
-//                    var routeData = this.module.webapp.transitIndex.routes[agencyAndId].routeData;
+                    var agencyAndId = stop.routes[r].agency.id + '_' + stop.routes[r].id;
+                    var routeData = {"routeShortName":stop.routes[r].shortName, "routeLongName":stop.routes[r].longName};
                     ich['otp-stopsLayer-popupRoute'](routeData).appendTo(routeList);
                     // TODO: click opens RouteViewer
                     //routeList.append('<div>'+agencyAndId+'</div>');
@@ -124,7 +131,7 @@ otp.layers.StopsLayer =
             }
 
            
-            if(stop.agency == "USF_BullRunner" && otp.config.showBullRunnerStops == true){
+            if(stop.agency == "USF Bull Runner" && otp.config.showBullRunnerStops == true){
             	//only want to display USF BullRunner stops in this layer
             	L.marker([stop.lat, stop.lon], {
             		icon : bullIcon,

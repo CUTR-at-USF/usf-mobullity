@@ -14,7 +14,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 package org.opentripplanner.index;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.GET;
@@ -123,10 +125,46 @@ public class IndexAPI {
            @QueryParam("lon")    Double lon,
            @QueryParam("radius") Double radius) {
 
+	   class StopShortRoutes {
+    	   public String agency;
+    	   public String id;
+    	   public String name;
+    	   public Double lat;
+    	   public Double lon;
+    	   public Set<Route> routes;
+    	   
+    	   public StopShortRoutes(StopShort s) {
+    		   agency = s.agency;
+    		   id = s.id;
+    		   name = s.name;
+    		   lat = s.lat;
+    		   lon = s.lon;
+    		   routes = Sets.newHashSet();        		   
+    	   }
+    	   
+    	   public StopShortRoutes(Stop s) {
+    	        agency = s.getId().getAgencyId();
+    	        id = s.getId().getId();
+    	        name = s.getName();
+    	        lat = s.getLat();
+    	        lon = s.getLon();
+    	        routes = Sets.newHashSet();
+    	   }
+       }
+       
+	   
        /* When no parameters are supplied, return all stops. */
        if (uriInfo.getQueryParameters().isEmpty()) {
            Collection<Stop> stops = index.stopForId.values();
-           return Response.status(Status.OK).entity(StopShort.list(stops)).build();
+           List<StopShortRoutes> stopsRoutes = Lists.newArrayList();
+           for (Stop s : stops) {
+        	  StopShortRoutes sr = new StopShortRoutes(s);
+              for (TripPattern pattern : index.patternsForStop.get(s)) {
+                  sr.routes.add(pattern.route);
+              }                           	  
+        	  stopsRoutes.add(sr);
+           }
+           return Response.status(Status.OK).entity(stopsRoutes).build();
        }
        /* If any of the circle parameters are specified, expect a circle not a box. */
        boolean expectCircle = (lat != null || lon != null || radius != null);
@@ -137,15 +175,22 @@ public class IndexAPI {
            if (radius > MAX_STOP_SEARCH_RADIUS){
                radius = MAX_STOP_SEARCH_RADIUS;
            }
-           List<StopShort> stops = Lists.newArrayList(); 
+                    
+           List<StopShortRoutes> stops = Lists.newArrayList();
+           
            Coordinate coord = new Coordinate(lon, lat);
            /* TODO Ack this should use the spatial index! */
            for (TransitStop stopVertex : index.stopSpatialIndex.query(lon, lat, radius)) {
                double distance = distanceLibrary.fastDistance(stopVertex.getCoordinate(), coord);
                if (distance < radius) {
-                   stops.add(new StopShort(stopVertex.getStop(), (int) distance));
+                   StopShortRoutes sr = new StopShortRoutes(new StopShort(stopVertex.getStop(), (int) distance));
+                   for (TripPattern pattern : index.patternsForStop.get(stopVertex.getStop())) {
+                       sr.routes.add(pattern.route);
+                   }                   
+                   stops.add(sr);
                }
            }
+           
            return Response.status(Status.OK).entity(stops).build();
        } else {
            /* We're not circle mode, we must be in box mode. */
@@ -193,6 +238,7 @@ public class IndexAPI {
     public Response getStoptimesForStop (@PathParam("stopId") String stopIdString) {
         Stop stop = index.stopForId.get(AgencyAndId.convertFromString(stopIdString));
         if (stop == null) return Response.status(Status.NOT_FOUND).entity(MSG_404).build();
+        
         return Response.status(Status.OK).entity(index.stopTimesForStop(stop)).build();
     }
 
