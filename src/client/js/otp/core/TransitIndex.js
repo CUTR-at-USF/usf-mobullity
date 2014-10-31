@@ -22,7 +22,7 @@ otp.core.TransitIndex = otp.Class({
     routes          : null,
     
     initialize : function(webapp) {
-        this.webapp = webapp;
+        this.webapp = webapp;       
     },
 
     loadAgencies : function(callbackTarget, callback) {
@@ -65,18 +65,18 @@ otp.core.TransitIndex = otp.Class({
         
         var url = otp.config.hostname + '/' + otp.config.restService + '/index/routes';
         $.ajax(url, {
-            dataType:   'jsonp',
+            dataType:   'json',
             
             data: {
                 extended: 'true',
             },
                 
             success: function(data) {
-                if(!_.has(data, 'routes')) {
+                if(data.length <= 0) {
                     console.log("Error: routes call returned no route data. OTP Message: "+data.message);
                     return;
                 }
-                var sortedRoutes = data.routes;
+                var sortedRoutes = data;
                 sortedRoutes.sort(function(a,b) {
                     a = a.routeShortName || a.routeLongName;
                     b = b.routeShortName || b.routeLongName;
@@ -200,10 +200,10 @@ otp.core.TransitIndex = otp.Class({
             params.routerId = otp.config.routerId;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/index/' + stopId + '/stopTimes';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + agencyId + "_" + stopId + '/stoptimes';
         $.ajax(url, {
   //          data:       params,
-            dataType:   'jsonp',
+            dataType:   'json',
                 
             success: function(data) {
                 callback.call(callbackTarget, data);                
