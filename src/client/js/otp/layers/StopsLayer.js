@@ -51,9 +51,6 @@ otp.layers.StopsLayer =
         
         this.module.addLayer("stops", this);
         
-        stopsLayer = { "BullRunner" : this };
-        L.control.layers(stopsLayer).addTo(this.module);
-        
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
 
     },
