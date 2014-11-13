@@ -58,6 +58,12 @@ var bullRunnerIconSW = L.Icon.extend({
 });
 
 var vehicles = {};
+var stopsA = {};
+var stopsB = {};
+var stopsC = {};
+var stopsD = {};
+var stopsE = {};
+var stopsF = {};
 
 otp.layers.BusPositionsLayer = 
 	otp.Class(L.LayerGroup, {
@@ -71,6 +77,16 @@ otp.layers.BusPositionsLayer =
 			this.module = module;
 
 			this.module.addLayer("buses", this);
+			
+			//Get the stops for each Bull Runner Route to draw the route...
+			stopsA = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_1');
+			stopsB = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_3');
+			stopsC = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_5');
+			stopsD = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_8');
+			stopsE = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_11');
+			stopsF = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_13');
+			
+			//set map to refresh vehicle positions every 5 seconds and every map movement..
 			this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
 			setInterval($.proxy(this.refresh,this),5000);
 		},
@@ -79,34 +95,21 @@ otp.layers.BusPositionsLayer =
 			this.clearLayers();
 			var lmap = this.module.webapp.map.lmap;
 			if(lmap.getZoom() >= this.minimumZoomForStops) {
-				this.liveMap();
-				this.setRoutes();
+				this.liveMap(); //need to get updated vehicle positions
+				this.setRoutes(); //need to reset routes display on the map
 			}
 		},
 
 		liveMap : function() {
 			this_ = this;
-			var url = otp.config.hostname + '/' + "otp/vehicle_positions";
-			$.ajax(url, {
-				type: 'GET',
-				dataType: 'JSON',
-				async: false,
-				timeout: 60000,
-				success: function(data){
-//					var x;
-//					for (x = 0; x < data.vehicles.length; x++){
-//					console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" route:"+data.vehicles[x].routeId+" lat:"+data.vehicles[x].lat.toFixed(3)+" lon:"+data.vehicles[x].lon.toFixed(3)+" dir:"+data.vehicles[x].bearing);
-//					}
-					this_.vehicles = data.vehicles;
-					this_.setMarkers();
-				}
+			this.module.webapp.transitIndex.loadBusPositions(this, function(data){
+				this_.vehicles = data.vehicles;
+				this_.setMarkers();
 			});
-//			console.log(this_.vehicles);
 		},
 
 		setMarkers: function(){
 			var this_ = this;
-			this.clearLayers();
 			var v;
 			var a = new Array();
 			var b = new Array();
@@ -417,13 +420,69 @@ otp.layers.BusPositionsLayer =
 				L.layerGroup(f).addTo(this_);
 		},
 		
-		setRoutes : function(){
-//			var routeData = this.module.webapp.transitIndex.routes;
-//			if(routeData['USF Bull Runner_A']){};
-//			if(routeData['USF Bull Runner_B']){};
-//			if(routeData['USF Bull Runner_C']){};
-//			if(routeData['USF Bull Runner_D']){};
-//			if(routeData['USF Bull Runner_E']){};
-//			if(routeData['USF Bull Runner_F']){};
+		setRoutes : function(){			
+			//for route A:
+			var routeA = new Array();
+			//console.log(stopsA);
+			for (var a = 0; a < stopsA.length; a++){
+				var lat = stopsA[a].lat;
+				var lng = stopsA[a].lon;
+				var latlng = L.latLng(lat, lng);
+				routeA.push(latlng);
+			}
+			//console.log(routeA);
+			L.polyline(routeA, {color: 'green'}).addTo(this);
+			
+			//for route B:
+			var routeB = new Array();
+			for (var b = 0; b < stopsB.length; b++){
+				var lat = stopsB[b].lat;
+				var lng = stopsB[b].lon;
+				var latlng = L.latLng(lat, lng);
+				routeB.push(latlng);
+			}
+			L.polyline(routeB, {color: 'blue'}).addTo(this);
+			
+			//for route C:
+			var routeC = new Array();
+			for (var c = 0; c < stopsC.length; c++){
+				var lat = stopsC[c].lat;
+				var lng = stopsC[c].lon;
+				var latlng = L.latLng(lat, lng);
+				routeC.push(latlng);
+			}
+			//console.log(routeA);
+			L.polyline(routeC, {color: 'purple'}).addTo(this);
+			
+			//for route D:
+			var routeD = new Array();
+			for (var d = 0; d < stopsD.length; d++){
+				var lat = stopsD[d].lat;
+				var lng = stopsD[d].lon;
+				var latlng = L.latLng(lat, lng);
+				routeD.push(latlng);
+			}
+			L.polyline(routeD, {color: 'red'}).addTo(this);
+			
+			//for route E:
+			var routeE = new Array();
+			for (var e = 0; e < stopsE.length; e++){
+				var lat = stopsE[e].lat;
+				var lng = stopsE[e].lon;
+				var latlng = L.latLng(lat, lng);
+				routeE.push(latlng);
+			}
+			L.polyline(routeE, {color: 'yellow'}).addTo(this);
+			
+			//for route F:
+			var routeF = new Array();
+			for (var f = 0; f < stopsF.length; f++){
+				var lat = stopsF[f].lat;
+				var lng = stopsF[f].lon;
+				var latlng = L.latLng(lat, lng);
+				routeF.push(latlng);
+			}
+			L.polyline(routeF, {color: 'brown'}).addTo(this);
+
 		},
 	});

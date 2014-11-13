@@ -328,5 +328,36 @@ otp.core.TransitIndex = otp.Class({
           },
       	
       });
-  },  
+  },
+  
+  loadBusPositions : function(callbackTarget, callback) {
+	  var url = otp.config.hostname + '/' + "otp/vehicle_positions";
+	  
+	  $.ajax(url, {
+		  type: 'GET',
+		  dataType: 'JSON',
+		  timeout: 60000,
+			
+		  success: function(data){
+			  callback.call(callbackTarget, data);
+		  }
+	  });
+  },
+
+  getTripRoute : function(agencyAndId){
+	  var url = otp.config.hostname + '/' + otp.config.restService +'/index/trips/' + agencyAndId + "/stops";
+	  var stops = {};
+	  $.ajax(url, {
+		  type: 'GET',
+		  dataType: 'JSON',
+		  async: false,
+	  
+		  success: function(data){
+			  stops = data;
+		  }
+	  });
+	  
+	  return stops;
+  }
+  
 });
