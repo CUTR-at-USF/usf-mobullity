@@ -111,8 +111,7 @@ otp.layers.HartStopsLayer =
                     }
                 }
 
-               
-                if(stop.agency == "Hillsborough Area Regional Transit"){
+                if(stop.agency == "Hillsborough Area Regional Transit" && otp.config.showHartBusStops == true){
                 	//only want to display Hart stops in this layer
                 	L.marker([stop.lat, stop.lon], {
                 		icon : hartIcon,

@@ -124,14 +124,13 @@ otp.layers.StopsLayer =
             }
 
            
-            if(stop.agency == "USF_BullRunner" && otp.config.showBullRunnerStops == true){
+            if(stop.agency == "USF Bull Runner" && otp.config.showBullRunnerStops == true){
             	//only want to display USF BullRunner stops in this layer
             	L.marker([stop.lat, stop.lon], {
             		icon : bullIcon,
             	}).addTo(this_)
             	.bindPopup(popupContent.get(0));
             }
-            
             else if(stop.agency == "Hillsborough Area Regional Transit" && otp.config.showHartBusStops == true){
             	//only want to display Hart stops in this layer
             	L.marker([stop.lat, stop.lon], {
