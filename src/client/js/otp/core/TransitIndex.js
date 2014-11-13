@@ -22,7 +22,7 @@ otp.core.TransitIndex = otp.Class({
     routes          : null,
     
     initialize : function(webapp) {
-        this.webapp = webapp;       
+        this.webapp = webapp;
     },
 
     loadAgencies : function(callbackTarget, callback) {
@@ -72,10 +72,11 @@ otp.core.TransitIndex = otp.Class({
             },
                 
             success: function(data) {
-                if(data.length <= 0) {
+                if(data == null) {
                     console.log("Error: routes call returned no route data. OTP Message: "+data.message);
                     return;
                 }
+            	
                 var sortedRoutes = data;
                 sortedRoutes.sort(function(a,b) {
                     a = a.routeShortName || a.routeLongName;
@@ -200,7 +201,7 @@ otp.core.TransitIndex = otp.Class({
             params.routerId = otp.config.routerId;
         }
         
-        var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + agencyId + "_" + stopId + '/stoptimes';
+        var url = otp.config.hostname + '/' + otp.config.restService + '/index/' + stopId + '/stopTimes';
         $.ajax(url, {
   //          data:       params,
             dataType:   'json',
@@ -327,5 +328,36 @@ otp.core.TransitIndex = otp.Class({
           },
       	
       });
-  },  
+  },
+  
+  loadBusPositions : function(callbackTarget, callback) {
+	  var url = otp.config.hostname + '/' + "otp/vehicle_positions";
+	  
+	  $.ajax(url, {
+		  type: 'GET',
+		  dataType: 'JSON',
+		  timeout: 60000,
+			
+		  success: function(data){
+			  callback.call(callbackTarget, data);
+		  }
+	  });
+  },
+
+  getTripRoute : function(agencyAndId){
+	  var url = otp.config.hostname + '/' + otp.config.restService +'/index/trips/' + agencyAndId + "/stops";
+	  var stops = {};
+	  $.ajax(url, {
+		  type: 'GET',
+		  dataType: 'JSON',
+		  async: false,
+	  
+		  success: function(data){
+			  stops = data;
+		  }
+	  });
+	  
+	  return stops;
+  }
+  
 });
