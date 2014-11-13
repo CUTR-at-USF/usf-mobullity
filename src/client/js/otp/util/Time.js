@@ -20,6 +20,13 @@ otp.namespace("otp.util");
  
 otp.util.Time = {
 
+	secsToArray : function(secs) {
+		var hrs = Math.floor(secs / 3600);
+		var mins = Math.floor(secs / 60) % 60;
+		
+		return [hrs, mins, secs % 60];
+	},
+
     secsToHrMin : function(secs) {
         var hrs = Math.floor(secs / 3600);
         var mins = Math.floor(secs / 60) % 60;

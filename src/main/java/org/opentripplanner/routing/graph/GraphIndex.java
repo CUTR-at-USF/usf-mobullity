@@ -1,7 +1,9 @@
 package org.opentripplanner.routing.graph;
 
 import java.util.BitSet;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -236,26 +238,53 @@ public class GraphIndex {
      */
     public Collection<StopTimesInPattern> stopTimesForStop(Stop stop) {
         List<StopTimesInPattern> ret = Lists.newArrayList();
+
         RoutingRequest req = new RoutingRequest();
+
+        Calendar dt = Calendar.getInstance();
+        dt.setTime(new Date());
+        
+        /*
+        dt.set(Calendar.HOUR_OF_DAY, 0);
+        dt.set(Calendar.MINUTE, 0);
+        dt.set(Calendar.SECOND, 0);       
+        
+        req.setDateTime(dt.getTime()); // Set State to midnight so we receive ALL of the scheduled trips like we used to
+        */
+        
+        dt.add(Calendar.SECOND, 1);
+        
         req.setRoutingContext(graph, (Vertex)null, (Vertex)null);
         State state = new State(req);
         for (TripPattern pattern : patternsForStop.get(stop)) {
             StopTimesInPattern times = new StopTimesInPattern(pattern);
-            // Should actually be getUpdatedTimetable
-            Timetable table = pattern.getScheduledTimetable();
+            
+            req.setDateTime(dt.getTime());
+            state = new State(req);
+            Timetable table = pattern.getUpdatedTimetable(req, state.getServiceDay());
+                        
             // A Stop may occur more than once in a pattern, so iterate over all Stops.
-            int sidx = 0;
-            for (Stop currStop : table.getPattern().getStopPattern().stops) {
+            for (int sidx = 0; sidx < table.getPattern().getStopPattern().stops.length; sidx++) {
+            //for (Stop currStop : table.getPattern().getStopPattern().stops) {
+            	Stop currStop = table.getPattern().getStop(sidx);
                 if (currStop != stop) continue;
+                                
                 for (ServiceDay sd : req.rctx.serviceDays) {
-                    TripTimes tt = table.getNextTrip(state, sd, sidx, true);
-                    if (tt != null) {
-                        times.times.add(new TripTimeShort(tt, sidx, stop));
-                    }
+                	
+                   		TripTimes tt = table.getNextTrip(state, sd, sidx, true);
+                   
+                		if (tt != null) {  
+                    		
+                            times.times.add(new TripTimeShort(tt, sidx, stop));
+                            
+                		}
+              		               		
                 }
-                sidx++;
+                
+                if ( ! times.times.isEmpty()) ret.add(times);
+                
             }
-            if ( ! times.times.isEmpty()) ret.add(times);
+    		                       
         }
         return ret;
     }
