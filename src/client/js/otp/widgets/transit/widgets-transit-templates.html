@@ -23,10 +23,10 @@
             {{formattedTime}}
         </div>
         <div class="otp-stopViewer-routeRow">
-            {{#trip.route.shortName}}
-                ({{trip.route.shortName}}) 
-            {{/trip.route.shortName}}
-            {{trip.route.longName}}
+            {{#trip.short}}
+                ({{trip.short}}) 
+            {{/trip.short}}
+            {{trip.long}}
         </div>
 
         {{#direction}}
