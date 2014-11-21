@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3011"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="ASouthEast.svg">
+  <defs
+     id="defs3013" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.45281467"
+     inkscape:cx="284.33728"
+     inkscape:cy="759.58268"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3016">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="dp_group001"
+       transform="translate(-169.31771,116.22319)">
+      <path
+         style="fill:#00624f;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path002"
+         d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path003"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path004"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#00624f;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path005"
+         d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+      <text
+         style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+         id="dp_text001"
+         transform="translate(491.761,325.78)"
+         xml:space="preserve"
+         font-size="205"
+         font-weight="400"
+         x="0"
+         y="0">A </text>
+    </g>
+    <path
+       style="fill:#00624f;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       d="m 140.8846,511.09463 148.37277,57.22822 -98.39636,-80.5326 1.55642,-127.14135 -51.53283,150.44573 z"
+       id="path3" />
+  </g>
+</svg>

@@ -1,59 +1,344 @@
 otp.namespace("otp.layers");
 
-var bullRunnerIconN = L.Icon.extend({
+var bullRunnerIconAS = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/busLocation.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/A.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconS = L.Icon.extend({
+var bullRunnerIconAN = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/south-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/ANorth.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconE = L.Icon.extend({
+var bullRunnerIconAE = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/east-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/AEast.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconW = L.Icon.extend({
+var bullRunnerIconAW = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/west-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/AWest.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconNE = L.Icon.extend({
+var bullRunnerIconANE = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/northEast-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/ANorthEast.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconNW = L.Icon.extend({
+var bullRunnerIconANW = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/northWest-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/ANorthWest.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconSE = L.Icon.extend({
+var bullRunnerIconASE = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/southEast-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/ASouthEast.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
-var bullRunnerIconSW = L.Icon.extend({
+var bullRunnerIconASW = L.Icon.extend({
 	options: {
 		angle: 0,
-		iconUrl : resourcePath + 'images/southWest-01.png',
-		iconSize: new L.Point(15,15)
+		iconUrl : resourcePath + 'images/ASouthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+
+var bullRunnerIconBS = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/B.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBN = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BNorth.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBNE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BNorthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBNW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BNorthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBSE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BSouthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconBSW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/BSouthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+
+var bullRunnerIconCS = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/C.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCN = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CNorth.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCNE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CNorthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCNW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CNorthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCSE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CSouthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconCSW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/CSouthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+
+var bullRunnerIconDS = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/D.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDN = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DNorth.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDNE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DNorthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDNW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DNorthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDSE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DSouthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconDSW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/DSouthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+
+var bullRunnerIconES = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/E.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconEN = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/ENorth.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconEE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/EEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconEW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/EWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconENE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/ENorthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconENW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/ENorthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconESE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/ESouthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconESW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/ESouthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+
+var bullRunnerIconFS = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/F.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFN = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FNorth.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFNE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FNorthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFNW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FNorthWest.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFSE = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FSouthEast.svg',
+		iconSize: new L.Point(40,70)
+	}
+});
+var bullRunnerIconFSW = L.Icon.extend({
+	options: {
+		angle: 0,
+		iconUrl : resourcePath + 'images/FSouthWest.svg',
+		iconSize: new L.Point(40,70)
 	}
 });
 
@@ -117,60 +402,113 @@ otp.layers.BusPositionsLayer =
 			var d = new Array();
 			var e = new Array();
 			var f = new Array();
-			for(v=0; v < this_.vehicles.length; v++){
-				var brIconN = new bullRunnerIconN();
-				var brIconNE = new bullRunnerIconNE();
-				var brIconNW = new bullRunnerIconNW();
-				var brIconS = new bullRunnerIconS();
-				var brIconSE = new bullRunnerIconSE();
-				var brIconSW = new bullRunnerIconSW();
-				var brIconE = new bullRunnerIconE();
-				var brIconW = new bullRunnerIconW();
+			for(v=0; v < this_.vehicles.length; v++){		
 				var coord = L.latLng(this_.vehicles[v].lat,this_.vehicles[v].lon);
 				var bearing = this_.vehicles[v].bearing;
 				var route = this_.vehicles[v].routeId;
 				var marker;
 
+				//A Route Markers initiation
+				var iconAN = new bullRunnerIconAN();
+				var iconAS = new bullRunnerIconAS();
+				var iconAE = new bullRunnerIconAE();
+				var iconAW = new bullRunnerIconAW();
+				var iconANE = new bullRunnerIconANE();
+				var iconANW = new bullRunnerIconANW();
+				var iconASE = new bullRunnerIconASE();
+				var iconASW = new bullRunnerIconASW();
+				
+				//B Route Markers initiation
+				var iconBN = new bullRunnerIconBN();
+				var iconBS = new bullRunnerIconBS();
+				var iconBE = new bullRunnerIconBE();
+				var iconBW = new bullRunnerIconBW();
+				var iconBNE = new bullRunnerIconBNE();
+				var iconBNW = new bullRunnerIconBNW();
+				var iconBSE = new bullRunnerIconBSE();
+				var iconBSW = new bullRunnerIconBSW();
+				
+				//C Route Markers initiation
+				var iconCN = new bullRunnerIconCN();
+				var iconCS = new bullRunnerIconCS();
+				var iconCE = new bullRunnerIconCE();
+				var iconCW = new bullRunnerIconCW();
+				var iconCNE = new bullRunnerIconCNE();
+				var iconCNW = new bullRunnerIconCNW();
+				var iconCSE = new bullRunnerIconCSE();
+				var iconCSW = new bullRunnerIconCSW();
+				
+				//D Route Markers initiation
+				var iconDN = new bullRunnerIconDN();
+				var iconDS = new bullRunnerIconDS();
+				var iconDE = new bullRunnerIconDE();
+				var iconDW = new bullRunnerIconDW();
+				var iconDNE = new bullRunnerIconDNE();
+				var iconDNW = new bullRunnerIconDNW();
+				var iconDSE = new bullRunnerIconDSE();
+				var iconDSW = new bullRunnerIconDSW();
+				
+				//E Route Markers initiation
+				var iconEN = new bullRunnerIconEN();
+				var iconES = new bullRunnerIconES();
+				var iconEE = new bullRunnerIconEE();
+				var iconEW = new bullRunnerIconEW();
+				var iconENE = new bullRunnerIconENE();
+				var iconENW = new bullRunnerIconENW();
+				var iconESE = new bullRunnerIconESE();
+				var iconESW = new bullRunnerIconESW();
+				
+				//F Route Markers initiation
+				var iconFN = new bullRunnerIconFN();
+				var iconFS = new bullRunnerIconFS();
+				var iconFE = new bullRunnerIconFE();
+				var iconFW = new bullRunnerIconFW();
+				var iconFNE = new bullRunnerIconFNE();
+				var iconFNW = new bullRunnerIconFNW();
+				var iconFSE = new bullRunnerIconFSE();
+				var iconFSW = new bullRunnerIconFSW();
+				
+				
 				switch (route){
 				case 'A':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconAN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconANE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconAE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconASE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconAS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconASW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconAW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconANW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						a.push(marker);
 						break;
@@ -181,42 +519,42 @@ otp.layers.BusPositionsLayer =
 				case 'B':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconBN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconBNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconBNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						b.push(marker);
 						break;
@@ -227,42 +565,42 @@ otp.layers.BusPositionsLayer =
 				case 'C':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconCN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconCNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconCNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						c.push(marker);
 						break;
@@ -273,42 +611,42 @@ otp.layers.BusPositionsLayer =
 				case 'D':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconDN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconDNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconDNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						d.push(marker);
 						break;
@@ -319,42 +657,42 @@ otp.layers.BusPositionsLayer =
 				case 'E':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconEN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconENE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconEE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconESE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconES,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconESW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
@@ -365,42 +703,42 @@ otp.layers.BusPositionsLayer =
 				case 'F':
 					switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : brIconN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker =  L.marker(coord,{icon : iconFN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : brIconNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker=L.marker(coord,{icon : iconFNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : brIconE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : brIconSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : brIconS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : brIconSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : brIconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : brIconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconFNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						f.push(marker);
 						break;
