@@ -14,7 +14,7 @@
    id="svg3007"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="FNorthWest.svg">
+   sodipodi:docname="ENorthEast.svg">
   <defs
      id="defs3009" />
   <sodipodi:namedview
@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-99.285714"
-     inkscape:cy="520"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="306.70909"
+     inkscape:cy="607.11287"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer8"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="705"
@@ -48,35 +48,248 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     id="dp_group001-7"
+     transform="translate(-179.032,129.36605)">
+    <path
+       style="fill:#008ed2;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path002-6"
+       d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path003-1"
+       d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path004-4"
+       d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+    <path
+       style="fill:#008ed2;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path005-2"
+       d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+    <text
+       style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+       id="dp_text001-3"
+       transform="translate(491.761,325.78)"
+       xml:space="preserve"
+       font-size="205"
+       font-weight="400"
+       x="0"
+       y="0">B </text>
+  </g>
+  <g
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer14"
+     inkscape:label="A">
     <g
        id="dp_group001"
-       transform="translate(-180.032,133.36605)">
+       transform="translate(-179.43698,127.2786)">
       <path
-         style="fill:#724b48;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         style="fill:#00624f;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
          inkscape:connector-curvature="0"
-         id="dp_path002"
+         id="dp_path002-2"
          d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
       <path
          style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
          inkscape:connector-curvature="0"
-         id="dp_path003"
+         id="dp_path003-8"
          d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
       <path
          style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
          inkscape:connector-curvature="0"
-         id="dp_path004"
+         id="dp_path004-6"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#00624f;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path005-0"
+         d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+      <text
+         style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+         id="dp_text001-2"
+         transform="translate(491.761,325.78)"
+         xml:space="preserve"
+         font-size="205"
+         font-weight="400"
+         x="0"
+         y="0">A </text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer13"
+     inkscape:label="B">
+    <g
+       id="dp_group001-4"
+       transform="translate(-180.19801,126.62071)">
+      <path
+         style="fill:#008ed2;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path002-8"
+         d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path003-6"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path004-5"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#008ed2;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path005-09"
+         d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+      <text
+         style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+         id="dp_text001-0"
+         transform="translate(491.761,325.78)"
+         xml:space="preserve"
+         font-size="205"
+         font-weight="400"
+         x="0"
+         y="0">B </text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="C">
+    <path
+       style="fill:#ba55d3;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path002"
+       d="m 357.57581,813.88181 c -55.816,-260.677 -122.795,-289.641 -152.564,-393.912 -81.863,-243.2983 424.201,-243.2983 342.338,0 -29.769,104.271 -96.748,133.235 -189.774,393.912 z" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path003"
+       d="m 377.17981,262.74581 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+    <path
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path004"
+       d="m 377.17981,262.74581 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+    <path
+       style="fill:#ba55d3;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+       inkscape:connector-curvature="0"
+       id="dp_path005"
+       d="m 377.17781,277.80181 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+    <text
+       style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+       id="dp_text001"
+       xml:space="preserve"
+       font-size="205"
+       font-weight="400"
+       x="301.90982"
+       y="455.47284">C </text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer15"
+     inkscape:label="D">
+    <g
+       id="dp_group001-0"
+       transform="translate(-178.85119,126.45017)">
+      <path
+         style="fill:#ee3337;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path002-61"
+         d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path003-3"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path004-8"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#ee3337;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path005-9"
+         d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
+      <text
+         style="font-size:205px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
+         id="dp_text001-34"
+         transform="translate(491.761,328.78)"
+         xml:space="preserve"
+         font-size="205"
+         font-weight="400"
+         x="0"
+         y="0">D </text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer16"
+     inkscape:label="E">
+    <path
+       d="m 358.16159,812.71025 c -55.816,-260.677 -122.795,-289.641 -152.564,-393.912 -81.863,-243.2983 424.201,-243.2983 342.338,0 -29.769,104.271 -96.748,133.235 -189.774,393.912 z"
+       id="dp_path002-4"
+       inkscape:connector-curvature="0"
+       style="fill:#e0bc38;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004" />
+    <path
+       d="m 377.76559,257.57425 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z"
+       id="dp_path003-9"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004" />
+    <path
+       d="m 377.76559,257.57425 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z"
+       id="dp_path004-63"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004" />
+    <path
+       d="m 377.76359,272.63025 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z"
+       id="dp_path005-7"
+       inkscape:connector-curvature="0"
+       style="fill:#e0bc38;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004" />
+    <text
+       y="448.91159"
+       x="309.49561"
+       font-weight="400"
+       font-size="203"
+       xml:space="preserve"
+       id="dp_text001-8"
+       style="font-size:203px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS">E </text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer17"
+     inkscape:label="F">
+    <g
+       id="dp_group001-8"
+       transform="translate(-178.85119,126.79332)">
+      <path
+         style="fill:#724b48;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path002-29"
+         d="M 536.427,687.189 C 480.611,426.512 413.632,397.548 383.863,293.277 302,49.9787 808.064,49.9787 726.201,293.277 696.432,397.548 629.453,426.512 536.427,687.189 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path003-13"
+         d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
+         inkscape:connector-curvature="0"
+         id="dp_path004-59"
          d="m 556.031,134.053 c 82.76,0 149.849,55.383 149.849,123.702 0,68.318 -67.089,123.701 -149.849,123.701 -82.76,0 -149.85,-55.383 -149.85,-123.701 0,-68.319 67.09,-123.702 149.85,-123.702 z" />
       <path
          style="fill:#724b48;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.33333004"
          inkscape:connector-curvature="0"
-         id="dp_path005"
+         id="dp_path005-8"
          d="m 556.029,149.109 c 74.438,0 134.78,48.638 134.78,108.634 0,59.996 -60.342,108.633 -134.78,108.633 -74.437,0 -134.78,-48.637 -134.78,-108.633 0,-59.996 60.343,-108.634 134.78,-108.634 z" />
       <text
          style="font-size:203px;font-weight:400;fill:#fdfdff;font-family:Arial Unicode MS"
-         id="dp_text001"
+         id="dp_text001-4"
          transform="translate(495.761,329.389)"
          xml:space="preserve"
          font-size="203"
@@ -84,10 +297,20 @@
          x="0"
          y="0.0013333299">F </text>
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Arrow">
+    <path
+       style="fill:#010101"
+       inkscape:connector-curvature="0"
+       d="M 582.00113,228.16214 571.89962,374.02815 543.00925,267.15402 436.13512,238.26365 582.00113,228.16214 z"
+       id="path3-2-2" />
     <path
        style="fill:#724b48;fill-opacity:1"
-       inkscape:connector-curvature="0"
-       d="m 594.11851,247.65601 3.03047,158.998 -42.02236,-120.00611 -120.00612,-42.02237 158.99801,3.03048 z"
-       id="path3" />
+       d="m 557.18705,316.86866 -13.55571,-50.33555 -49.71657,-13.42186 c -27.34411,-7.38202 -49.40261,-13.73582 -49.01888,-14.11955 0.74256,-0.74255 135.32129,-10.30644 135.96531,-9.66242 0.52069,0.52069 -9.04214,136.82975 -9.64009,137.41042 -0.26309,0.25549 -6.57842,-22.18648 -14.03406,-49.87104 z"
+       id="path3604"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
