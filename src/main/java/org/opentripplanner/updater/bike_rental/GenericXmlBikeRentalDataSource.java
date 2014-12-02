@@ -46,7 +46,7 @@ public abstract class GenericXmlBikeRentalDataSource implements BikeRentalDataSo
 
     private static final Logger log = LoggerFactory.getLogger(BixiBikeRentalDataSource.class);
 
-    private String url;
+    protected String url;
 
     ArrayList<BikeRentalStation> stations = new ArrayList<BikeRentalStation>();
 
@@ -84,7 +84,7 @@ public abstract class GenericXmlBikeRentalDataSource implements BikeRentalDataSo
         return true;
     }
 
-    private void parseXML(InputStream data) throws ParserConfigurationException, SAXException,
+    protected void parseXML(InputStream data) throws ParserConfigurationException, SAXException,
             IOException {
         ArrayList<BikeRentalStation> out = new ArrayList<BikeRentalStation>();
 

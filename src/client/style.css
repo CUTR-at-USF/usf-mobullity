@@ -758,7 +758,7 @@ z-index: 9002;
     font-weight: none; 
     color: #fff;
     background-color: #9CCB3B;
-    margin-bottom: 5px;
+   /* margin-bottom: 5px; */
     overflow: hidden;   
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1020,6 +1020,86 @@ p#splash-text span {
 }
 
 
+
+.otp-layerView { 
+	width:260px;
+	min-height:100px;
+	background-color: white; /*#F3F3F3;*/
+	border: 0px solid #9CCB3B;
+	color: black;	
+	padding:0px;
+}
+
+.otp-layerView-header { text-align:center; }
+
+.otp-layerView-inner {
+	min-height:100px;
+	border:none;
+	font-family: Stencil;	
+	text-align:left;
+	padding:10px;
+	border: 1px solid #9CCB3B;
+	border-top: none;	
+}
+
+.routes div .box,
+.bikes div .box,
+.stops div .box {
+	border: 1px solid #b0acac;
+	border-radius: 3px;
+	height: 15px; width: 15px;
+	background-color:white;	
+	width: 15px;
+	height: 15px;
+	float:left;
+}
+.routes div .name,
+.bikes div .name,
+.stops div .name {
+	color: black;
+	float:left;
+	padding-left: 5px;
+}
+
+.routes div#usf_A .box.active { 
+	background-color: #00573C;
+}
+
+.routes div#usf_B .box.active {
+	background-color: #0077d1;
+}
+.routes div#usf_C .box.active {
+	background-color: #ac49d0;
+}
+.routes div#usf_D .box.active {
+	background-color: #f70505; 
+}
+.routes div#usf_E .box.active {
+	background-color: #d4ba13;
+}
+.routes div#usf_F .box.active {
+	background-color: #8f6a51;
+}
+
+.bikes div#bike_stations .box.active {
+	background-color: green;
+}
+
+.bikes div#bike_lanes .box.active {
+	background-color: green;
+}
+
+.stops div#bus_hart .box.active {
+	background-color: green;
+}
+
+.otp-layerView-inner fieldset { border-top:1px solid #9CCB3B; }
+.otp-layerView-inner fieldset legend { text-align:center; }
+
+.layerView .bus, .layerView .bikes, .layerView .parking { padding: 5px; text-align:left; }
+/* .layerView .bus li { } */
+.layerView .bikes li { }
+.layerView .parking li { }
 
 
 /* Media Queries for Responsive Layout

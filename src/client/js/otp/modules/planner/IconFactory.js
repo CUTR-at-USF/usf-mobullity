@@ -312,10 +312,21 @@ otp.modules.planner.IconFactory = otp.Class({
         quadrant = quadrant.toLowerCase();
         mode = mode.toLowerCase();
         highlight = highlight || false;
-        var html = '<div class="otp-itin-div-icon-topRow-'+quadrant[0]+'">';
-        if(!isOrigin) html += '<img src="'+otp.config.resourcePath+'images/mode/arrow.png" style="margin-right:2px;">';
-        html += '<img src="'+otp.config.resourcePath+'images/mode/'+mode+'.png">';
-        if(isOrigin) html += '<img src="'+otp.config.resourcePath+'images/mode/arrow.png" style="margin-left:2px;">';
+
+        if (mode == "bicycle") {
+           	cls = "";
+           	var html = "<div>";
+           	if (isOrigin) html += "<img src='"+this.startBike.options.iconUrl+"'>";
+           	else html += "<img src='"+this.endBike.options.iconUrl+"'>";
+        }
+        else {
+           	cls = 'otp-itin-div-icon '+'otp-itin-div-icon-'+quadrant+(highlight ? "-highlight" : "");
+            var html = '<div class="otp-itin-div-icon-topRow-'+quadrant[0]+'">';
+           	if(!isOrigin) html += '<img src="'+otp.config.resourcePath+'images/mode/arrow.png" style="margin-right:2px;">';
+           	html += '<img src="'+otp.config.resourcePath+'images/mode/'+mode+'.png">';
+           	if(isOrigin) html += '<img src="'+otp.config.resourcePath+'images/mode/arrow.png" style="margin-left:2px;">';
+    	}        
+
         html += '</div>';
         //Removes AM/PM at the end of time if it exists (Time is too long
         //otherwise)
@@ -328,7 +339,7 @@ otp.modules.planner.IconFactory = otp.Class({
         if(quadrant === 'se') anchor = [0,0];
 
         return L.divIcon({
-            className: 'otp-itin-div-icon '+'otp-itin-div-icon-'+quadrant+(highlight ? "-highlight" : ""),
+            className: cls,
             iconSize: [32,44],
             iconAnchor: anchor,
             html: html 

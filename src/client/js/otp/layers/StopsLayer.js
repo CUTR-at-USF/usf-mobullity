@@ -48,11 +48,11 @@ otp.layers.StopsLayer =
         this.module.stopViewerWidget = new otp.widgets.transit.StopViewerWidget('otp-'+this.id+'-StopViewerWidget', this.module);
         
         this.stopsLookup = {};
-        
-        this.module.addLayer("stops", this);
+       
+        this.stopsLayer = this.module.addLayer("stops", this);
         
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
-
+        
     },
     
     refresh : function() {
@@ -74,20 +74,27 @@ otp.layers.StopsLayer =
         var stops = _.values(this.stopsLookup);
         var this_ = this;
         var routeData = this.module.webapp.transitIndex.routes;
-        
+
+       	// USF Bull Runner_A index, routeData
+ 
         for(var i=0; i<stops.length; i++) {
 
             var stop = stops[i];
             stop.lat = stop.lat || stop.stopLat;
             stop.lon = stop.lon || stop.stopLon;
 
-            // temporary TriMet specific code
+	    flag = false;
+	    for (x in stop.routes) {
+		r = stop.routes[x];
+		if (webapp.modules[0].busLayers.visible.indexOf(r.shortName) != -1 || 
+		    (otp.config.showHartBusStops && r.agency == "Hillsborough Area Regional Transit") ) {
+			flag = true;
+			break;
+		}
+	    }
 
-//            if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
-//                stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
-//            }
-//            console.log(stop);
-            
+	    if (!flag) continue;
+
             var bullIcon = new bullrunnerStopIcon();
             var hartIcon = new hartStopIcon();
             
@@ -127,7 +134,7 @@ otp.layers.StopsLayer =
                 }
             }
 
-           
+          
             if(stop.agency == "USF Bull Runner" && otp.config.showBullRunnerStops == true){
             	//only want to display USF BullRunner stops in this layer
             	L.marker([stop.lat, stop.lon], {

@@ -3,7 +3,7 @@
     <div>
         <div style="font-weight: bold; font-size: 16px;">
             {{#titleLink}}<a href="{{titleLink}}" target="_blank">{{/titleLink}}
-            {{stopName}}
+            {{name}}
             {{#titleLink}}</a>{{/titleLink}}
         </div>
         <div style="font-style: italic; font-size: 11px;">{{stopDesc}}</div>
@@ -33,4 +33,99 @@
     </li>
 </script>
 
+<script id="usf-layer-menu" type="text/html">
+<div class='otp-layerView-inner'>
+
+<fieldset>
+<legend>USF Bus Routes</legend>
+<div class="routes">
+
+<div id="usf_A" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route A</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="usf_B" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route B</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="usf_C" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route C</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="usf_D" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route D</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="usf_E" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route E</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="usf_F" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Route F</div>
+</div>
+<div style="clear:left;"></div>
+
+</div>
+</fieldset>
+
+<fieldset>
+<legend>Bus Stops</legend>
+<div class=stops>
+
+<div id="bus_hart" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">HART</div>
+</div>
+<div style="clear:left;"></div>
+
+</div>
+</fieldset>
+
+<!--
+<fieldset>
+<legend>Live Bus Positions</legend>
+<div class=bus>
+<input type=checkbox checked id="bus_positions" /> <label for=bus_positions>USF</label> <br>
+</div>
+</fieldset>
+-->
+
+<fieldset>
+<legend>Bike Rentals</legend>
+<div class=bikes>
+
+<div id="bike_stations" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Bike Stations</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="bike_lanes" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Bike Lanes</div>
+</div>
+<div style="clear:left;"></div>
+
+</div>
+</fieldset>
+
+<!--<div class=parking>
+<input type=checkbox id="park_garages" /> <label for=park_garages>Parking Garages</label> <br>
+</div>
+-->
+
+</div>
+
+</script>
         		

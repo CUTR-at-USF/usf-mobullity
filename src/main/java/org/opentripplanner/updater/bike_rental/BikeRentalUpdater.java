@@ -100,8 +100,12 @@ public class BikeRentalUpdater extends PollingGraphUpdater {
             } else if (sourceType.equals("ov-fiets")) {
                 source = new OVFietsKMLDataSource();
             } else if (sourceType.equals("city-bikes")) {
-                source = new CityBikesBikeRentalDataSource();
-            }
+                source = new CityBikesBikeRentalDataSource();            
+        	} else if (sourceType.equals("local-file")) {
+        		source = new LocalFileBikeRentalDataSource();    
+        	} else if (sourceType.equals("csv-file")) {
+        		source = new CsvBikeRentalDataSource();
+        	}                
         }
 
         if (source == null) {

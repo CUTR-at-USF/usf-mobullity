@@ -145,6 +145,11 @@ public class DefaultWayPropertySetSource implements WayPropertySetSource {
         setProperties(props, "highway=motorway_link;cycleway=lane",
                 StreetTraversalPermission.BICYCLE_AND_DRIVING, 1.15, 1.15);
 
+        /* Bicycle Lanes: cycleway=lane */        
+        setProperties(props, "cycleway=lane",
+                StreetTraversalPermission.BICYCLE_LANE, 2.15, 2.15, true);
+        
+        
         /* cycleway=share_busway */
         setProperties(props, "highway=*;cycleway=share_busway",
                 StreetTraversalPermission.PEDESTRIAN_AND_BICYCLE, 0.92, 0.92);
