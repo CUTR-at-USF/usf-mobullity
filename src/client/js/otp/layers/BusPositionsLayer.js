@@ -687,12 +687,12 @@ otp.layers.BusPositionsLayer =
 						e.push(marker);
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : iconW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconEW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : iconNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
+						marker = L.marker(coord,{icon : iconENW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
 						marker.on('mouseover', marker.openPopup.bind(marker));
 						e.push(marker);
 						break;

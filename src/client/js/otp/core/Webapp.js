@@ -129,13 +129,6 @@ otp.core.Webapp = otp.Class({
             }
         }
        
-        // Add the locator text
-        if(otp.config.locatorSwitch){
-                var labelHtml = '<div id="loc_lbl" class="loc_lbl_css">';
-                labelHtml += 'Locator</div>';
-                $(labelHtml).appendTo('#branding'); 
-        }
-        
         // initialize the AddThis widget
         
         if(otp.config.showAddThis) {

@@ -169,8 +169,7 @@ otp.config = {
     	title: 'Icon Legend',
     	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
     		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
-    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br>\
-    		<img src="images/busLocation.png" height="15" width="15"> : BullRunner Bus Position</p>'        	
+    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br>'      	
         },
         {	
 	title: 'Contact',
