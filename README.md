@@ -1,4 +1,4 @@
-## USF Mobullity
+# USF Mobullity
 USF Mobullity is a branch off of the open source OpenTripPlanner located at http://opentripplanner.com/.
 
 ## Setting up the Server
