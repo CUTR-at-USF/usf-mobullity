@@ -145,6 +145,7 @@
 <script src="js/otp/widgets/InfoWidget.js?v=1"></script>
 <script src="js/otp/widgets/tripoptions/RoutesSelectorWidget.js?v=1"></script>
 <script src="js/otp/widgets/tripoptions/TripOptionsWidget.js?v=1"></script>
+<script src="js/otp/widgets/tripoptions/LayersWidget.js?v=1"></script>
 <script src="js/otp/widgets/tripoptions/BikeTrianglePanel.js?v=1"></script>
 <link rel="stylesheet" href="js/otp/widgets/tripoptions/tripoptions-style.css?v=1" />
 
@@ -157,7 +158,9 @@
 <script src="js/otp/layers/StopsLayer.js?v=1"></script>
 <script src="js/otp/layers/HartStopsLayer.js?v=1"></script>
 <script src="js/otp/layers/BusPositionsLayer.js?v=1"></script>
+<script src="js/otp/layers/BikeStationsLayer.js?v=1"></script>
 
+<script src="js/otp/layers/BikeLanes.js?v=1"></script>
 
 <link rel="stylesheet" href="style.css?v=1" />
 
@@ -171,6 +174,7 @@
 <!-- load ICH templates and create the webapp at startup -->
 <script type="text/javascript" language="javascript">
 
+var webapp = null;
 
 $(document).ready(function() {
     var templateUrls = [ //new Array(
@@ -189,7 +193,7 @@ $(document).ready(function() {
             loadedTemplates++;
             if(loadedTemplates == templateUrls.length) {
                 ich.grabTemplates();                   
-                new otp.core.Webapp();
+                webapp = new otp.core.Webapp();
             }
         });
     }
@@ -202,22 +206,15 @@ $(document).ready(function() {
 <body>
 
 <header id="branding" role="banner" class="clearfix">
+
+	<div class=logo></div>
+	
+	<nav id="main-menu" role="article"><ul>
+	<li><a href="javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();">Trip Planner</a></li>
   
-  <!--<hgroup id="logo">
-    <div class="ribbon">
-      <h1 id="site-title"><span><a href="/" title="cibi.me" rel="home">cibi.me</a></span></h1>
-      <h2 id="site-description">Where can you bike to?</h2>
-    </div>
-  </hgroup>-->
-
-  <!--<p id="splash-text"><span>Bike share is coming to NYC this summer!</span> <span>How will you use it to get around?</span></p>-->
-
- <!--
-  <div class="search">
+    <li><a href="javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">Layers</a></li>
+    </ul></nav>
     
-    <input type="text" name="location_search" placeholder="Search for a location&hellip;" />
-  </div>
- -->
 </header><!-- #branding -->
 
 <div id="map"></div>

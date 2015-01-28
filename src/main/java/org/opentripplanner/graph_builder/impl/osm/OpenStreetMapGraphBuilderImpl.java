@@ -1547,11 +1547,17 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 wayIndex++;
 
                 WayProperties wayData = wayPropertySet.getDataForWay(way);
-
+                                              
                 setWayName(way);
 
                 StreetTraversalPermission permissions = getPermissionsForWay(way,
                         wayData.getPermission());
+
+                if (way.getTag("cycleway") != null && way.getTag("highway") != null) {
+                	permissions = permissions.add(StreetTraversalPermission.BICYCLE_LANE);
+                	System.out.println(permissions);
+                }
+                
                 if (!isWayRoutable(way) || permissions.allowsNothing())
                     continue;
 
@@ -1686,6 +1692,7 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
         private void applyWayProperties(PlainStreetEdge street, PlainStreetEdge backStreet,
                                         WayProperties wayData, OSMWithTags way) {
 
+        	
             Set<Alert> note = wayPropertySet.getNoteForWay(way);
             Set<Alert> wheelchairNote = getWheelchairNotes(way);
             boolean noThruTraffic = way.isThroughTrafficExplicitlyDisallowed();
@@ -2456,7 +2463,7 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 street = getEdgeForStreet(start, end, way, index, startNode, endNode, length,
                         permissionsFront, geometry, false);
             }
-            if (permissionsBack.allowsAnything()) {
+            if (permissionsBack != null && permissionsBack.allowsAnything()) {
                 backStreet = getEdgeForStreet(end, start, way, index, endNode, startNode, length,
                         permissionsBack, backGeometry, true);
             }
@@ -2711,6 +2718,11 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
             if (way.isBicycleExplicitlyAllowed()) {
                 permissions = permissions.add(StreetTraversalPermission.BICYCLE);
                 forceBikes = true;
+                
+                // XXX use wayproperties
+                if (way.getTag("cycleway") != null) {// && way.getTag("cycleway").equals("lane")) {                	
+                	permissions = permissions.add(StreetTraversalPermission.BICYCLE_LANE);
+                }
             }
 
             if (way.isBicycleDismountForced()) {

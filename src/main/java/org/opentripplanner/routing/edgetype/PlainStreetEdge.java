@@ -38,6 +38,7 @@ import org.opentripplanner.routing.util.ElevationProfileSegment;
 import org.opentripplanner.routing.util.ElevationUtils;
 import org.opentripplanner.routing.vertextype.IntersectionVertex;
 import org.opentripplanner.routing.vertextype.StreetVertex;
+import org.opentripplanner.routing.core.TraverseMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -312,6 +313,15 @@ public class PlainStreetEdge extends StreetEdge implements Cloneable {
             switch (options.optimize) {
             case SAFE:
                 weight = elevationProfileSegment.getBicycleSafetyEffectiveLength() / speed;
+
+		break;
+	    case SAFE_LANES:
+		weight = elevationProfileSegment.getSlopeSpeedEffectiveLength() / speed;
+	
+	        if ((traverseMode.equals(TraverseMode.BICYCLE)) && permission.allows(StreetTraversalPermission.BICYCLE_LANE))
+			weight *= 0.66; 
+	
+		
                 break;
             case GREENWAYS:
                 weight = elevationProfileSegment.getBicycleSafetyEffectiveLength() / speed;
@@ -334,6 +344,7 @@ public class PlainStreetEdge extends StreetEdge implements Cloneable {
                 weight = quick * options.getTriangleTimeFactor() + slope
                         * options.getTriangleSlopeFactor() + safety
                         * options.getTriangleSafetyFactor();
+
                 weight /= speed;
                 break;
             default:

@@ -96,7 +96,8 @@ otp.config = {
     showBullRunnerStops	: true,
     showHartBusStops	: false,
     showBusPositions	: true,
-
+    showBikeStations	: true,
+    showBikeLanes		: true,
 
     /**
      * Modules: a list of the client modules to be loaded at startup. Expressed

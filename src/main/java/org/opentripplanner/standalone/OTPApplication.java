@@ -8,6 +8,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.opentripplanner.api.common.OTPExceptionMapper;
 import org.opentripplanner.api.model.JSONObjectMapperProvider;
 import org.opentripplanner.api.resource.AlertPatcher;
+import org.opentripplanner.api.resource.BikeLanes;
 import org.opentripplanner.api.resource.BikeRental;
 import org.opentripplanner.api.resource.ExternalGeocoderResource;
 import org.opentripplanner.api.resource.Metadata;
@@ -78,6 +79,7 @@ public class OTPApplication extends Application {
             GeocoderResource.class,
             SimpleIsochrone.class,
             TileService.class,
+            BikeLanes.class,
             BikeRental.class,
             LIsochrone.class,
             ExternalGeocoderResource.class,

@@ -417,6 +417,7 @@ otp.widgets.tripoptions.ModeSelector =
                      //"TRANSIT" : "Bus Only", 
                     // "TRAINISH,WALK" : "Rail Only", 
                      "BICYCLE" : 'Bicycle Only',
+		     "BICYCLE_RENT" : "Rented Bicycle",
                      "WALK" : 'Walk Only',
                      "CAR" : 'Drive Only',
                    },
@@ -445,7 +446,16 @@ otp.widgets.tripoptions.ModeSelector =
         html += '<div id="'+this.id+'-widgets" style="overflow: hidden;"></div>';
         html += "</div>";
         $(html).appendTo(this.$());
-        
+
+	// Add Bicycle Safety
+	html = "<div class='notDraggable',> Bicycle Safety: ";
+	html += "<select id='bike_safety'>";
+	html += "<option value=''>No Preference</option>";
+	html += "<option value='1'>Prefer Lanes</option>";
+	html += "</select>";
+	html += "</div>";
+       	$(html).appendTo(this.$());
+ 
         //this.setContent(content);
         
     },
@@ -458,6 +468,12 @@ otp.widgets.tripoptions.ModeSelector =
             });
             this_.refreshModeControls();
         });
+
+	$('#bike_safety').change(function() {
+		if ($('#bike_safety').val() == 1) this_.tripWidget.module.optimize = "SAFE_LANES";
+		else this_.tripWidget.module.optimize = "QUICK";
+	});
+
     },
 
     restorePlan : function(data) {
@@ -572,6 +588,7 @@ otp.widgets.tripoptions.MaxDistanceSelector =
             $('#'+this_.id+'-value').val(presetVal.toFixed(2));    
             $('#'+this_.id+'-presets option:eq(0)').prop('selected', true);    
         });
+
     },
 
     restorePlan : function(data) {

@@ -22,6 +22,8 @@ otp.core.WidgetManagerMenu =
     
     widgetItems : null,
     
+    infoWidgets : [],
+
     initialize : function(webapp) {
         
         otp.core.PopupMenu.prototype.initialize.call(this);
@@ -47,7 +49,28 @@ otp.core.WidgetManagerMenu =
                 if(widget.isMinimized) widget.unminimize();
             }        
         });
-        
+       
+	this.addSeparator();
+
+       // add info widgets and links along header bar
+        if(otp.config.infoWidgets !== undefined && otp.config.infoWidgets.length > 0) {
+
+            for(var i=0; i<otp.config.infoWidgets.length; i++) {
+
+                if(otp.config.infoWidgets[i] == undefined) continue;
+
+                var id = "otp-infoWidget-"+i;
+
+		$('<div class="otp-popupMenu-item" id="'+id+'">'+otp.config.infoWidgets[i].title+'</div>')
+        	.appendTo($(this.menu))
+        	.click(function() {
+                    var widget = webapp.infoWidgets[this.id];
+                    if(!widget.isOpen) widget.show();
+                    widget.bringToFront();
+		});
+            }
+        }
+ 
         this.addSeparator();
         
         this.widgetItems = $("<div />").appendTo(this.menu);
