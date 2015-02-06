@@ -17,7 +17,7 @@ otp.namespace("otp.core");
 
 otp.core.Geocoder = otp.Class({
     
-    url : 'http://mobullity.forest.usf.edu/otp-geocoder/geocode',
+    url : 'http://mobullity.forest.usf.edu:8181/otp-geocoder/geocode',
     addressParam : null,
     
     initialize : function(url, addressParam) {
