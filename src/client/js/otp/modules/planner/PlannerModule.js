@@ -31,6 +31,7 @@ otp.modules.planner.defaultQueryParams = {
     triangleTimeFactor              : 0.333,
     triangleSlopeFactor             : 0.333,
     triangleSafetyFactor            : 0.334,
+    wheelchair			    : false,
 }
 
 otp.modules.planner.PlannerModule = 
@@ -335,6 +336,7 @@ otp.modules.planner.PlannerModule =
                 mode: this.mode,
                 maxWalkDistance: this.maxWalkDistance
             };
+	    if(this.wheelchair !== null) _.extend(queryParams, { wheelchair : this.wheelchair } );
             if(this.arriveBy !== null) _.extend(queryParams, { arriveBy : this.arriveBy } );
             if(this.preferredRoutes !== null) {
                 queryParams.preferredRoutes = this.preferredRoutes;

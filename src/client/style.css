@@ -753,7 +753,7 @@ z-index: 9002;
 .otp-defaultTripWidget-header {
     font-size: 20px;
     min-height: 16px;
-    font-family: SketchFlow Print;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
     letter-spacing: 2px;
     font-weight: none; 
     color: #fff;
@@ -1035,7 +1035,7 @@ p#splash-text span {
 .otp-layerView-inner {
 	min-height:100px;
 	border:none;
-	font-family: Stencil;	
+	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
 	text-align:left;
 	padding:10px;
 	border: 1px solid #9CCB3B;
