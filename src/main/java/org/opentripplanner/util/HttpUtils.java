@@ -48,6 +48,23 @@ public class HttpUtils {
         return entity.getContent();
     }
 
+    public static InputStream getData(String url, String requestHeaderName, String requestHeaderValue) throws ClientProtocolException, IOException {
+        HttpGet httpget = new HttpGet(url);
+        if (requestHeaderValue != null) {
+            httpget.addHeader(requestHeaderName, requestHeaderValue);
+        }
+        HttpClient httpclient = getClient();
+        HttpResponse response = httpclient.execute(httpget);
+        if(response.getStatusLine().getStatusCode() != 200)
+            return null;
+
+        HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            return null;
+        }
+        return entity.getContent();
+    }
+
     public static void testUrl(String url) throws IOException {
         HttpHead head = new HttpHead(url);
         HttpClient httpclient = getClient();
