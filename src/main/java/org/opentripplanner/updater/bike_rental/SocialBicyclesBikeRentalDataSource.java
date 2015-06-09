@@ -60,6 +60,7 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 
     private String url;
     private String network_id;
+    private String dataType;
 
     private String oauth_client_id;
     private String oauth_token;
@@ -78,7 +79,7 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 
 	    while (next_page > 0 && count < 15) {
 		    count++;
-		    String tmpurl = String.format("%s/api/hubs.json?page=%d&client_id=%s&network_id=%s", this.url, next_page, this.oauth_client_id, this.network_id);
+		    String tmpurl = String.format("%s?page=%d&client_id=%s&network_id=%s", this.url, next_page, this.oauth_client_id, this.network_id);
 	            InputStream stream = HttpUtils.getData(tmpurl, "Authorization", "Bearer " + this.oauth_token);
         	    if (stream == null) {
                 	log.warn("Failed to get data from url " + tmpurl);
@@ -95,7 +96,10 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 	            }
         	    String data = builder.toString();
 
-	            int tmp_page = parseJson(data);
+		    int tmp_page;
+		    if (this.dataType.equals("hubs")) tmp_page = parseJson(data);
+		    else tmp_page = parseBikesJson(data);
+
 		    if (tmp_page > next_page) next_page = tmp_page;
 		    else break;
 	    }
@@ -132,17 +136,18 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 
             brStation.bikesAvailable = stationNode.get("available_bikes").intValue();
             brStation.spacesAvailable = stationNode.get("free_racks").intValue();
-            
+          
             if (brStation != null && brStation.id != null) {
             	out.add(brStation);
             }            
         }
-                
+
         synchronized (this) {
 	    // Add/update new stations
 	    for (int i=0; i < out.size(); i++) {
 		if (Integer.parseInt(out.get(i).id) < stations.size()) {
-			stations.set(i, out.get(i) );
+			// XXX we need to ensure of the order we receive the stations...
+			stations.set(Integer.parseInt(out.get(i).id), out.get(i) );
 		}
 		else stations.add(out.get(i));
 	    }
@@ -157,9 +162,69 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 	return 0;
     }
 
+    // XXX NOTE: Since OTP BikeRentalStations are limited to an id, name, x/y coords, and the # of bikes/spaces available, we try to map the global bikes.json API
+    // data to these fields as appropriately as possible. 
+    private int parseBikesJson(String data) throws ParserConfigurationException, SAXException,
+            IOException {
+        ArrayList<BikeRentalStation> out = new ArrayList<BikeRentalStation>();
+
+        // Jackson ObjectMapper to read in JSON
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (JsonNode stationNode : mapper.readTree(data).get("items")) {
+
+            BikeRentalStation brStation = new BikeRentalStation();
+            brStation.id = String.valueOf(stationNode.get("id").intValue());
+            brStation.x = stationNode.get("current_position").get("coordinates").get(1).doubleValue();// / 1000000.0;
+            brStation.y = stationNode.get("current_position").get("coordinates").get(0).doubleValue();// / 1000000.0;
+            brStation.name = stationNode.get("name").textValue();
+
+            brStation.bikesAvailable = 1;
+            brStation.spacesAvailable = 0;  // Not a rack, this is a bike :)
+
+	    if (! stationNode.get("repair_state").textValue().equals("working")) {
+		brStation.bikesAvailable = -1; 
+	    }
+	    else if (! stationNode.get("state").textValue().equals("available")) {
+		brStation.bikesAvailable = 0;
+	    }
+
+            if (brStation != null && brStation.id != null) {
+                out.add(brStation);
+            }
+        }
+
+        synchronized (this) {
+            // Add/update new stations
+            for (int i=0; i < out.size(); i++) {
+                if (Integer.parseInt(out.get(i).id) < stations.size()) {
+                        // XXX we need to ensure of the order we receive the stations...
+                        stations.set(Integer.parseInt(out.get(i).id), out.get(i) );
+                }
+                else stations.add(out.get(i));
+            }
+        }
+
+        int page = mapper.readTree(data).get("current_page").intValue();
+        int per_page = mapper.readTree(data).get("per_page").intValue();
+        int total_entries = mapper.readTree(data).get("total_entries").intValue();
+
+        if (page*per_page < total_entries) return ++page;
+
+        return 0;
+    }
+
     @Override
     public synchronized List<BikeRentalStation> getStations() {
         return stations;
+    }
+
+    public String getDataType() {
+        return this.dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
     public String getUrl() {
@@ -210,6 +275,9 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
         if (token == null)
             throw new IllegalArgumentException("Missing mandatory 'oauth_token' configuration.");
         setOAuthToken(token);
+
+        String dataType = preferences.get("datatype", "hubs");
+        setDataType(dataType);
 
     }
 
