@@ -86,8 +86,7 @@ otp.layers.StopsLayer =
 	    flag = false;
 	    for (x in stop.routes) {
 		r = stop.routes[x];
-		if (webapp.modules[0].busLayers.visible.indexOf(r.shortName) != -1 || 
-		    (otp.config.showHartBusStops && r.agency == "Hillsborough Area Regional Transit") ) {
+		if (otp.config.showHartBusStops && r.agency.name == "Hillsborough Area Regional Transit")  {
 			flag = true;
 			break;
 		}
@@ -134,7 +133,6 @@ otp.layers.StopsLayer =
                 }
             }
 
-          
             if(stop.agency == "USF Bull Runner" && otp.config.showBullRunnerStops == true){
             	//only want to display USF BullRunner stops in this layer
             	L.marker([stop.lat, stop.lon], {

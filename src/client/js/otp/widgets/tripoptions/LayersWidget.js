@@ -88,7 +88,7 @@ otp.widgets.LayersWidget =
         });
       
 	// HART bus stops
-	$('#bus_hart').bind('click', {'this_': this}, function(ev) {
+	$('#bus_hart').bind('click', {'module': this.module}, function(ev) {
 
 		if (otp.config.showHartBusStops) {
 			otp.config.showHartBusStops = false;
@@ -99,7 +99,7 @@ otp.widgets.LayersWidget =
 			$("#bus_hart .box").addClass('active');
 		}
 
-		ev.data.this_.module.busLayers.refresh();
+		ev.data.module.stopsLayer.refresh();
 
 	});
   
