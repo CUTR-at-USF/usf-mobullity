@@ -73,7 +73,7 @@
 				<entry key="(CIC) Campus Information Center" value="28.0557 -82.4126" />
 				<entry key="(CIS) Communication &amp; Information Sciences Building" value="28.0587 -82.4110" /> <!-- &amp; is supposed to be the "&" character-->
 				<entry key="(CMC) CAS Multidisciplinary Complex (formerly Physics (PHY))" value="28.0598 -82.4153" />
-				<entry key="(CMS) Children's Medical Services Building" value="28.0663, -82.42524" />
+				<entry key="(CMS) Children's Medical Services Building" value="28.0663 -82.42524" />
 				<entry key="(CPR) Russell M. Cooper Hall (Arts &amp; Sciences)" value="28.0597 -82.4108" />
 				<entry key="(CPT) Central Plant" value="28.06522 -82.41585" />
 				<entry key="(CUT) Center for Urban Transportation Research" value="28.0586 -82.4161" />
@@ -165,7 +165,7 @@
 				<entry key="(RKA) Kappa Hall" value="28.06715 -82.41027" />
 				<entry key="(RKO) Kosove Hall" value="28.06463 -82.41135" />
 				<entry key="(RLA) Lambda Hall" value="28.06761 -82.41022" />
-				<entry key="(RMU) Mu Hall" value="28.06800, -82.41068" />
+				<entry key="(RMU) Mu Hall" value="28.06800 -82.41068" />
 				<entry key="(RTH) Theta Hall" value="28.06684 -82.40971" />
 				<entry key="(RZE) Zeta Hall" value="28.06670 -82.41264" />
 
@@ -187,7 +187,7 @@
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
 
 				<entry key="Adventure Island" value="28.04079 -82.41599" />
-				<entry key="Bush Gardens" value="28.03445 -82.41634" />
+				<entry key="Busch Gardens" value="28.03445 -82.41634" />
 				<entry key="Bull Market" value="28.07189 -82.41420" />
 				<entry key="(MOSI) Museum of Science and Industry" value="28.05350 -82.40463" />
 				<entry key="Publix, E Fowler ave." value="28.05352 -82.39673" />
