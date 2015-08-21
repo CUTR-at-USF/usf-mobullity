@@ -45,6 +45,7 @@ otp.util.Text = {
     constructUrlParamString : function(params) {
         var encodedParams = [];
         for(param in params) {
+	    if (params[param] == undefined) continue; // skip unset or invalid parameters so OTP doesn't complain later
             encodedParams.push(param+"="+ encodeURIComponent(params[param]));
         }
         return encodedParams.join("&");
