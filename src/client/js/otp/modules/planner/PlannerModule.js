@@ -122,8 +122,8 @@ otp.modules.planner.PlannerModule =
     
 	getCookie : function()
     {
-		name = 'visited=';
-		var parts = document.cookie.split(";");
+		name = "visited=";
+		var parts = document.cookie.split("; ");
 		for (var i = 0; i < parts.length; i++) // This will iterate throught all the combinaison of key and value
 		{
 			var part = parts[i];
@@ -139,7 +139,7 @@ otp.modules.planner.PlannerModule =
     checkCookie : function() {
     	var test = this.getCookie();
     	if(test != "true"){
-    		document.cookie = "visited=true;";
+    		document.cookie = "visited=true; ";
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
             		"<li>View Current Live Bull Runner Bus Feed by<br>" +
