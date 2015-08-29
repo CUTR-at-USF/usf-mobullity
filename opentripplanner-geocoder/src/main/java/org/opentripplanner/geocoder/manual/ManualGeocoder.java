@@ -36,16 +36,17 @@ public class ManualGeocoder implements Geocoder {
     	ArrayList<String> poiNames = new ArrayList<String>();
     	poiNames.addAll(pois.keySet());
     	
-        for (String name : poiNames) {
-        	name = name.toUpperCase();
+        for (String key : poiNames) {
+        	String name = key.toUpperCase();
         	String addr = address.toUpperCase();
         	if(name.contains(addr) || addr.contains(name)) {
-        		String value = (String)pois.get(name);
+        		String value = (String)pois.get(key);
         		String[] latlon = value.split(" ");
         		Double lat = Double.parseDouble(latlon[0]);
         		Double lon = Double.parseDouble(latlon[1]);
-        		String displayName = name;
-        		GeocoderResult geocoderResult = new GeocoderResult(lat, lon, displayName);
+
+			// Display the name exactly as it appears in the XML
+        		GeocoderResult geocoderResult = new GeocoderResult(lat, lon, key);
         		geocoderResults.add(geocoderResult);
         	}
         }
