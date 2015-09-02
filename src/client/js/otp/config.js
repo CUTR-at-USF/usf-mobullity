@@ -67,14 +67,14 @@ otp.config = {
     //set init lat lng in map.js with geolocation
     geoLocation: true,
     //if user does not allow location finding default location set
-    initLatLng : new L.LatLng(28.058499, -82.416945), 
-	mapBoundary: false,
+    initLatLng : new L.LatLng(28.061062, -82.413200), 
+    mapBoundary: false,
     initZoom : 15,
-    minZoom : 8,
+    minZoom : 9,
     maxZoom : 20,
     
     /* Whether the map should be moved to contain the full itinerary when a result is received. */
-    zoomToFitResults    : false,
+    zoomToFitResults    : true,
 
     	  
     /**

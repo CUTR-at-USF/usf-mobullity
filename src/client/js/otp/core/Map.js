@@ -99,12 +99,9 @@ otp.core.Map = otp.Class({
         $.ajax(url, {
             data: { routerId : otp.config.routerId },            
             dataType: 'JSON',
-            success: function(data) {				
-                this_.lmap.fitBounds([
-                    [data.lowerLeftLatitude, data.lowerLeftLongitude],
-                    [data.upperRightLatitude, data.upperRightLongitude]
-                ]);				
-				
+            
+            success: 
+            function(data) {				
 				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
 		
 				if(otp.config.geoLocation){
@@ -213,6 +210,7 @@ otp.core.Map = otp.Class({
     
     activeModuleChanged : function(oldModule, newModule) {
         
+
         //console.log("actModChanged: "+oldModule+", "+newModule);
         
         // hide module-specific layers for "old" module, if applicable
