@@ -99,12 +99,8 @@ otp.core.Map = otp.Class({
         $.ajax(url, {
             data: { routerId : otp.config.routerId },            
             dataType: 'JSON',
+            
             success: function(data) {				
-                this_.lmap.fitBounds([
-                    [data.lowerLeftLatitude, data.lowerLeftLongitude],
-                    [data.upperRightLatitude, data.upperRightLongitude]
-                ]);				
-				
 				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
 		
 				if(otp.config.geoLocation){
@@ -124,7 +120,7 @@ otp.core.Map = otp.Class({
 				if (e.accuracy >= 22000) {
 					console.log("Accuracy beyond threshold; recentering on USF.");
 					e.latlng = otp.config.initLatLng;
-					this.queueView(e.latlng, 15);
+					this.queueView(e.latlng, otp.config.initZoom);
 					return; // dont bother adding a marker 
 				}
 				
@@ -132,7 +128,7 @@ otp.core.Map = otp.Class({
 				if ( ! otp.config.mapBoundary.contains(e.latlng)) {
 					console.log("Geolocation is outside of map boundaries; recentering on USF.");
 					e.latlng = otp.config.initLatLng;
-					this.queueView(e.latlng, 15);
+					this.queueView(e.latlng, otp.config.initZoom);
 					return; // and don't add a marker on first load
 				}				
 				
@@ -152,7 +148,7 @@ otp.core.Map = otp.Class({
             	this.addLayer(accCircle);
             	//if statement will make it so the map only zooms on the first function call
             	if (count == 1){
-            	  this.queueView(e.latlng, 17);
+            	  this.queueView(e.latlng, otp.config.gpsZoom);
             	};
             	//following removes the last set of map markers on the last function call
             	this.removeLayer(tempM);
@@ -213,6 +209,7 @@ otp.core.Map = otp.Class({
     
     activeModuleChanged : function(oldModule, newModule) {
         
+
         //console.log("actModChanged: "+oldModule+", "+newModule);
         
         // hide module-specific layers for "old" module, if applicable
