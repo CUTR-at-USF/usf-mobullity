@@ -72,7 +72,7 @@ otp.config = {
     initZoom : 15,
     minZoom : 9,
     maxZoom : 20,
-    gpsZoom : 17
+    gpsZoom : 17,
     
     /* Whether the map should be moved to contain the full itinerary when a result is received. */
     zoomToFitResults    : true,
