@@ -165,7 +165,7 @@ otp.core.Map = otp.Class({
             /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
-        //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));
+        L.control.locate({ position : 'topright', locateOptions: {maxZoom: otp.config.gpsZoom} }).addTo(this.lmap);
                 
         /*var baseMaps = {
             'Base Layer' : tileLayer 
@@ -213,6 +213,7 @@ otp.core.Map = otp.Class({
         //console.log("actModChanged: "+oldModule+", "+newModule);
         
         // hide module-specific layers for "old" module, if applicable
+
         if(oldModule != null) {
             for(var layerName in oldModule.mapLayers) {
                 
