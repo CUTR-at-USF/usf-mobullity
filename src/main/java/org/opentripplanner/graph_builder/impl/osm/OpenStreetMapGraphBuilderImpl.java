@@ -1553,12 +1553,22 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 StreetTraversalPermission permissions = getPermissionsForWay(way,
                         wayData.getPermission());
 
-                if (way.getTag("cycleway") != null && way.getTag("highway") != null) {
+		// Handle roads with bike lanes
+                if (permissions != null && (way.getTag("cycleway") != null && way.getTag("highway") != null) || 
+			way.getTag("cycleway:left") != null || way.getTag("cycleway:right") != null) {
                 	permissions = permissions.add(StreetTraversalPermission.BICYCLE_LANE);
                 	System.out.println(permissions);
                 }
-                
-                if (!isWayRoutable(way) || permissions.allowsNothing())
+		// Handle pedestrian-only walkway vs shared used path
+		else if (permissions != null && (way.getTag("est_width") == null || !way.getTag("est_width").equalsIgnoreCase("8ft")) && permissions.allows(StreetTraversalPermission.BICYCLE)) {
+			//permissions = permissions.remove(StreetTraversalPermission.BICYCLE);
+			// XXX only do this for FOOTWAYS otherwise we never ride on the street w/o a lane ... rely on edgetype/plainedge safe_lanes optimization
+		}
+		else if (way.getTag("est_width") != null && way.getTag("est_width").equalsIgnoreCase("8ft") && !permissions.allows(StreetTraversalPermission.BICYCLE)) {
+                        permissions = permissions.add(StreetTraversalPermission.BICYCLE);
+		}
+
+                if (permissions != null && (!isWayRoutable(way) || permissions.allowsNothing()))
                     continue;
 
                 // handle duplicate nodes in OSM ways
@@ -1681,6 +1691,11 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                     PlainStreetEdge street = streets.getFirst();
                     PlainStreetEdge backStreet = streets.getSecond();
                     applyWayProperties(street, backStreet, wayData, way);
+
+		    // If cycleway was only left or right, be sure to remove permission on the back edge
+	            if ( way != null && backStreet != null && (way.getTag("cycleway:left") != null || way.getTag("cycleway:right") != null) && permissions.allows(StreetTraversalPermission.BICYCLE_LANE)) {
+                        backStreet.setPermission(permissions.remove(StreetTraversalPermission.BICYCLE_LANE));
+        	    }
 
                     applyEdgesToTurnRestrictions(way, startNode, endNode, street, backStreet);
                     startNode = endNode;
@@ -2447,7 +2462,7 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                                                       IntersectionVertex end, OSMWay way, int index, long startNode, long endNode,
                                                       StreetTraversalPermission permissions, LineString geometry) {
             // No point in returning edges that can't be traversed by anyone.
-            if (permissions.allowsNothing()) {
+            if (permissions != null && permissions.allowsNothing()) {
                 return new P2<PlainStreetEdge>(null, null);
             }
 
@@ -2459,7 +2474,7 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
             StreetTraversalPermission permissionsFront = permissionPair.getFirst();
             StreetTraversalPermission permissionsBack = permissionPair.getSecond();
 
-            if (permissionsFront.allowsAnything()) {
+            if (permissionsFront != null && permissionsFront.allowsAnything()) {
                 street = getEdgeForStreet(start, end, way, index, startNode, endNode, length,
                         permissionsFront, geometry, false);
             }
@@ -2489,33 +2504,33 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
             StreetTraversalPermission permissionsBack = permissions;
 
             // Check driving direction restrictions.
-            if (way.isOneWayForwardDriving() || way.isRoundabout()) {
+            if (permissionsBack != null && (way.isOneWayForwardDriving() || way.isRoundabout())) {
                 permissionsBack = permissionsBack
                         .remove(StreetTraversalPermission.BICYCLE_AND_DRIVING);
             }
-            if (way.isOneWayReverseDriving()) {
+            if (permissionsFront != null && way.isOneWayReverseDriving()) {
                 permissionsFront = permissionsFront
                         .remove(StreetTraversalPermission.BICYCLE_AND_DRIVING);
             }
 
             // Check bike direction restrictions.
-            if (way.isOneWayForwardBicycle()) {
+            if (permissionsBack != null && way.isOneWayForwardBicycle()) {
                 permissionsBack = permissionsBack.remove(StreetTraversalPermission.BICYCLE);
             }
-            if (way.isOneWayReverseBicycle()) {
+            if (permissionsFront != null && way.isOneWayReverseBicycle()) {
                 permissionsFront = permissionsFront.remove(StreetTraversalPermission.BICYCLE);
             }
 
             // TODO(flamholz): figure out what this is for.
             String oneWayBicycle = way.getTag("oneway:bicycle");
             if (OSMWithTags.isFalse(oneWayBicycle) || way.isTagTrue("bicycle:backwards")) {
-                if (permissions.allows(StreetTraversalPermission.BICYCLE)) {
+                if (permissions != null && permissions.allows(StreetTraversalPermission.BICYCLE)) {
                     permissionsFront = permissionsFront.add(StreetTraversalPermission.BICYCLE);
                     permissionsBack = permissionsBack.add(StreetTraversalPermission.BICYCLE);
                 }
             }
 
-            if (way.isOpposableCycleway()) {
+            if (permissionsBack != null && way.isOpposableCycleway()) {
                 permissionsBack = permissionsBack.add(StreetTraversalPermission.BICYCLE);
             }
             return new P2<StreetTraversalPermission>(permissionsFront, permissionsBack);
