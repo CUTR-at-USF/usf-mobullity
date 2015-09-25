@@ -1020,11 +1020,23 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                     for (int j = 0; j < visibilityNodes.size(); ++j) {
                         OSMNode nodeJ = visibilityNodes.get(j);
                         P2<OSMNode> nodePair = new P2<OSMNode>(nodeI, nodeJ);
-                        if (alreadyAddedEdges.contains(nodePair))
-                            continue;
 
                         IntersectionVertex startEndpoint = getVertexForOsmNode(nodeI, areaEntity);
                         IntersectionVertex endEndpoint = getVertexForOsmNode(nodeJ, areaEntity);
+
+	                if (alreadyAddedEdges.contains(nodePair)) {
+	                        //We still need to add nodes to starting vertices, otherwise we can get non routable area
+	                        //because some starting nodes are only connected over area ring edges and those won't be added otherwise
+	                        //See #2111 for example of this problem
+	
+	                        if (startingNodes.contains(nodeI)) {
+	                            startingVertices.add(startEndpoint);
+	                        }
+	                        if (startingNodes.contains(nodeJ)) {
+	                            startingVertices.add(endEndpoint);
+	                        }
+	                        continue; //segment and polygon check isn't needed since those are ring edges
+                        }
 
                         Coordinate[] coordinates = new Coordinate[]{
                                 startEndpoint.getCoordinate(), endEndpoint.getCoordinate()};
