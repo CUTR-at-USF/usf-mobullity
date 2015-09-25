@@ -71,7 +71,7 @@ otp.config = {
     mapBoundary: false,
     initZoom : 15, /* Default zoom w/o GPS (15 = entire viewport big enough for Tampa campus) */
     minZoom : 13, /* Smaller numbers allow farther zooms (zoom OUT) */
-    maxZoom : 19, /* Larger numbers allow closer zooms (zoom IN) */
+    maxZoom : 18, /* Larger numbers allow closer zooms (zoom IN) */
     gpsZoom : 17, /* The default zoom on load when GPS location is available */
     
     /* Whether the map should be moved to contain the full itinerary when a result is received. */
