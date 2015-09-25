@@ -24,7 +24,11 @@ otp.core.Map = otp.Class({
     contextMenu             : null,
     contextMenuModuleItems  : null,
     contextMenuLatLng       : null,
-    
+   
+    initialGeolocation : false,
+    currentLocation : false,
+    geolocateCallbacks : [], /* Array of [callback function, arguments] called upon every successful geolocation */
+ 
     baseLayers  : {},
 	overLayMaps : {},
     
@@ -44,10 +48,10 @@ otp.core.Map = otp.Class({
 
             var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
 
-                this.baseLayers[layerConfig.name] = layer;
+            this.baseLayers[layerConfig.name] = layer;
             if(i == 0) defaultBaseLayer = layer;            
                 
-                if(typeof layerConfig.getTileUrl != 'undefined') {
+            if(typeof layerConfig.getTileUrl != 'undefined') {
                     layer.getTileUrl = otp.config.getTileUrl;
             }
         }
@@ -87,14 +91,7 @@ otp.core.Map = otp.Class({
 		
         this.lmap = new L.Map('map', mapProps);        
 		
-        /*Locates user's current location if geoLocation in config.js is set to true*/
-        var marker = new L.marker();
-        var tempM = new L.marker();
-        var accCircle = new L.circle();
-        var tempA = new L.circle();
-        count=0;
-        
-		// Establish map boundaries from OTP
+	// Establish map boundaries from OTP
         var url = otp.config.hostname + '/' + otp.config.restService + '/metadata';
         $.ajax(url, {
             data: { routerId : otp.config.routerId },            
@@ -103,7 +100,8 @@ otp.core.Map = otp.Class({
             success: function(data) {				
 				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
 		
-				if(otp.config.geoLocation){
+				if(otp.config.geoLocation) {
+					this.initialGeolocation = true;
 					this_.lmap.locate({watch: true, enableHighAccuracy: true});
 					this_.lmap.on('locationfound', onLocationFound);
 				}						
@@ -111,58 +109,11 @@ otp.core.Map = otp.Class({
             }
         });		    
 		           
-            /* sets a marker at the current location */
-            function onLocationFound(e){
-     			
-				count = count+1;
-								
-				// 40 accuracy for wifi, 22000 for wired/city center approximations
-				if (e.accuracy >= 22000) {
-					console.log("Accuracy beyond threshold; recentering on USF.");
-					e.latlng = otp.config.initLatLng;
-					this.queueView(e.latlng, otp.config.initZoom);
-					return; // dont bother adding a marker 
-				}
-				
-				// if e.latlng is outside of map boundaries (tampa), recenter on USF				
-				if ( ! otp.config.mapBoundary.contains(e.latlng)) {
-					console.log("Geolocation is outside of map boundaries; recentering on USF.");
-					e.latlng = otp.config.initLatLng;
-					this.queueView(e.latlng, otp.config.initZoom);
-					return; // and don't add a marker on first load
-				}				
-				
-            	var locationSpot = L.Icon.extend({
-            		options: {
-            			iconUrl: resourcePath + 'images/locationSpot.svg',
-            			iconSize: new L.Point(10,10),
-            		}
-            	});
-            	tempM = marker;
-            	tempA = accCircle;
-            	var locSpot = new locationSpot();
-            	marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
-            	accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
-            	//adds new marker and accuracy circle
-            	this.addLayer(marker);
-            	this.addLayer(accCircle);
-            	//if statement will make it so the map only zooms on the first function call
-            	if (count == 1){
-            	  this.queueView(e.latlng, otp.config.gpsZoom);
-            	};
-            	//following removes the last set of map markers on the last function call
-            	this.removeLayer(tempM);
-            	this.removeLayer(tempA);
-            };
-			
-			
-  //          var marker = L.marker([28.058499, -82.416945]);
-            
-            this.overLayMaps ={
-            		//"CUTR" : marker,
-            };
+        this.overLayMaps ={
+        	//"CUTR" : marker,
+        };
 	   
-            /* here are the controls for layers and zooming on the map */
+        /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
         //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));
@@ -202,7 +153,73 @@ otp.core.Map = otp.Class({
         this.activated = true;
         
     },
-    
+   
+    /* sets a marker at the current location */
+    geoLocationFound : function(e) {
+      	 var this_ = webapp.map; // Since we are typically called from leaflet.on, 'this' will be from that context
+
+	 if (this_.initialGeolocation) {		
+								
+		// 40 accuracy for wifi, 22000 for wired/city center approximations
+		if (e.accuracy >= 22000) {
+			console.log("Accuracy beyond threshold; recentering on USF.");
+			e.latlng = otp.config.initLatLng;
+			this_.queueView(e.latlng, otp.config.initZoom);
+			return; // dont bother adding a marker 
+		}
+				
+		// if e.latlng is outside of map boundaries (tampa), recenter on USF				
+		if ( ! otp.config.mapBoundary.contains(e.latlng)) {
+			console.log("Geolocation is outside of map boundaries; recentering on USF.");
+			e.latlng = otp.config.initLatLng;
+			this_.queueView(e.latlng, otp.config.initZoom);
+			return; // and don't add a marker on first load
+		}				
+	
+		this_.initialGeolocation = false;
+
+            	// Only zoom in on location on initial geolocation
+		this_.queueView(e.latlng, otp.config.gpsZoom);
+ 	 }
+
+	 // Save the location on otp.core.Map for use elsewhere
+	 this_.currentLocation = e;
+
+	 // Handle other callback functions
+	 for (i=0; i < this_.geolocateCallbacks.length; i++) {
+		this_.geolocateCallbacks[i][0]( this_.geolocateCallbacks[i][1] );
+	 }
+
+	 // Setup marker
+	 var locationSpot = L.Icon.extend({
+        	options: {
+            		iconUrl: resourcePath + 'images/locationSpot.svg',
+            		iconSize: new L.Point(10,10),
+            	}
+         });
+
+         /*Locates user's current location if geoLocation in config.js is set to true*/
+         var marker = new L.marker();
+         var tempM = new L.marker();
+         var accCircle = new L.circle();
+         var tempA = new L.circle();
+
+         tempM = marker;
+         tempA = accCircle;
+         var locSpot = new locationSpot();
+         marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
+         accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+
+         //adds new marker and accuracy circle
+         this.addLayer(marker);
+         this.addLayer(accCircle);
+
+         //following removes the last set of map markers on the last function call
+         this.removeLayer(tempM);
+         this.removeLayer(tempA);
+
+    },
+ 
     addContextMenuItem : function(text, clickHandler) {
         this.contextMenu.addModuleItem(text, clickHandler);
     },

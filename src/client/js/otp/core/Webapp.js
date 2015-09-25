@@ -15,7 +15,7 @@
 otp.namespace("otp.core");
 
 otp.core.Webapp = otp.Class({
-        map     : null,
+    map     : null,
     
     modules : [ ],
     moduleMenu : null,
