@@ -101,9 +101,9 @@ otp.core.Map = otp.Class({
 				otp.config.mapBoundary = new L.latLngBounds(new L.latLng(data.lowerLeftLatitude, data.lowerLeftLongitude), new L.latLng(data.upperRightLatitude, data.upperRightLongitude));
 		
 				if(otp.config.geoLocation) {
-					this.initialGeolocation = true;
+					this_.initialGeolocation = true;
 					this_.lmap.locate({watch: true, enableHighAccuracy: true});
-					this_.lmap.on('locationfound', onLocationFound);
+					this_.lmap.on('locationfound', webapp.map.geoLocationFound);
 				}						
 				
             }
@@ -159,12 +159,16 @@ otp.core.Map = otp.Class({
       	 var this_ = webapp.map; // Since we are typically called from leaflet.on, 'this' will be from that context
 
 	 if (this_.initialGeolocation) {		
-								
+
+            	// Only zoom in on location on initial geolocation
+		// If the GPS is bad for some reason, and the user zooms, we would reset the view once this callback fires unless we track the initial call as below.
+		this_.initialGeolocation = false;
+
 		// 40 accuracy for wifi, 22000 for wired/city center approximations
 		if (e.accuracy >= 22000) {
 			console.log("Accuracy beyond threshold; recentering on USF.");
 			e.latlng = otp.config.initLatLng;
-			this_.queueView(e.latlng, otp.config.initZoom);
+			this.queueView(e.latlng, otp.config.initZoom);
 			return; // dont bother adding a marker 
 		}
 				
@@ -172,14 +176,11 @@ otp.core.Map = otp.Class({
 		if ( ! otp.config.mapBoundary.contains(e.latlng)) {
 			console.log("Geolocation is outside of map boundaries; recentering on USF.");
 			e.latlng = otp.config.initLatLng;
-			this_.queueView(e.latlng, otp.config.initZoom);
+			this.queueView(e.latlng, otp.config.initZoom);
 			return; // and don't add a marker on first load
 		}				
-	
-		this_.initialGeolocation = false;
 
-            	// Only zoom in on location on initial geolocation
-		this_.queueView(e.latlng, otp.config.gpsZoom);
+		this.queueView(e.latlng, otp.config.gpsZoom);
  	 }
 
 	 // Save the location on otp.core.Map for use elsewhere
