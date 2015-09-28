@@ -139,7 +139,7 @@ otp.modules.planner.PlannerModule =
     checkCookie : function() {
     	var test = this.getCookie();
     	if(test != "true"){
-    		document.cookie = "visited=true; ";
+    		document.cookie = "visited=true; expires=Fri, 13 Dec 2041 12:00:00 UTC ";
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
             		"<li>View Current Live Bull Runner Bus Feed by<br>" +
