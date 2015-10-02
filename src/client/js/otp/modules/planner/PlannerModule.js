@@ -143,8 +143,8 @@ otp.modules.planner.PlannerModule =
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
             		"<li>View Current Live Bull Runner Bus Feed by<br>" +
-            		"selecting a route on the left.</li>" +
-            		"<li>Plan a trip by clicking 'Trip Planner' on top.</li>" +
+            		"clicking Layers at the top and selecting a route on the left.</li>" +
+            		"<li>Plan a trip by using the menu on the left.</li>" +
             		"<li>Click the Help button for more information.</li>", this);
             this.WelcomeWidget.center();
             this.WelcomeWidget.setTitle("Welcome!");

@@ -102,8 +102,20 @@ otp.modules.multimodal.MultimodalPlannerModule =
 
         // Layer Selector		
         this.layerWidget = new otp.widgets.LayersWidget('otp-'+this.id+'-layersWidget', this);		
-                
-        this.optionsWidget.minimize();
+             
+        // The following minimize the widget depending on the attribut given in the url
+        if (location.hash == "#trip"){
+            this.layerWidget.minimize();
+        }
+        else if (location.hash == "#layers") {
+           this.optionsWidget.minimize();
+        }
+        else if (location.hash == "#map") {
+            this.layerWidget.minimize();
+            this.optionsWidget.minimize();
+        }
+        else {this.layerWidget.minimize();}
+            
     },
     
     routesLoaded : function() {
