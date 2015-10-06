@@ -39,7 +39,10 @@ otp.config = {
      *   - attribution: <string> the attribution text for the map tile data
      *   - [subdomains]: <array of strings> a list of tileUrl subdomains, if
      *       applicable
-     *       
+     *   
+     *   - Note: if the names of the layers are changed the attribute "defaultBaseLayer"
+     *     need to be updated to reflect this change. This attribute specify, based on the name,
+     *     which layer will be use by default.
      */
      
     baseLayers: [
@@ -116,7 +119,7 @@ otp.config = {
         {
             id : 'planner',
             className : 'otp.modules.multimodal.MultimodalPlannerModule',
-            defaultBaseLayer : 'MapQuest OSM',
+            defaultBaseLayer : 'Map',
             isDefault: true
         },
 //       {
