@@ -1102,6 +1102,12 @@ p#splash-text span {
 .layerView .parking li { }
 
 
+.leaflet-control-locate a {
+	padding: 3px 0px 0px 0px;
+}
+
+
+
 /* Media Queries for Responsive Layout
 -------------------------------------------------------------- */
 
