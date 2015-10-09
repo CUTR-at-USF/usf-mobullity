@@ -129,7 +129,16 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
             }
 
             if(!this._active) {
-                this._map.locate(this.options.locateOptions);
+		 // We use our own location callback to handle drawing the marker, etc
+                 // webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
+
+		// Only start 1 locate() to work around Chromium bug
+		if (this._map._locationWatchId == undefined) {
+        	        webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
+			webapp.map.initialGeolocation = true; // Allow app to pan/zoom to new location if the user clicked this
+		}
+		// else this._map.fire('locationfound'); XXX?
+
             }
             this._active = true;
 
@@ -145,6 +154,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
          */
         _deactivate: function() {
             this._map.stopLocate();
+	    this._map._locationWatchId = undefined;
 
             this._map.off('dragstart', this._stopFollowing, this);
             if (this.options.follow && this._following) {
@@ -329,7 +339,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
             if (!this._event) {
                 this._setClasses('requesting');
             } else {
-                this.drawMarker(this._map);
+                this._toggleContainerStyle();
             }
         },
 
@@ -344,8 +354,6 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
 
             this._cleanClasses();
             this._resetVariables();
-
-            this.removeMarker();
         },
 
         /**
@@ -365,6 +373,8 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
          * Stores the received event and updates the marker.
          */
         _onLocationFound: function(e) {
+	    this._toggleContainerStyle();
+
             // no need to do anything if the location has not changed
             if (this._event &&
                 (this._event.latlng.lat === e.latlng.lat &&
@@ -383,7 +393,6 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
                 this._locateOnNextLocationFound = true;
             }
 
-            this.drawMarker(this._map);
         },
 
         /**

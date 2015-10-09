@@ -260,9 +260,6 @@ otp.widgets.tripoptions.LocationsSelector =
 		if (webapp.map.geolocateCallbacks[i][1] == data) webapp.map.geolocateCallbacks.splice(i, 1);
 	}
 
-	// Turn off the locationfound event
-	webapp.map.lmap.off('locationfound', webapp.map.geoLocationFound );
-
     },
         
     initInput : function(input, setterFunction) {
@@ -279,8 +276,6 @@ otp.widgets.tripoptions.LocationsSelector =
 			webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
 
                         webapp.map.lmap.locate({watch:false, enableHighAccuracy: true});
-                        webapp.map.lmap.on('locationfound', webapp.map.geoLocationFound );
-
 			return;
 		}
 

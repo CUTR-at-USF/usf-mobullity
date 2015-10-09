@@ -90,7 +90,12 @@ otp.core.Map = otp.Class({
         });
 		
         this.lmap = new L.Map('map', mapProps);        
-		
+	
+	// Setup geolocation event	
+	this.lmap.on('locationfound', this.geoLocationFound);
+	this._locationLayer = L.layerGroup();
+	this._locationLayer.addTo(this.lmap);
+
 	// Establish map boundaries from OTP
         var url = otp.config.hostname + '/' + otp.config.restService + '/metadata';
         $.ajax(url, {
@@ -103,7 +108,6 @@ otp.core.Map = otp.Class({
 				if(otp.config.geoLocation) {
 					this_.initialGeolocation = true;
 					this_.lmap.locate({watch: true, enableHighAccuracy: true});
-					this_.lmap.on('locationfound', webapp.map.geoLocationFound);
 				}						
 				
             }
@@ -117,6 +121,8 @@ otp.core.Map = otp.Class({
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
         //this.lmap.addControl(new L.Control.Zoom({ position : 'topright' }));
+        this.locateControl = L.control.locate({ position : 'topright', locateOptions: {maxZoom: otp.config.gpsZoom} });
+	this.locateControl.addTo(this.lmap); 
                 
         /*var baseMaps = {
             'Base Layer' : tileLayer 
@@ -172,7 +178,7 @@ otp.core.Map = otp.Class({
 			return; // dont bother adding a marker 
 		}
 				
-		// if e.latlng is outside of map boundaries (tampa), recenter on USF				
+		// if e.latlng is outside of map boundaries (tampa), recenter on USF			
 		if ( ! otp.config.mapBoundary.contains(e.latlng)) {
 			console.log("Geolocation is outside of map boundaries; recentering on USF.");
 			e.latlng = otp.config.initLatLng;
@@ -185,6 +191,7 @@ otp.core.Map = otp.Class({
 
 	 // Save the location on otp.core.Map for use elsewhere
 	 this_.currentLocation = e;
+	 this_.locateControl._event = e;
 
 	 // Handle other callback functions
 	 for (i=0; i < this_.geolocateCallbacks.length; i++) {
@@ -199,25 +206,18 @@ otp.core.Map = otp.Class({
             	}
          });
 
-         /*Locates user's current location if geoLocation in config.js is set to true*/
          var marker = new L.marker();
-         var tempM = new L.marker();
          var accCircle = new L.circle();
-         var tempA = new L.circle();
 
-         tempM = marker;
-         tempA = accCircle;
          var locSpot = new locationSpot();
          marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
          accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
 
-         //adds new marker and accuracy circle
-         this.addLayer(marker);
-         this.addLayer(accCircle);
+ 	 this_._locationLayer.clearLayers();
 
-         //following removes the last set of map markers on the last function call
-         this.removeLayer(tempM);
-         this.removeLayer(tempA);
+         //adds new marker and accuracy circle
+         marker.addTo(this_._locationLayer);
+         accCircle.addTo(this_._locationLayer);
 
     },
  
