@@ -120,7 +120,6 @@ otp.core.Map = otp.Class({
         /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
-        L.control.locate({ position : 'topright', locateOptions: {maxZoom: otp.config.gpsZoom} }).addTo(this.lmap);
         this.locateControl = L.control.locate({ position : 'topright', locateOptions: {maxZoom: otp.config.gpsZoom} });
 	this.locateControl.addTo(this.lmap); 
                 
