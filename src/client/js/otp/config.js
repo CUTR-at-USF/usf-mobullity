@@ -39,18 +39,21 @@ otp.config = {
      *   - attribution: <string> the attribution text for the map tile data
      *   - [subdomains]: <array of strings> a list of tileUrl subdomains, if
      *       applicable
-     *       
+     *   
+     *   - Note: if the names of the layers are changed the attribute "defaultBaseLayer"
+     *     need to be updated to reflect this change. This attribute specify, based on the name,
+     *     which layer will be use by default.
      */
      
     baseLayers: [
         {
-            name: 'MapQuest OSM',
+            name: 'Map',
             tileUrl: 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
             subdomains : ['otile1','otile2','otile3','otile4'],
             attribution : 'Data, imagery and map information provided by <a href="http://open.mapquest.com" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
         },
         {
-            name: 'MapQuest Aerial',
+            name: 'Satellite',
             tileUrl: 'http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.png',
             subdomains : ['otile1','otile2','otile3','otile4'],
             attribution : 'Data, imagery and map information provided by <a href="http://open.mapquest.com" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
@@ -116,7 +119,7 @@ otp.config = {
         {
             id : 'planner',
             className : 'otp.modules.multimodal.MultimodalPlannerModule',
-            defaultBaseLayer : 'MapQuest OSM',
+            defaultBaseLayer : 'Map',
             isDefault: true
         },
 //       {
