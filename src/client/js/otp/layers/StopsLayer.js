@@ -84,11 +84,14 @@ otp.layers.StopsLayer =
             stop.lon = stop.lon || stop.stopLon;
 
 	    flag = false;
+	    // Make sure at least one route served by stop is marked as visible in layers
 	    for (x in stop.routes) {
 		r = stop.routes[x];
-		if (otp.config.showHartBusStops && r.agency.name == "Hillsborough Area Regional Transit")  {
+		// if the BullRunner route layer is active
+                if (webapp.modules[0].busLayers.visible.indexOf(r.shortName) != -1) flag = true;
+		// if the HART layer is active (which manipulates otp.config)
+		if (otp.config.showHartBusStops && r.agency.name == "Hillsborough Area Regional Transit") {
 			flag = true;
-			break;
 		}
 	    }
 
