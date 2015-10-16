@@ -14,6 +14,11 @@
 
 otp.namespace("otp.layers");
 
+/*
+ Bounding box polyline is automatically built by src/main/java/org/opentripplanner/routing/graph/Graph.java:buildBicycleLanes()
+ and is encoded as the first four segments returned by API
+ */
+
 otp.layers.BikeLanesLayer = 
     otp.Class(L.LayerGroup, {
    
@@ -53,13 +58,19 @@ otp.layers.BikeLanesLayer =
         this.clearLayers();                
         var lmap = this.module.webapp.map.lmap;
         if(lmap.getZoom() >= this.minimumZoomForStops && this.visible) {
+	
+		i = 0;	
         	for (p in this.bikeLanes) {
 
-    			ret=L.polyline(this.bikeLanes[p], {color: 'red'});    			
+			// For first four segments of bounding box
+			if (i < 4) opts = {color: 'red', dashArray: '5, 5'};
+			else opts = {color: 'red'};
+
+    			ret=L.polyline(this.bikeLanes[p], opts);    			
 
     			this.addLayer(ret).addTo(lmap);
-    			
-            		
+    				
+            		i++;
         	}
         }
     },

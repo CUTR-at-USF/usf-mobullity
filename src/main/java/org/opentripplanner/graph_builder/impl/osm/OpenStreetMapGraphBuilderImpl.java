@@ -789,8 +789,6 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 buildParkAndRideAreas();
             }
 	
-	    buildBicycleLanes();
-
             buildElevatorEdges(graph);
 
             /* unify turn restrictions */
@@ -1063,37 +1061,6 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
             pruneAreaEdges(startingVertices, edges);
         }
        
-	private void buildBicycleLanes() {
-		LOG.info("Filtering USF Bicycle Lanes");
-
-		Envelope envelope = null;
-		int n = 0;
-		double[] lat = new double[2], lon = new double[2];
-
-                envelope = new Envelope(-82.430611, -82.401308, 28.080497, 28.043430);
-
-                for (Edge e : graph.getEdges()) {
-			if (!(e instanceof PlainStreetEdge)) continue;
-
-			lat[0] = e.getToVertex().getLat();
-			lat[1] = e.getFromVertex().getLat();
-                        lon[0] = e.getToVertex().getLon();
-                        lon[1] = e.getFromVertex().getLon();
-
-			// if either vertex of edge is within boundary, LEAVE the lane permission
-			if (envelope.contains(lon[0], lat[0]) || envelope.contains(lon[1], lat[1])) {
-				n++;
-				continue;
-			}
-
-			StreetTraversalPermission p = ((PlainStreetEdge)e).getPermission();
-			p = p.remove(StreetTraversalPermission.BICYCLE_LANE);
-			((PlainStreetEdge)e).setPermission(p);
-		}	
-
-		LOG.info("Created {} Bike Lanes.", n);
-	}
- 
         private void buildParkAndRideAreas() {
             LOG.info("Building P+R areas");
             List<AreaGroup> areaGroups = groupAreas(_parkAndRideAreas);

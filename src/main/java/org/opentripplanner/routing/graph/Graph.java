@@ -639,32 +639,11 @@ public class Graph implements Serializable {
             graph.index(indexFactory);
 
             // Generate bike lane polyline string for use by UI later
+	    // ONLY use lanes within USF bounding box for display (all can be used for routing)
             // XXX regenerate this if graph is reloaded?
             // XXX a better way to intelligently split different segments?
-    		graph.bikeLanesStr = new ArrayList<EncodedPolylineBean>();
-    		
-            ArrayList<Coordinate> pts = new ArrayList<Coordinate>();
-            double lat[] = {0,0};
-            double lon[] = {0,0};
-    		for (Edge e : graph.getEdges()) {					
-    			if (e.getClass() == PlainStreetEdge.class) {
-    				if (((PlainStreetEdge) e).getPermission().allows(StreetTraversalPermission.BICYCLE_LANE)) {
-    							
-    					//pts.add( new Coordinate(e.getFromVertex().getLon(), e.getFromVertex().getLat()) );
-    					//pts.add( new Coordinate(e.getToVertex().getLon(), e.getToVertex().getLat()) );
-    					lon[0] = e.getToVertex().getLon();
-    					lon[1] = e.getFromVertex().getLon();
-    					lat[0] = e.getToVertex().getLat();
-    					lat[1] = e.getFromVertex().getLat();
-    					graph.bikeLanesStr.add( PolylineEncoder.createEncodings( lat, lon ) );						
-    				}								
-    				
-    			}				
-    		}		
-    		LOG.info("bikelane=" + graph.bikeLanesStr.size() );
-    		
-            //graph.bikeLanesStr = PolylineEncoder.createEncodings(pts, -1);            
-            
+	    graph.buildBicycleLanes(graph);
+
             if (level == LoadLevel.FULL) {
                 return graph;
             }
@@ -681,6 +660,73 @@ public class Graph implements Serializable {
             throw new IllegalStateException("Stored Graph version error", ex);
         }
     }
+
+
+    private void buildBicycleLanes(Graph graph) {
+                LOG.info("Filtering USF Bicycle Lanes");
+
+                graph.bikeLanesStr = new ArrayList<EncodedPolylineBean>();
+                ArrayList<Coordinate> pts = new ArrayList<Coordinate>();
+                double lat2[] = {0,0}, lon2[] = {0,0};
+
+                Envelope envelope = null;
+                int n = 0;
+                double[] lat = new double[2], lon = new double[2];
+
+                envelope = new Envelope(-82.430611, -82.401308, 28.080497, 28.043430);
+
+		// Build bounding box polyline
+
+		// From top-left to top-right
+		lat[0] = 28.080497;
+		lon[0] = -82.430611;
+		lat[1] = 28.080497;
+		lon[1] = -82.401308;
+		graph.bikeLanesStr.add( PolylineEncoder.createEncodings(lat, lon) );
+
+		// From top-right to bottom-right
+		lat[0] = 28.043430;
+		lon[0] = -82.401308;
+		graph.bikeLanesStr.add( PolylineEncoder.createEncodings(lat, lon) );
+
+		// From bottom-right to bottom-left
+		lat[1] = 28.043430;
+		lon[1] = -82.430611;
+                graph.bikeLanesStr.add( PolylineEncoder.createEncodings(lat, lon) );
+
+		// From bottom-left to top-left
+		lat[0] = 28.080497;
+		lon[0] = -82.430611;
+                graph.bikeLanesStr.add( PolylineEncoder.createEncodings(lat, lon) );
+
+		
+                for (Edge e : graph.getEdges()) {
+                        if (!(e instanceof PlainStreetEdge)) continue;
+
+                        if ( ! ((PlainStreetEdge) e).getPermission().allows(StreetTraversalPermission.BICYCLE_LANE)) continue;
+
+                        lat[0] = e.getToVertex().getLat();
+                        lat[1] = e.getFromVertex().getLat();
+                        lon[0] = e.getToVertex().getLon();
+                        lon[1] = e.getFromVertex().getLon();
+
+                        // if either vertex of edge is within boundary, LEAVE the lane permission
+                        if (!envelope.contains(lon[0], lat[0]) && !envelope.contains(lon[1], lat[1])) continue;
+
+			// Count and Add the polyline segment to the list
+                        n++;
+
+                        lon2[0] = e.getToVertex().getLon();
+                        lon2[1] = e.getFromVertex().getLon();
+                        lat2[0] = e.getToVertex().getLat();
+                        lat2[1] = e.getFromVertex().getLat();
+                        graph.bikeLanesStr.add( PolylineEncoder.createEncodings( lat2, lon2 ) );
+
+                }
+
+                LOG.info("Created {} Polylines for USF-Area Bike Lanes.", n);
+    }
+
 
     /**
      * Compares the OTP version number stored in the graph with that of the currently running instance. Logs warnings explaining that mismatched
