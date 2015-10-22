@@ -22,6 +22,8 @@ otp.modules.planner.defaultQueryParams = {
     arriveBy                        : false,
     mode                            : "TRANSIT,WALK",
     maxWalkDistance                 : 482.8032, // .3 mile unit are in meter
+    metricDefaultMaxWalkDistance    : 450, // meters
+    imperialDefaultMaxWalkDistance  : 482.8032, // 1 mile
     preferredRoutes                 : null,
     otherThanPreferredRoutesPenalty : 300,
     bannedTrips                     : null,
@@ -104,6 +106,12 @@ otp.modules.planner.PlannerModule =
         this.planTripFunction = this.planTrip;
         
         this.defaultQueryParams = _.clone(otp.modules.planner.defaultQueryParams);
+
+        if (otp.config.metric) {
+            this.defaultQueryParams.maxWalkDistance = this.defaultQueryParams.metricDefaultMaxWalkDistance;
+        } else {
+            this.defaultQueryParams.maxWalkDistance = this.defaultQueryParams.imperialDefaultMaxWalkDistance;
+        }
 
         if(_.has(this.options, 'defaultQueryParams')) {
             _.extend(this.defaultQueryParams, this.options.defaultQueryParams);
