@@ -36,13 +36,14 @@ import org.opentripplanner.openstreetmap.impl.BinaryFileBasedOpenStreetMapProvid
 import org.opentripplanner.openstreetmap.impl.FileBasedOpenStreetMapProviderImpl;
 import org.opentripplanner.openstreetmap.impl.OpenStreetMapParser;
 import org.opentripplanner.openstreetmap.impl.StreamedFileBasedOpenStreetMapProviderImpl;
+import java.net.URLDecoder; 
 
 public class OpenStreetMapParserTest {
     @Test
     public void testAFBinaryParser() throws Exception {
         AnyFileBasedOpenStreetMapProviderImpl pr = new AnyFileBasedOpenStreetMapProviderImpl();
         OSMMap map = new OSMMap();
-        pr.setPath(new File(getClass().getResource("map.osm.pbf").getPath()));
+        pr.setPath(new File(URLDecoder.decode(getClass().getResource("map.osm.pbf").getPath(), "UTF-8")));
         pr.readOSM(map);
         testParser(map);
     }
@@ -51,7 +52,7 @@ public class OpenStreetMapParserTest {
     public void testAFXMLParser() throws Exception {
         AnyFileBasedOpenStreetMapProviderImpl pr = new AnyFileBasedOpenStreetMapProviderImpl();
         OSMMap map = new OSMMap();
-        pr.setPath(new File(getClass().getResource("map.osm.gz").getPath()));
+        pr.setPath(new File(URLDecoder.decode(getClass().getResource("map.osm.gz").getPath(), "UTF-8")));
         pr.readOSM(map);
         testParser(map);
     }
