@@ -70,7 +70,7 @@
 				<entry key="(CGS) Patel Center for Global Solutions" value="28.0552 -82.4084" />
 				<entry key="(CHE) Chemistry Building" value="28.0613 -82.4153" />
 				<entry key="(CHG) Crescent Hill Parking Facility" value="28.06512 -82.41210" />
-				<entry key="(CIC) Campus Information Center" value="28.0557 -82.4126" />
+				<entry key="(CIC) Campus Information Center" value="28.055706 -82.412572" />
 				<entry key="(CIS) Communication &amp; Information Sciences Building" value="28.0587 -82.4110" /> <!-- &amp; is supposed to be the "&" character-->
 				<entry key="(CMC) CAS Multidisciplinary Complex (formerly Physics (PHY))" value="28.0598 -82.4153" />
 				<entry key="(CMS) Children's Medical Services Building" value="28.0663 -82.42524" />
@@ -80,6 +80,7 @@
 				<entry key="(CWY) C.W. BillYoung Hall" value="28.06138 -82.40826" />
 
 				<entry key="(DAC) David C. Anchin Center" value="28.0607 -82.4105" />
+				<entry key="(DUP) Transportation Office" value="28.066877 -82.417053" />
 
 				<entry key="(EDU) Education Building" value="28.0604 -82.4106" />
 				<entry key="(ENA) Engineering Teaching Auditorium" value="28.0601 -82.4159" />
@@ -146,7 +147,7 @@
 				<entry key="(PED) Physical Education Building" value="28.06132 -82.40768" />
 				<entry key="(PPA) USF Post Office" value="28.06548 -82.41463" />
 				<entry key="(PPC) Maintenance and Service Shops" value="28.06575 -82.41439" />
-				<entry key="(PTA) Parking and Transportation Services" value="28.0660064 -82.4169995" />
+				<entry key="(PTA) Parking and Transportation Services" value="28.066000 -82.41704" />
 				<entry key="(PTB) Parking and Transportation Services" value="28.0660253 -82.4167627" />
 				<entry key="(PRS) Lifsey House" value="28.0557 -82.4114" />
 
@@ -187,7 +188,8 @@
 				<entry key="(UTA) University Technology Center A" value="28.0564 -82.4174" />
 
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
-
+                
+                <!-- Surrounding point of interest --> 
 				<entry key="Adventure Island" value="28.04079 -82.41599" />
 				<entry key="Busch Gardens" value="28.03445 -82.41634" />
 				<entry key="Bull Market" value="28.07189 -82.41420" />
