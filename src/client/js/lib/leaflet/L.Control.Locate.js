@@ -135,8 +135,9 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
 		// Only start 1 locate() to work around Chromium bug
 		if (this._map._locationWatchId == undefined) {
         	        webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
-			webapp.map.initialGeolocation = true; // Allow app to pan/zoom to new location if the user clicked this
 		}
+
+		webapp.map.initialGeolocation = true; // Allow app to pan/zoom to new location if the user clicked this
 		// else this._map.fire('locationfound'); XXX?
 
             }
@@ -153,13 +154,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
          * Override it to shutdown any functionalities you added on start.
          */
         _deactivate: function() {
-            this._map.stopLocate();
-	    this._map._locationWatchId = undefined;
-
-            this._map.off('dragstart', this._stopFollowing, this);
-            if (this.options.follow && this._following) {
-                this._stopFollowing(this._map);
-            }
+		this._active = false;
         },
 
         /**
