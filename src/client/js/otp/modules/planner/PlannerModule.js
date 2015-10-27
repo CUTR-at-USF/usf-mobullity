@@ -21,8 +21,9 @@ otp.modules.planner.defaultQueryParams = {
     date                            : moment().format(otp.config.locale.time.date_format),
     arriveBy                        : false,
     mode                            : "TRANSIT,WALK",
+    //The three following attribute don't make sense. More information here: https://groups.google.com/forum/#!topic/opentripplanner-dev/PS4oSVQKm2k
     maxWalkDistance                 : 482.8032, // .3 mile unit are in meter
-    metricDefaultMaxWalkDistance    : 450, // meters
+    metricDefaultMaxWalkDistance    : 482.8032, // meters
     imperialDefaultMaxWalkDistance  : 482.8032, // 1 mile
     preferredRoutes                 : null,
     otherThanPreferredRoutesPenalty : 300,
