@@ -264,10 +264,7 @@ body {
   right: 50px;
 }
 
-/*I have no done anything with the logo not sure where it is/what it is */
-/* the logo */
 #logo {
-  display: none;
   float: left;
   height:30px;
   margin: 10px 0px 0px 10px;
