@@ -87,13 +87,13 @@ otp.config = {
 
     siteName            : "MoBullity",
     siteDescription     : "An OpenTripPlanner deployment for USF.",
-    logoGraphic         : 'images/USF-v-green.png',
+    logoGraphic         : 'images/usf-h-gold.png',
     // bikeshareName    : "",
   //Enable this if you want to show frontend language chooser
     showLanguageChooser : true,
 
     showLogo            : true,
-    showTitle           : true,
+    showTitle           : false,
     showModuleSelector  : true,
     metric              : false,
     
