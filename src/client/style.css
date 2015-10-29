@@ -1341,7 +1341,7 @@ p#splash-text span {
 @media only screen and (min-width: 1300px) {
 }
 
-/* Menu with material design lite */
+/* Menu with material design lite 
 
 #main-menu-item-list{
 position:absolute;
@@ -1352,7 +1352,7 @@ z-index:-2;
 position:relative;
 z-index:-2;
 }
-
+*/
 
 
 /* =Media Query Size Indicator
