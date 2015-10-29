@@ -197,19 +197,31 @@ otp.widgets.tripoptions.LocationsSelector =
 
     },
 
+    showAutocomplete : function(obj) {
+	    var results = obj.data('results');
+
+	    // if no results, or the input box is empty, load the full list of buildings
+	    if (results == undefined || results.length <= 0 || obj.val() == "") {
+		obj.autocomplete("option", { "minLength": 0} );
+		obj.autocomplete("search", "");
+                obj.autocomplete("option", { "minLength": 1} );
+            }
+
+            obj.autocomplete("widget").show();
+    },
+
     doAfterLayout : function() {
         var this_ = this;
         
         this.startInput = this.initInput($("#"+this.id+"-start"), this.tripWidget.module.setStartPoint);
         this.endInput = this.initInput($("#"+this.id+"-end"), this.tripWidget.module.setEndPoint);
 
-        
         $("#"+this.id+"-startDropdown").click($.proxy(function() {
-            $("#"+this.id+"-start").autocomplete("widget").show();
+	    this_.showAutocomplete( $('#' + this.id + '-start') );
         }, this));
 
         $("#"+this.id+"-endDropdown").click($.proxy(function() {
-            $("#"+this.id+"-end").autocomplete("widget").show();
+            this_.showAutocomplete( $("#"+this.id+"-end") );
         }, this));
                         
 
@@ -231,32 +243,83 @@ otp.widgets.tripoptions.LocationsSelector =
             });
         }
     },
+
+    saveMyLocation : function(data) {
+
+	obj = data['obj'];
+	e = webapp.map.currentLocation;
+
+	var result = $(obj).data('results');
+	result['My Location'].lat = e.latlng.lat;
+	result['My Location'].lng = e.latlng.lng;
+	$(obj).data('results', result);
+	$(obj)[0].selectItem( "My Location" );	
+
+	// Remove callback 
+	for (i=0; i < webapp.map.geolocateCallbacks.length; i++) {
+		if (webapp.map.geolocateCallbacks[i][1] == data) webapp.map.geolocateCallbacks.splice(i, 1);
+	}
+
+    },
         
     initInput : function(input, setterFunction) {
         var this_ = this;
-        input.autocomplete({
-	    autoFocus: true,
-            source: function(request, response) {
-                this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
-                    console.log("got results "+results.length);
-                    response.call(this, _.pluck(results, 'description'));
-                    input.data("results", this_.getResultLookup(results));
-                });
-            },
-            select: function(event, ui) {
-                var result = input.data("results")[ui.item.value];
-                var latlng = new L.LatLng(result.lat, result.lng);
-                this_.tripWidget.module.webapp.map.lmap.panTo(latlng);
-                setterFunction.call(this_.tripWidget.module, latlng, false, result.description);
-                this_.tripWidget.inputChanged();
-            },
+
+        input[0].module = this_;
+        input[0].selectItem = function(key) {
+
+               var result = $(this).data("results")[key];
+               $(this).data('selected-item', result);
+
+		if (key == "My Location" && result.lat == 0) {
+
+			webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
+
+                        webapp.map.lmap.locate({watch:false, enableHighAccuracy: true});
+			return;
+		}
+
+               var latlng = new L.LatLng( result.lat, result.lng );
+
+               this.module.tripWidget.module.webapp.map.lmap.panTo(latlng);                    
+               setterFunction.call(this.module.tripWidget.module, latlng, false, result.description);
+               this.module.tripWidget.inputChanged();
+       }.bind(input[0]);
+
+       input.autocomplete({
+             autoFocus: true,
+             source: function(request, response) {
+                 this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
+
+                     results.unshift( { 'description': "My Location", "lat":0, "lng":0 } );
+                     console.log("got results "+results.length);
+
+                     response.call(this, _.pluck(results, 'description'));
+                     input.data("results", this_.getResultLookup(results));
+                 });
+             },
+             select: function(event, ui) {
+                 $(this)[0].selectItem( ui.item.value );
+             },
+         })
+         .change(function() {
+                $(this).select();
+return;
         })
-        .change(function() {
-        	$(this).select();
+        .blur(function(e) {
+                results = $(this).data('results');
+		// If results not available, or input is blank - return
+		// XXX we need to make sure the relevant planner variable is also unset so it doesn't annoyingly come back later
+                if (results == undefined || $(this).val() == "") return;
+
+                keys = Object.keys(results);
+
+                // If current destination value is 'in' the list of results
+                // *and* the selected-item result == the .val() from results
+                if (keys.indexOf( $(this).val() ) != -1 && results[$(this).val()] == $(this).data('selected-item')) return;
+
+                $(this)[0].selectItem( keys[0] );
         });
-//        .dblclick(function() {
-//            $(this).select();
-//        });
         return input;
     },
     

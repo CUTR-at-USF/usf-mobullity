@@ -294,6 +294,7 @@ otp.modules.planner.PlannerModule =
         
     restoreTrip : function(queryParams) {    
         this.restoreMarkers(queryParams);
+	this.validated = true; // skip planner validation if we are using a link - XXX
         this.planTripFunction.call(this, queryParams);
     },
     
@@ -542,7 +543,11 @@ otp.modules.planner.PlannerModule =
                 }
             }
         }
-        if (otp.config.zoomToFitResults) this.webapp.map.lmap.fitBounds(itin.getBoundsArray());
+        if (otp.config.zoomToFitResults) {
+		this.webapp.map.initialGeolocation = false; // Make sure we aren't waiting for our initial GPS fix - only zoom/pan to the trip, NOT the location too
+		this.webapp.map.lmap.fitBounds(itin.getBoundsArray());
+	}
+
     },
     
     highlightLeg : function(leg) {
