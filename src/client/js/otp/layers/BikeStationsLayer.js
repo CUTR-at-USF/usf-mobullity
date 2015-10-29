@@ -58,7 +58,13 @@ otp.layers.BikeStationsLayer =
 				var coord = L.latLng(this_.stations[v].y,this_.stations[v].x);
 				var marker;
 				
-				marker =  L.marker(coord, {icon: this.module.icons.getSmall(this_.stations[v])} ).bindPopup('Bike Rack: ' + this_.stations[v].id + " Bikes Available: " + this_.stations[v].spacesAvailable + " Spaces: " + this_.stations[v].bikesAvailable);
+				name = this_.stations[v].name || this_.stations[v].id;
+				context = {'name': name, 'station': this_.stations[v]};
+
+				var bikePopup = ich['otp-bikesLayer-popup'](context).get(0);
+
+				marker =  L.marker(coord, {icon: this.module.icons.getSmall(this_.stations[v])} );
+				marker.bindPopup(bikePopup, {'minWidth': 200});
 				marker.on('mouseover', marker.openPopup.bind(marker));
 				
 				a.push(marker);
