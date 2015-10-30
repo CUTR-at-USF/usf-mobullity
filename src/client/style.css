@@ -49,6 +49,9 @@ pre, code, kbd, samp { font-family: monospace, sans-serif; }
 /* Base Styles
 -------------------------------------------------------------- */
 
+.mdl-menu__container, .mdl-menu__outline, .mdl-menu {
+	z-index: 100;
+}
 
 body, select, input, textarea {
   /* text color is here for boxes: #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
@@ -472,7 +475,7 @@ z-index: 9002;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 40;
 }
 
 @media only screen and (min-width: 768px) {
@@ -566,7 +569,7 @@ z-index: 9002;
   
 .otp-widget {
   position: absolute;
-  z-index: 1000;
+  z-index: 50;
 }
 
 /* Changes the widget boxes when transparent=false in widget.js */
@@ -589,7 +592,7 @@ z-index: 9002;
 	position: absolute;
 	right: 0;
 	top: 0;
-	z-index: 10000;
+	z-index: 50;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -630,7 +633,7 @@ z-index: 9002;
 	position: static;
 	float: right;
 	width: 8px;
-	z-index: 10000;
+	z-index: 50;
 }
 
 .otp-widget-header-minimize:hover {
