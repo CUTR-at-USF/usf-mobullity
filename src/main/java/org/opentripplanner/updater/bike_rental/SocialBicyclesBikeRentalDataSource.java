@@ -77,6 +77,8 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 	    int next_page = 1, count = 0;
 	    // Loop to get each page of results from API with hard-limit of 15 pages
 
+	    stations.clear();
+
 	    while (next_page > 0 && count < 15) {
 		    count++;
 		    String tmpurl = String.format("%s?page=%d&client_id=%s&network_id=%s", this.url, next_page, this.oauth_client_id, this.network_id);
@@ -130,8 +132,8 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 
             BikeRentalStation brStation = new BikeRentalStation();
             brStation.id = String.valueOf(stationNode.get("id").intValue());
-            brStation.x = stationNode.get("middle_point").get("coordinates").get(1).doubleValue();// / 1000000.0;
-            brStation.y = stationNode.get("middle_point").get("coordinates").get(0).doubleValue();// / 1000000.0;
+            brStation.x = stationNode.get("middle_point").get("coordinates").get(0).doubleValue();// / 1000000.0;
+            brStation.y = stationNode.get("middle_point").get("coordinates").get(1).doubleValue();// / 1000000.0;
             brStation.name = stationNode.get("name").textValue();
 
             brStation.bikesAvailable = stationNode.get("available_bikes").intValue();
@@ -175,12 +177,14 @@ public class SocialBicyclesBikeRentalDataSource implements BikeRentalDataSource,
 
             BikeRentalStation brStation = new BikeRentalStation();
             brStation.id = String.valueOf(stationNode.get("id").intValue());
-            brStation.x = stationNode.get("current_position").get("coordinates").get(1).doubleValue();// / 1000000.0;
-            brStation.y = stationNode.get("current_position").get("coordinates").get(0).doubleValue();// / 1000000.0;
+            brStation.x = stationNode.get("current_position").get("coordinates").get(0).doubleValue();// / 1000000.0;
+            brStation.y = stationNode.get("current_position").get("coordinates").get(1).doubleValue();// / 1000000.0;
             brStation.name = stationNode.get("name").textValue();
 
             brStation.bikesAvailable = 1;
-            brStation.spacesAvailable = 0;  // Not a rack, this is a bike :)
+	    // XXX: For now, let user drop the bike back to this area...
+	    // Perhaps also load standard racks into system?
+            brStation.spacesAvailable = 1;  
 
 	    if (! stationNode.get("repair_state").textValue().equals("working")) {
 		brStation.bikesAvailable = -1; 
