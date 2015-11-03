@@ -219,7 +219,6 @@ $(document).ready(function() {
 <header id="branding" role="banner" class="clearfix">
 
 	<div class=Menu>
-	
         <!-- Left aligned menu below button -->
         <button id="main-menu" class="mdl-button mdl-js-button mdl-button--icon">
         <i class="material-icons">menu</i>
@@ -229,19 +228,8 @@ $(document).ready(function() {
         for="main-menu">
             <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();"> Trip planner</li>
             <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">Layers</li>
-            <li class="mdl-menu__item">Share</li>
-            <li id="tools" class="mdl-menu__item">More Tools</li>
+            <li class="mdl-menu__item">Help</li> <!-- this need to be link to the icon legend pop up -->
         </ul>
-        
-        <!-- TODO the position of this menu is not correct do like this one: http://www.richmediagallery.com/# -->
-        <ul id="submenu-tools-item-list" class="mdl-menu mdl-js-menu mdl-js-ripple-effect"
-        for="tools">
-            <li class="mdl-menu__item">Minimize all</li>
-            <li class="mdl-menu__item">Unminimize all</li>
-            <li class="mdl-menu__item">Contact</li>
-        </ul>
-        
-        
     </div>
 	
 	<div class=logo></div>
