@@ -228,7 +228,9 @@ $(document).ready(function() {
         for="main-menu">
             <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();"> Trip planner</li>
             <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">Layers</li>
-            <li class="mdl-menu__item">Help</li> <!-- this need to be link to the icon legend pop up -->
+            <li class="mdl-menu__item" onClick="javascript:webapp.infoWidgets['otp-infoWidget-0'].show();" >Help</li> 
+            <li class="mdl-menu__item" onClick="javascript:webapp.infoWidgets['otp-infoWidget-1'].show();" >Feedback</li> 
+            <!-- the button help need to be link to the icon legend pop up -->
         </ul>
     </div>
 	
