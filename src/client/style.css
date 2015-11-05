@@ -260,13 +260,6 @@ body {
     text-align: right;
 } 
 
-
-#addthis {
-  display: none;
-  position: absolute;
-  right: 50px;
-}
-
 #logo {
   float: left;
   height:30px;
