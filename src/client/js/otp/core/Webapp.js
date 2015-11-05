@@ -150,29 +150,6 @@ otp.core.Webapp = otp.Class({
             }
         }
        
-        // initialize the AddThis widget
-        
-        if(otp.config.showAddThis) {
-            var addThisHtml = '<div id="addthis" class="addthis_toolbox addthis_default_style"\n';
-            addThisHtml += 'addthis:url="'+otp.config.siteURL+'"\n';
-            addThisHtml += 'addthis:title="'+otp.config.addThisTitle+'"\n';
-            addThisHtml += 'addthis:description="'+otp.config.siteDescription+'">\n';
-            addThisHtml += '<a class="addthis_button_facebook"></a>\n';
-            addThisHtml += '<a class="addthis_button_twitter"></a>\n';
-            addThisHtml += '<a class="addthis_button_preferred_1"></a>\n';
-            addThisHtml += '<a class="addthis_button_compact"></a>\n';
-            addThisHtml += '</div>';
-            
-            $(addThisHtml).appendTo('#branding');
-            
-            addthis_config = {
-                         pubid: otp.config.addThisPubId,
-                         data_track_clickback: true
-                    };
-                    $.getScript("http://s7.addthis.com/js/250/addthis_widget.js#pubid="+otp.config.addThisPubId);
-        }                
-        
-        
         //add locator button
         if(otp.config.locatorSwitch){
                 var locatorHTML = '<div class="onoffswitch">';
