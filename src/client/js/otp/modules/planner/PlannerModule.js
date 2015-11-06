@@ -314,13 +314,14 @@ otp.modules.planner.PlannerModule =
 	// Look for a match in the autocomplete results with the value of the input box and verify that the latlng matches
 
 	ret = {};
+	resultsList = results['result']; // from validate
 
-        for (var key in results['result']) {
+        for (var key in resultsList) {
                 tmp = key;
 
-	        resultLatLng = "(" + parseFloat(results['result'][key].lat).toFixed(5) + ', ' + parseFloat(results['result'][key].lng).toFixed(5) + ")";
+		resultLatLng = "(" + parseFloat(resultsList[key].lat).toFixed(5) + ', ' + parseFloat(resultsList[key].lng).toFixed(5) + ")";
 
-		// Either an exact match, or (BUILDING) match
+		// Either an exact match, or (BUILDING) match, and "My Location"
                 if (key == obj.val() ||
                     key.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
 		
@@ -328,22 +329,22 @@ otp.modules.planner.PlannerModule =
 			if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
 			else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
 
-	        	ret['pos'] = results['result'][key];
+	        	ret['pos'] = resultsList[key];
 			break;
         	}
                 // The input is somewhere in the key 
 		// 1 result + 'my location'
-                else if (tmp.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(results['result']).length == 2) {
+                else if (tmp.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(resultsList).length == 2) {
 
 			obj[0].selectItem( key );
 			
-                        ret['pos'] = results['result'][key];
+                        ret['pos'] = resultsList[key];
 			break;
                 }
                 // XXX Input is in the key AND results.length > 1 (maybe more than 1 match) ... ask
 	}
 
-	if (ret != {}) return ret;
+	if (typeof(ret) == "object" && ret['pos'] != undefined) return ret;
 	
 	return false;
     },
@@ -396,13 +397,16 @@ otp.modules.planner.PlannerModule =
                                 if (ret != false) start_result['pos'] = ret['pos'];
 			}
 
+                        if (start_result['pos'] != undefined && start_result['pos'].lat == 0) ret = false;
+
 			if (ret != false) {
 				this._valid.push('start');
 
-				if (start_result['pos'] == undefined)
+				if (start_result['pos'] != undefined) {
 					this.startLatLng = start_result['pos'];
+				}
 			}
-			else if (this._valid.indexOf('start_geocode') != -1) {
+			else if (this._valid.indexOf('start_geocode') == -1) {
 				this._valid.push('start_geocode');
 				this._validTimer = false;
 
@@ -410,9 +414,17 @@ otp.modules.planner.PlannerModule =
 		                        ctrl = that.this.widgets[that.widget_id].controls.locations.startInput;
        	        		        ctrl.data('results', ctrl[0].module.getResultLookup(results) );
 
+					clearTimeout( that.this._validTimeout );
+
 					if (that.this._validTimer == false)
-						that.this._validTimer = setTimeout( that.this.validate, 500 );
+                                                that.this._validTimer = setTimeout( function() { that.this.validate() }, 500 );
 				});
+
+                                if (this._validTimeout == false) {
+					// in case of error or timeout, fire a planTrip to keep the validation going and alert if things dont work out
+					this._validTimeout = setTimeout( function() { this.validate() }, 2000 );
+				}
+
 			}
 			else {
 				if (start_result['pos'] == undefined) this.startLatLng = null;
@@ -437,13 +449,16 @@ otp.modules.planner.PlannerModule =
 				if (ret != false) end_result['pos'] = ret['pos'];
 			}
 
+			if (end_result['pos'] != undefined && end_result['pos'].lat == 0) ret = false;
+
                         if (ret != false) {
                                 this._valid.push('end');
 
-				if (end_result['pos'] != undefined) 
+				if (end_result['pos'] != undefined) {
 	                                this.endLatLng = end_result['pos'];
+				}
                         }
-                        else if (this._valid.indexOf('end_geocode') != -1) {
+                        else if (this._valid.indexOf('end_geocode') == -1) {
                                 this._valid.push('end_geocode');
                                 this._validTimer = false;
 
@@ -451,9 +466,17 @@ otp.modules.planner.PlannerModule =
                                         ctrl = that.this.widgets[that.widget_id].controls.locations.endInput;
                                         ctrl.data('results', ctrl[0].module.getResultLookup(results) );
 
+                                        clearTimeout( that.this._validTimeout );
+
                                         if (that.this._validTimer == false)
-                                                that.this._validTimer = setTimeout( that.this.validate, 500 );
+                                                that.this._validTimer = setTimeout( function() { that.this.validate() }, 500 );
                                 });
+
+				if (this._validTimeout == false) {
+	                                // in case of error or timeout, fire a planTrip to keep the validation going and alert if things dont work out
+        	                        this._validTimeout = setTimeout( function() { this.validate() }, 2000 );
+				}
+
                         }
                         else {
 				if (end_result['pos'] == undefined) this.endLatLng = null;

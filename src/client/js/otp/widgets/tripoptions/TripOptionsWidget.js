@@ -292,11 +292,16 @@ otp.widgets.tripoptions.LocationsSelector =
              source: function(request, response) {
                  this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
 
-                     results.unshift( { 'description': "My Location", "lat":0, "lng":0 } );
                      console.log("got results "+results.length);
 
-                     response.call(this, _.pluck(results, 'description'));
                      input.data("results", this_.getResultLookup(results));
+
+		     e = webapp.map.currentLocation
+	             lat = e.latlng.lat;
+   	             lng = e.latlng.lng;
+          	     results.unshift({'description': 'My Location', 'lat':lat, 'lng':lng});
+	
+                     response.call(this, _.pluck(results, 'description'));
                  });
              },
              select: function(event, ui) {
@@ -311,6 +316,12 @@ otp.widgets.tripoptions.LocationsSelector =
     
     getResultLookup : function(results) {
         var resultLookup = {};
+
+	e = webapp.map.currentLocation
+	lat = e.latlng.lat;
+	lng = e.latlng.lng;
+	resultLookup['My Location'] = {'description': 'My Location', 'lat':lat, 'lng':lng};
+
         for(var i=0; i<results.length; i++) {
             resultLookup[results[i].description] = results[i];
         }
