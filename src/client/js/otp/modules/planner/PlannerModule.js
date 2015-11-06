@@ -61,6 +61,9 @@ otp.modules.planner.PlannerModule =
 
     planTripFunction : null,
 
+    validated : false,
+    _valid : [],
+
     // current trip query parameters: 
     /*
     startName               : null,
@@ -306,10 +309,190 @@ otp.modules.planner.PlannerModule =
     	this.setEndPoint(this.endLatLng, false);
     },
     
+    checkAutocomplete: function(results, obj, inputSelected) {
+	// Array of autocomplete results, user input jquery object, start or end
+	// Look for a match in the autocomplete results with the value of the input box and verify that the latlng matches
+
+	ret = {};
+
+        for (var key in results['result']) {
+                tmp = key;
+
+	        resultLatLng = "(" + parseFloat(results['result'][key].lat).toFixed(5) + ', ' + parseFloat(results['result'][key].lng).toFixed(5) + ")";
+
+		// Either an exact match, or (BUILDING) match
+                if (key == obj.val() ||
+                    key.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
+		
+        	        // Name matches, but latlng doesn't. Update the result
+			if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
+			else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
+
+	        	ret['pos'] = results['result'][key];
+			break;
+        	}
+                // The input is somewhere in the key 
+		// 1 result + 'my location'
+                else if (tmp.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(results['result']).length == 2) {
+
+			obj[0].selectItem( key );
+			
+                        ret['pos'] = results['result'][key];
+			break;
+                }
+                // XXX Input is in the key AND results.length > 1 (maybe more than 1 match) ... ask
+	}
+
+	if (ret != {}) return ret;
+	
+	return false;
+    },
+  
+    validate : function() {
+	// Perform geocoder ajax to verify start/endpoints iff:
+	// 1) The inputs are non-empty AND,
+	// 2) Both autocomplete results are not available
+
+	// Verify the endpoints by checking:
+	// 1) The names are within the list of results,
+	// 2) The latlng matches what it should
+	// If either does not match, check geocoder again and then tell the user
+
+	// Find the tripoptions widget
+	widget_id = -1;
+   	for (i=0; i < this.widgets.length; i++) {
+		if (this.widgets[i].id == "otp-planner-optionsWidget") widget_id = i;
+	} 
+
+	cantValidate = false;
+
+	if (widget_id > -1) {
+
+		var that = {'this': this, 'widget_id': widget_id, 'existingQueryParams': this._existingQueryParams, 'apiMethod': this._apiMethod};
+
+		startInput = this.widgets[widget_id].controls.locations.startInput;
+		endInput = this.widgets[widget_id].controls.locations.endInput;
+
+		// CHECK START/END AGAINST AUTOCOMPLETE RESULTS
+		start_result = {'pos': undefined, 'result': startInput.data('results') || {}};
+		end_result = {'pos': undefined, 'result': endInput.data('results') || {}};
+
+		ret = false;
+
+		// if start isnt validated
+		if (this._valid.indexOf('start') == -1) {
+
+			// Handle case when latlng manually set
+			if (startInput.val()[0] == '(') {
+				if (this.startLatLng == undefined) {
+					str = startInput.val().replace("(", "").replace(")", "").split(', ');
+					this.startLatLng = new L.LatLng(parseFloat(str[0]), parseFloat(str[1]));				
+				}
+				start_result['pos'] = this.startLatLng; 
+				ret = true; // Assume user knows what they are doing by clicking map or using my location
+			}
+			else if (startInput.val().length > 0 && start_result['pos'] == undefined) {
+				ret = this.checkAutocomplete(start_result, startInput, 'start' );
+                                if (ret != false) start_result['pos'] = ret['pos'];
+			}
+
+			if (ret != false) {
+				this._valid.push('start');
+
+				if (start_result['pos'] == undefined)
+					this.startLatLng = start_result['pos'];
+			}
+			else if (this._valid.indexOf('start_geocode') != -1) {
+				this._valid.push('start_geocode');
+				this._validTimer = false;
+
+               			this.webapp.geocoders[0].geocode(startInput.val(), function(results) {
+		                        ctrl = that.this.widgets[that.widget_id].controls.locations.startInput;
+       	        		        ctrl.data('results', ctrl[0].module.getResultLookup(results) );
+
+					if (that.this._validTimer == false)
+						that.this._validTimer = setTimeout( that.this.validate, 500 );
+				});
+			}
+			else {
+				if (start_result['pos'] == undefined) this.startLatLng = null;
+				cantValidate = true;
+			}
+		}
+
+		// if end isnt validated
+                if (this._valid.indexOf('end') == -1) {
+
+                        // Handle case when latlng manually set
+                        if (endInput.val()[0] == '(') {
+                               if (this.endLatLng == undefined) {
+                                        str = endInput.val().replace("(", "").replace(")", "").split(', ');
+                                        this.endLatLng = new L.LatLng(parseFloat(str[0]), parseFloat(str[1]));
+                                }
+                                end_result['pos'] = this.endLatLng;
+                                ret = true; // Assume user knows what they are doing by clicking map or using my location
+                        }
+                        else if (endInput.val().length > 0 && end_result['pos'] == undefined) {
+                                ret = this.checkAutocomplete(end_result, endInput, 'end' );
+				if (ret != false) end_result['pos'] = ret['pos'];
+			}
+
+                        if (ret != false) {
+                                this._valid.push('end');
+
+				if (end_result['pos'] != undefined) 
+	                                this.endLatLng = end_result['pos'];
+                        }
+                        else if (this._valid.indexOf('end_geocode') != -1) {
+                                this._valid.push('end_geocode');
+                                this._validTimer = false;
+
+                                this.webapp.geocoders[0].geocode(endInput.val(), function(results) {
+                                        ctrl = that.this.widgets[that.widget_id].controls.locations.endInput;
+                                        ctrl.data('results', ctrl[0].module.getResultLookup(results) );
+
+                                        if (that.this._validTimer == false)
+                                                that.this._validTimer = setTimeout( that.this.validate, 500 );
+                                });
+                        }
+                        else {
+				if (end_result['pos'] == undefined) this.endLatLng = null;
+
+				cantValidate = true;
+			}
+
+		}
+
+	}
+
+	if (cantValidate) {
+		alert("Please select a start and end location.");
+		return;
+	}
+
+	// rely on ajax callback
+	if (this._valid.indexOf('start') == -1 || this._valid.indexOf('end') == -1) return;
+
+	this.validated = true;
+
+        this.planTrip( this._queryParams, this._apiMethod );
+
+    },
+ 
     planTrip : function(existingQueryParams, apiMethod) {
     
         if(typeof this.planTripStart == 'function') this.planTripStart();
-        
+
+	this._queryParams = existingQueryParams;
+	this._apiMethod = apiMethod;
+
+	if (!this.validated) {
+		this._valid = [];
+		return this.validate();
+	}
+
+	this.validated = false;
+
         //this.noTripWidget.hide();
     	
     	if(this.currentRequest !== null)
@@ -472,7 +655,6 @@ otp.modules.planner.PlannerModule =
     
         var queryParams = itin.tripPlan.queryParams;
         
-        console.log(itin.itinData);
         for(var i=0; i < itin.itinData.legs.length; i++) {
             var leg = itin.itinData.legs[i];
 

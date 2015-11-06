@@ -270,6 +270,7 @@ otp.widgets.tripoptions.LocationsSelector =
 
                var result = $(this).data("results")[key];
                $(this).data('selected-item', result);
+  	       $(this).val( key );
 
 		if (key == "My Location" && result.lat == 0) {
 
@@ -304,21 +305,6 @@ otp.widgets.tripoptions.LocationsSelector =
          })
          .change(function() {
                 $(this).select();
-return;
-        })
-        .blur(function(e) {
-                results = $(this).data('results');
-		// If results not available, or input is blank - return
-		// XXX we need to make sure the relevant planner variable is also unset so it doesn't annoyingly come back later
-                if (results == undefined || $(this).val() == "") return;
-
-                keys = Object.keys(results);
-
-                // If current destination value is 'in' the list of results
-                // *and* the selected-item result == the .val() from results
-                if (keys.indexOf( $(this).val() ) != -1 && results[$(this).val()] == $(this).data('selected-item')) return;
-
-                $(this)[0].selectItem( keys[0] );
         });
         return input;
     },
