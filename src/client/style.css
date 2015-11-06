@@ -240,26 +240,6 @@ body {
   padding: 6px 0px 4px 12px;
 }
 
-
-/* settings widget */
-#otp-widgetManager {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 30px;
-    height: 30px;
-    margin: 10px 10px 0 0;
-    background: url('images/gear.svg');
-    background-size: 30px 30px;
-    cursor: pointer;
-}
-
-.otp-widgetManagerMenu {
-    top: 40px;
-    right: 0px;
-    text-align: right;
-} 
-
 #logo {
   float: left;
   height:30px;
