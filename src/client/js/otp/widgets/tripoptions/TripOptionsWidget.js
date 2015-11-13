@@ -270,6 +270,7 @@ otp.widgets.tripoptions.LocationsSelector =
 
                var result = $(this).data("results")[key];
                $(this).data('selected-item', result);
+  	       $(this).val( key );
 
 		if (key == "My Location" && result.lat == 0) {
 
@@ -291,11 +292,16 @@ otp.widgets.tripoptions.LocationsSelector =
              source: function(request, response) {
                  this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
 
-                     results.unshift( { 'description': "My Location", "lat":0, "lng":0 } );
                      console.log("got results "+results.length);
 
-                     response.call(this, _.pluck(results, 'description'));
                      input.data("results", this_.getResultLookup(results));
+
+		     e = webapp.map.currentLocation
+	             lat = e.latlng.lat;
+   	             lng = e.latlng.lng;
+          	     results.unshift({'description': 'My Location', 'lat':lat, 'lng':lng});
+	
+                     response.call(this, _.pluck(results, 'description'));
                  });
              },
              select: function(event, ui) {
@@ -304,27 +310,18 @@ otp.widgets.tripoptions.LocationsSelector =
          })
          .change(function() {
                 $(this).select();
-return;
-        })
-        .blur(function(e) {
-                results = $(this).data('results');
-		// If results not available, or input is blank - return
-		// XXX we need to make sure the relevant planner variable is also unset so it doesn't annoyingly come back later
-                if (results == undefined || $(this).val() == "") return;
-
-                keys = Object.keys(results);
-
-                // If current destination value is 'in' the list of results
-                // *and* the selected-item result == the .val() from results
-                if (keys.indexOf( $(this).val() ) != -1 && results[$(this).val()] == $(this).data('selected-item')) return;
-
-                $(this)[0].selectItem( keys[0] );
         });
         return input;
     },
     
     getResultLookup : function(results) {
         var resultLookup = {};
+
+	e = webapp.map.currentLocation
+	lat = e.latlng.lat;
+	lng = e.latlng.lng;
+	resultLookup['My Location'] = {'description': 'My Location', 'lat':lat, 'lng':lng};
+
         for(var i=0; i<results.length; i++) {
             resultLookup[results[i].description] = results[i];
         }
