@@ -410,9 +410,14 @@ z-index: 9002;
 }
 
 /* Navigation: Main Menu */
+#main-menu > i.material-icons {
+       line-height: 30px;
+}
 #main-menu {
-  padding: .25em;
+  padding: 0.03em;
   float: left;
+  width: auto;
+  height: 40px;
 }
 #main-menu li {
   float: left;
@@ -1114,7 +1119,7 @@ p#splash-text span {
 
   /* Navigation: Main Menu */
   #main-menu {
-    padding: 1em;
+    padding: 0.9em;
   }
   #main-menu li {
     float: left;
