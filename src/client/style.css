@@ -932,7 +932,9 @@ p#splash-text span {
 
 
 .otp-layerView { 
-	width:260px;
+	width:40%;
+	min-width: 160px;
+	max-width: 200px;
 	min-height:100px;
 	background-color: white; /*#F3F3F3;*/
 	border: 0px solid #9CCB3B;
