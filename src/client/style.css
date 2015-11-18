@@ -412,18 +412,44 @@ z-index: 9002;
 }
 
 /* Navigation: Main Menu */
-#main-menu > i.material-icons {
-       line-height: 30px;
+
+@media only screen and (max-width: 768px){ 
+
+.mdl-button {
+    font-size: 24px;
+    margin-top: 4px;
+}
+
 }
 #main-menu {
-  padding: 0.03em;
+  padding: 0.8em;
+  font-size: 26px;
   float: left;
   width: auto;
   height: 40px;
 }
+
+#main-menu > i.material-icons {
+       line-height: 20px;
+}
+
+.mdl-button .material-icons {
+    vertical-align: left;
+    font-size: 36px;
+    margin-top:2px;
+}
+
 #main-menu li {
   float: left;
 }
+
+#material-icons { /*TODO color the icon when selected with :active */
+  color:red;
+}
+.mdl-button:active {
+    background-color: rgba(255,0,0,.2);
+}
+
 #main-menu a {
   display: block;
   color: #fff;
@@ -442,9 +468,16 @@ z-index: 9002;
 	/* hover color of icons in toolbar*/
   background-color: #9CCB3B;
 }
+
 #main-menu a:active{
-	background-color: #9CCB3B;
+	background-color: #ff0000; /*TODO nothing get colored by this */
 }
+
+.mdl-menu__item {
+    line-height: 1;
+    color: rgba(0, 0, 0, 1);
+}
+
 
 /* The Map
 -------------------------------------------------------------- */
@@ -1319,7 +1352,4 @@ p#splash-text span {
   }
   
 
-}
-
-@media only screen and (min-width: 1300px) {
 }
