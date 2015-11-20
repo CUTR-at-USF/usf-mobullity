@@ -57,11 +57,23 @@ otp.layers.BikeStationsLayer =
 			for(v=0; v < this_.stations.length; v++){
 				var coord = L.latLng(this_.stations[v].y,this_.stations[v].x);
 				var marker;
-				
-				name = this_.stations[v].name || this_.stations[v].id;
-				context = {'name': name, 'station': this_.stations[v]};
+		
+                                if (this_.stations[v].id.substring(0,3) == "hub")
+                                        link = "http://app.socialbicycles.com/map?hub_id=" + this_.stations[v].id.replace("hub_", "");
+				else 
+					link = "http://app.socialbicycles.com/map?bike_id=" + this_.stations[v].id.replace("bike_", "");
 
-				var bikePopup = ich['otp-bikesLayer-popup'](context).get(0);
+				if (L.Browser.mobile && L.Browser.android)
+					link = "https://play.google.com/store/apps/details?id=com.socialbicycles.app";
+				else if (L.Browser.mobile)
+					link = "https://itunes.apple.com/us/app/social-bicycles/id641497286?mt=8";
+
+				name = this_.stations[v].name || this_.stations[v].id;
+				context = {'name': name, 'station': this_.stations[v], 'reserve_link': link};
+
+				if (this_.stations[v].id.substring(0,3) == "hub")
+					var bikePopup = ich['otp-bikesLayer-hub-popup'](context).get(0);
+				else var bikePopup = ich['otp-bikesLayer-popup'](context).get(0);
 
 				marker =  L.marker(coord, {icon: this.module.icons.getSmall(this_.stations[v])} );
 				marker.bindPopup(bikePopup, {'minWidth': 200});
