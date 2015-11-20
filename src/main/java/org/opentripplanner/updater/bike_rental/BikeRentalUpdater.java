@@ -103,6 +103,10 @@ public class BikeRentalUpdater extends PollingGraphUpdater {
                 source = new CityBikesBikeRentalDataSource();            
 	    } else if (sourceType.equals("socialbicycles")) {
                 source = new SocialBicyclesBikeRentalDataSource();
+	    } else if (sourceType.equals("opendata-bikes")) {
+		source = new OpenDataBikeRentalDataSource();
+            } else if (sourceType.equals("opendata-hubs")) {
+                source = new OpenDataBikeHubsDataSource();
 	    } else if (sourceType.equals("local-file")) {
         	source = new LocalFileBikeRentalDataSource();    
             } else if (sourceType.equals("csv-file")) {
