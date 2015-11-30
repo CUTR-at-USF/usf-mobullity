@@ -429,10 +429,6 @@ z-index: 9002;
   height: 40px;
 }
 
-#main-menu > i.material-icons {
-       line-height: 20px;
-}
-
 .mdl-button .material-icons {
     vertical-align: left;
     font-size: 36px;
