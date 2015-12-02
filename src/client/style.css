@@ -430,20 +430,7 @@ z-index: 9002;
 }
 
 .mdl-button .material-icons {
-    vertical-align: left;
     font-size: 36px;
-    margin-top:2px;
-}
-
-#main-menu li {
-  float: left;
-}
-
-#material-icons { /*TODO color the icon when selected with :active */
-  color:red;
-}
-.mdl-button:active {
-    background-color: rgba(255,0,0,.2);
 }
 
 #main-menu a {
@@ -464,16 +451,6 @@ z-index: 9002;
 	/* hover color of icons in toolbar*/
   background-color: #9CCB3B;
 }
-
-#main-menu a:active{
-	background-color: #ff0000; /*TODO nothing get colored by this */
-}
-
-.mdl-menu__item {
-    line-height: 1;
-    color: rgba(0, 0, 0, 1);
-}
-
 
 /* The Map
 -------------------------------------------------------------- */
