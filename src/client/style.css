@@ -49,6 +49,11 @@ pre, code, kbd, samp { font-family: monospace, sans-serif; }
 /* Base Styles
 -------------------------------------------------------------- */
 
+.mdl-menu__container, .mdl-menu__outline, .mdl-menu {
+	z-index: 100;
+	position: absolute;
+}
+
 
 body, select, input, textarea {
   /* text color is here for boxes: #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
@@ -237,33 +242,6 @@ body {
   padding: 6px 0px 4px 12px;
 }
 
-
-/* settings widget */
-#otp-widgetManager {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 30px;
-    height: 30px;
-    margin: 10px 10px 0 0;
-    background: url('images/gear.svg');
-    background-size: 30px 30px;
-    cursor: pointer;
-}
-
-.otp-widgetManagerMenu {
-    top: 40px;
-    right: 0px;
-    text-align: right;
-} 
-
-
-#addthis {
-  display: none;
-  position: absolute;
-  right: 50px;
-}
-
 #logo {
   float: left;
   height:30px;
@@ -347,13 +325,27 @@ z-index: 9002;
 }
 
 /* Navigation: Main Menu */
+
+@media only screen and (max-width: 768px){ 
+
+.mdl-button {
+    font-size: 24px;
+    margin-top: 4px;
+}
+
+}
 #main-menu {
-  padding: .25em;
+  padding: 0.8em;
+  font-size: 26px;
   float: left;
+  width: auto;
+  height: 40px;
 }
-#main-menu li {
-  float: left;
+
+.mdl-button .material-icons {
+    font-size: 36px;
 }
+
 #main-menu a {
   display: block;
   color: #fff;
@@ -372,8 +364,12 @@ z-index: 9002;
 	/* hover color of icons in toolbar*/
   background-color: #9CCB3B;
 }
-#main-menu a:active{
-	background-color: #9CCB3B;
+
+li.mdl-menu__item > i.material-icons, li.mdl-menu__item {
+    vertical-align:middle !important;
+}
+li.mdl-menu__item > i.material-icons {
+    margin-right: 10px;
 }
 
 /* The Map
@@ -385,7 +381,7 @@ z-index: 9002;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 40;
 }
 
 @media only screen and (min-width: 768px) {
@@ -479,7 +475,7 @@ z-index: 9002;
   
 .otp-widget {
   position: absolute;
-  z-index: 1000;
+  z-index: 50;
 }
 
 /* Changes the widget boxes when transparent=false in widget.js */
@@ -502,7 +498,7 @@ z-index: 9002;
 	position: absolute;
 	right: 0;
 	top: 0;
-	z-index: 10000;
+	z-index: 50;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -543,7 +539,7 @@ z-index: 9002;
 	position: static;
 	float: right;
 	width: 8px;
-	z-index: 10000;
+	z-index: 50;
 }
 
 .otp-widget-header-minimize:hover {
@@ -1053,7 +1049,7 @@ p#splash-text span {
 
   /* Navigation: Main Menu */
   #main-menu {
-    padding: 1em;
+    padding: 0.9em;
   }
   #main-menu li {
     float: left;
@@ -1252,18 +1248,3 @@ p#splash-text span {
   
 
 }
-
-@media only screen and (min-width: 1300px) {
-}
-
-
-/* =Media Query Size Indicator
--------------------------------------------------------------- */
-
-/* Uncomment the following to display the media query results in your browser. */
-/*body:after { content: "less than 320px"; font-size: 300%; font-weight: bold; position: fixed; bottom: 0; width: 100%; text-align: center; background-color: hsla(1,60%,40%,0.7); color: #fff; }
-@media only screen and (min-width: 320px) { body:after { content: "320 to 479px"; background-color: hsla(90,60%,40%,0.7); } }
-@media only screen and (min-width: 480px) { body:after { content: "480 to 767px"; background-color: hsla(180,60%,40%,0.7); } }
-@media only screen and (min-width: 768px) { body:after { content: "768 to 1023px"; background-color: hsla(270,60%,40%,0.7); } }
-@media only screen and (min-width: 1024px) { body:after { content: "1024 to 1299px"; background-color: hsla(360,60%,40%,0.7); } }
-@media only screen and (min-width: 1300px) { body:after { content: "1300 and up"; background-color: hsla(60,60%,40%,0.7); } }*/

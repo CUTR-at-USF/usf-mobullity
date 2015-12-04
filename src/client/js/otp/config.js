@@ -183,17 +183,6 @@ otp.config = {
         },
 
     ],
-    
-    
-    /**
-     * Support for the "AddThis" display for sharing to social media sites, etc.
-     */
-     
-    showAddThis     : true,
-    siteURL			: 'http://mobullity.forest.usf.edu/index.html',
-    addThisTitle    : 'Check out the MoBullity Webapp!',
-    siteDescription : 'OpenTripPlanner for USF',
-    addThisPubId    : 'ra-525818cf0207df3a',
 
 
     /**

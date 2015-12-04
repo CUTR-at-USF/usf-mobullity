@@ -42,6 +42,11 @@
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />
 
 
+<!-- Material Design Lite -->
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <!-- json support -->
 <script src="js/lib/json2.js"></script>
 
@@ -213,14 +218,29 @@ $(document).ready(function() {
 
 <header id="branding" role="banner" class="clearfix">
 
+	<div class=Menu>
+        <!-- Left aligned menu below button -->
+        <button id="main-menu" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">menu</i>
+        </button>
+
+        <ul id="main-menu-item-list" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+        for="main-menu">
+            <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();"> 
+            <i class="material-icons" >directions</i>
+                Trip planner</li>
+            <li class="mdl-menu__item" onClick="javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">
+            <i class="material-icons" >layers</i>
+                Layers</li>
+            <li class="mdl-menu__item" onClick="javascript:webapp.infoWidgets['otp-infoWidget-0'].show();" >Help</li> 
+            <li class="mdl-menu__item" onClick="javascript:webapp.infoWidgets['otp-infoWidget-1'].show();" >Send feedback</li> 
+            <!-- the button help need to be link to the icon legend pop up -->
+        </ul>
+    </div>
+	
 	<div class=logo></div>
 	
-	<nav id="main-menu" role="article"><ul>
-	<li><a href="javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();">Trip Planner</a></li>
-  
-    <li><a href="javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">Layers</a></li>
-    </ul></nav>
-    
+
 </header><!-- #branding -->
 
 <div id="map"></div>
