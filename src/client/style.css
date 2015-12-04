@@ -452,6 +452,13 @@ z-index: 9002;
   background-color: #9CCB3B;
 }
 
+li.mdl-menu__item > i.material-icons, li.mdl-menu__item {
+    vertical-align:middle !important;
+}
+li.mdl-menu__item > i.material-icons {
+    margin-right: 10px;
+}
+
 /* The Map
 -------------------------------------------------------------- */
 
