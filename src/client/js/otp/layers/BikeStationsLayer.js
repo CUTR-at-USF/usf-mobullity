@@ -4,7 +4,7 @@ var bikeIcon = L.Icon.extend({
         options: {
                 angle: 0,
                 iconUrl : resourcePath + 'images/marker-bike.svg',
-                iconSize: new L.Point(40,70)
+                iconSize: new L.Point(30,60)
         }
 });
 
@@ -12,7 +12,7 @@ var hubIcon = L.Icon.extend({
         options: {
                 angle: 0,
                 iconUrl : resourcePath + 'images/marker-hub.svg',
-                iconSize: new L.Point(40,70)
+                iconSize: new L.Point(30,60)
         }
 });
 
@@ -81,8 +81,13 @@ otp.layers.BikeStationsLayer =
 			var lmap = this.module.webapp.map.lmap;
 			var zoom = lmap.getZoom();
 
-			var bike_icon = new bikeIcon();
-			var hub_icon = new hubIcon();
+			opts = {};
+			if (zoom < 17) {
+				opts['iconSize'] = new L.Point(20,50);
+			}
+
+			var bike_icon = new bikeIcon(opts);
+			var hub_icon = new hubIcon(opts);
 
 			var added = {};
 	
@@ -126,6 +131,8 @@ otp.layers.BikeStationsLayer =
 					else if (is_hub) {
 		                                oldmarker.bindPopup(bikePopup, {'minWidth': 200});
 					}
+
+					oldmarker.setIcon(marker_icon);
 				}
 
 				added[ marker._leaflet_id ] = marker;
