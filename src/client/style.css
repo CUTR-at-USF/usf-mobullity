@@ -427,9 +427,6 @@ z-index: 9002;
   float: left;
   
   height: 40px;
-
-  position: static;
-  width: 10px;
 }
 
 .mdl-button .material-icons {
@@ -463,7 +460,7 @@ li.mdl-menu__item > i.material-icons {
 }
 
 hr.menu_separator{
-    border-top-color: #D3D3D3;
+    border-top-color: #e5e5e5;
 }
 /* The Map
 -------------------------------------------------------------- */
