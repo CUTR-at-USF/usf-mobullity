@@ -462,6 +462,10 @@ li.mdl-menu__item > i.material-icons {
 hr.menu_separator{
     border-top-color: #e5e5e5;
 }
+
+.slected_item{
+    color: #006747;
+}
 /* The Map
 -------------------------------------------------------------- */
 
