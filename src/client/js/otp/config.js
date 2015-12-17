@@ -174,7 +174,8 @@ otp.config = {
     	title: 'Icon Legend',
     	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
     		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
-    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br>'      	
+    		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br> </p>\
+    		<p> We would like to acknowledge the support and funding assistance provided by the USF Student Green Energy Fund, Center for Urban Transportation Research, and Florida Department of Transportation.</p>' 
         },
         {	
 	title: 'Contact',

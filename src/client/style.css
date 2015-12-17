@@ -338,7 +338,7 @@ z-index: 9002;
   padding: 0.8em;
   font-size: 26px;
   float: left;
-  width: auto;
+  
   height: 40px;
 }
 
@@ -372,6 +372,13 @@ li.mdl-menu__item > i.material-icons {
     margin-right: 10px;
 }
 
+hr.menu_separator{
+    border-top-color: #e5e5e5;
+}
+
+.slected_item{
+    color: #006747;
+}
 /* The Map
 -------------------------------------------------------------- */
 
