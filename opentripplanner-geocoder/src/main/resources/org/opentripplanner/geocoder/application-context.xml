@@ -190,29 +190,29 @@
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
                 
                 <!-- Parking lot/garages --> 
-                <entry key="Apple (parking lot)" value="28.060087 -82.412438" /> <!-- Check value -->
+                <entry key="Apple (parking lot)" value="28.060087 -82.412438" />
                 <entry key="Collins Garage" value="28.061889 -82.412526" />
                 <entry key="Crescent Hill Garage" value="28.064802 -82.412283" />
 
-                <entry key="Lot 2B" value="28.060886 -82.413868" /> <!-- Check value --> 
-                <entry key="Lot 3C" value="28.064396 -82.415560" /> <!-- Check value --> 
-                <entry key="Lot 3D" value="28.064396 -82.415560" /> <!-- Check value --> 
-                <entry key="Lot 5A" value="28.064169 -82.412313" /> <!-- Check value --> 
-                <entry key="Lot 6" value="28.060249 -82.405642" /> <!-- Check value -->
-                <entry key="Lot 8B" value="28.059182 -82.417222" /> <!-- Check value -->   
-                <entry key="Lot 18" value="28.060180 -82.402663" /> <!-- Check value -->              
-                <entry key="Lot 19E" value="28.061739 -82.419761" /> <!-- Check value --> 
-                <entry key="Lot 19W" value="28.061881 -82.420775" /> <!-- Check value --> 
-                <entry key="Lot 21" value="28.061700 -82.407978" /> <!-- Check value -->
-                <entry key="Lot 22A" value="28.057693 -82.408012" /> <!-- Check value -->
-                <entry key="Lot 22D" value="28.057360 -82.407867" /> <!-- Check value -->
-                <entry key="Lot 23B" value="28.055829 -82.408244" /> <!-- Check value -->
-                <entry key="Lot 29B" value="28.059012 -82.412679" /> <!-- Check value -->
-                <entry key="Lot 33T" value="28.065418 -82.423345" /> <!-- Check value --> 
-                <entry key="Lot 36" value="28.058120 -82.411192" /> <!-- Check value --> 
-                <entry key="Lot 38C" value="28.067558 -82.425541" /> <!-- Check value --> 
-                <entry key="Lot 38T" value="28.068316 -82.421583" /> <!-- Check value --> 
-                <entry key="Lot 43" value="28.067953 -82.416468" /> <!-- Check value --> 
+                <entry key="Lot 2B" value="28.060886 -82.413868" /> 
+                <entry key="Lot 3C" value="28.064396 -82.415560" /> 
+                <entry key="Lot 3D" value="28.064396 -82.415560" /> 
+                <entry key="Lot 5A" value="28.064169 -82.412313" /> 
+                <entry key="Lot 6" value="28.060249 -82.405642" /> 
+                <entry key="Lot 8B" value="28.059182 -82.417222" />
+                <entry key="Lot 18" value="28.060180 -82.402663" />
+                <entry key="Lot 19E" value="28.061739 -82.419761" />
+                <entry key="Lot 19W" value="28.061881 -82.420775" />
+                <entry key="Lot 21" value="28.061700 -82.407978" /> 
+                <entry key="Lot 22A" value="28.057693 -82.408012" />
+                <entry key="Lot 22D" value="28.057360 -82.407867" />
+                <entry key="Lot 23B" value="28.055829 -82.408244" />
+                <entry key="Lot 29B" value="28.059012 -82.412679" />
+                <entry key="Lot 33T" value="28.065418 -82.423345" />
+                <entry key="Lot 36" value="28.058120 -82.411192" /> 
+                <entry key="Lot 38C" value="28.067558 -82.425541" />
+                <entry key="Lot 38T" value="28.068316 -82.421583" />
+                <entry key="Lot 43" value="28.067953 -82.416468" /> 
                 
                 
                 <!-- Surrounding point of interest --> 
