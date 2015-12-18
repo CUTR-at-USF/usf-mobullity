@@ -457,14 +457,19 @@ li.mdl-menu__item > i.material-icons, li.mdl-menu__item {
 }
 li.mdl-menu__item > i.material-icons {
     margin-right: 10px;
+    color: #888;
 }
 
 hr.menu_separator{
     border-top-color: #e5e5e5;
 }
 
-.selected_item{
-    color: #006747;
+.selected_item {
+    color: #006747 !important;
+    background-color: rgba(0,0,0,0.11);
+}
+.selected_item > i.material-icons {
+    color: #006747 !important;
 }
 /* The Map
 -------------------------------------------------------------- */
