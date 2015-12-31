@@ -106,15 +106,21 @@ otp.modules.multimodal.MultimodalPlannerModule =
         // The following minimize the widget depending on the attribut given in the url
         if (location.hash == "#trip"){
             this.layerWidget.minimize();
+            jQuery('#tripPlannerButton').addClass('selected_item');
         }
         else if (location.hash == "#layers") {
            this.optionsWidget.minimize();
+           jQuery('#layersButton').addClass('selected_item')
         }
         else if (location.hash == "#map") {
             this.layerWidget.minimize();
             this.optionsWidget.minimize();
         }
-        else {this.layerWidget.minimize();}
+        else //by default the trip planner widget is open
+        {
+            jQuery('#tripPlannerButton').addClass('selected_item');
+            this.layerWidget.minimize();
+        }
             
     },
     
