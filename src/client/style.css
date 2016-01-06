@@ -656,7 +656,9 @@ hr.menu_separator{
     width: 75%;
     height: 75%;
     overflow: hidden;
-    background: #CFC493;
+    background: #006747;
+    color: #FFF;
+    
 }
 
 @media only screen and (min-width: 768px){
@@ -664,7 +666,8 @@ hr.menu_separator{
  	   width: 400px;
  	   height: auto;
  	   overflow: hidden;
- 	   background: #CFC493;
+ 	   background: #006747;
+ 	   color: #FFF;
 	}
 }
 
@@ -813,7 +816,8 @@ hr.menu_separator{
 	position: absolute;
 	left: 0px;
 	top: 4em;
-	background: #CFC493;
+	background: #006747;
+	color: #FFF;
 }
 
 @media only screen and (min-width: 768px) {
