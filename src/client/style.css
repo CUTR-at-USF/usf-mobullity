@@ -57,7 +57,7 @@ pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 body, select, input, textarea {
   /* text color is here for boxes: #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
-  color: #006747; 
+  color: #000; 
   /* set your base font here, to apply evenly */
   font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
 }
