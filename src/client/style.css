@@ -198,7 +198,7 @@ body {
 @media only screen and (min-width: 768px) {
   #branding {
     height: 3.5em;
-    border-bottom: 0.5em solid #9CCB3B;
+    border-bottom: 0.5em solid #006747;
   }
 }
 
@@ -337,6 +337,7 @@ body {
              box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25), inset 1px 1px 1px rgba(255,255,255,0.5);
 }
 
+/*TODO I believe that the following should be deleted since we choosed to not make the tilte appear anymore*/
 /*Mobullity Title at top*/
 #site-title {
   font-size: 2em;
@@ -447,10 +448,6 @@ z-index: 9002;
      -moz-border-radius: 3px;
           border-radius: 3px;
 }
-#main-menu a:hover {
-	/* hover color of icons in toolbar*/
-  background-color: #9CCB3B;
-}
 
 li.mdl-menu__item > i.material-icons, li.mdl-menu__item {
     vertical-align:middle !important;
@@ -544,7 +541,8 @@ hr.menu_separator{
     z-index: 10000;
     font-size: 14px;
     font-weight: bold;
-    background: #CFC493;
+    color: #FFFFFF;
+    background: #006747;
     padding: 5px 2px 3px 6px;
     margin-left: 10px;
     width: 150px;
@@ -629,7 +627,7 @@ hr.menu_separator{
 }
 
 .otp-widget-header-button {
-	color: #006747;
+	color: #FFFFFF;
 	cursor: pointer;
 	font-size: 20px;
     font-weight: bold;
@@ -646,20 +644,20 @@ hr.menu_separator{
 }
 
 /* Welcome Widget: Popup window with information at beginning to help user*/
-   #otp-WelcomeWidget {
+#otp-WelcomeWidget {
     background: white;
     position: absolute;
     z-index: 9001;
-  } 
+} 
 
 /* Change the looks of the widget windows */
 
-	.otp-defaultInfoWidget {
- 	   width: 75%;
- 	   height: 75%;
- 	   overflow: hidden;
- 	   background: #CFC493;
-	}
+.otp-defaultInfoWidget {
+    width: 75%;
+    height: 75%;
+    overflow: hidden;
+    background: #CFC493;
+}
 
 @media only screen and (min-width: 768px){
 	.otp-defaultInfoWidget {
@@ -762,7 +760,7 @@ hr.menu_separator{
     letter-spacing: 2px;
     font-weight: none; 
     color: #fff;
-    background-color: #9CCB3B;
+    background-color: #006747;
    /* margin-bottom: 5px; */
     overflow: hidden;   
     text-overflow: ellipsis;
