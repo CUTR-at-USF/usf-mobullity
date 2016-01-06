@@ -517,10 +517,11 @@ hr.menu_separator{
 .otp-popupMenu-item {
     padding: .4em;
     cursor: pointer;
+    color:#006747;
 }
 
 .otp-popupMenu-item:hover {
-    background: #CFC493;
+    background: #e5e5e5;
 }
 
 /* Minimize Tray
