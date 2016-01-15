@@ -214,13 +214,7 @@ otp.modules.planner.PlannerModule =
     },
 
     handleClick : function(event) {
-        if(this.startLatLng == null) {
-        	this.setStartPoint(new L.LatLng(event.latlng.lat, event.latlng.lng), true);
-        }
         
-        else if(this.endLatLng == null) {
-        	this.setEndPoint(new L.LatLng(event.latlng.lat, event.latlng.lng), true);
-        }
     },
    
     
