@@ -42,7 +42,7 @@ public final class OpenDataBikeHubsDataSource extends GenericJSONBikeRentalDataS
 	String url = getUrl();
 	// First get initial hub data (names, etc)
         try {
-            InputStream data = HttpUtils.getData(url + "opendata/station_information.json");
+            InputStream data = HttpUtils.getData(url + "/station_information.json");
             if (data == null) {
                 log.warn("Failed to get data from url " + url);
                 return false;
@@ -62,7 +62,7 @@ public final class OpenDataBikeHubsDataSource extends GenericJSONBikeRentalDataS
 
 	// Now get the hub status
         try {
-            InputStream data = HttpUtils.getData(url + "opendata/station_status.json");
+            InputStream data = HttpUtils.getData(url + "/station_status.json");
             if (data == null) {
                 log.warn("Failed to get data from url " + url);
                 return false;
@@ -176,7 +176,7 @@ public final class OpenDataBikeHubsDataSource extends GenericJSONBikeRentalDataS
 		return null;
  	 }
 
- 	 brStation = hubs.get( brStation.id );
+ 	 brStation = hubs.get( stationNode.get("station_id").textValue() );
 
          brStation.bikesAvailable = stationNode.get("num_bikes_available").intValue();
          brStation.spacesAvailable = stationNode.get("num_docks_available").intValue();

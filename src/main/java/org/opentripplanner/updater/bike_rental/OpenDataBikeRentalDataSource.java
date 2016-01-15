@@ -34,6 +34,13 @@ public final class OpenDataBikeRentalDataSource extends GenericJSONBikeRentalDat
         super("data/bikes");
     }
 
+    public void configure(Graph graph, Preferences preferences) {
+        String url = preferences.get("url", null);
+        if (url == null)
+            throw new IllegalArgumentException("Missing mandatory 'url' configuration.");
+        setUrl(url + "/free_bike_status.json");
+    }
+
     public BikeRentalStation makeStation(JsonNode stationNode) {
 
          BikeRentalStation brStation = new BikeRentalStation();
