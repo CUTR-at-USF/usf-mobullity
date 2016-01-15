@@ -164,11 +164,11 @@ public final class OpenDataBikeHubsDataSource extends GenericJSONBikeRentalDataS
     
     public BikeRentalStation makeStation(JsonNode stationNode) {
 
-         BikeRentalStation brStation = new BikeRentalStation();
+        BikeRentalStation brStation = null;
 
-         brStation.id = String.valueOf(stationNode.get("station_id").textValue());
-
-	 if (stationNode.get("name") != null) {
+	if (stationNode.get("name") != null) {
+		brStation = new BikeRentalStation();
+	        brStation.id = String.valueOf(stationNode.get("station_id").textValue());
  	 	brStation.x = stationNode.get("lon").doubleValue();// / 1000000.0;
 		brStation.y = stationNode.get("lat").doubleValue();// / 1000000.0;
 	        brStation.name = stationNode.get("name").textValue();
