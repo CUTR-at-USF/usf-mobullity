@@ -143,8 +143,6 @@ otp.layers.BikeStationsLayer =
 				id = this.markers[i]._leaflet_id;
 				if (added[id] == undefined) {
 					this.removeLayer( this.markers[i] );
-
-					console.log( "REMOVED " + i );
 				}
 			}
 
