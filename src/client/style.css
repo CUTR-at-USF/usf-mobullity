@@ -564,6 +564,11 @@ hr.menu_separator{
     z-index: 9001;
 } 
 
+/* Specifically override the new white widget icons here because the background is also white */
+#otp-WelcomeWidget .otp-widget-header-button { 
+    color: black;
+}
+
 /* Change the looks of the widget windows */
 
 .otp-defaultInfoWidget {
