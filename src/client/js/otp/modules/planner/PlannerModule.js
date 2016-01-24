@@ -146,10 +146,8 @@ otp.modules.planner.PlannerModule =
     		document.cookie = "visited=true; expires=Fri, 13 Dec 2041 12:00:00 UTC ";
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
-            		"<li>View Current Live Bull Runner Bus Feed by<br>" +
-            		"clicking Layers at the top and selecting a route on the left.</li>" +
-            		"<li>Plan a trip by using the menu on the left.</li>" +
-            		"<li>Click the Help button for more information.</li>", this);
+            		"<li> Use the menu button to change between the Trip Planner and Layers features </li>" +
+            		"<li> To set your trip "Start" and "End", type your building name or abbreviation into the boxes or long-press on the map </li>", this);
             this.WelcomeWidget.center();
             this.WelcomeWidget.setTitle("Welcome!");
             this.addWidget(this.WelcomeWidget);
