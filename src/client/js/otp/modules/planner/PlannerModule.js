@@ -147,7 +147,7 @@ otp.modules.planner.PlannerModule =
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
             		"<li> Use the menu button to change between the Trip Planner and Layers features </li>" +
-            		"<li> To set your trip "Start" and "End", type your building name or abbreviation into the boxes or long-press on the map </li>", this);
+            		"<li> To set your trip \"Start\" and \"End\", type your building name or abbreviation into the boxes or long-press on the map </li>", this);
             this.WelcomeWidget.center();
             this.WelcomeWidget.setTitle("Welcome!");
             this.addWidget(this.WelcomeWidget);
