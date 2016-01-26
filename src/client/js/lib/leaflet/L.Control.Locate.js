@@ -69,7 +69,15 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
             onLocationError: function(err) {
                 // this event is called in case of any location error
                 // that is not a time out error.
-                alert(err.message);
+
+                switch (err.code) {
+                case 1: /* The HTML5 standard specifies err.PERMISSION_DENIED, leaflet does not pass this through */
+                    alert("To see your real-time position on the map, please allow USF Maps to access your location");
+                    break;
+                default:
+                    alert(err.message);
+                }
+
             },
             onLocationOutsideMapBounds: function(control) {
                 // this event is repeatedly called when the location changes
