@@ -522,20 +522,6 @@ otp.widgets.ItinerariesWidget =
             });
             
 
-            $('<div class="otp-itin-leg-endpointDescSub">Stop #'+leg.from.stopId.id+' [<a href="#">Stop Viewer</a>]</div>')
-            .appendTo(legDiv)
-            .click(function(evt) {
-                if(!this_.module.stopViewerWidget) {
-                    this_.module.stopViewerWidget = new otp.widgets.transit.StopViewerWidget("otp-"+this_.module.id+"-stopViewerWidget", this_.module);
-                    this_.module.stopViewerWidget.$().offset({top: evt.clientY, left: evt.clientX});
-                }
-                this_.module.stopViewerWidget.show();
-                this_.module.stopViewerWidget.setActiveTime(leg.startTime);
-                this_.module.stopViewerWidget.setStop(leg.from.stopId.agencyId, leg.from.stopId.id, leg.from.name);
-                this_.module.stopViewerWidget.bringToFront();
-            });
-
-
             $('<div class="otp-itin-leg-buffer"></div>').appendTo(legDiv);            
 
             // show the "time in transit" line
@@ -544,19 +530,6 @@ otp.widgets.ItinerariesWidget =
 
             $('<span><i>Time in transit: '+otp.util.Time.secsToHrMin(leg.duration)+'</i></span>').appendTo(inTransitDiv);
 
-            $('<span>&nbsp;[<a href="#">Trip Viewer</a>]</span>')
-            .appendTo(inTransitDiv)
-            .click(function(evt) {
-                if(!this_.module.tripViewerWidget) {
-                    this_.module.tripViewerWidget = new otp.widgets.transit.TripViewerWidget("otp-"+this_.module.id+"-tripViewerWidget", this_.module);
-                    this_.module.tripViewerWidget.$().offset({top: evt.clientY, left: evt.clientX});
-                }
-                this_.module.tripViewerWidget.show();
-                if(this_.module.tripViewerWidget.minimized) this_.module.tripViewerWidget.unminimize();
-                this_.module.tripViewerWidget.update(leg);
-                this_.module.tripViewerWidget.bringToFront();
-            });
-            
             // show the intermediate stops, if applicable -- REPLACED BY TRIP VIEWER
             
             if(this.module.showIntermediateStops) {
