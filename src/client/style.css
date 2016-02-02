@@ -194,14 +194,6 @@ body {
   ); */
 }
 
-/*creates the green line below the tool bar at the top*/
-@media only screen and (min-width: 768px) {
-  #branding {
-    height: 3.5em;
-    border-bottom: 0.5em solid #006747;
-  }
-}
-
 /* Module Selector */
 #otp_moduleSelector {
   font-size: 11px;
@@ -369,14 +361,6 @@ body {
                -1px  1px 1px rgba(42,101,161,0.25),
                 1px -1px 1px rgba(42,101,161,0.25),
                 1px  1px 1px rgba(42,101,161,0.25)
-}
-
-/* AddThis */
-#branding .addthis_toolbox {
-  margin: 1.25em 0 0 0;
-  padding-right: 0;
-  float: right;
-  min-width: 100px;
 }
 
 /* Live Map Window Style Class */
@@ -654,23 +638,13 @@ hr.menu_separator{
 /* Change the looks of the widget windows */
 
 .otp-defaultInfoWidget {
-    width: 75%;
-    height: 75%;
-    overflow: hidden;
-    background: #006747;
-    color: #FFF;
-    
+   width: 400px;
+   height: auto;
+   overflow: hidden;
+   background: #006747;
+   color: #FFF;
 }
 
-@media only screen and (min-width: 768px){
-	.otp-defaultInfoWidget {
- 	   width: 400px;
- 	   height: auto;
- 	   overflow: hidden;
- 	   background: #006747;
- 	   color: #FFF;
-	}
-}
 
 .livemap-window {
 	background: #ffffff;
@@ -756,60 +730,61 @@ hr.menu_separator{
 
 /* TripSummaryWidget */
 
-/* Custom CSS header class for the trip widget */
-.otp-defaultTripWidget-header {
-    font-size: 20px;
-    min-height: 16px;
+/* Common trait for layers and trip planner widgets */
+.otp-defaultTripWidget-header, .otp-layerView-header {
+    font-size: 22px;
+    min-height: 20px;
     font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
     letter-spacing: 2px;
     font-weight: none; 
     color: #fff;
     background-color: #006747;
-   /* margin-bottom: 5px; */
     overflow: hidden;   
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: default;
-    padding: 5px;
-}
-
-.otp-defaultTripWidget {
-  width: auto;
-  height: auto;
-  top: 3.5em;
-  left: 0;
-  padding: 0px;
-  background: white;
-}
-
-.otp-defaultTripWidget hr {
-  display: none;
-}
-
-
-/* trip options widget editing */
-@media only screen and (min-width: 768px) {
-  .otp-defaultTripWidget {
-    width: 20em;
-    height: 90%;
-    top: 4em;
-    left: 0;
-    padding: 0px;
-    border: 0;
-    background-color: white;
-  }
-
-  .otp-defaultTripWidget hr {
-    display: block;
-  }
- 
-   .otp-defaultTripWidget-header .title {
-    display: block;
-    background: black;
-	color: rgb(255, 155, 20);
-  } 
+    padding: 1px;
     
 }
+    
+.otp-defaultTripWidget, .otp-layerView {
+  height:auto;
+  top: 3.5em;
+  left: 0px;
+  padding: 0px;
+  background: white;
+  border: 1px solid gray;
+  color: black;
+}
+
+/* Custom CSS header class for the trip widget none for now */
+.otp-defaultTripWidget {
+    width:auto;
+}
+
+.otp-defaultTripWidget-inner {
+    padding:100px;
+}
+
+/* Layers Widget */
+.otp-layerView {
+    width:40%;
+    min-width: 160px;
+	max-width: 200px;
+}
+
+.otp-layerView-header { text-align:center; }
+
+
+.otp-layerView-inner {
+	min-height:100px;
+	border:none;
+	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
+	text-align:left;
+	background: white;
+	padding:10px;
+}
+
 
 .otp-defaultItinsWidget {
 	width: auto;
@@ -1027,29 +1002,6 @@ p#splash-text span {
   display: none;
 }
 
-
-
-.otp-layerView { 
-	width:260px;
-	min-height:100px;
-	background-color: white; /*#F3F3F3;*/
-	border: 0px solid #9CCB3B;
-	color: black;	
-	padding:0px;
-}
-
-.otp-layerView-header { text-align:center; }
-
-.otp-layerView-inner {
-	min-height:100px;
-	border:none;
-	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
-	text-align:left;
-	padding:10px;
-	border: 1px solid #9CCB3B;
-	border-top: none;	
-}
-
 .routes div .box,
 .bikes div .box,
 .stops div .box {
@@ -1132,9 +1084,6 @@ p#splash-text span {
     display: block;
   }
 
-  #addthis {
-    display: block;
-  }
   #logo .ribbon {
     height: 6em;
     padding: 0 1.5em 0 2em;
@@ -1166,12 +1115,6 @@ p#splash-text span {
   	font-family: verdana;
   }
 
-  /* AddThis */
-  #branding .addthis_toolbox {
-    margin-right: 0;
-    float: right
-  }
-  
   /* Map UI */
   .leaflet-control-zoom {
     display: block;
