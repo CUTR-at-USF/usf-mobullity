@@ -639,7 +639,6 @@ hr.menu_separator{
 .otp-defaultTripWidget, .otp-layerView {
   height:auto;
   top: 3.5em;
-  left: 0px;
   padding: 0px;
   background: white;
   border: 1px solid gray;
@@ -649,10 +648,6 @@ hr.menu_separator{
 /* Custom CSS header class for the trip widget none for now */
 .otp-defaultTripWidget {
     width:auto;
-}
-
-.otp-defaultTripWidget-inner {
-    padding:100px;
 }
 
 /* Layers Widget */
