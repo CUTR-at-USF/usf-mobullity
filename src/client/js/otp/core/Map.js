@@ -90,8 +90,9 @@ otp.core.Map = otp.Class({
         });
 		
         this.lmap = new L.Map('map', mapProps);        
-	
+		
 	// Setup geolocation event	
+	this.currentLocation = {'latlng': L.latLng(0,0) };
 	this.lmap.on('locationfound', this.geoLocationFound);
 	this._locationLayer = L.layerGroup();
 	this._locationLayer.addTo(this.lmap);

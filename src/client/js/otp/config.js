@@ -85,7 +85,7 @@ otp.config = {
      * Site name / description / branding display options
      */
 
-    siteName            : "MoBullity",
+    siteName            : "USF Maps",
     siteDescription     : "An OpenTripPlanner deployment for USF.",
     logoGraphic         : 'images/usf-h-gold.png',
     // bikeshareName    : "",

@@ -1,5 +1,21 @@
 otp.namespace("otp.layers");
 
+var bikeIcon = L.Icon.extend({
+        options: {
+                angle: 0,
+                iconUrl : resourcePath + 'images/marker-bike.svg',
+                iconSize: new L.Point(30,60)
+        }
+});
+
+var hubIcon = L.Icon.extend({
+        options: {
+                angle: 0,
+                iconUrl : resourcePath + 'images/marker-hub.svg',
+                iconSize: new L.Point(30,60)
+        }
+});
+
 var stations = {};
 
 otp.layers.BikeStationsLayer = 
@@ -15,16 +31,26 @@ otp.layers.BikeStationsLayer =
 			this.module = module;
 			
 			this.module.addLayer("bikes", this);
-			this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
+
+			this.markers = {};
+
+			// We only need to handle zoom events to remove/add markers if the level is too high or low
+			this.module.webapp.map.lmap.on('zoomend', $.proxy(this.refresh, this));
+
+			// Refresh data every 5 seconds
+                        setInterval($.proxy(this.liveMap,this),5000);
 			
 			this.liveMap();
 		},
 
 		refresh : function() {
-			this.clearLayers();
 			var lmap = this.module.webapp.map.lmap;
 			if(lmap.getZoom() >= this.minimumZoomForStops) {
 				this.setMarkers();
+			}
+			else {
+				this.clearLayers();
+				this.markers = {};
 			}
 		},
 
@@ -37,46 +63,90 @@ otp.layers.BikeStationsLayer =
 				async: false,
 				timeout: 60000,
 				success: function(data){
-//					var x;
-//					for (x = 0; x < data.vehicles.length; x++){
-//					console.log("Vehicle "+x+": id:"+data.vehicles[x].id+" route:"+data.vehicles[x].routeId+" lat:"+data.vehicles[x].lat.toFixed(3)+" lon:"+data.vehicles[x].lon.toFixed(3)+" dir:"+data.vehicles[x].bearing);
-//					}
 					this_.stations = data.stations;
+					this_.setMarkers();
 				}
 			});
-//			console.log(this_.vehicles);
 		},
 
 		setMarkers: function(){
 			var this_ = this;
-			this.clearLayers();
-			var a = new Array();
-			var v;
+
+			if (!this.visible) {
+				this.clearLayers();
+				this.markers = {};
+				return;
+			}
+
 			var lmap = this.module.webapp.map.lmap;
-			
-			for(v=0; v < this_.stations.length; v++){
+			var zoom = lmap.getZoom();
+
+			opts = {};
+			if (zoom < 17) {
+				opts['iconSize'] = new L.Point(20,50);
+			}
+
+			var bike_icon = new bikeIcon(opts);
+			var hub_icon = new hubIcon(opts);
+
+			var added = {};
+	
+			for(var v=0; v < this_.stations.length; v++){
 				var coord = L.latLng(this_.stations[v].y,this_.stations[v].x);
 				var marker;
-				
-				marker =  L.marker(coord, {icon: this.module.icons.getSmall(this_.stations[v])} ).bindPopup('Bike Rack: ' + this_.stations[v].id + " Bikes Available: " + this_.stations[v].spacesAvailable + " Spaces: " + this_.stations[v].bikesAvailable);
-				marker.on('mouseover', marker.openPopup.bind(marker));
-				
-				a.push(marker);
-				
-			}
 		
-			if (this.visible)	
-				this.addLayer(L.layerGroup(a)).addTo(lmap);
+				var is_hub = this_.stations[v].id.substring(0,3) == "hub";
 
+                                if (is_hub) {
+                                        link = "http://app.socialbicycles.com/map?hub_id=" + this_.stations[v].id.replace("hub_", "");
+					marker_icon = hub_icon;
+				}
+				else {
+					link = "http://app.socialbicycles.com/map?bike_id=" + this_.stations[v].id.replace("bike_", "");
+					marker_icon = bike_icon;
+				}
+
+				name = this_.stations[v].name || this_.stations[v].id;
+				context = {'name': name, 'station': this_.stations[v], 'reserve_link': link};
+
+				if (is_hub) 
+					var bikePopup = ich['otp-bikesLayer-hub-popup'](context).get(0);
+				else var bikePopup = ich['otp-bikesLayer-popup'](context).get(0);
+
+				marker =  L.marker(coord, {icon: marker_icon} );
+				marker.bindPopup(bikePopup, {'minWidth': 200});
+				marker._leaflet_id = this_.stations[v].id;
+
+				if (!this.hasLayer(marker)) this.addLayer(marker);
+				else {
+					// if the marker exists, check that the position didnt change from previously
+					oldmarker = this._layers[marker._leaflet_id];
+	
+					// If the new position is different
+					if ( ! oldmarker._latlng.equals(marker._latlng)) {				
+						this.removeLayer(oldmarker);
+						this.addLayer(marker);
+					}
+					// if the position isn't different and the station is a hub, update the popup info
+					else if (is_hub) {
+		                                oldmarker.bindPopup(bikePopup, {'minWidth': 200});
+					}
+
+					oldmarker.setIcon(marker_icon);
+				}
+
+				added[ marker._leaflet_id ] = marker;
+			}
+	
+			// remove layers present but not in new set of markers
+			for (var i in this.markers) {
+				id = this.markers[i]._leaflet_id;
+				if (added[id] == undefined) {
+					this.removeLayer( this.markers[i] );
+				}
+			}
+
+			this.markers = added;
 		},
 		
-		setRoutes : function(){
-//			var routeData = this.module.webapp.transitIndex.routes;
-//			if(routeData['USF Bull Runner_A']){};
-//			if(routeData['USF Bull Runner_B']){};
-//			if(routeData['USF Bull Runner_C']){};
-//			if(routeData['USF Bull Runner_D']){};
-//			if(routeData['USF Bull Runner_E']){};
-//			if(routeData['USF Bull Runner_F']){};
-		},
 	});

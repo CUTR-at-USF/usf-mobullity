@@ -61,6 +61,9 @@ otp.modules.planner.PlannerModule =
 
     planTripFunction : null,
 
+    validated : false,
+    _valid : [],
+
     // current trip query parameters: 
     /*
     startName               : null,
@@ -143,10 +146,8 @@ otp.modules.planner.PlannerModule =
     		document.cookie = "visited=true; expires=Fri, 13 Dec 2041 12:00:00 UTC ";
             //Set Pop up Menu to give user info on how to use the app when the page firsts loads
             this.WelcomeWidget = this.createWidget("otp-WelcomeWidget", "<font color=red>Do NOT use this application while driving a vehicle!</font><br><br>" +
-            		"<li>View Current Live Bull Runner Bus Feed by<br>" +
-            		"clicking Layers at the top and selecting a route on the left.</li>" +
-            		"<li>Plan a trip by using the menu on the left.</li>" +
-            		"<li>Click the Help button for more information.</li>", this);
+            		"<li> Use the menu button to change between the Trip Planner and Layers features </li>" +
+            		"<li> To set your trip \"Start\" and \"End\", type your building name or abbreviation into the boxes or long-press on the map </li>", this);
             this.WelcomeWidget.center();
             this.WelcomeWidget.setTitle("Welcome!");
             this.addWidget(this.WelcomeWidget);
@@ -211,13 +212,7 @@ otp.modules.planner.PlannerModule =
     },
 
     handleClick : function(event) {
-        if(this.startLatLng == null) {
-        	this.setStartPoint(new L.LatLng(event.latlng.lat, event.latlng.lng), true);
-        }
         
-        else if(this.endLatLng == null) {
-        	this.setEndPoint(new L.LatLng(event.latlng.lat, event.latlng.lng), true);
-        }
     },
    
     
@@ -306,10 +301,213 @@ otp.modules.planner.PlannerModule =
     	this.setEndPoint(this.endLatLng, false);
     },
     
+    checkAutocomplete: function(results, obj, inputSelected) {
+	// Array of autocomplete results, user input jquery object, start or end
+	// Look for a match in the autocomplete results with the value of the input box and verify that the latlng matches
+
+	ret = {};
+	resultsList = results['result']; // from validate
+
+        for (var key in resultsList) {
+                tmp = key;
+
+		resultLatLng = "(" + parseFloat(resultsList[key].lat).toFixed(5) + ', ' + parseFloat(resultsList[key].lng).toFixed(5) + ")";
+
+		// Either an exact match, or (BUILDING) match, and "My Location"
+                if (key == obj.val() ||
+                    key.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
+		
+        	        // Name matches, but latlng doesn't. Update the result
+			if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
+			else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
+
+	        	ret['pos'] = resultsList[key];
+			break;
+        	}
+                // The input is somewhere in the key 
+		// 1 result + 'my location'
+                else if (tmp.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(resultsList).length == 2) {
+
+			obj[0].selectItem( key );
+			
+                        ret['pos'] = resultsList[key];
+			break;
+                }
+                // XXX Input is in the key AND results.length > 1 (maybe more than 1 match) ... ask
+	}
+
+	if (typeof(ret) == "object" && ret['pos'] != undefined) return ret;
+	
+	return false;
+    },
+  
+    validate : function() {
+	// Perform geocoder ajax to verify start/endpoints iff:
+	// 1) The inputs are non-empty AND,
+	// 2) Both autocomplete results are not available
+
+	// Verify the endpoints by checking:
+	// 1) The names are within the list of results,
+	// 2) The latlng matches what it should
+	// If either does not match, check geocoder again and then tell the user
+
+	// Find the tripoptions widget
+	widget_id = -1;
+   	for (i=0; i < this.widgets.length; i++) {
+		if (this.widgets[i].id == "otp-planner-optionsWidget") widget_id = i;
+	} 
+
+	cantValidate = false;
+
+	if (widget_id > -1) {
+
+		var that = {'this': this, 'widget_id': widget_id, 'existingQueryParams': this._existingQueryParams, 'apiMethod': this._apiMethod};
+
+		startInput = this.widgets[widget_id].controls.locations.startInput;
+		endInput = this.widgets[widget_id].controls.locations.endInput;
+
+		// CHECK START/END AGAINST AUTOCOMPLETE RESULTS
+		start_result = {'pos': undefined, 'result': startInput.data('results') || {}};
+		end_result = {'pos': undefined, 'result': endInput.data('results') || {}};
+
+		ret = false;
+
+		// if start isnt validated
+		if (this._valid.indexOf('start') == -1) {
+
+			// Handle case when latlng manually set
+			if (startInput.val()[0] == '(') {
+				if (this.startLatLng == undefined) {
+					str = startInput.val().replace("(", "").replace(")", "").split(', ');
+					this.startLatLng = new L.LatLng(parseFloat(str[0]), parseFloat(str[1]));				
+				}
+				start_result['pos'] = this.startLatLng; 
+				ret = true; // Assume user knows what they are doing by clicking map or using my location
+			}
+			else if (startInput.val().length > 0 && start_result['pos'] == undefined) {
+				ret = this.checkAutocomplete(start_result, startInput, 'start' );
+                                if (ret != false) start_result['pos'] = ret['pos'];
+			}
+
+                        if (start_result['pos'] != undefined && start_result['pos'].lat == 0) ret = false;
+
+			if (ret != false) {
+				this._valid.push('start');
+
+				if (start_result['pos'] != undefined) {
+					this.startLatLng = start_result['pos'];
+				}
+			}
+			else if (this._valid.indexOf('start_geocode') == -1) {
+				this._valid.push('start_geocode');
+				this._validTimer = false;
+
+               			this.webapp.geocoders[0].geocode(startInput.val(), function(results) {
+		                        ctrl = that.this.widgets[that.widget_id].controls.locations.startInput;
+       	        		        ctrl.data('results', ctrl[0].module.getResultLookup(results) );
+
+					clearTimeout( that.this._validTimeout );
+
+					if (that.this._validTimer == false)
+                                                that.this._validTimer = setTimeout( function() { that.this.validate() }, 500 );
+				});
+
+                                if (this._validTimeout == false) {
+					// in case of error or timeout, fire a planTrip to keep the validation going and alert if things dont work out
+					this._validTimeout = setTimeout( function() { this.validate() }, 2000 );
+				}
+
+			}
+			else {
+				if (start_result['pos'] == undefined) this.startLatLng = null;
+				cantValidate = true;
+			}
+		}
+
+		// if end isnt validated
+                if (this._valid.indexOf('end') == -1) {
+
+                        // Handle case when latlng manually set
+                        if (endInput.val()[0] == '(') {
+                               if (this.endLatLng == undefined) {
+                                        str = endInput.val().replace("(", "").replace(")", "").split(', ');
+                                        this.endLatLng = new L.LatLng(parseFloat(str[0]), parseFloat(str[1]));
+                                }
+                                end_result['pos'] = this.endLatLng;
+                                ret = true; // Assume user knows what they are doing by clicking map or using my location
+                        }
+                        else if (endInput.val().length > 0 && end_result['pos'] == undefined) {
+                                ret = this.checkAutocomplete(end_result, endInput, 'end' );
+				if (ret != false) end_result['pos'] = ret['pos'];
+			}
+
+			if (end_result['pos'] != undefined && end_result['pos'].lat == 0) ret = false;
+
+                        if (ret != false) {
+                                this._valid.push('end');
+
+				if (end_result['pos'] != undefined) {
+	                                this.endLatLng = end_result['pos'];
+				}
+                        }
+                        else if (this._valid.indexOf('end_geocode') == -1) {
+                                this._valid.push('end_geocode');
+                                this._validTimer = false;
+
+                                this.webapp.geocoders[0].geocode(endInput.val(), function(results) {
+                                        ctrl = that.this.widgets[that.widget_id].controls.locations.endInput;
+                                        ctrl.data('results', ctrl[0].module.getResultLookup(results) );
+
+                                        clearTimeout( that.this._validTimeout );
+
+                                        if (that.this._validTimer == false)
+                                                that.this._validTimer = setTimeout( function() { that.this.validate() }, 500 );
+                                });
+
+				if (this._validTimeout == false) {
+	                                // in case of error or timeout, fire a planTrip to keep the validation going and alert if things dont work out
+        	                        this._validTimeout = setTimeout( function() { this.validate() }, 2000 );
+				}
+
+                        }
+                        else {
+				if (end_result['pos'] == undefined) this.endLatLng = null;
+
+				cantValidate = true;
+			}
+
+		}
+
+	}
+
+	if (cantValidate) {
+		alert("Please select a start and end location.");
+		return;
+	}
+
+	// rely on ajax callback
+	if (this._valid.indexOf('start') == -1 || this._valid.indexOf('end') == -1) return;
+
+	this.validated = true;
+
+        this.planTrip( this._queryParams, this._apiMethod );
+
+    },
+ 
     planTrip : function(existingQueryParams, apiMethod) {
     
         if(typeof this.planTripStart == 'function') this.planTripStart();
-        
+
+	this._queryParams = existingQueryParams;
+	this._apiMethod = apiMethod;
+
+	if (!this.validated) {
+		this._valid = [];
+		return this.validate();
+	}
+
+	this.validated = false;
+
         //this.noTripWidget.hide();
     	
     	if(this.currentRequest !== null)
@@ -472,7 +670,6 @@ otp.modules.planner.PlannerModule =
     
         var queryParams = itin.tripPlan.queryParams;
         
-        console.log(itin.itinData);
         for(var i=0; i < itin.itinData.legs.length; i++) {
             var leg = itin.itinData.legs[i];
 
@@ -481,10 +678,16 @@ otp.modules.planner.PlannerModule =
             var weight = 8;
             // Added specific code for the HART bus line so that the hart bus line route will be highlighted in blue
             // Any other route will be highlighted in the default color which is green.
-            if(leg.agencyId == "Hillsborough Area Regional Transit"){polyline.setStyle({ color : '#0000FF', weight: weight});}
-            if(leg.agencyId == "USF Bull Runner"){polyline.setStyle({color: '#080', weight: weight});}
-            else{polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight});}
+            if (leg.agencyId == "Hillsborough Area Regional Transit") {
+                polyline.setStyle({ color : '#0000FF', weight: weight });
+            }
+            else if (leg.agencyId == "USF Bull Runner") { 
+                polyline.setStyle({ color: '#080', weight: weight });
+            }
+            else polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight });
+
             this.pathLayer.addLayer(polyline);
+
             polyline.leg = leg;
             polyline.bindPopup("("+leg.routeShortName+") "+leg.routeLongName);
 
