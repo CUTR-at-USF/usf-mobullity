@@ -646,7 +646,7 @@ hr.menu_separator{
 /* Custom CSS header class for the trip widget */
 .otp-defaultTripWidget-header {
     font-size: 20px;
-    min-height: 16px;
+    min-height: 22px;
     font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
     letter-spacing: 2px;
     font-weight: none; 
@@ -656,6 +656,7 @@ hr.menu_separator{
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: default;
+    padding: 5px;
 }
 
 .otp-defaultTripWidget {
@@ -683,7 +684,10 @@ hr.menu_separator{
 	padding:0px;
 }
 
-.otp-layerView-header { text-align:center; }
+.otp-layerView-header { 
+    padding: 5px;
+    text-align:center; 
+}
 
 .otp-layerView-inner {
 	min-height:100px;
