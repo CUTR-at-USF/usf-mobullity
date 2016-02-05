@@ -1052,9 +1052,6 @@ p#splash-text span {
     display: block;
   }
 
-  #addthis {
-    display: block;
-  }
   #logo .ribbon {
     height: 6em;
     padding: 0 1.5em 0 2em;
@@ -1084,12 +1081,6 @@ p#splash-text span {
   	float: right;
   	color: #9CCB3B;
   	font-family: verdana;
-  }
-
-  /* AddThis */
-  #branding .addthis_toolbox {
-    margin-right: 0;
-    float: right
   }
   
   /* Map UI */
