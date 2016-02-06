@@ -17,21 +17,40 @@ otp.namespace("otp.core");
 
 otp.core.Geocoder = otp.Class({
     
-    url : 'http://mobullity.forest.usf.edu:8181/otp-geocoder/geocode',
     addressParam : null,
     
     initialize : function(url, addressParam) {
-        //this.url = url;
+        this.url = url;
         this.addressParam = addressParam;
     },
     
-    geocode : function(address, setResultsCallback) {
+    geocode : function(address, setResultsCallback, currentUrl) {
+
         var params = { }; 
         params[this.addressParam] = address;
-        
-        $.ajax(this.url, {
-            data : params,
+
+        /* Rudimentary URL failover */               
+        if (typeof this.url == "object") {
+            if (currentUrl == undefined) url = this.url[0];
+            else url = currentUrl;
             
+            i = this.url.indexOf(url);
+            if (i in this.url && i+1 < this.url.length) nextUrl = this.url[i+1];
+            else nextUrl = "";
+
+        }
+        else {
+            url = this.url;
+            nextUrl = "";
+        }
+
+        args = {'address': address, 'callback': setResultsCallback};
+
+        $.ajax(url, {
+            data : params,
+
+            context: $.extend(this, {'args': args, 'nextUrl': nextUrl}),
+
             success: function(data) {
                 if((typeof data) == "string") data = jQuery.parseXML(data);
                 var results = [];
@@ -48,7 +67,12 @@ otp.core.Geocoder = otp.Class({
                 });
                 
                 setResultsCallback.call(this, results);
-            }
+            },
+
+            error: function() {
+                if (this.nextUrl != "") this.geocode(this.args['address'], this.args['callback'], this.nextUrl);
+            },
+
         });        
     } 
     
