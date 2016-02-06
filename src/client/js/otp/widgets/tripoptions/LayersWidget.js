@@ -135,6 +135,35 @@ otp.widgets.LayersWidget =
 		ev.data.module.bikeLanes.refresh(); 
                	
         });
+
+
+        // CarShare
+        this.carshare_layer = L.layerGroup();
+        this.carshare_active = false;
+
+        carshareicon = L.icon({angle:0, iconUrl: '/images/marker-carshare.svg', iconSize: new L.Point(30,60)});
+
+        marker =  L.marker(L.latLng(28.059951, -82.417575), {icon: carshareicon} );
+        marker._leaflet_id = 1;
+        this.carshare_layer.addLayer(marker);
+
+        marker =  L.marker(L.latLng(28.064287, -82.412130), {icon: carshareicon} );
+        marker._leaflet_id = 2;
+        this.carshare_layer.addLayer(marker);       
+ 
+        $('#carshare').bind('click', {'module': this}, function(ev) {
+
+            if (ev.data.module.carshare_active) {
+                $('#carshare .box').removeClass("active");
+                webapp.map.lmap.removeLayer( ev.data.module.carshare_layer );
+            }
+            else {
+                $('#carshare .box').addClass("active");
+                ev.data.module.carshare_layer.addTo( webapp.map.lmap );
+            }   
+
+            ev.data.module.carshare_active = ! ev.data.module.carshare_active;     
+        });
         
     },
     
