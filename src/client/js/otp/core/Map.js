@@ -162,11 +162,11 @@ otp.core.Map = otp.Class({
    
     /* sets a marker at the current location */
     geoLocationFound : function(e) {
-      	 var this_ = webapp.map; // Since we are typically called from leaflet.on, 'this' will be from that context
+     var this_ = webapp.map; // Since we are typically called from leaflet.on, 'this' will be from that context
 
 	 if (this_.initialGeolocation) {		
 
-            	// Only zoom in on location on initial geolocation
+       	// Only zoom in on location on initial geolocation
 		// If the GPS is bad for some reason, and the user zooms, we would reset the view once this callback fires unless we track the initial call as below.
 		this_.initialGeolocation = false;
 
@@ -186,8 +186,14 @@ otp.core.Map = otp.Class({
 			return; // and don't add a marker on first load
 		}				
 
+        // Set initial map view and zoom when first GPS location found
 		this.queueView(e.latlng, otp.config.gpsZoom);
  	 }
+     else {
+        // Otherwise, just pan the map to 'follow' user movements
+        if ( !this_.lmap.getBounds().contains( e.latlng ) )
+            this_.lmap.panTo( e.latlng );   
+     }
 
 	 // Save the location on otp.core.Map for use elsewhere
 	 this_.currentLocation = e;
@@ -203,21 +209,21 @@ otp.core.Map = otp.Class({
         	options: {
             		iconUrl: resourcePath + 'images/locationSpot.svg',
             		iconSize: new L.Point(10,10),
-            	}
-         });
+          	}
+     });
 
-         var marker = new L.marker();
-         var accCircle = new L.circle();
+     var marker = new L.marker();
+     var accCircle = new L.circle();
 
-         var locSpot = new locationSpot();
-         marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
-         accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
+     var locSpot = new locationSpot();
+     marker = L.marker(e.latlng,{icon : locSpot,}).bindPopup('Current Location');
+     accCircle = L.circle(e.latlng,e.accuracy,{color:"blue", opacity: .25, fillOpacity: .1, weight: 3});
 
  	 this_._locationLayer.clearLayers();
 
-         //adds new marker and accuracy circle
-         marker.addTo(this_._locationLayer);
-         accCircle.addTo(this_._locationLayer);
+     //adds new marker and accuracy circle
+     marker.addTo(this_._locationLayer);
+     accCircle.addTo(this_._locationLayer);
 
     },
  
