@@ -669,8 +669,8 @@ hr.menu_separator{
   border: 1px solid gray;
 }
 
-.otp-planner-optionsWidget-scollPanel {
-    padding: 10px;
+div#otp-planner-optionsWidget-scollPanel {
+    padding: 0px 5px;
 }
 /* Layer widget */
 .otp-layerView { 
