@@ -137,16 +137,13 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
             }
 
             if(!this._active) {
-		 // We use our own location callback to handle drawing the marker, etc
-                 // webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
+        		// We use our own location callback to handle drawing the marker, etc
+                // webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
 
-		// Only start 1 locate() to work around Chromium bug
-		if (this._map._locationWatchId == undefined) {
+		        // Only start 1 locate() to work around Chromium bug
+        		if (this._map._locationWatchId == undefined) {
         	        webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
-		}
-
-		webapp.map.initialGeolocation = true; // Allow app to pan/zoom to new location if the user clicked this
-		// else this._map.fire('locationfound'); XXX?
+		        }
 
             }
             this._active = true;
@@ -162,7 +159,10 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
          * Override it to shutdown any functionalities you added on start.
          */
         _deactivate: function() {
-		this._active = false;
+            this._map.stopLocate();
+            this._map._locationWatchId = undefined;
+
+		    this._active = false;
         },
 
         /**
@@ -305,10 +305,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
                 .on(this._link, 'click', L.DomEvent.stopPropagation)
                 .on(this._link, 'click', L.DomEvent.preventDefault)
                 .on(this._link, 'click', function() {
-                    var shouldStop = (this._event === undefined ||
-                        this._map.getBounds().contains(this._event.latlng) ||
-                        !this.options.setView || this._isOutsideMapBounds());
-                    if (!this.options.remainActive && (this._active && shouldStop)) {
+                    if (this._active) {
                         this.stop();
                     } else {
                         this.start();

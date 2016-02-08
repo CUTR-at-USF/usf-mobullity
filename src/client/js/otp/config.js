@@ -144,7 +144,8 @@ otp.config = {
         {
             name: 'Geocoder',
             className: 'otp.core.Geocoder',
-            //hardcoded url into otp.core.Geocoder
+            url: [ "http://" + window.location.hostname + ":8181/otp-geocoder/geocode", "http://mobullity.forest.usf.edu:8181/otp-geocoder/geocode" ],
+
             addressParam: 'address',
             // URL and query parameter do not need to be set for built-in geocoder.
         }

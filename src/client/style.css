@@ -195,12 +195,6 @@ body {
 }
 
 /*creates the green line below the tool bar at the top*/
-@media only screen and (min-width: 768px) {
-  #branding {
-    height: 3.5em;
-    border-bottom: 0.5em solid #006747;
-  }
-}
 
 /* Module Selector */
 #otp_moduleSelector {
@@ -214,23 +208,6 @@ body {
     font-size: 16px;
     margin: 13px 20px;
   }
-}
-
-
-
-#otp_topbutton {
-  float: left;
-  width: 90px;
-  height: 42px;
-  background: #466069;
-  font-weight: bold;
-  font-size: 30px;
-  padding: 6px 0px 4px 10px;
-  cursor: pointer;
-}
-
-#otp_topbutton:hover {
-  color: #29AFCE;
 }
 
 #otp_toptitle {
@@ -282,14 +259,6 @@ body {
                -1px  1px 1px rgba(42,101,161,0.25),
                 1px -1px 1px rgba(42,101,161,0.25),
                 1px  1px 1px rgba(42,101,161,0.25)
-}
-
-/* AddThis */
-#branding .addthis_toolbox {
-  margin: 1.25em 0 0 0;
-  padding-right: 0;
-  float: right;
-  min-width: 100px;
 }
 
 /* Live Map Window Style Class */
@@ -677,13 +646,12 @@ hr.menu_separator{
 /* Custom CSS header class for the trip widget */
 .otp-defaultTripWidget-header {
     font-size: 20px;
-    min-height: 16px;
+    min-height: 22px;
     font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
     letter-spacing: 2px;
     font-weight: none; 
     color: #fff;
     background-color: #006747;
-   /* margin-bottom: 5px; */
     overflow: hidden;   
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -695,39 +663,40 @@ hr.menu_separator{
   width: auto;
   height: auto;
   top: 3.5em;
-  left: 0;
   padding: 0px;
+  padding-bottom: 5px;
   background: white;
+  border: 1px solid gray;
 }
 
-.otp-defaultTripWidget hr {
-  display: none;
+.otp-planner-optionsWidget-scollPanel {
+    padding: 10px;
+}
+/* Layer widget */
+.otp-layerView { 
+	width:40%;
+	min-width: 160px;
+	max-width: 200px;
+	min-height:100px;
+	background-color: white;
+	border: 1px solid gray;
+	color: black;	
+	padding:0px;
 }
 
-
-/* trip options widget editing */
-@media only screen and (min-width: 768px) {
-  .otp-defaultTripWidget {
-    width: 20em;
-    height: 90%;
-    top: 4em;
-    left: 0;
-    padding: 0px;
-    border: 0;
-    background-color: white;
-  }
-
-  .otp-defaultTripWidget hr {
-    display: block;
-  }
- 
-   .otp-defaultTripWidget-header .title {
-    display: block;
-    background: black;
-	color: rgb(255, 155, 20);
-  } 
-    
+.otp-layerView-header { 
+    padding: 5px;
+    text-align:center; 
 }
+
+.otp-layerView-inner {
+	min-height:100px;
+	border:none;
+	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
+	text-align:left;
+	padding:10px;
+}
+
 
 .otp-defaultItinsWidget {
 	width: auto;
@@ -945,31 +914,7 @@ p#splash-text span {
   display: none;
 }
 
-
-
-.otp-layerView { 
-	width:40%;
-	min-width: 160px;
-	max-width: 200px;
-	min-height:100px;
-	background-color: white; /*#F3F3F3;*/
-	border: 0px solid #9CCB3B;
-	color: black;	
-	padding:0px;
-}
-
-.otp-layerView-header { text-align:center; }
-
-.otp-layerView-inner {
-	min-height:100px;
-	border:none;
-	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
-	text-align:left;
-	padding:10px;
-	border: 1px solid #9CCB3B;
-	border-top: none;	
-}
-
+.other div .box,
 .routes div .box,
 .bikes div .box,
 .stops div .box {
@@ -981,6 +926,8 @@ p#splash-text span {
 	height: 15px;
 	float:left;
 }
+
+.other div .name,
 .routes div .name,
 .bikes div .name,
 .stops div .name {
@@ -1021,6 +968,10 @@ p#splash-text span {
 	background-color: green;
 }
 
+.other div#carshare .box.active {
+    background-color: green;
+}
+
 .otp-layerView-inner fieldset { border-top:1px solid #9CCB3B; }
 .otp-layerView-inner fieldset legend { text-align:center; }
 
@@ -1052,9 +1003,6 @@ p#splash-text span {
     display: block;
   }
 
-  #addthis {
-    display: block;
-  }
   #logo .ribbon {
     height: 6em;
     padding: 0 1.5em 0 2em;
@@ -1084,12 +1032,6 @@ p#splash-text span {
   	float: right;
   	color: #9CCB3B;
   	font-family: verdana;
-  }
-
-  /* AddThis */
-  #branding .addthis_toolbox {
-    margin-right: 0;
-    float: right
   }
   
   /* Map UI */
