@@ -50,7 +50,7 @@ otp.widgets.tripoptions.TripOptionsWidget =
         else {
             control.$().appendTo(this.$());
         }
-        //$("<hr />").appendTo(this.$());
+
         control.doAfterLayout();
         this.controls[id] = control;
     },
