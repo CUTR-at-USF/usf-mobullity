@@ -144,10 +144,12 @@ otp.widgets.LayersWidget =
         carshareicon = L.icon({angle:0, iconUrl: '/images/marker-carshare.svg', iconSize: new L.Point(30,60)});
 
         marker =  L.marker(L.latLng(28.059951, -82.417575), {icon: carshareicon} );
+        marker.bindPopup("<a target='_blank' href='https://www.enterprisecarshare.com/us/en/programs/university/usf.html'>Reserve a car</a>");
         marker._leaflet_id = 1;
         this.carshare_layer.addLayer(marker);
 
         marker =  L.marker(L.latLng(28.064287, -82.412130), {icon: carshareicon} );
+        marker.bindPopup("<a target='_blank' href='https://www.enterprisecarshare.com/us/en/programs/university/usf.html'>Reserve a car</a>");
         marker._leaflet_id = 2;
         this.carshare_layer.addLayer(marker);       
  
