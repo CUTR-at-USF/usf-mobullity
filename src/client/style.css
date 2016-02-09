@@ -697,6 +697,13 @@ div#otp-planner-optionsWidget-scollPanel {
 	padding:10px;
 }
 
+.otp-layerView-inner fieldset { border-top:1px solid #000; }
+.otp-layerView-inner fieldset legend { text-align:center; }
+
+.layerView .bus, .layerView .bikes, .layerView .parking { padding: 5px; text-align:left; }
+/* .layerView .bus li { } */
+.layerView .bikes li { }
+.layerView .parking li { }
 
 .otp-defaultItinsWidget {
 	width: auto;
@@ -971,14 +978,6 @@ p#splash-text span {
 .other div#carshare .box.active {
     background-color: green;
 }
-
-.otp-layerView-inner fieldset { border-top:1px solid #9CCB3B; }
-.otp-layerView-inner fieldset legend { text-align:center; }
-
-.layerView .bus, .layerView .bikes, .layerView .parking { padding: 5px; text-align:left; }
-/* .layerView .bus li { } */
-.layerView .bikes li { }
-.layerView .parking li { }
 
 
 .leaflet-control-locate a {
