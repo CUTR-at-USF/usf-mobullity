@@ -979,6 +979,9 @@ p#splash-text span {
     background-color: green;
 }
 
+.other div#bluephone .box.active {
+    background-color: #2880ca;
+}
 
 .leaflet-control-locate a {
 	padding: 3px 0px 0px 0px;
