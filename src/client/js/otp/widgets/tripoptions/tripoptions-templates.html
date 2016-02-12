@@ -2,21 +2,21 @@
 
 <script id="otp-tripOptions-locations" type="text/html">
 
-    <div style="width: 2.5em; float:left;">
-        <div style="height: 2em;">{{start}}:</div>
+    <div style="width: 2.5em; float:left; margin-top:5px;">
+        <div style="height: 3em;">{{start}}:</div>
         <div>{{end}}:</div>
     </div>
         
-    <div class="notDraggable" style="position: relative; margin-left: 3em; height: 3.6em; overflow: hidden;">
-        <div style="position: absolute; left:0px; right: 30px; height: 20px;">
-            <div style="position: absolute; left:0px; right: 16px; top:1px; bottom: 0px;">
+    <div class="notDraggable" style="position: relative; margin-left: 3em; height: 5em; overflow: hidden; margin-top:5px;">
+        <div style="position: absolute; left:0px; right: 30px; top:5px; height: 20px;">
+            <div style="position: absolute; left:0px; right: 16px; top:0px; bottom: 0px;">
                 <input id="{{widgetId}}-start" class="borderBox otp-tripOptions-loc-input">
             </div>
-            <div style="position: absolute; top:0px; bottom: 0px; right: 0px; width: 16px;">
+            <div style="position: absolute; top:-1px; bottom: 0px; right: 0px; height: 20px; width: 16px;">
                 <button id="{{widgetId}}-startDropdown" class="borderBox otp-tripOptions-loc-dropdownBtn">&#x25BC;</button>
             </div>
         </div>
-        <div style="position: absolute; top: 1.8em; left:0px; right: 30px; height: 20px;">
+        <div style="position: absolute; top: 3em; left:0px; right: 30px; height: 20px;">
             <div style="position: absolute; left:0px; right: 16px; top:1px; bottom: 0px;">
                 <input id="{{widgetId}}-end" class="borderBox otp-tripOptions-loc-input">
             </div>
@@ -24,8 +24,8 @@
                 <button id="{{widgetId}}-endDropdown" class="borderBox otp-tripOptions-loc-dropdownBtn">&#x25BC;</button>
             </div>
         </div>
-        <div style="position: absolute; top: 10px; right:0px; width: 20px; height: 20px; background: red;">
-            <button id="{{widgetId}}-reverseButton" class="otp-tripOptions-loc-reverseBtn"><img src="images/reverse.png" /></button>
+        <div style="position: absolute; top: 18px; right:0px; width: 26px; height: 26px; background: white;">
+            <button id="{{widgetId}}-reverseButton" class="otp-tripOptions-loc-reverseBtn"><img src="images/swap-vertical.png" /></button>
         </div>
     </div>
 
@@ -67,7 +67,7 @@
 
 <script id="otp-tripOptions-wheelchair" type="text/html">
 
-    <div class="notDraggable">
+    <div class="notDraggable" style="padding-bottom: 5px;">
         {{label}} &nbsp;
 		<input type="checkbox" id="{{widgetId}}-wheelchair-input" />
     </div>
