@@ -258,7 +258,7 @@
 	</bean>
 
 	<bean id="geocoderNominatim" class="org.opentripplanner.geocoder.nominatim.NominatimGeocoder">
-		<property name="nominatimUrl" value="http://open.mapquestapi.com/nominatim/v1/search" />
+		<property name="nominatimUrl" value="http://open.mapquestapi.com/nominatim/v1/search?key=kOgk9LSvIeh3EbKOupBCxC5w4tB2JtF4" />
 		<!-- Optional parameters: viewBox and resultLimit, viewbox=left,top,right,bottom -->  
 		<property name="viewBox" value="-83.23,28.32,-81.81,27.63" />
 		<property name="resultLimit" value="50" />
