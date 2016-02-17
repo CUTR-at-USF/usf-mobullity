@@ -983,6 +983,10 @@ p#splash-text span {
     background-color: #2880ca;
 }
 
+.box_col {
+    vertical-align: middle;
+}
+
 .leaflet-control-locate a {
 	padding: 3px 0px 0px 0px;
 }
