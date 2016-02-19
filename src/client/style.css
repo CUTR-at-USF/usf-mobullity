@@ -697,7 +697,7 @@ div#otp-planner-optionsWidget-scollPanel {
 	padding:10px;
 }
 
-.otp-layerView-inner fieldset { border-top:1px solid #000; }
+.otp-layerView-inner fieldset { border-top:1px solid gray; }
 .otp-layerView-inner fieldset legend { text-align:center; }
 
 .layerView .bus, .layerView .bikes, .layerView .parking { padding: 5px; text-align:left; }
