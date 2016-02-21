@@ -108,7 +108,7 @@ otp.core.Map = otp.Class({
 		
 				if(otp.config.geoLocation) {
 					this_.initialGeolocation = true;
-					this_.lmap.locate({watch: true, enableHighAccuracy: true});
+					//this_.lmap.locate({watch: true, enableHighAccuracy: true});
 				}						
 				
             }
