@@ -114,7 +114,7 @@ otp.core.Webapp = otp.Class({
         this.widgetManager = new otp.widgets.WidgetManager();
         
         // create the info widgets and links along header bar
-        if(otp.config.infoWidgets !== undefined && otp.config.infoWidgets.length > 0) {
+        if(otp.config.showWidgetMenu && otp.config.infoWidgets !== undefined && otp.config.infoWidgets.length > 0) {
             var nav = $('<nav id="main-menu" role="article">').appendTo('#branding');
             var ul = $('<ul>').appendTo(nav);
 
