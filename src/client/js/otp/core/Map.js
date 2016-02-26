@@ -189,11 +189,6 @@ otp.core.Map = otp.Class({
         // Set initial map view and zoom when first GPS location found
 		this.queueView(e.latlng, otp.config.gpsZoom);
  	 }
-     else {
-        // Otherwise, just pan the map to 'follow' user movements
-        if ( !this_.lmap.getBounds().contains( e.latlng ) )
-            this_.lmap.panTo( e.latlng );   
-     }
 
 	 // Save the location on otp.core.Map for use elsewhere
 	 this_.currentLocation = e;
