@@ -103,6 +103,8 @@ otp.config = {
     showBikeStations	: true,
     showBikeLanes		: true,
 
+    showWidgetMenu      : false, /* The old-style drop down menu with all active widgets ... 'gears icon' */
+
     /**
      * Modules: a list of the client modules to be loaded at startup. Expressed
      * as an array of objects, where each object has the following fields:
