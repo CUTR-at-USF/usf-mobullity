@@ -62,7 +62,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
                 //color: '#FFA500',
                 //fillColor: '#FFB000'
             },
-            icon: 'fa fa-map-marker',  // fa-location-arrow or fa-map-marker
+            icon: 'mdi mdi-crosshairs-gps',  // fa-location-arrow or fa-map-marker
             iconLoading: 'fa fa-spinner fa-spin',
             circlePadding: [0, 0],
             metric: true,
@@ -136,17 +136,16 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
                 this._locateOnNextLocationFound = true;
             }
 
-            if(!this._active) {
-        		// We use our own location callback to handle drawing the marker, etc
-                // webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
+        	// We use our own location callback to handle drawing the marker, etc
 
-		        // Only start 1 locate() to work around Chromium bug
-        		if (this._map._locationWatchId == undefined) {
-        	        webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
-		        }
+		    // Only start 1 locate() to work around Chromium bug
+        	if (this._map._locationWatchId == undefined) {
+        	    webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
+		    }
 
+            if (webapp.map.currentLocation.latlng.lat != 0) {
+                webapp.map.lmap.panTo([webapp.map.currentLocation.latlng.lat, webapp.map.currentLocation.latlng.lng]);
             }
-            this._active = true;
 
             if (this.options.follow) {
                 this._startFollowing(this._map);
@@ -179,17 +178,6 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
             if (this._locateOnNextLocationFound) {
                 if (this._isOutsideMapBounds()) {
                     this.options.onLocationOutsideMapBounds(this);
-                } else {
-                    // If accuracy info isn't desired, keep the current zoom level
-                    if(this.options.keepCurrentZoomLevel || !this.options.drawCircle){
-                        map.panTo([this._event.latitude, this._event.longitude]);
-                    } else {
-                        map.fitBounds(this._event.bounds, {
-                            padding: this.options.circlePadding,
-                            maxZoom: this.options.keepCurrentZoomLevel ?
-                            map.getZoom() : this.options.locateOptions.maxZoom
-                        });
-                    }
                 }
                 this._locateOnNextLocationFound = false;
             }
@@ -305,11 +293,7 @@ You can find the project at: https://github.com/domoritz/leaflet-locatecontrol
                 .on(this._link, 'click', L.DomEvent.stopPropagation)
                 .on(this._link, 'click', L.DomEvent.preventDefault)
                 .on(this._link, 'click', function() {
-                    if (this._active) {
-                        this.stop();
-                    } else {
                         this.start();
-                    }
                 }, this)
                 .on(this._link, 'dblclick', L.DomEvent.stopPropagation);
 
