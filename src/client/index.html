@@ -231,12 +231,14 @@ $(document).ready(function() {
         for="main-menu">
             <li class="mdl-menu__item" id="tripPlannerButton"
             onClick=" document.cookie = 'widgetUsed=trip; expires=Fri, 13 Dec 2041 12:00:00 UTC';
+                     document.location.hash = 'trip';
                      jQuery('#layersButton').removeClass('selected_item'); jQuery('#tripPlannerButton').addClass('selected_item');
                      javascript:webapp.modules[0].optionsWidget.unminimize(); webapp.modules[0].layerWidget.minimize();"> 
             <i class="material-icons" >directions</i>
                 Trip planner</li>
             <li class="mdl-menu__item" id="layersButton"
                 onClick=" document.cookie = 'widgetUsed=layers; expires=Fri, 13 Dec 2041 12:00:00 UTC';
+                          document.location.hash = 'layers';
                           jQuery('#tripPlannerButton').removeClass('selected_item'); jQuery('#layersButton').addClass('selected_item');
                           javascript:webapp.modules[0].layerWidget.unminimize(); webapp.modules[0].optionsWidget.minimize();">
             <i class="material-icons" >layers</i>
