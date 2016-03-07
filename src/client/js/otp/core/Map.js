@@ -121,8 +121,89 @@ otp.core.Map = otp.Class({
         /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
         L.control.zoom({ position : 'topright' }).addTo(this.lmap);
-        this.locateControl = L.control.locate({ position : 'topright', locateOptions: {maxZoom: otp.config.gpsZoom} });
-	this.locateControl.addTo(this.lmap); 
+
+        locate_control = L.Control.extend({
+            options: {
+                position: 'topright',
+                markerStyle: {
+                    color: '#136AEC',
+                    fillColor: '#2A93EE',
+                    fillOpacity: 0.7,
+                    weight: 2,
+                    opacity: 0.9,
+                    radius: 5
+                },
+                icon: 'mdi mdi-crosshairs-gps',  // fa-location-arrow or fa-map-marker
+                iconLoading: 'fa fa-spinner fa-spin',
+            },
+            onLocationError: function(err) {
+                // this event is called in case of any location error
+                // that is not a time out error.
+
+                switch (err.code) {
+                case 1: /* The HTML5 standard specifies err.PERMISSION_DENIED, leaflet does not pass this through */
+                    alert("To see your real-time position on the map, please allow USF Maps to access your location");
+                    break;
+                default:
+                    alert(err.message);
+                }
+
+            },
+            _activate: function() {
+                // We use our own location callback to handle drawing the marker, etc
+
+                // Only start 1 locate() to work around Chromium bug
+                if (this._map._locationWatchId == undefined) {
+                    webapp.map.lmap.locate({watch:true, enableHighAccuracy: true});
+                }
+
+                if (webapp.map.currentLocation.latlng.lat != 0) {
+                    webapp.map.lmap.panTo([webapp.map.currentLocation.latlng.lat, webapp.map.currentLocation.latlng.lng]);
+                }
+            },
+
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-control-locate leaflet-bar leaflet-control');
+
+                this._event = undefined;
+
+                this._link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single', container);
+                this._link.href = '#';
+                this._icon = L.DomUtil.create('span', this.options.icon, this._link);
+
+                L.DomEvent
+                    .on(this._link, 'click', L.DomEvent.stopPropagation)
+                    .on(this._link, 'click', L.DomEvent.preventDefault)
+                    .on(this._link, 'click', function() {
+                            this.start();
+                    }, this);
+
+                this.bindEvents(map);
+
+                return container;
+            },
+
+            /**
+             * Binds the actions to the map events.
+             */
+            bindEvents: function(map) {
+                map.on('locationfound', this._onLocationFound, this);
+                map.on('locationerror', this._onLocationError, this);
+                map.on('unload', this.stop, this);
+            },
+
+            /**
+             * Starts the plugin:
+             * - activates the engine
+             * - draws the marker (if coordinates available)
+             */
+            start: function() {
+                this._activate();
+            },
+
+        });  
+        this.locateControl = new locate_control(); 
+    	this.locateControl.addTo(this.lmap); 
                 
         /*var baseMaps = {
             'Base Layer' : tileLayer 
