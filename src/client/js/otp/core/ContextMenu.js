@@ -25,14 +25,19 @@ otp.core.ContextMenu =
         
         var this_ = this;
         
-        this.parent = parent;
+        this.parent = parent; /* Widget.js mainDiv */
+        parent.contextMenuOpened = false;
         
         parent.on('contextmenu', function(event) {
             if(event.preventDefault) event.preventDefault();
+
+            this_.parent.contextMenuOpened = true; 
             this_.menu.show();
             this_.menu.offset(this_.getOffset(event)).appendTo("body");
 
             if(menuClicked) menuClicked.call(this, event);
+
+            return false;
         });
     },
 });    
