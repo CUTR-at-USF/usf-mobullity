@@ -174,7 +174,7 @@ otp.config = {
     infoWidgets: [
 
         {
-    	title: 'Icon Legend',
+    	title: 'Help',
     	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
     		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
     		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br> </p>\
