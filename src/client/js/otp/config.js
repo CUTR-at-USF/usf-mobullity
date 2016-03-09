@@ -181,12 +181,13 @@ otp.config = {
     		<p> We would like to acknowledge the support and funding assistance provided by the USF Student Green Energy Fund, Center for Urban Transportation Research, and Florida Department of Transportation.</p>' 
         },
         {	
-	title: 'Contact',
-	content: '<p> Contact information for questions or comments:</p>\
-		<p>Sean Barbeau: barbeau@cutr.usf.edu</p>'
+        title: 'Send Feedback',
+        content: '<p>We welcome questions and comments! Send feedback to Sean Barbeau (<a style="color:white" href="mailto:barbeau@cutr.usf.edu" >barbeau@cutr.usf.edu</a>).</p> \
+    	      <p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p>'
         },
 
     ],
+
 
 
     /**
@@ -195,5 +196,6 @@ otp.config = {
      
     timeFormat  : "h:mma",
     dateFormat  : "MMM Do YYYY"
+
     	
 }
