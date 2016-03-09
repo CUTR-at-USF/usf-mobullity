@@ -114,10 +114,15 @@ otp.core.Webapp = otp.Class({
         this.widgetManager = new otp.widgets.WidgetManager();
         
         // create the info widgets and links along header bar
-        if(otp.config.showWidgetMenu && otp.config.infoWidgets !== undefined && otp.config.infoWidgets.length > 0) {
-            var nav = $('<nav id="main-menu" role="article">').appendTo('#branding');
-            var ul = $('<ul>').appendTo(nav);
+        if(otp.config.infoWidgets !== undefined && otp.config.infoWidgets.length > 0) {
 
+            // Create the main-menu DOM elements
+            if (otp.config.showWidgetMenu) {
+                var nav = $('<nav id="main-menu" role="article">').appendTo('#branding');
+                var ul = $('<ul>').appendTo(nav);
+            }
+
+            // Initialize the infowidgets
             for(var i=0; i<otp.config.infoWidgets.length; i++) {
 
                 if(otp.config.infoWidgets[i] == undefined) continue;
