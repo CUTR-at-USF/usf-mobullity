@@ -27,6 +27,13 @@ otp.core.PopupMenu = otp.Class({
         this.menu = $('<div class="otp-popupMenu"></div>');
         
         $(document).bind("click", function(event) {
+            // ignore right clicks - we handle contextmenu in ContextMenu.js
+            if (event.which == 3) { 
+                this_.contextMenuOpened = false;
+                event.stopPropagation();
+                return;
+            }
+
             if(this_.suppressHide) {
                 this_.suppressHide = false;
                 return;
