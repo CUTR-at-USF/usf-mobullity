@@ -1,3 +1,11 @@
+function sendfeedback() {
+    var email = 'barbeau@cutr.usf.edu';
+    var subject = 'USF Maps feedback';
+    var body = '%0D%0A%0D%0A%0D%0AThe%20below%20information%20helps%20us%20troubleshoot%20problems:%0D%0A' + navigator.userAgent;// + '%0D%0AGeolocation:'+ navigator.geolocation.getCurrentPosition();
+    var content = '<p>We welcome questions and comments! Send feedback to Sean Barbeau (<a style="color:white" href="mailto:' + email + '?subject=' + subject + '&body=' + body + '">' + email + '</a>).</p>';
+    return content;
+}
+
 otp.config = {
     debug: false,
     locale: otp.locale.English,
@@ -182,11 +190,11 @@ otp.config = {
         },
         {	
         title: 'Send Feedback',
-        content: '<p>We welcome questions and comments! Send feedback to Sean Barbeau (<a style="color:white" href="mailto:barbeau@cutr.usf.edu" >barbeau@cutr.usf.edu</a>).</p> \
-    	      <p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p>'
+        content: sendfeedback() + '<p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p>' 
         },
 
     ],
+
 
 
 
