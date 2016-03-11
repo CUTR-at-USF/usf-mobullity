@@ -542,7 +542,7 @@ hr.menu_separator{
 
 .otp-defaultInfoWidget {
     width: 75%;
-    height: 75%;
+    height: auto;
     overflow: hidden;
     background: #006747;
     color: #FFF;
