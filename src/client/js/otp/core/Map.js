@@ -47,10 +47,22 @@ otp.core.Map = otp.Class({
             if(layerConfig.subdomains) layerProps['subdomains'] = layerConfig.subdomains;
 
             var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
+            L.stamp(layer);
 
-            this.baseLayers[layerConfig.name] = layer;
-            if(i == 0) defaultBaseLayer = layer;            
-                
+            if ('overlayUrl' in layerConfig) {
+                var hybLayer = L.layerGroup();
+                L.stamp(hybLayer);
+                hybLayer.addLayer( layer );
+                hybLayer.addLayer( new L.TileLayer(layerConfig.overlayUrl, layerProps) );
+
+                this.baseLayers[layerConfig.name] = hybLayer;     
+            }
+            else {
+                this.baseLayers[layerConfig.name] = layer;
+            }
+
+            if(i == 0) defaultBaseLayer = layer;           
+ 
             if(typeof layerConfig.getTileUrl != 'undefined') {
                     layer.getTileUrl = otp.config.getTileUrl;
             }
@@ -114,9 +126,7 @@ otp.core.Map = otp.Class({
             }
         });		    
 		           
-        this.overLayMaps ={
-        	//"CUTR" : marker,
-        };
+        this.overLayMaps = { };
 	   
         /* here are the controls for layers and zooming on the map */
         L.control.layers(this.baseLayers, this.overLayMaps).addTo(this.lmap);
