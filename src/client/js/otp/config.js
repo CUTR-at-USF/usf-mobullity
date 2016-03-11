@@ -1,3 +1,11 @@
+function sendfeedback() {
+    var email = 'barbeau@cutr.usf.edu';
+    var subject = 'USF Maps feedback';
+    var body = '%0D%0A%0D%0A%0D%0AThe%20below%20information%20helps%20us%20troubleshoot%20problems:%0D%0A' + navigator.userAgent;// + '%0D%0AGeolocation:'+ navigator.geolocation.getCurrentPosition();
+    var content = '<p>We welcome questions and comments! Send feedback to Sean Barbeau (<a style="color:white" href="mailto:' + email + '?subject=' + subject + '&body=' + body + '">' + email + '</a>).</p>';
+    return content;
+}
+
 otp.config = {
     debug: false,
     locale: otp.locale.English,
@@ -181,19 +189,20 @@ otp.config = {
     infoWidgets: [
 
         {
-    	title: 'Icon Legend',
+    	title: 'Help',
     	content: '<p><img src="images/locationSpot.svg" height="15" width="15"> : Current Location<br>\
     		<img src="images/busStopButton.png" height="15" width="15"> : BullRunner Bus Stop<br>\
     		<img src="images/stop20.png" height="15" width="15"> : HART Bus Stop<br> </p>\
     		<p> We would like to acknowledge the support and funding assistance provided by the USF Student Green Energy Fund, Center for Urban Transportation Research, and Florida Department of Transportation.</p>' 
         },
         {	
-	title: 'Contact',
-	content: '<p> Contact information for questions or comments:</p>\
-		<p>Sean Barbeau: barbeau@cutr.usf.edu</p>'
+        title: 'Send Feedback',
+        content: sendfeedback() + '<p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p>' 
         },
 
     ],
+
+
 
 
     /**
@@ -202,5 +211,6 @@ otp.config = {
      
     timeFormat  : "h:mma",
     dateFormat  : "MMM Do YYYY"
+
     	
 }
