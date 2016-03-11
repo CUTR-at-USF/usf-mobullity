@@ -189,34 +189,136 @@
 				<entry key="(UTA) University Technology Center A" value="28.0564 -82.4174" />
 
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
-                
-                <!-- Parking lot/garages --> 
-                <entry key="Apple (parking lot)" value="28.060087 -82.412438" />
-                <entry key="Collins Garage" value="28.061889 -82.412526" />
-                <entry key="Crescent Hill Garage" value="28.064802 -82.412283" />
 
-                <entry key="Lot 2B" value="28.060886 -82.413868" /> 
-                <entry key="Lot 3C" value="28.064396 -82.415560" /> 
-                <entry key="Lot 3D" value="28.064396 -82.415560" /> 
-                <entry key="Lot 5A" value="28.064169 -82.412313" /> 
-                <entry key="Lot 6" value="28.060249 -82.405642" /> 
-                <entry key="Lot 8B" value="28.059182 -82.417222" />
-                <entry key="Lot 18" value="28.060180 -82.402663" />
-                <entry key="Lot 19E" value="28.061739 -82.419761" />
-                <entry key="Lot 19W" value="28.061881 -82.420775" />
-                <entry key="Lot 21" value="28.061700 -82.407978" /> 
-                <entry key="Lot 22A" value="28.057693 -82.408012" />
-                <entry key="Lot 22D" value="28.057360 -82.407867" />
-                <entry key="Lot 23B" value="28.055829 -82.408244" />
-                <entry key="Lot 29B" value="28.059012 -82.412679" />
-                <entry key="Lot 33T" value="28.065418 -82.423345" />
-                <entry key="Lot 36" value="28.058120 -82.411192" /> 
-                <entry key="Lot 38C" value="28.067558 -82.425541" />
-                <entry key="Lot 38T" value="28.068316 -82.421583" />
-                <entry key="Lot 43" value="28.067953 -82.416468" /> 
-                
-                
-                <!-- Surrounding point of interest --> 
+                <!-- Parking lot/garages --> 
+                <entry key="Apple (Hourly parking lot)" value="28.060087     -82.412438" />
+                <entry key="Collins Garage (S,GZ)" value="28.061889 -82.412526" />
+                <entry key="Crescent Hill Garage (S,E,D)" value="28.064802         -82.412283" />
+                <entry key="Laurel Drive Parking Facility (S,GZ)" value="28.066791 -82.418158" />
+                <entry key="Richard A. Beard Parking Facility (S,R,GZ,D)" value="28.059003 -82.417126" />
+
+                <entry key="Lot 1 (E)" value="28.060704 -82.412129" />
+
+                <entry key="Lot 2A (GZ)" value="28.060125 -82.414562" />
+                <entry key="Lot 2B (Hourly)" value="28.060525 -82.413993" />
+                <entry key="Lot 2C (GZ)" value="28.059512 -82.414776" />
+
+                <entry key="Lot 3A (E)" value="28.064454 -82.414525" />
+                <entry key="Lot 3B (S,E,D)" value="28.064463 -82.415233" />
+                <entry key="Lot 3C (S,E,D)" value="28.064396 -82.415560" />
+                <entry key="Lot 3D (S,E,D)" value="28.064396 -82.415560" />
+                <entry key="Lot 3E (E)" value="28.064454 -82.417261" />
+
+                <entry key="Lot 4 (E)" value="28.065188 -82.414528" />
+
+                <entry key="Lot 5A (R)" value="28.064169 -82.412313" />
+                <entry key="Lot 5B (Metered)" value="28.064942 -82.411385" />
+                <entry key="Lot 5D (Metered)" value="28.065425 -82.409218" />
+                <entry key="Lot 5E (R)" value="28.064459 -82.408435" />
+
+                <entry key="Lot 6 (S,E,D)" value="28.060249 -82.405642" />
+
+                <entry key="Lot 7A (E)" value="28.062202 -82.410880" />
+                <entry key="Lot 7B (E)" value="28.061596 -82.410804" />
+                <entry key="Lot 7C (E)" value="28.062085 -82.411914" />
+
+                <entry key="Lot 8A (E)" value="28.060362 -82.417035" />
+                <entry key="Lot 8B (E,D)" value="28.059182 -82.417222" />
+                <entry key="Lot 8C (S,E)" value="28.058017 -82.414399" />
+
+                <entry key="Lot 9A (E,S)" value="28.063238 -82.418231" />
+                <entry key="Lot 9C (E,D)" value="28.065502 -82.418521" />
+
+                <entry key="Lot 11 (E,D)" value="28.067765 -82.418027" />
+
+                <entry key="Lot 12 (E,D)" value="28.068406 -82.419980" />
+
+                <entry key="Lot 13 (R)" value="28.067403 -82.412733" />
+                <entry key="Lot 13T (R)" value="28.067905 -82.412819" />
+
+                <entry key="Lot 14 (E)" value="28.066018 -82.417233" />
+
+                <entry key="Lot 15 (E)" value="28.061070 -82.408281" />
+
+                <entry key="Lot 16 (R)" value="28.068702 -82.411039" />
+
+                <entry key="Lot 17A (R,S)" value="28.063535 -82.410019" />
+                <entry key="Lot 17B (R,S)" value="28.063388 -82.409151" />
+
+                <entry key="Lot 18 (Y,S,R,E,GZ,D)" value="28.060180 -82.402663" />
+
+                <entry key="Lot 19E (E,S,D)" value="28.061739 -82.419761" />
+                <entry key="Lot 19W (E,S,D)" value="28.061881 -82.420775" />
+
+                <entry key="Lot 20 (R,S,E,D)" value="28.067290 -82.414111" />
+
+                <entry key="Lot 21 (S,E)" value="28.061700 -82.407978" />
+
+                <entry key="Lot 22A (E,D,S)" value="28.057693 -82.408012" />
+                <entry key="Lot 22D (E,D,S)" value="28.057360 -82.407867" />
+                <entry key="Lot 22E (E,D,S)" value="28.057636 -82.406704" />
+                <entry key="Lot 22F (E,D,S)" value="28.057795 -82.405858" />
+
+                <entry key="Lot 23A (E)" value="28.056271 -82.409185" />
+                <entry key="Lot 23B (E,D)" value="28.055829 -82.408244" />
+                <entry key="Lot 23T (E,D,S)" value="28.056744 -82.409185" />
+
+                <entry key="Lot 24B (R)" value="28.060550 -82.418476" />
+
+                <entry key="Lot 25 (R)" value="28.067830 -82.408355" />
+
+                <entry key="Lot 26 (E)" value="28.068550 -82.408053" />
+
+                <entry key="Lot 29A (S)" value="28.057780 -82.412159" />
+                <entry key="Lot 29B (S)" value="28.059012 -82.412679" />
+
+                <entry key="Lot 30 (S,GZ)" value="28.062549 -82.425382" />
+                <entry key="Lot 31 (GZ)" value="28.063022 -82.423451" />
+                <entry key="Lot 32 (E,S)" value="28.063401 -82.422464" />
+
+                <entry key="Lot 33 (GZ)" value="28.064849 -82.422884" />
+                <entry key="Lot 33T (S)" value="28.065418 -82.423345" />
+
+                <entry key="Lot 34 (E,S,D)" value="28.065567 -82.424146" />
+                <entry key="Lot 35 (R,S)" value="28.064811 -82.407432" />
+
+                <entry key="Lot 36 (S,GZ)" value="28.058120 -82.411192" />
+
+                <entry key="Lot 37 (E)" value="28.062166 -82.409459" />
+                <entry key="Lot 37T (S,E)" value="28.062592 -82.408993" />
+
+                <entry key="Lot 38A (E,S)" value="28.068014 -82.421264" />
+                <entry key="Lot 38B (E)" value="28.066809 -82.425441" />
+                <entry key="Lot 38C (E,S,D)" value="28.068655 -82.425441" />
+                <entry key="Lot 38D (E,S)" value="28.067235 -82.422233" />
+                <entry key="Lot 38E (E)" value="28.066951 -82.422759" />
+                <entry key="Lot 38G (E)" value="28.067831 -82.422040" />
+                <entry key="Lot 38R (E)" value="28.068872 -82.423521" />
+                <entry key="Lot 38T (E,S,D)" value="28.068550 -82.421525" />
+                <entry key="Lot 38U (E,S)" value="28.067348 -82.420795" />
+                <entry key="Lot 38F (E,S)" value="28.066505 -82.424196" />
+                <entry key="Lot 38H (D)" value="28.068540 -82.423788" />
+
+                <entry key="Lot 40 (E)" value="28.057283 -82.405045" />
+                <entry key="Lot 41 (E)" value="28.060451 -82.409245" />
+                <entry key="Lot 42 (E,D)" value="28.066240 -82.418171" />
+                <entry key="Lot 43 (Y,S,R,E,GZ,D)" value="28.067953 -82.416468" />
+                <entry key="Lot 44 (R,S,E,D)" value="28.067347 -82.415062" />
+                <entry key="Lot 45 (E,D,S)" value="28.056457 -82.404262" />
+                <entry key="Lot 46 (E)" value="28.063300 -82.419638" />
+
+                <entry key="Lot 47 (E,D,S,R)" value="28.059581 -82.420632" />
+                <entry key="Lot 47A (R)" value="28.058886 -82.419627" />
+
+                <entry key="Lot 50 (R)" value="28.068533 -82.407396" />
+                <entry key="Lot 51 (R)" value="28.068499 -82.406717" />
+
+                <entry key="Lot 52 (R)" value="28.068177 -82.405559" />
+                <entry key="Lot 52T (S,D)" value="28.068499 -82.405269" />
+                <entry key="Lot 53 (R)" value="28.067079 -82.407501" />
+
+
+                <!-- Surrounding point of interest -->
 				<entry key="Adventure Island" value="28.04079 -82.41599" />
 				<entry key="Busch Gardens" value="28.03445 -82.41634" />
 				<entry key="Bull Market" value="28.07189 -82.41420" />
