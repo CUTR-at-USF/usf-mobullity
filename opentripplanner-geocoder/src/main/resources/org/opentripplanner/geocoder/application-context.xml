@@ -190,10 +190,10 @@
 
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
 
-                <!-- Parking lot/garages --> 
-                <entry key="Apple (Hourly parking lot)" value="28.060087     -82.412438" />
+                <!-- Parking lot/garages -->
+                <entry key="Apple (Hourly parking lot)" value="28.060087 -82.412438" />
                 <entry key="Collins Garage (S,GZ)" value="28.061889 -82.412526" />
-                <entry key="Crescent Hill Garage (S,E,D)" value="28.064802         -82.412283" />
+                <entry key="Crescent Hill Garage (S,E,D)" value="28.064802 -82.412283" />
                 <entry key="Laurel Drive Parking Facility (S,GZ)" value="28.066791 -82.418158" />
                 <entry key="Richard A. Beard Parking Facility (S,R,GZ,D)" value="28.059003 -82.417126" />
 
