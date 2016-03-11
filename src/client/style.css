@@ -706,23 +706,15 @@ div#otp-planner-optionsWidget-scollPanel {
 .layerView .parking li { }
 
 .otp-defaultItinsWidget {
-	width: auto;
-	height: 50%;
+	height: 275px;
+	width: 250px;
 	position: absolute;
 	left: 0px;
 	top: 4em;
 	background: #006747;
-	color: #FFF;
+    color: #FFF;
 }
 
-@media only screen and (min-width: 768px) {
-	.otp-defaultItinsWidget {
-		height: 275px;
-		width: 250px;
-		position: absolute;
-		left: 0px;
-	}
-}
 
 
 h3.your-trip,
