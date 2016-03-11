@@ -542,7 +542,7 @@ hr.menu_separator{
 
 .otp-defaultInfoWidget {
     width: 75%;
-    height: 75%;
+    height: auto;
     overflow: hidden;
     background: #006747;
     color: #FFF;
@@ -706,24 +706,12 @@ div#otp-planner-optionsWidget-scollPanel {
 .layerView .parking li { }
 
 .otp-defaultItinsWidget {
-	width: auto;
-	height: 50%;
-	position: absolute;
-	left: 0px;
-	top: 4em;
-	background: #006747;
-	color: #FFF;
+    height: 275px;
+    width: 250px;
+    top:8em;
+    background: #006747;
+    color: #FFF;
 }
-
-@media only screen and (min-width: 768px) {
-	.otp-defaultItinsWidget {
-		height: 275px;
-		width: 250px;
-		position: absolute;
-		left: 0px;
-	}
-}
-
 
 h3.your-trip,
 h6.drag-to-change {
