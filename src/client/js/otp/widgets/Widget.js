@@ -212,9 +212,25 @@ otp.widgets.Widget = otp.Class({
     },
     
     show : function() {
+    
+        for (i in this.owner.getWidgetManager().widgets) {
+            x = this.owner.getWidgetManager().widgets[i];
+
+            if (x == this) continue;
+            if (x.isMinimized) continue;
+            var re = new RegExp(".+ Itineraries Returned");
+            // if x == trip planner and this == itinerary returned then continue; or just minimized
+            if (x.title.match(new RegExp("Trip planner")) && this.title.match(re)) {continue;}
+            if (x.title.match(re)) {x.minimize(); continue;}
+            
+            console.log(x.title);
+            if (x.isOpen) x.hide();
+        }
+    /**/
         this.isOpen = true;
-        if(this.isMinimized) this.minimizedTab.show();
+        if(this.isMinimized) this.unminimize();
         else this.mainDiv.fadeIn(); //show();
+    /**/
     },
 
     hide : function() {
