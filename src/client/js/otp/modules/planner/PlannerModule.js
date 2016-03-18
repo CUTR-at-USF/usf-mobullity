@@ -220,8 +220,9 @@ otp.modules.planner.PlannerModule =
     
     setStartPoint : function(latlng, update, name) {
         this.startName = (typeof name !== 'undefined') ? name : null;
-        this.startLatLng = latlng;
-        if(this.startMarker == null) {
+        this.startLatLng = (typeof latlng !== 'undefined') ? latlng : null;
+
+        if(this.startMarker == null && this.startLatLng != null) {
             this.startMarker = new L.Marker(this.startLatLng, {icon: this.icons.startFlag, draggable: true});
             this.startMarker.bindPopup('<strong>Start</strong>');
             this.startMarker.on('dragend', $.proxy(function() {
@@ -233,7 +234,7 @@ otp.modules.planner.PlannerModule =
             }, this));
             this.markerLayer.addLayer(this.startMarker);
         }
-        else { // marker already exists
+        else if (this.startLatLng != null) { // marker already exists
             this.startMarker.setLatLng(latlng);
         }
         
@@ -251,8 +252,8 @@ otp.modules.planner.PlannerModule =
     
     setEndPoint : function(latlng, update, name) {
         this.endName = (typeof name !== 'undefined') ? name : null;
-        this.endLatLng = latlng;    	 
-        if(this.endMarker == null) {
+        this.endLatLng = (typeof latlng !== 'undefined') ? latlng : null;    	 
+        if(this.endMarker == null && this.endLatLng != null) {
             this.endMarker = new L.Marker(this.endLatLng, {icon: this.icons.endFlag, draggable: true}); 
             this.endMarker.bindPopup('<strong>Destination</strong>');
             this.endMarker.on('dragend', $.proxy(function() {
@@ -264,7 +265,7 @@ otp.modules.planner.PlannerModule =
             }, this));
             this.markerLayer.addLayer(this.endMarker);
         }
-        else { // marker already exists
+        else if (this.endLatLng != null) { // marker already exists
             this.endMarker.setLatLng(latlng);
         }
                  

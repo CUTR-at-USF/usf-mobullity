@@ -227,8 +227,8 @@ otp.widgets.tripoptions.LocationsSelector =
 
         $("#"+this.id+"-reverseButton").click($.proxy(function() {
             var module = this.tripWidget.module;
-            var startLatLng = module.startLatLng, startName = module.startName;
-            var endLatLng = module.endLatLng, endName = module.endName;
+            var startLatLng = module.startLatLng, startName = $("#"+this.id+"-start").val();
+            var endLatLng = module.endLatLng, endName = $("#"+this.id+"-end").val();
             module.clearTrip();
             module.setStartPoint(endLatLng, false, endName);
             module.setEndPoint(startLatLng, false, startName);
