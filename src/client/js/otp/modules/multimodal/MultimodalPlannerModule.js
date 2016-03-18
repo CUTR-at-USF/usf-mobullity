@@ -103,23 +103,48 @@ otp.modules.multimodal.MultimodalPlannerModule =
         // Layer Selector		
         this.layerWidget = new otp.widgets.LayersWidget('otp-'+this.id+'-layersWidget', this);		
              
-        // The following minimize the widget depending on the attribut given in the url
-        if (location.hash == "#trip"){
+        // The following block of code open the widget depending on the user "config"
+        if (location.hash == "#trip")
+        {
             this.layerWidget.minimize();
             jQuery('#tripPlannerButton').addClass('selected_item');
         }
-        else if (location.hash == "#layers") {
+        else if (location.hash == "#layers") 
+        {
            this.optionsWidget.minimize();
            jQuery('#layersButton').addClass('selected_item')
         }
-        else if (location.hash == "#map") {
+        else if (location.hash == "#map") 
+        {
             this.layerWidget.minimize();
             this.optionsWidget.minimize();
         }
-        else //by default the trip planner widget is open
+        else //If the user didn't specify anything we check the cookies
         {
-            jQuery('#tripPlannerButton').addClass('selected_item');
-            this.layerWidget.minimize();
+            var widgetUsedName = "widgetUsed=";
+		    var widgetUsed = "trip";
+		    var parts = document.cookie.split("; ");
+		    for (var i = 0; i < parts.length; i++) // This will iterate throught all the combinaison of key and value
+		    {
+			    var part = parts[i];
+			    if (part.indexOf(widgetUsedName) == 0) // This look if the key match 
+			    {
+				    widgetUsed =  part.substring(widgetUsedName.length);// This will return the value of the key "visited"
+			    }
+		    }
+		    
+		    //Depending on the cookies it will open the corresponding widget
+		    //If not cookies set default was previously set to "trip"
+		    if(widgetUsed == "layers")
+		    {
+                this.optionsWidget.minimize();
+                jQuery('#layersButton').addClass('selected_item')
+		    }
+		    else if (widgetUsed == "trip")
+		    {
+		        this.layerWidget.minimize();
+		        jQuery('#tripPlannerButton').addClass('selected_item');
+		    }
         }
             
     },
