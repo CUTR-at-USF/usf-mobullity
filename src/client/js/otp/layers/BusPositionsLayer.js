@@ -382,7 +382,7 @@ otp.layers.BusPositionsLayer =
 
 				// XXX use defined agency and detect the tripid (01) ?
 			        $.ajax({
-                		url: '/otp/routers/default/index/patterns/USF Bull Runner_'+route+'_01/geometries',
+                		url: otp.config.hostname + '/otp/routers/default/index/patterns/USF Bull Runner_'+route+'_01/geometries',
                 		this_: this,
 				rte: route,
 		                dataType: 'json',
@@ -400,7 +400,11 @@ otp.layers.BusPositionsLayer =
 		refresh : function() {
 			this.clearLayers();
 			var lmap = this.module.webapp.map.lmap;
-			if(lmap.getZoom() >= this.minimumZoomForStops) {
+            var busRouteVisible = this.visible.indexOf('A') != -1 || this.visible.indexOf('B') != -1 
+                                    || this.visible.indexOf('C') != -1 || this.visible.indexOf('D') != -1
+                                    || this.visible.indexOf('E') != -1 || this.visible.indexOf('F') != -1;
+
+			if(lmap.getZoom() >= this.minimumZoomForStops && busRouteVisible) {
 				this.liveMap(); //need to get updated vehicle positions
 				this.setRoutes(); //need to reset routes display on the map
 			}
