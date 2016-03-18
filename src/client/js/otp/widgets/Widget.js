@@ -226,16 +226,14 @@ otp.widgets.Widget = otp.Class({
             
             if (x.isOpen) x.hide();
         }
-    /**/
         this.isOpen = true;
         if(this.isMinimized) this.unminimize();
-        else this.mainDiv.fadeIn(); //show();
-    /**/
+        else this.mainDiv.fadeIn();
     },
 
     hide : function() {
         if(this.isMinimized) this.minimizedTab.hide();
-        else this.mainDiv.fadeOut(); //hide();
+        else this.mainDiv.fadeOut(); 
     },
 
     $ : function() {
