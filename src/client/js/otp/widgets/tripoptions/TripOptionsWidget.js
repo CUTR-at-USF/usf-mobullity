@@ -198,6 +198,11 @@ otp.widgets.tripoptions.LocationsSelector =
     },
 
     showAutocomplete : function(obj) {
+        if ( $(obj.autocomplete('widget')).is(':visible') ) {
+            obj.autocomplete("widget").hide();
+            return;
+        }
+
 	    var results = obj.data('results');
 
 	    // if no results, or the input box is empty, load the full list of buildings
