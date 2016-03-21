@@ -221,7 +221,7 @@ otp.widgets.Widget = otp.Class({
             if (x.isMinimized) continue;
             
             if (x.title.match(new RegExp("Trip planner")) && this.title.match(re)) 
-            {console.log(x.title); console.log(this.title.match(re)); continue;}
+            {continue;}
             if (x.title.match(re)) {x.minimize(); continue;}
             
             if (x.isOpen) x.hide();
