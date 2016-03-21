@@ -556,14 +556,14 @@ otp.widgets.tripoptions.ModeSelector =
         $(html).appendTo(this.$());
 
 	// Add Bicycle Safety
-	html = "<div class='notDraggable',> Bicycle Safety: ";
+	html = "<div style='display:none' class='bike_safety notDraggable'> Prefer Bike Lanes: ";
 	html += "<select id='bike_safety'>";
-	html += "<option value=''>No Preference</option>";
-	html += "<option value='1'>Prefer Lanes</option>";
+	html += "<option value=''>No</option>";
+	html += "<option value='1'>Yes</option>";
 	html += "</select>";
 	html += "</div>";
        	$(html).appendTo(this.$());
- 
+
         //this.setContent(content);
         
     },
@@ -575,6 +575,10 @@ otp.widgets.tripoptions.ModeSelector =
                 mode : _.keys(this_.modes)[this.selectedIndex],
             });
             this_.refreshModeControls();
+
+            if ($(this).val().indexOf("Bicycle") >= 0) $('.bike_safety').show();
+            else $('.bike_safety').hide();
+
         });
 
 	$('#bike_safety').change(function() {
@@ -758,7 +762,7 @@ otp.widgets.tripoptions.MaxBikeSelector =
     },
     
     isApplicableForMode : function(mode) {
-        return otp.util.Itin.includesTransit(mode) && otp.util.Itin.includesBicycle(mode);
+        return otp.util.Itin.includesAnyBicycle(mode);
     },
 
 });
