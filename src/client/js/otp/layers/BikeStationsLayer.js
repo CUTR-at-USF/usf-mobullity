@@ -39,7 +39,8 @@ otp.layers.BikeStationsLayer =
 
 			// Refresh data every 5 seconds
                         setInterval($.proxy(this.liveMap,this),5000);
-			
+		
+            this.firstloaded = true;	
 			this.liveMap();
 		},
 
@@ -56,6 +57,10 @@ otp.layers.BikeStationsLayer =
 
 		liveMap : function() {
 			this_ = this;
+
+            if (!this.visible && !this.firstloaded) return;
+            this.firstloaded = false;
+
 			var url = otp.config.hostname + '/' + "otp/routers/default/bike_rental";
 			$.ajax(url, {
 				type: 'GET',
