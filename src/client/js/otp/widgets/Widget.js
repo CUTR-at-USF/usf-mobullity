@@ -212,14 +212,28 @@ otp.widgets.Widget = otp.Class({
     },
     
     show : function() {
+    
+        var re = new RegExp(".*Itineraries.*");
+        for (i in this.owner.getWidgetManager().widgets) {
+            x = this.owner.getWidgetManager().widgets[i];
+            
+            if (x == this) continue;
+            if (x.isMinimized) continue;
+            
+            if (x.title.match(new RegExp("Trip planner")) && this.title.match(re)) 
+            {continue;}
+            if (x.title.match(re)) {x.minimize(); continue;}
+            
+            if (x.isOpen) x.hide();
+        }
         this.isOpen = true;
-        if(this.isMinimized) this.minimizedTab.show();
-        else this.mainDiv.fadeIn(); //show();
+        if(this.isMinimized) this.unminimize();
+        else this.mainDiv.fadeIn();
     },
 
     hide : function() {
         if(this.isMinimized) this.minimizedTab.hide();
-        else this.mainDiv.fadeOut(); //hide();
+        else this.mainDiv.fadeOut(); 
     },
 
     $ : function() {
