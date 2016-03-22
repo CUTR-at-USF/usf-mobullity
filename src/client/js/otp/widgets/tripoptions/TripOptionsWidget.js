@@ -1170,14 +1170,12 @@ otp.widgets.tripoptions.Submit =
         //console.log(this.id+'-button')
         
     },
-    
     doAfterLayout : function() {
         var this_ = this;
-        $('#'+this.id+'-button').button().click(function() {
-            //this_.tripWidget.pushSettingsToModule();
+        document.getElementById(this.id+'-button').onclick = function(){
             if(typeof this_.tripWidget.module.userPlanTripStart == 'function') this_.tripWidget.module.userPlanTripStart();
             this_.tripWidget.module.planTripFunction.apply(this_.tripWidget.module);
-        });
+        };
     }
 });
 
