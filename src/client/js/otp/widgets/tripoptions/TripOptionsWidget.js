@@ -1172,10 +1172,10 @@ otp.widgets.tripoptions.Submit =
     },
     doAfterLayout : function() {
         var this_ = this;
-        document.getElementById(this.id+'-button').onclick = function(){
+        $('#'+this.id+'-button').click(function() {
             if(typeof this_.tripWidget.module.userPlanTripStart == 'function') this_.tripWidget.module.userPlanTripStart();
             this_.tripWidget.module.planTripFunction.apply(this_.tripWidget.module);
-        };
+        });
     }
 });
 
