@@ -6,6 +6,26 @@
 
 /* Locations Picker */
 
+
+.ui-autocomplete { 
+    /* This z-index allow the autocomplete widget to be above the minimized tabs */
+    z-index:10001 !important;
+    overflow-y: auto;
+}
+@media only screen and (min-width: 768px){ 
+    .ui-autocomplete {
+        max-height: 75%;
+        min-width: 560px;
+    }
+}
+
+@media only screen and (max-width: 768px){ 
+    .ui-autocomplete {
+        max-height: 70%;
+        max-width: 70%;
+    }
+}
+
 .otp-tripOptions-loc-input {
     width:100%;
     border-radius: 0px;
