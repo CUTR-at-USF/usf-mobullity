@@ -556,7 +556,7 @@ otp.widgets.tripoptions.ModeSelector =
         $(html).appendTo(this.$());
 
 	// Add Bicycle Safety
-	html = "<div style='display:none' class='bike_safety notDraggable'> Prefer Bike Lanes: ";
+	html = "<div style='margin-top: 8px; display:none' class='bike_safety notDraggable'> Prefer Bike Lanes: ";
 	html += "<select id='bike_safety'>";
 	html += "<option value=''>No</option>";
 	html += "<option value='1'>Yes</option>";
@@ -1170,11 +1170,9 @@ otp.widgets.tripoptions.Submit =
         //console.log(this.id+'-button')
         
     },
-    
     doAfterLayout : function() {
         var this_ = this;
-        $('#'+this.id+'-button').button().click(function() {
-            //this_.tripWidget.pushSettingsToModule();
+        $('#'+this.id+'-button').click(function() {
             if(typeof this_.tripWidget.module.userPlanTripStart == 'function') this_.tripWidget.module.userPlanTripStart();
             this_.tripWidget.module.planTripFunction.apply(this_.tripWidget.module);
         });
