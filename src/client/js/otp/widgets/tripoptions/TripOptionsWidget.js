@@ -695,10 +695,7 @@ otp.widgets.tripoptions.MaxDistanceSelector =
             this_.setDistance(presetVal);
 
             if (!otp.config.metric) { presetVal = otp.util.Imperial.metersToMiles(presetVal); } // Output in miles
-
-            // Show the value in miles/meters
-            $('#'+this_.id+'-value').val(presetVal.toFixed(2));    
-            $('#'+this_.id+'-presets option:eq(0)').prop('selected', true);    
+              
         });
 
     },

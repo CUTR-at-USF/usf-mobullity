@@ -80,12 +80,11 @@
 <script id="otp-tripOptions-maxDistance" type="text/html">
 
     <div class="notDraggable">
-        {{label}} <input id="{{widgetId}}-value" type="text" style="width:35px;" value="{{currentMaxDistance}}" /> {{distSuffix}}&nbsp;
+        {{label}} 
         <select id="{{widgetId}}-presets"><option>{{presets_label}}:</option>
             {{#presets}}
                 <option>{{.}} {{distSuffix}}</option>
             {{/presets}}
-        </select>
     </div>
         
 </script>
