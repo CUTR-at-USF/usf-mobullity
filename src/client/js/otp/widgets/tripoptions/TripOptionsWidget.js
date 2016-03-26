@@ -291,7 +291,12 @@ otp.widgets.tripoptions.LocationsSelector =
                setterFunction.call(this.module.tripWidget.module, latlng, false, result.description);
                this.module.tripWidget.inputChanged();
        }.bind(input[0]);
-
+       
+       /* hide the autocomplete list when the user click somewhere */
+       $(document).bind('click', function (event) {
+            $(".ui-autocomplete").hide();            
+       });
+       
        input.autocomplete({
              autoFocus: true,
              source: function(request, response) {
