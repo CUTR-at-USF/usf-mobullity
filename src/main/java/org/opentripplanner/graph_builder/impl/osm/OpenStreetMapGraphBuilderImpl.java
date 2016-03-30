@@ -13,6 +13,8 @@
 
 package org.opentripplanner.graph_builder.impl.osm;
 
+import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import lombok.Setter;
 
@@ -85,6 +89,7 @@ import org.opentripplanner.routing.edgetype.StreetEdge;
 import org.opentripplanner.routing.edgetype.StreetTraversalPermission;
 import org.opentripplanner.routing.graph.Edge;
 import org.opentripplanner.routing.graph.Graph;
+import org.opentripplanner.routing.graph.PoiNode;
 import org.opentripplanner.routing.graph.Vertex;
 import org.opentripplanner.routing.spt.GraphPath;
 import org.opentripplanner.routing.spt.ShortestPathTree;
@@ -117,6 +122,8 @@ import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
+
+import org.opentripplanner.standalone.GraphBuilderParameters;
 
 /**
  * Builds a street graph from OpenStreetMap data.
@@ -166,6 +173,9 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
     private HashMap<Vertex, Double> elevationData = new HashMap<Vertex, Double>();
 
     public boolean skipVisibility = false;
+
+    public Map<String, JsonNode> buildPOIs;
+    private Map<Long, PoiNode> POINodeRefs;
 
     // Members that can be set by clients.
 
@@ -240,6 +250,24 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
         _providers.addAll(providers);
     }
 
+    public void setBuildConfig(GraphBuilderParameters config) {
+
+        // XXX set other GraphBuilderParameters properties here, too?
+
+        // config.pois is a Map<String, JsonNode> representing OSM tag (key), and tag => (fields.key) 
+        // and fields.value settings for how to capture POI data
+        for (Map.Entry<String, List<JsonNode>> tag : config.pois.entrySet()) { 
+            String tagName = tag.getKey();
+
+            for (JsonNode node : tag.getValue()) {
+
+                // node.getKey() is the amenity:VALUE, and node.getValue() is optional settings
+                buildPOIs.put( tagName, node );
+            }
+        }
+
+    }
+
     /**
      * Set the way properties from a {@link WayPropertySetSource} source.
      *
@@ -254,9 +282,13 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
      */
     public OpenStreetMapGraphBuilderImpl(List<OpenStreetMapProvider> providers) {
         this.setProviders(providers);
+        buildPOIs = new HashMap<String, JsonNode>();
+        POINodeRefs = new HashMap<Long, PoiNode>();
     }
 
     public OpenStreetMapGraphBuilderImpl() {
+        buildPOIs = new HashMap<String, JsonNode>();
+        POINodeRefs = new HashMap<Long, PoiNode>();
     }
 
     @Override
@@ -2002,6 +2034,36 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 _bikeRentalNodes.add(node);
                 return;
             }
+
+            // Add POI-relevant nodes to data store
+            if (node.getTags() != null) {
+                for (String k : node.getTags().keySet()) {
+                    String v = node.getTag(k);
+                    String key = String.format("%s:%s", k, v);
+
+                    if (buildPOIs.containsKey( key )) {
+                
+                        PoiNode p = new PoiNode();
+                        p.type = "node";
+                        p.tags = node.getTags();
+                        p.locations = String.format("%s,%s", node.getLat(), node.getLon());
+
+                        if (!graph.pois.containsKey( key )) graph.pois.put( key, new ArrayList<PoiNode>() );
+
+                        graph.pois.get(key).add( p );
+
+                    }
+                }
+            }
+
+            if (POINodeRefs.containsKey( node.getId() )) {
+                PoiNode p = POINodeRefs.get(node.getId());
+
+                if (p.locations != "") p.locations += ";";
+                p.locations += String.format("%s,%s", node.getLat(), node.getLon());
+
+            }            
+
             if (!(_nodesWithNeighbors.contains(node.getId()) || _areaNodes.contains(node.getId())))
                 return;
 
@@ -2017,11 +2079,35 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
         public void addWay(OSMWay way) {
             /* only add ways once */
             long wayId = way.getId();
+
             if (_ways.containsKey(wayId) || _areaWaysById.containsKey(wayId))
                 return;
 
             if (_areaWayIds.contains(wayId)) {
                 _areaWaysById.put(wayId, way);
+            }
+
+            // Add POI-relevant ways to store
+            if (way.getTags() != null) {
+                for (String k : way.getTags().keySet()) {
+                    String v = way.getTag(k);
+                    String key = String.format("%s:%s", k, v);
+
+                    if (buildPOIs.containsKey( key )) {
+
+                        PoiNode p = new PoiNode();
+                        p.type = "way";
+                        p.tags = way.getTags(); 
+                        p.locations = "";
+
+                        for (Long nid : way.getNodeRefs()) POINodeRefs.put(nid, p);
+
+                        if (!graph.pois.containsKey( key )) graph.pois.put( key, new ArrayList<PoiNode>() );
+
+                        graph.pois.get(key).add( p );
+                        
+                    }
+                }
             }
 
             /* filter out ways that are not relevant for routing */
