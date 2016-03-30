@@ -120,6 +120,8 @@ public class OTPConfigurator {
         List<File> gtfsFiles = Lists.newArrayList();
         List<File> osmFiles =  Lists.newArrayList();
         File configFile = null;
+        GraphBuilderParameters buildConfig = null;
+
         /* For now this is adding files from all directories listed, rather than building multiple graphs. */
         for (File dir : params.build) {
             LOG.info("Searching for graph builder input files in {}", dir);
@@ -144,6 +146,9 @@ public class OTPConfigurator {
                         configFile = file;
                     }
                     break;
+                case BUILD_CONFIG:
+                           buildConfig = new GraphBuilderParameters( OTPMain.loadJson( file ) );
+                           break;
                 case OTHER:
                     LOG.debug("Skipping file '{}'", file);
                 }
@@ -165,6 +170,9 @@ public class OTPConfigurator {
             DefaultWayPropertySetSource defaultWayPropertySetSource = new DefaultWayPropertySetSource();
             osmBuilder.setDefaultWayPropertySetSource(defaultWayPropertySetSource);
             osmBuilder.skipVisibility = params.skipVisibility;
+
+            if (buildConfig != null) osmBuilder.setBuildConfig( buildConfig ); 
+
             graphBuilder.addGraphBuilder(osmBuilder);
             graphBuilder.addGraphBuilder(new PruneFloatingIslands());            
         }
@@ -233,7 +241,7 @@ public class OTPConfigurator {
     }
 
     private static enum InputFileType {
-        GTFS, OSM, CONFIG, OTHER;
+        GTFS, OSM, CONFIG, BUILD_CONFIG, OTHER;
         public static InputFileType forFile(File file) {
             String name = file.getName();
             if (name.endsWith(".zip")) {
@@ -248,6 +256,7 @@ public class OTPConfigurator {
             if (name.endsWith(".osm")) return OSM;
             if (name.endsWith(".osm.xml")) return OSM;
             if (name.equals("Embed.properties")) return CONFIG;
+            if (name.equals("build-config.json")) return BUILD_CONFIG;
             return OTHER;
         }
     }

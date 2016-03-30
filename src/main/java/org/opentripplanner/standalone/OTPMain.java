@@ -13,6 +13,14 @@
 
 package org.opentripplanner.standalone;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonParser;
+
 import org.opentripplanner.graph_builder.GraphBuilderTask;
 import org.opentripplanner.visualizer.GraphVisualizer;
 import org.slf4j.Logger;
@@ -89,4 +97,29 @@ public class OTPMain {
         }
         
     }
+
+    /**
+     * Open and parse the JSON file at the given path into a Jackson JSON tree. Comments and unquoted keys are allowed.
+     * Returns null if the file does not exist,
+     * Returns null if the file contains syntax errors or cannot be parsed for some other reason.
+     *
+     * We do not require any JSON config files to be present because that would get in the way of the simplest
+     * rapid deployment workflow. Therefore we return an empty JSON node when the file is missing, causing us to fall
+     * back on all the default values as if there was a JSON file present with no fields defined.
+     */
+    public static JsonNode loadJson (File file) {
+        try (FileInputStream jsonStream = new FileInputStream(file)) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
+            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+            JsonNode config = mapper.readTree(jsonStream);
+            LOG.info("Found and loaded JSON configuration file '{}'", file);
+            return config;
+        } catch (Exception ex) {
+            LOG.error("Error while parsing JSON config file '{}': {}", file, ex.getMessage());
+            System.exit(42); // probably "should" be done with an exception
+            return null;
+        }
+    }
+
 }
