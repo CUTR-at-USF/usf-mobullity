@@ -663,22 +663,31 @@ otp.widgets.tripoptions.MaxDistanceSelector =
         this.id = tripWidget.id+"-maxWalkSelector";
 
         // currentMaxDistance is used to compare against the title string of the option element, to select the correct one
-        var currentMaxDistance = otp.util.Geo.distanceString(this.tripWidget.module.maxWalkDistance);
-
+        var currentMaxDistance = parseFloat(otp.util.Geo.distanceString(this.tripWidget.module.maxWalkDistance)).toFixed(2);
+        
+        if(jQuery.inArray(currentMaxDistance,presets) == -1)
+        {
+            presets.push(currentMaxDistance);
+            //The function within the sort makes the sort being a "natural sort"
+            presets.sort(function(a, b) {return +/\d+/.exec(a)[0] - +/\d+/.exec(b)[0];});
+        }
+        
         ich['otp-tripOptions-maxDistance']({
             widgetId : this.id,
             presets : presets,
             label : this.label,
             presets_label : otp.config.locale.instructions.presets_label,
             distSuffix: this.distSuffix,
-            currentMaxDistance: parseFloat(currentMaxDistance)
+            currentMaxDistance: currentMaxDistance
         }).appendTo(this.$());
-
+        
     },
 
     doAfterLayout : function() {
         var this_ = this;
-
+        var currentMaxDistance = parseFloat(otp.util.Geo.distanceString(this.tripWidget.module.maxWalkDistance)).toFixed(2);
+        $('#'+this.id + '-presets').val(currentMaxDistance + " " + this.distSuffix );
+        
         $('#'+this.id+'-value').change(function() {
             var meters = parseFloat($(this).val());
 
@@ -687,7 +696,7 @@ otp.widgets.tripoptions.MaxDistanceSelector =
 
             this_.setDistance(meters);
         });
-        
+
         $('#'+this.id+'-presets').change(function() {
             var presetVal = this_.presets[this.selectedIndex-1];
 
@@ -695,7 +704,7 @@ otp.widgets.tripoptions.MaxDistanceSelector =
             this_.setDistance(presetVal);
 
             if (!otp.config.metric) { presetVal = otp.util.Imperial.metersToMiles(presetVal); } // Output in miles
-              
+
         });
 
     },
