@@ -7,13 +7,14 @@ function sendfeedback() {
 }
 
 /* Define layers icons */
-bluephone_icon =  L.icon({angle:0, iconUrl: '/images/marker-bluephone.svg', iconSize: new L.Point(30,60), iconAnchor: new L.Point(15,50) });
-carshare_icon = L.icon({angle:0, iconUrl: '/images/marker-carshare.svg', iconSize: new L.Point(30,60), iconAnchor: new L.Point(15,55) });
+bluephone_icon =  L.icon({angle:0, iconUrl: '/images/marker-bluephone.svg', iconSize: new L.Point(30,60), iconAnchor: new L.Point(15,50), popupAnchor: new L.Point(0,-40) });
+carshare_icon = L.icon({angle:0, iconUrl: '/images/marker-carshare.svg', iconSize: new L.Point(30,60), iconAnchor: new L.Point(15,50), popupAnchor: new L.Point(0,-40) });
 
 L.layersIcon = L.DivIcon.extend({
     options: {
         iconSize: [35, 45],
         iconAnchor: [18, 45],
+        popupAnchor: [0, -45],
         icon: '',
         color: 'blue',
     },
