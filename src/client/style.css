@@ -1210,5 +1210,7 @@ p#splash-text span {
   	margin: 0 0 0 0.5em;
   }
   
-
 }
+
+.no_margin { margin:0; padding:0; line-height: initial; }
+
