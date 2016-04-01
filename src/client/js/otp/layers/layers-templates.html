@@ -92,15 +92,6 @@
 </div>
 </fieldset>
 
-<!--
-<fieldset>
-<legend>Live Bus Positions</legend>
-<div class=bus>
-<input type=checkbox checked id="bus_positions" /> <label for=bus_positions>USF</label> <br>
-</div>
-</fieldset>
--->
-
 <fieldset>
 <legend>USF Bike Info</legend>
 <div class=bikes>
@@ -108,6 +99,12 @@
 <div id="bike_stations" class="route-menu-item selected">
 <div class="box"></div><div class="color"></div>
 <div class="name">Share-A-Bull Bikes</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="bikerepair" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Bike Repair Stations</div>
 </div>
 <div style="clear:left;"></div>
 
@@ -134,8 +131,19 @@
 </div>
 <div style="clear:left;"></div>
 
-<div id="bluephone" class="route-menu-item selected">
+<div id="parkinglots" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Parking Lots</div>
+</div>
+<div style="clear:left;"></div>
 
+<div id="carcharging" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Electric Car Charging</div>
+</div>
+<div style="clear:left;"></div>
+
+<div id="bluephone" class="route-menu-item selected">
 <table border=0 cellspacing=0 cellpadding=3 width=100%>
 <tr>
 <td class=box_col align=center><div class='box'></div><div class=color></div></td>
@@ -146,15 +154,9 @@
 </div>
 </fieldset>
 
-<!--<div class=parking>
-<input type=checkbox id="park_garages" /> <label for=park_garages>Parking Garages</label> <br>
-</div>
--->
-
 </div>
 
 </script>
-
 
 <script id="otp-bikesLayer-popup" type="text/html">
 <div>
@@ -203,4 +205,87 @@
 
 </div>
 </script>
+
+<script id="bikeRepair-template" type="text/html">
+<div>
+
+{{#brand}}
+<h3 class=no_margin>{{brand}}</h3>
+{{/brand}}
+{{#name}}
+<h3 class=no_margin>{{name}}</h3>
+{{/name}}
+
+Bicycle Pump? 
+{{#service:bicycle:pump}}
+{{service:bicycle:pump}}
+{{/service:bicycle:pump}}
+{{^service:bicycle:pump}}
+No
+{{/service:bicycle:pump}}
+<br>
+
+{{#opening_hours}}
+Open: {{opening_hours}}<br>
+{{/opening_hours}}
+
+{{#note}}
+<b>Note</b>: {{ note }}<br>
+{{/note}}
+
+{{#operator}}
+Operated by: {{operator}}<br>
+{{/operator}}
+
+</div>
+</script>
+
+<script id="carCharging-template" type="text/html">
+<div>
+<h3>Electric Vehicle Charging Station</h3>
+
+Provided by <a href="https://na.chargepoint.com/charge_point" target="_blank">Charge Point</a>. <br>
+<br>
+
+<b>Please note:</b> A USF parking permit is required and the vehicle must be charging while using the space. There is no fee for using the charging station. However, there is a 4 hour daily limit. <br>
+<br>
+
+<a href="http://www.usf.edu/administrative-services/parking/parking/ev-charging-stations.aspx" target="_blank">More information</a>
+
+</div>
+</script>
+
+<script id="parkingLots-template" type="text/html">
+<div>
+
+{{#name}}
+<h3>{{ name }}</h3>
+{{/name}}
+{{^name}}
+<h3>Parking Lot</h3>
+{{/name}}
+
+Permit Type(s): {{ permits }}
+<br>
+
+{{#surface}}
+<b>Surface:</b> {{surface}}<br>
+{{/surface}}
+
+{{#building}}
+<b>Building:</b> {{building}}<br>
+{{/building}}
+
+{{#parkmobile }}
+Pay with your Smart Phone using ParkMobile App! (<a href="http://www.usf.edu/administrative-services/parking/parking/parkmobile.aspx" target="_blank">More Info</a>)<br>
+{{/parkmobile}}
+
+{{#note }}
+<b>Note</b>: {{note}}<br>
+{{/note}}
+
+</div>
+</script>
+
+
 	

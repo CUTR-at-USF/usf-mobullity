@@ -89,6 +89,8 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 
+import org.opentripplanner.routing.graph.PoiNode;
+
 /**
  * A graph is really just one or more indexes into a set of vertexes. It used to keep edgelists for each vertex, but those are in the vertex now.
  */
@@ -195,6 +197,8 @@ public class Graph implements Serializable {
     	return bikeLanesStr;
     }   
 
+    public Map<String, ArrayList<PoiNode>> pois;
+
     public Graph(Graph basedOn) {
         this();
         this.bundle = basedOn.getBundle();
@@ -205,6 +209,7 @@ public class Graph implements Serializable {
         this.temporaryEdges = Collections.newSetFromMap(new ConcurrentHashMap<Edge, Boolean>());
         this.edgeById = new ConcurrentHashMap<Integer, Edge>();
         this.vertexById = new ConcurrentHashMap<Integer, Vertex>();
+        this.pois = new HashMap<String, ArrayList<PoiNode>>();
     }
     
     /**

@@ -848,7 +848,7 @@ otp.layers.BusPositionsLayer =
 
 			if (this.visible.indexOf('D') != -1) this.drawRoutePolyline(this.route_polylines['D'], {color: '#F70505'} );
 
-			if (this.visible.indexOf('E') != -1) this.drawRoutePolyline(this.route_polylines['E'], {color: '#D4BA13'} );
+			if (this.visible.indexOf('E') != -1) this.drawRoutePolyline(this.route_polylines['E'], {color: '#bca510'} );
 
 			if (this.visible.indexOf('F') != -1) this.drawRoutePolyline(this.route_polylines['F'], {color: '#8F6A51'} );
 

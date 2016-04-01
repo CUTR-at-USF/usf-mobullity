@@ -37,7 +37,7 @@ otp.layers.BikeLanesLayer =
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
         
         $.ajax({
-        	url: '/otp/routers/default/bike_lanes', 
+        	url: otp.config.hostname + "/" + otp.config.restService + '/bike_lanes', 
         	webapp: this.module.webapp,
         	this_: this,
         	dataType: 'json',
@@ -63,8 +63,8 @@ otp.layers.BikeLanesLayer =
         	for (p in this.bikeLanes) {
 
 			// For first four segments of bounding box
-			if (i < 4) opts = {color: 'red', dashArray: '5, 5'};
-			else opts = {color: 'red'};
+			if (i < 4) opts = {color: '#006747', dashArray: '5, 5'};
+			else opts = {color: '#006747'};
 
     			ret=L.polyline(this.bikeLanes[p], opts);    			
 

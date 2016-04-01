@@ -909,6 +909,22 @@ p#splash-text span {
   display: none;
 }
 
+.layersIcon-blue {
+    background: url('/images/marker-blue.svg');
+}
+.layersIcon-green {
+    background: url('/images/marker-green.svg');
+}
+.layersIcon-red {
+    background: url('/images/marker-red.svg');
+}
+.layersIcon i {
+    margin-left: 20%;
+    margin-top: 20%;
+    font-size: 20px;
+    color: white
+}
+
 .other div .box,
 .routes div .box,
 .bikes div .box,
@@ -945,7 +961,7 @@ p#splash-text span {
 	background-color: #f70505; 
 }
 .routes div#usf_E .box.active {
-	background-color: #d4ba13;
+	background-color: #bca510;
 }
 .routes div#usf_F .box.active {
 	background-color: #8f6a51;
@@ -956,19 +972,11 @@ p#splash-text span {
 }
 
 .bikes div#bike_lanes .box.active {
-	background-color: green;
+	background-color: #006747;
 }
 
 .stops div#bus_hart .box.active {
 	background-color: green;
-}
-
-.other div#carshare .box.active {
-    background-color: green;
-}
-
-.other div#bluephone .box.active {
-    background-color: #2880ca;
 }
 
 .box_col {
@@ -1202,5 +1210,7 @@ p#splash-text span {
   	margin: 0 0 0 0.5em;
   }
   
-
 }
+
+.no_margin { margin:0; padding:0; line-height: initial; }
+
