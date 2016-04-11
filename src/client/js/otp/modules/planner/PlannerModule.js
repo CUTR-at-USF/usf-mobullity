@@ -487,6 +487,13 @@ otp.modules.planner.PlannerModule =
 		alert("Please select a start and end location.");
 		return;
 	}
+	
+	var val = $('#otp-planner-optionsWidget-timeSelector-time').val();
+    var re = new RegExp("((^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$)|(^(00|0?[0-9]|1[012]):[0-5][0-9]((a|p)m|(A|P)M)$))");
+    if(!re.test(val)){
+        alert("Please enter a valid time in 12 hr or 24 hr format.");
+        return;
+    }
 
 	// rely on ajax callback
 	if (this._valid.indexOf('start') == -1 || this._valid.indexOf('end') == -1) return;

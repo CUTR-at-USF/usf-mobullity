@@ -407,6 +407,15 @@ otp.widgets.tripoptions.TimeSelector =
         });
         $('#'+this.id+'-date').datepicker("setDate", new Date());
         
+        $('#'+this.id+'-time').change(function() {
+            var val = $('#otp-planner-optionsWidget-timeSelector-time').val();
+            var re = new RegExp("((^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$)|(^(00|0?[0-9]|1[012]):[0-5][0-9]((a|p)m|(A|P)M)$))");
+            if(!re.test(val)){
+                alert("Please enter a valid time in 12 hr or 24 hr format.");
+                return;
+            }
+        });
+        
         $('#'+this.id+'-time').val(moment().format(otp.config.locale.time.time_format))
         .keyup(function() {
             if(otp.config.locale.time.time_format.toLowerCase().charAt(otp.config.locale.time.time_format.length-1) === 'a') {
