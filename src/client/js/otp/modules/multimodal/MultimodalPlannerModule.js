@@ -106,18 +106,18 @@ otp.modules.multimodal.MultimodalPlannerModule =
         // The following block of code open the widget depending on the user "config"
         if (location.hash == "#trip")
         {
-            this.layerWidget.minimize();
+            this.layerWidget.hide();
             jQuery('#tripPlannerButton').addClass('selected_item');
         }
         else if (location.hash == "#layers") 
         {
-           this.optionsWidget.minimize();
+           this.optionsWidget.hide();
            jQuery('#layersButton').addClass('selected_item')
         }
         else if (location.hash == "#map") 
         {
-            this.layerWidget.minimize();
-            this.optionsWidget.minimize();
+            this.layerWidget.hide();
+            this.optionsWidget.hide();
         }
         else //If the user didn't specify anything we check the cookies
         {
@@ -137,12 +137,12 @@ otp.modules.multimodal.MultimodalPlannerModule =
 		    //If not cookies set default was previously set to "trip"
 		    if(widgetUsed == "layers")
 		    {
-                this.optionsWidget.minimize();
+                this.optionsWidget.hide();
                 jQuery('#layersButton').addClass('selected_item')
 		    }
 		    else if (widgetUsed == "trip")
 		    {
-		        this.layerWidget.minimize();
+		        this.layerWidget.hide();
 		        jQuery('#tripPlannerButton').addClass('selected_item');
 		    }
         }
