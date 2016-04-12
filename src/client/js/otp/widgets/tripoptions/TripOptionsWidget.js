@@ -403,6 +403,11 @@ otp.widgets.tripoptions.TimeSelector =
                 this_.tripWidget.inputChanged({
                     date : date,
                 });
+            },
+            onClose: function(date) {
+                this_.tripWidget.inputChanged({
+                    date : date,
+                });
             }
         });
         $('#'+this.id+'-date').datepicker("setDate", new Date());
