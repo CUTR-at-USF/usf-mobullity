@@ -53,11 +53,12 @@ public class QualifiedModeSetSequence {
         for (QualifiedMode qMode : qModes) {
             req.modes.setMode(qMode.mode, true);
         }
-        req.modes.setMode(TraverseMode.WALK, true); // always turn on WALK. TODO: why do we even need a walk mode?
+
         for (QualifiedMode qMode : qModes) {
             if (qMode.mode == TraverseMode.BICYCLE) {
                 if (qMode.qualifiers.contains(Qualifier.RENT)) {
                     req.allowBikeRental = true;
+                    req.modes.setMode(TraverseMode.WALK, true); // turn on WALK for bike rental mode
                 }
                 if (req.modes.isTransit()) { // this is ugly, using both kinds of modeset at once
                     req.bikeParkAndRide = qMode.qualifiers.contains(Qualifier.PARK);
