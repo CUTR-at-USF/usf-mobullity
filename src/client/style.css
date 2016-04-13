@@ -910,18 +910,27 @@ p#splash-text span {
 }
 
 .layersIcon-blue {
-    background: url('/images/marker-blue.svg');
+    background: url('/images/marker-blue.svg') no-repeat 0 0;
 }
 .layersIcon-green {
-    background: url('/images/marker-green.svg');
+    background: url('/images/marker-green.svg') no-repeat 0 0;
 }
 .layersIcon-red {
-    background: url('/images/marker-red.svg');
+    background: url('/images/marker-red.svg') no-repeat 0 0;
+}
+.layersIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 45px;
+    background-size: 100%;
 }
 .layersIcon i {
-    margin-left: 20%;
-    margin-top: 20%;
     font-size: 20px;
+    margin-top: 21%;
+    margin-left: 22%;
+    display: inline-block;
     color: white
 }
 
@@ -1213,4 +1222,3 @@ p#splash-text span {
 }
 
 .no_margin { margin:0; padding:0; line-height: initial; }
-
