@@ -408,6 +408,17 @@ otp.widgets.tripoptions.TimeSelector =
                 this_.tripWidget.inputChanged({
                     date : date,
                 });
+        // The following block of code decompose the date manually entered and make sure this date is valid.
+        var comp = date.split('/');
+        var m = parseInt(comp[0], 10);
+        var d = parseInt(comp[1], 10);
+        var y = parseInt(comp[2], 10);
+        var date2 = new Date(y,m-1,d);
+        if(!(date2.getFullYear() == y && date2.getMonth() + 1 == m && date2.getDate() == d)) {
+            alert('Please enter a valid date.');
+        }
+                
+                
             }
         });
         $('#'+this.id+'-date').datepicker("setDate", new Date());

@@ -495,6 +495,17 @@ otp.modules.planner.PlannerModule =
         return;
     }
 
+    // The following block of code decompose the date manually entered and make sure this date is valid.
+    var comp = this.date.split('/');
+    var m = parseInt(comp[0], 10);
+    var d = parseInt(comp[1], 10);
+    var y = parseInt(comp[2], 10);
+    var date2 = new Date(y,m-1,d);
+    if(!(date2.getFullYear() == y && date2.getMonth() + 1 == m && date2.getDate() == d)) {
+        alert('Please enter a valid date.');
+        return;
+    }
+
 	// rely on ajax callback
 	if (this._valid.indexOf('start') == -1 || this._valid.indexOf('end') == -1) return;
 
