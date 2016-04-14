@@ -22,7 +22,7 @@ otp.widgets.InfoWidget =
 	    var defaultOptions = {
 	        cssClass : 'otp-defaultInfoWidget',
             closeable : true,
-            minimizable : true,
+            minimizable : false,
             openInitially : false,
 	    };
 	    
