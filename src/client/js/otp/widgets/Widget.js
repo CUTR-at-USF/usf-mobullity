@@ -25,7 +25,7 @@ otp.widgets.Widget = otp.Class({
     customHeader	: false, // custom header option
     // fields that can be set via the options parameter, and default values:
     draggable       : true,
-    minimizable     : true,
+    minimizable     : false,
     closeable       : true,
     resizable       : false,
     showHeader      : true,
