@@ -487,6 +487,24 @@ otp.modules.planner.PlannerModule =
 		alert("Please select a start and end location.");
 		return;
 	}
+	
+	var val = $('#otp-planner-optionsWidget-timeSelector-time').val();
+    var re = new RegExp("((^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$)|(^(00|0?[0-9]|1[012]):[0-5][0-9]((a|p)m|(A|P)M)$))");
+    if(!re.test(val)){
+        alert("Please enter a valid time in 12 hr or 24 hr format.");
+        return;
+    }
+
+    // The following block of code decompose the date manually entered and make sure this date is valid.
+    var comp = this.date.split('/');
+    var m = parseInt(comp[0], 10);
+    var d = parseInt(comp[1], 10);
+    var y = parseInt(comp[2], 10);
+    var date2 = new Date(y,m-1,d);
+    if(!(date2.getFullYear() == y && date2.getMonth() + 1 == m && date2.getDate() == d)) {
+        alert('Please enter a valid date.');
+        return;
+    }
 
 	// rely on ajax callback
 	if (this._valid.indexOf('start') == -1 || this._valid.indexOf('end') == -1) return;
