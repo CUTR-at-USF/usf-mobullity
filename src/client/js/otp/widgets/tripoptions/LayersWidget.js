@@ -45,7 +45,7 @@ otp.widgets.LayersWidget =
 			title : 'Layers',
 			customHeader : true, // use a custom header
 			headerClass: "otp-defaultTripWidget-header",
-            cssClass : 'otp-layerView',
+            cssClass : 'otp-layerView enable-pinch',
             closeable : false,
             resizable : false,
 			draggable : false,
