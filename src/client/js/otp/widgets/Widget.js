@@ -53,6 +53,8 @@ otp.widgets.Widget = otp.Class({
         // set up the main widget DOM element:
         this.mainDiv = $('<div />').attr('id', id).addClass('otp-widget').appendTo('body');
         if(!this.transparent) this.mainDiv.addClass('otp-widget-nonTransparent');
+        this.mainDiv.addClass('enable-pinch');
+
 
         if(!this.openInitially) {
             this.isOpen = false;
@@ -79,6 +81,35 @@ otp.widgets.Widget = otp.Class({
                 cancel: '.notDraggable'
             });
         }
+
+        var ham = new Hammer( $(this.mainDiv)[0], {
+          touchAction: 'auto'
+        });
+
+        ham.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+        ham.get('pinch').set({ enable: true });
+
+        ham.on('pinch', function(e) {
+
+            dom = $(this_.mainDiv)[0];
+
+            mre = /scale\((\d),\s*(\d)\)/i;
+            m = dom.style.transform.match(mre);
+            my = mx = (e.scale > 2) ? 2 : e.scale;
+          
+            var matrix_re = /(\d\.*\d*),\w*\d\.*\d*,\w*\d\.*\d*,\w*(\d\.*\d*),\w*(\d\.*\d*),\w*(\d\.*\d*)/;
+
+            m = dom.style.transform.match(matrix_re);
+            if (m != null) {
+                m = [parseFloat(m[1]), 0, 0, parseFloat(m[2]), parseFloat(m[3]), parseFloat(m[4])];
+            }
+            else m = [0,0,0,0,0,0];
+
+            m[0] = mx;
+            m[3] = my;
+            $(dom).css({ 'transform': "matrix(" + m.join(',') + ")" });
+      } );
+
     },
         
     addmyHeader : function(headerClass) {
