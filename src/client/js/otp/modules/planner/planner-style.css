@@ -81,11 +81,10 @@
 
 .otp-itinsAccord-header-time {
     position:absolute;
-    width: 30px;
-    height: 12px;
-    top: 4px;
+    width: 50px;
+    top: 2px;
     color: white;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: bold;
     text-shadow: none;
     text-align: center;
