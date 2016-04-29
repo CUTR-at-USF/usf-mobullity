@@ -1067,7 +1067,7 @@ public class TestRequest extends TestCase {
         }
 
         public Response getItineraries() {
-            return getItineraries(otpServer, null);
+            return getItineraries(otpServer, null, null);
         }
 
         public Response getFirstTrip() {
