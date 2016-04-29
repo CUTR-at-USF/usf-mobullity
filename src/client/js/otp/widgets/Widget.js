@@ -260,6 +260,8 @@ otp.widgets.Widget = otp.Class({
         this.isOpen = true;
         if(this.isMinimized) this.unminimize();
         else this.mainDiv.fadeIn();
+
+        if ('activated' in this) this.activated();
     },
 
     hide : function() {

@@ -39,6 +39,11 @@ otp.widgets.tripoptions.TripOptionsWidget =
         this.module = module;
         
         this.controls = {};
+
+    },
+
+    activated : function() {
+        $('#otp-planner-optionsWidget-locSelector-start').focus();
     },
 
     addControl : function(id, control, scrollable) {
@@ -219,6 +224,8 @@ otp.widgets.tripoptions.LocationsSelector =
         var this_ = this;
         
         this.startInput = this.initInput($("#"+this.id+"-start"), this.tripWidget.module.setStartPoint);
+        this.startInput.focus(); 
+
         this.endInput = this.initInput($("#"+this.id+"-end"), this.tripWidget.module.setEndPoint);
 
         $("#"+this.id+"-startDropdown").click($.proxy(function() {
