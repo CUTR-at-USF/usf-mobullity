@@ -24,8 +24,6 @@ otp.modules.fieldtrip.FieldTripRequestWidget =
         
         this.module = module;
         this.request = request;
-        //console.log("request "+request.id+":");
-        //console.log(request);
         otp.widgets.Widget.prototype.initialize.call(this, id, module, {
             cssClass : 'otp-fieldTrip-requestWidget',
             title : "Field Trip Request #"+request.id,
@@ -136,7 +134,6 @@ otp.modules.fieldtrip.FieldTripRequestWidget =
             if(outboundTrip) context.outboundItineraries = outboundTrip.groupItineraries;
             if(inboundTrip) context.inboundItineraries = inboundTrip.groupItineraries;
             
-            console.log(context);
             var content = ich['otp-fieldtrip-printablePlan'](context);
             
             // populate itin details
@@ -188,7 +185,6 @@ otp.modules.fieldtrip.FieldTripRequestWidget =
         });
         
         for(var i = 0; i < this.request.notes.length; i++) {
-            //console.log("note "+this.request.notes[i].id);
             var note = this.request.notes[i];
             this.content.find(".deleteNoteButton-" + note.id).data("note", note).click(function() {
                 var note = $(this).data("note");

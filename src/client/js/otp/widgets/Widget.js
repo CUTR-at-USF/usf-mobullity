@@ -39,7 +39,6 @@ otp.widgets.Widget = otp.Class({
 
     
     initialize : function(id, owner, options) {
-        //console.log('widget constructor: '+this.id);
         
         if(typeof options !== 'undefined') {
             _.extend(this, options);
@@ -135,7 +134,6 @@ otp.widgets.Widget = otp.Class({
 
         // set up context menu
         this.contextMenu = new otp.core.ContextMenu(this.mainDiv, function() {
-            //console.log("widget cm clicked");
         });
         this.contextMenu.addItem("Minimize", function() {
             this_.minimize();
@@ -173,7 +171,6 @@ otp.widgets.Widget = otp.Class({
 
         // set up context menu
         this.contextMenu = new otp.core.ContextMenu(this.mainDiv, function() {
-            //console.log("widget cm clicked");
         });
         this.contextMenu.addItem(otp.config.locale.contextMenu.minimize, function() {
             this_.minimize();

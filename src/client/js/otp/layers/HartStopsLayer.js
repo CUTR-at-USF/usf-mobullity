@@ -72,7 +72,6 @@ otp.layers.HartStopsLayer =
 //                if(stop.stopUrl.indexOf("http://trimet.org") === 0) {
 //                    stop.titleLink = 'http://www.trimet.org/go/cgi-bin/cstops.pl?action=entry&resptype=U&lang=en&noCat=Landmark&Loc=' + stop.id.id;
 //                }
-                //console.log(stop);
                 
                 var hartIcon = new hartStopIcon();
                 

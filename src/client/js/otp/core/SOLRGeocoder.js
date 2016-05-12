@@ -26,7 +26,6 @@ otp.core.SOLRGeocoder = otp.Class({
     },
     
     geocode : function(address, setResultsCallback) {
-        console.log('solr geocode');
         var params = {
             start : 0,
             limit : 10,
@@ -42,7 +41,6 @@ otp.core.SOLRGeocoder = otp.Class({
             success: function(data) {
                 if(!data.response) data = jQuery.parseJSON(data);
 
-                console.log(data);
                 var results = [];
                 var resultData = data.response.docs;
                 for(var i=0; i<resultData.length; i++) {

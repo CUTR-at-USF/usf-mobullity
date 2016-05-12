@@ -32,7 +32,6 @@ otp.modules.fieldtrip.SaveFieldTripWidget =
         
         $('<button id="'+this.id+'-saveButton">Save</button>').button()
         .appendTo(buttonRow).click(function() {
-            //console.log("val: " +$('textarea#'+this_.id+'-desc').val());
             module.saveTrip($('textarea#'+this_.id+'-desc').val());
             this_.hide();
         });

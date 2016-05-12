@@ -177,7 +177,6 @@ otp.widgets.tripoptions.LocationsSelector =
     activeIndex  :  0,
     
     initialize : function(tripWidget, geocoders) {
-        console.log("init loc");
         this.geocoders = geocoders;
         
         otp.widgets.tripoptions.TripOptionsWidgetControl.prototype.initialize.apply(this, arguments);
@@ -309,8 +308,6 @@ otp.widgets.tripoptions.LocationsSelector =
              source: function(request, response) {
                  this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
 
-                     console.log("got results "+results.length);
-
                      input.data("results", this_.getResultLookup(results));
 
 		     e = webapp.map.currentLocation
@@ -347,7 +344,6 @@ otp.widgets.tripoptions.LocationsSelector =
     
     restorePlan : function(data) {
         if(data.queryParams.fromPlace) {
-            console.log("rP: "+data.queryParams.fromPlace);
             var fromName = otp.util.Itin.getLocationName(data.queryParams.fromPlace);
             if(fromName) {
                 $("#"+this.id+"-start").val(fromName);
@@ -1210,7 +1206,6 @@ otp.widgets.tripoptions.Submit =
         this.id = tripWidget.id+"-submit";
 
         $('<div class="notDraggable" style="text-align:center;"><button id="'+this.id+'-button">' + otp.config.locale.tripPlanner.labels.planTrip + '</button></div>').appendTo(this.$());
-        //console.log(this.id+'-button')
         
     },
     doAfterLayout : function() {
@@ -1296,7 +1291,6 @@ otp.widgets.tripoptions.GroupTripOptions =
         this.id = tripWidget.id+"-gtSubmit";
 
         $('<div class="notDraggable" style="text-align:center;"><button id="'+this.id+'-button">Plan Trip</button></div>').appendTo(this.$());
-        //console.log(this.id+'-button')
         
     },
     

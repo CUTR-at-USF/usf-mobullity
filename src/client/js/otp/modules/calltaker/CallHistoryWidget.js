@@ -128,7 +128,6 @@ otp.widgets.CallView = Backbone.View.extend({
     }, 
     
     clicked : function() {
-        console.log('call '+this.model.id+' clicked');
         this.module.callHistoryWidget.queryListView.fetchByCallId(this.model.id);
     }   
 
@@ -164,7 +163,6 @@ otp.widgets.CallListView = Backbone.View.extend({
     
     
     addCall: function(call){
-        console.log("addCall");
         this.collection.add(call);
         //this.collection.create(call);
     },

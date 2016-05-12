@@ -69,7 +69,6 @@ otp.modules.alerts.EditAlertView = Backbone.View.extend({
     addRangeButtonClicked : function(event) {
         var start = 1000*moment($("#"+this.options.widget.id+'-rangeStartInput').val(), "MM/DD/YYYY "+otp.config.timeFormat).unix();
         var end = 1000*moment($("#"+this.options.widget.id+'-rangeEndInput').val(), "MM/DD/YYYY "+otp.config.timeFormat).unix();
-        console.log("new range: "+start+" to "+end);
         
         this.model.attributes.timeRanges.push({
             startTime: start,

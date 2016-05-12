@@ -242,7 +242,6 @@ otp.widgets.ItinerariesWidget =
         
         var div = $('<div style="position: relative; height: 20px; background: yellow;"></div>');
         div.append('<div style="position:absolute; width: 20px; height: 20px; background: red;">'+(index+1)+'</div>');
-        console.log("header div width: "+div.width());
         // clear div
         //html += '<div style="clear:both;"></div>';
         return div;
@@ -404,7 +403,7 @@ otp.widgets.ItinerariesWidget =
         }
         
         //itinAccord.accordion({
-        /*console.log('#' + divId + ' > div')
+        /*
         $('#' + divId + ' > div').accordion({
             header : 'h3',
             active: false,
@@ -684,7 +683,6 @@ otp.widgets.ItinerariesWidget =
         this.municoderResultId++;
         var spanId = 'otp-municoderResult-'+this.municoderResultId;
 
-        console.log("muniReq");        
         $.ajax(otp.config.municoderHostname+"/opentripplanner-municoder/municoder", {
         
             data : { location : lat+","+lon },           

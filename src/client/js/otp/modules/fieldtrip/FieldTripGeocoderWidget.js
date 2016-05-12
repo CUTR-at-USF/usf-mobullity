@@ -92,7 +92,6 @@ otp.modules.fieldtrip.FieldTripGeocoderWidget =
     
     refreshDestinationList : function() {
         this.activeGeocoder.geocode(this.content.find('.destinationInput').val(), $.proxy(function(results) {
-            //console.log(results);
             this.destinationResults = results;
             var destSelect = this.content.find('.destinationSelect');
             destSelect.empty();

@@ -41,7 +41,6 @@ otp.modules.planner.TripPlan = otp.Class({
         this.itineraries.push(itin);
         itin.tripPlan = this;
         this.calculateTimeBounds();
-        //console.log("added itin, n="+this.itineraries.length);
     },
     
     replaceItinerary : function(index, itin) {
@@ -61,8 +60,6 @@ otp.modules.planner.TripPlan = otp.Class({
                                   itin.getEndTime() > this.latestEndTime) ?
                                     itin.getEndTime() : this.latestEndTime; 
         }
-        //console.log("earliest start: "+otp.util.Time.formatItinTime(this.earliestStartTime));
-        //console.log("latest end: "+otp.util.Time.formatItinTime(this.latestEndTime));
     },
     
 });

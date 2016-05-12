@@ -263,7 +263,6 @@ otp.core.Map = otp.Class({
 
 		// 40 accuracy for wifi, 22000 for wired/city center approximations
 		if (e.accuracy >= 22000) {
-			console.log("Accuracy beyond threshold; recentering on USF.");
 			e.latlng = otp.config.initLatLng;
 			this.queueView(e.latlng, otp.config.initZoom);
 			return; // dont bother adding a marker 
@@ -271,7 +270,6 @@ otp.core.Map = otp.Class({
 				
 		// if e.latlng is outside of map boundaries (tampa), recenter on USF			
 		if ( ! otp.config.mapBoundary.contains(e.latlng)) {
-			console.log("Geolocation is outside of map boundaries; recentering on USF.");
 			e.latlng = otp.config.initLatLng;
 			this.queueView(e.latlng, otp.config.initZoom);
 			return; // and don't add a marker on first load
@@ -320,8 +318,6 @@ otp.core.Map = otp.Class({
     activeModuleChanged : function(oldModule, newModule) {
         
 
-        //console.log("actModChanged: "+oldModule+", "+newModule);
-        
         // hide module-specific layers for "old" module, if applicable
 
         if(oldModule != null) {

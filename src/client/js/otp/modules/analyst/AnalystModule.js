@@ -113,8 +113,6 @@ otp.modules.analyst.AnalystModule =
 
         	
         var URL = this.analystUrl + this.buildQuery(params);
-        console.log(params);
-        console.log(URL);
         
         // is there a better way to trigger a refresh than removing and re-adding?
 	    if(this.analystLayer != null)

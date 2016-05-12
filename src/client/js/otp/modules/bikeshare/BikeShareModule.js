@@ -152,7 +152,6 @@ otp.modules.bikeshare.BikeShareModule =
             this.resultsWidget.addPanel("biketype", new otp.widgets.TW_BikeType(this.resultsWidget));
             
             if(restoring) { //existingQueryParams !== null) {
-                console.log("restoring");
                 this.resultsWidget.restorePlan(queryParams);
             }
             this.resultsWidget.show();
@@ -265,7 +264,6 @@ otp.modules.bikeshare.BikeShareModule =
             marker;
         icon = icon || this.icons.getSmall(stationData);
         
-        //console.log(station);
         marker = new L.Marker(new L.LatLng(stationData.y, stationData.x), {icon: icon});
         this.markers[station.id] = marker;
         this.stationsLayer.addLayer(marker);

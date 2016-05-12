@@ -50,7 +50,7 @@ otp.core.Webapp = otp.Class({
         }
         if(!otp.util.Text.endsWith(otp.config.urlRoot, "/"))
             otp.config.urlRoot += "/";
-        console.log("urlRoot "+otp.config.urlRoot);*/
+        */
 
         // init url params
         this.urlParams = { };
@@ -91,7 +91,6 @@ otp.core.Webapp = otp.Class({
                 wrapDiv : true,
                 divId : 'logo'
             })).appendTo('#branding .logo');
-            //console.log(img);
             //$(img).appendTo('#branding');
             /*$(Mustache.render(otp.templates.div, { id : 'logo' }))
             .append(Mustache.render(otp.templates.img, { src : otp.config.logoGraphic }))
@@ -142,13 +141,11 @@ otp.core.Webapp = otp.Class({
         if(otp.config.geocoders) {
             for(var i=0; i<otp.config.geocoders.length; i++) {
                 var gcConfig = otp.config.geocoders[i];
-                console.log('init geocoder: '+gcConfig.name);
                 //var geocoder = window[gcConfig.classname](gcConfig.url, gcConfig.addressParam);
                 
                 var gcClass = this.stringToFunction(gcConfig.className);
                 var geocoder = new gcClass(gcConfig.url, gcConfig.addressParam);
                 geocoder.name = gcConfig.name;
-                //console.log(geocoder);
                 
                 this.geocoders.push(geocoder);
                 //var geocoder = new otp.core.Geocoder(otp.config.geocoder.url, otp.config.geocoder.addressParam);
@@ -193,8 +190,6 @@ otp.core.Webapp = otp.Class({
         // initialize the modules 
         
         var authModules = [];
-        if(this.urlParams['module'])
-            console.log("startup module: "+this.urlParams['module'])
         if(otp.config.modules) {
             var defaultModule = null;
             for(var i=0; i<otp.config.modules.length; i++) {
@@ -285,7 +280,6 @@ otp.core.Webapp = otp.Class({
 
     setActiveModule : function(module) {
         var this_ = this;
-        //console.log("set active module: "+module.moduleName);
         if(this.activeModule != null) {
             this.activeModule.deselected();
             
@@ -298,7 +292,6 @@ otp.core.Webapp = otp.Class({
         
         for(var i = 0; i < module.widgets.length; i++) {
             if(module.widgets[i].isOpen) {
-                console.log(" - showing widget: "+module.widgets[i].id);
                 module.widgets[i].show();
             }
         }        

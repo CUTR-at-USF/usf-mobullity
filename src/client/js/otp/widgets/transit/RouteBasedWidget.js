@@ -78,7 +78,6 @@ otp.widgets.transit.RouteBasedWidget =
     newVariantSelected : function() {
         this.activeLeg = null;
         var variantName = this.variantSelect.val();
-        //console.log("new variant selected: "+variantName);
         this.clear() //stopList.empty();
         this.setActiveVariant(this.module.webapp.transitIndex.routes[this.agency_id].variants[variantName]);
     },
@@ -100,7 +99,6 @@ otp.widgets.transit.RouteBasedWidget =
     checkAndLoadVariants : function() {
         var tiRouteInfo = this.module.webapp.transitIndex.routes[this.agency_id];
         if(tiRouteInfo.variants != null) {
-            //console.log("variants exist");
             this.updateVariants();
         }
         else {
@@ -113,7 +111,6 @@ otp.widgets.transit.RouteBasedWidget =
         var route = this.module.webapp.transitIndex.routes[this.agency_id];
 
         if(!route.variants) {
-            console.log("ERROR: transitIndex.routes.["+this.agency_id+"].variants null in StopViewerWidget.updateVariants()");
             return;
         }
         

@@ -73,7 +73,6 @@ otp.core.TransitIndex = otp.Class({
                 
             success: function(data) {
                 if(data.length <= 0) {
-                    console.log("Error: routes call returned no route data. OTP Message: "+data.message);
                     return;
                 }
                 var sortedRoutes = data;
@@ -109,7 +108,6 @@ otp.core.TransitIndex = otp.Class({
     /* TODO: find correct url from Index API for loadVariants */
     loadVariants : function(agencyAndId, callbackTarget, callback) {
         var this_ = this;
-        //console.log("loadVariants: "+agencyAndId);
         var route = this.routes[agencyAndId];
         if(route.variants) {
             if(callback) callback.call(callbackTarget, route.variants);
@@ -126,7 +124,6 @@ otp.core.TransitIndex = otp.Class({
             dataType:   'json',
                 
             success: function(data) {
-                //console.log(data);
                 route.variants = {};
                 for(var i=0; i<data.routeData[0].variants.length; i++) {
                     route.variants[data.routeData[0].variants[i].name] = data.routeData[0].variants[i];
@@ -152,32 +149,24 @@ otp.core.TransitIndex = otp.Class({
             dataType:   'json',
                 
             success: function(data) {
-                //console.log("vFT result:");
-                //console.log(data);
                 callback.call(callbackTarget, data);
             }
         });        
 
         /*var route = this.routes[agencyAndId];
-        console.log("looking for trip "+tripId+" in "+agencyAndId);
         
         if(!route.variants) {
-            console.log("ERROR: transitIndex.routes.["+agencyAndId+"].variants null in TransitIndex.getVariantForTrip()");
             return;
         }
         
         for(var vi=0; vi<route.variants.length; vi++) {
             var variant = route.variants[vi];
-            console.log("searching variant "+vi);
-            //console.log(variant);
             for(var ti=0; ti<variant.trips.length; ti++) {
                 var trip = variant.trips[ti];
-                console.log(" - "+trip.id)
                 if(trip.id == tripId) return variant;
             }
         }
         
-        console.log("could not find trip "+tripId);
         return null;*/
     },
 

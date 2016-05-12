@@ -46,12 +46,10 @@ otp.core.QueryLogger = otp.Class({
             },
                 
             success: function(data) {
-                //console.log("logged query (post): from "+fromPlace+" to "+toPlace+" by "+this_.userName);
                 this_.module.queryLogged();
             },
             
             error: function(data) {
-                console.log("error logging query (post): from "+fromPlace+" to "+toPlace+" by "+this_.userName);
             }
         });
     },

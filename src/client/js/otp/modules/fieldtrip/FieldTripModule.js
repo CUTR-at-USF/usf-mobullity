@@ -56,7 +56,6 @@ otp.modules.fieldtrip.FieldTripModule =
 
     activate : function() {
         if(this.activated) return;
-        console.log("activate "+this.id);
         otp.modules.multimodal.MultimodalPlannerModule.prototype.activate.apply(this);
 
         var modeSelector = this.optionsWidget.controls['mode'];
@@ -147,8 +146,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error retrieving trips");
-                console.log(data);
             }
         });
         this.setBannedTrips();
@@ -192,7 +189,6 @@ otp.modules.fieldtrip.FieldTripModule =
         if(this.currentGroupSize > capacity) { // group members remain; plan another trip
             this.currentGroupSize -= capacity;
             itin.groupSize = capacity;
-            //console.log("remaining: "+this.currentGroupSize);
             this.itinCapacity = null;
             this.planTrip();
         }
@@ -230,7 +226,6 @@ otp.modules.fieldtrip.FieldTripModule =
         }
     
         this.bannedTrips = tripIds.length > 0 ? tripIds.join(',') : null;     
-        //console.log("set bannedTrips: "+this.bannedTrips);
     },
 
     refreshTrips : function(date) {
@@ -248,8 +243,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error retrieving trips");
-                console.log(data);
             }
         });
     },
@@ -275,8 +268,6 @@ otp.modules.fieldtrip.FieldTripModule =
 
         for(var i = 0; i < this.groupPlan.itineraries.length; i++) {
             var itin = this.groupPlan.itineraries[i];
-            //console.log("saving itin for trip "+tripId);
-            //console.log(itin.itinData);
 
             data['itins['+i+'].passengers'] = itin.groupSize;
             data['itins['+i+'].itinData'] = otp.util.Text.lzwEncode(JSON.stringify(itin.itinData));
@@ -302,7 +293,6 @@ otp.modules.fieldtrip.FieldTripModule =
             }
         }
         
-        //console.log(data);
         $.ajax(this.datastoreUrl+'/fieldtrip/newTrip', {
             type: 'POST',
             
@@ -317,8 +307,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error saving trip");
-                console.log(data);
             }
         });
     },
@@ -354,8 +342,6 @@ otp.modules.fieldtrip.FieldTripModule =
                 id : trip.id
         };
         
-        console.log("delete");
-        console.log(data);
         $.ajax(this.datastoreUrl+'/fieldtrip/deleteTrip', {
             type: 'POST',
             
@@ -366,8 +352,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error deleting trip:");
-                console.log(data);
             }
         });
     },
@@ -386,8 +370,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error retrieving trip "+trip.id);
-                console.log(data);
             }
         });
 
@@ -434,8 +416,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error retrieving requests");
-                console.log(data);
             }
         });
     },
@@ -459,8 +439,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error setting trip status:");
-                console.log(data);
             }
         });
     },
@@ -486,8 +464,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error setting classpass id:");
-                console.log(data);
             }
         });
     },
@@ -656,8 +632,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error adding note:");
-                console.log(data);
             }
         });
     },
@@ -678,8 +652,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error deleting note:");
-                console.log(data);
             }
         });
     },
@@ -701,8 +673,6 @@ otp.modules.fieldtrip.FieldTripModule =
             },
             
             error: function(data) {
-                console.log("error updating request date");
-                console.log(data);
             }
         });
     },    

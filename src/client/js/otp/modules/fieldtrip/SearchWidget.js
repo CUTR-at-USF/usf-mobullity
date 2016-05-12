@@ -104,8 +104,6 @@ otp.modules.fieldtrip.SearchWidget =
             
             error: function(data) {
                 this.mainDiv.find(".resultsTab").html("Error Completing Search");
-                console.log("error searching");
-                console.log(data);
             }
         });
 
