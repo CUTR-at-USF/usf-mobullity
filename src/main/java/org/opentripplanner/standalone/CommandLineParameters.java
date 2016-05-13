@@ -114,6 +114,10 @@ public class CommandLineParameters {
             description = "server port")
     Integer securePort;
 
+    @Parameter( names = { "--secureCert"}, validateWith = ReadableFile.class,
+            description = "SSL Certificate keystore")
+    String secureCert = "/var/otp/ssh/keystore_server";
+
     @Parameter( names = { "-f", "--graphConfigFile"}, validateWith = ReadableFile.class,
             description = "path to graph configuration file")
     String graphConfigFile;
