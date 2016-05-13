@@ -404,7 +404,7 @@ otp.layers.BusPositionsLayer =
                                     || this.visible.indexOf('C') != -1 || this.visible.indexOf('D') != -1
                                     || this.visible.indexOf('E') != -1 || this.visible.indexOf('F') != -1;
 
-			if(lmap.getZoom() >= this.minimumZoomForStops && busRouteVisible) {
+			if(busRouteVisible) {
 				this.liveMap(); //need to get updated vehicle positions
 				this.setRoutes(); //need to reset routes display on the map
 			}

@@ -24,8 +24,6 @@ otp.layers.BikeStationsLayer =
 		module : null,
 	 	visible : false,
 	
-		minimumZoomForStops : 14,
-
 		initialize : function(module) {
 			L.LayerGroup.prototype.initialize.apply(this);
 			this.module = module;
@@ -46,13 +44,7 @@ otp.layers.BikeStationsLayer =
 
 		refresh : function() {
 			var lmap = this.module.webapp.map.lmap;
-			if(lmap.getZoom() >= this.minimumZoomForStops) {
 				this.setMarkers();
-			}
-			else {
-				this.clearLayers();
-				this.markers = {};
-			}
 		},
 
 		liveMap : function() {

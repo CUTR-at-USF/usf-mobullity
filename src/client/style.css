@@ -1226,4 +1226,21 @@ p#splash-text span {
     transform: scale(1,1);
 }
 
+#zoom-notice {
+        position: absolute;
+        width: 50%;
+        background-color: white;
+        border-radius: 3px;
+        color: black;
+        z-index: 999999;
+        margin-left: 25%;
+        margin-top: 2%;
+        text-align: center;
+        padding: 5px;
+        font-size: 20px;
+        font-weight: bold;
+        display: none;
+}
+
 .no_margin { margin:0; padding:0; line-height: initial; }
+

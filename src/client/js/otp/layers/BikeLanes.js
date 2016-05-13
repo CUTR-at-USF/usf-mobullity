@@ -24,8 +24,6 @@ otp.layers.BikeLanesLayer =
    
     module : null,
     
-    minimumZoomForStops : 15,
-   
     visible: false,
  
     initialize : function(module) {
@@ -57,7 +55,7 @@ otp.layers.BikeLanesLayer =
     refresh : function() {
         this.clearLayers();                
         var lmap = this.module.webapp.map.lmap;
-        if(lmap.getZoom() >= this.minimumZoomForStops && this.visible) {
+        if(this.visible) {
 	
 		i = 0;	
         	for (p in this.bikeLanes) {
