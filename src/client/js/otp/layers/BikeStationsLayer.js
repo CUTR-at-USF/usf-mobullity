@@ -57,7 +57,6 @@ otp.layers.BikeStationsLayer =
 			$.ajax(url, {
 				type: 'GET',
 				dataType: 'JSON',
-				async: false,
 				timeout: 60000,
 				success: function(data){
 					this_.stations = data.stations;

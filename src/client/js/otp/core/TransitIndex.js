@@ -309,7 +309,6 @@ otp.core.TransitIndex = otp.Class({
       var url = otp.config.hostname + '/' + otp.config.restService + '/index/stops/' + agencyId + '/routes';
       $.ajax(url, {
           dataType:   'json',
-          async: false,
               
           success: function(data) {
         	  callback.call(callbackTarget, data);
