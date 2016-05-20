@@ -35,6 +35,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.net.InetAddress;
 
 /**
  * This is the primary entry point for the trip planning web service.
@@ -83,6 +84,8 @@ public class Planner extends RoutingResource {
                 StringBuilder sb = new StringBuilder();
                 String clientIpAddress = grizzlyRequest.getRemoteAddr();
                 //sb.append(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+                sb.append(InetAddress.getLocalHost().getHostName());
+                sb.append(' ');
                 sb.append(clientIpAddress);
                 sb.append(' ');
                 sb.append(request.arriveBy ? "ARRIVE" : "DEPART");
