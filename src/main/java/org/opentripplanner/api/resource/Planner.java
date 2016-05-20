@@ -21,13 +21,21 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import org.glassfish.grizzly.http.server.Request;
 import org.opentripplanner.api.common.RoutingResource;
 import org.opentripplanner.api.model.TripPlan;
+import org.opentripplanner.api.model.Itinerary;
 import org.opentripplanner.api.model.error.PlannerError;
 import org.opentripplanner.routing.core.RoutingRequest;
 import org.opentripplanner.standalone.OTPServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.net.InetAddress;
 
 /**
  * This is the primary entry point for the trip planning web service.
@@ -52,7 +60,7 @@ public class Planner extends RoutingResource {
     // Jersey uses @Context to inject internal types and @InjectParam or @Resource for DI objects.
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + Q, MediaType.TEXT_XML + Q })
-    public Response getItineraries(@Context OTPServer otpServer, @Context UriInfo uriInfo) {
+    public Response getItineraries(@Context OTPServer otpServer, @Context UriInfo uriInfo, @Context Request grizzlyRequest) {
 
         /*
          * TODO: add Lang / Locale parameter, and thus get localized content (Messages & more...)
@@ -68,7 +76,43 @@ public class Planner extends RoutingResource {
         try {
             // fill in request from query parameters via shared superclass method
             request = super.buildRequest();
+
             TripPlan plan = otpServer.planGenerator.generate(request);
+
+            /* Log this request if such logging is enabled. */
+            if (request != null && otpServer.requestLogger != null) {
+                StringBuilder sb = new StringBuilder();
+                String clientIpAddress = grizzlyRequest.getRemoteAddr();
+                //sb.append(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+                sb.append(InetAddress.getLocalHost().getHostName());
+                sb.append(' ');
+                sb.append(clientIpAddress);
+                sb.append(' ');
+                sb.append(request.arriveBy ? "ARRIVE" : "DEPART");
+                sb.append(' ');
+                sb.append(LocalDateTime.ofInstant(Instant.ofEpochSecond(request.dateTime), ZoneId.systemDefault()));
+                sb.append(' ');
+                sb.append(request.modes.getAsStr());
+                sb.append(' ');
+                sb.append(request.from.getLat());
+                sb.append(' ');
+                sb.append(request.from.getLng());
+                sb.append(' ');
+                sb.append(request.to.getLat());
+                sb.append(' ');
+                sb.append(request.to.getLng());
+                sb.append(' ');
+                if (plan != null) {
+                    for (Itinerary path : plan.itinerary) {
+                        sb.append(path.duration);
+                        sb.append(' ');
+                        sb.append(path.legs.size());
+                        sb.append(' ');
+                    }
+                }
+                otpServer.requestLogger.info(sb.toString());
+            }         
+
             response.setPlan(plan);
         } catch (Exception e) {
             PlannerError error = new PlannerError(e);

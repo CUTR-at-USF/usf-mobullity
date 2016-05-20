@@ -23,7 +23,15 @@ import org.opentripplanner.routing.impl.RetryingPathServiceImpl;
 import org.opentripplanner.routing.services.GraphService;
 import org.opentripplanner.routing.services.PathService;
 import org.opentripplanner.routing.services.SPTService;
-import org.slf4j.Logger;
+
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.rolling.RollingFileAppender;
+import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
+import ch.qos.logback.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ext.Provider;
@@ -36,7 +44,7 @@ import java.util.Map;
  */
 public class OTPServer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(OTPServer.class);
+    private static final Logger LOG = (Logger) LoggerFactory.getLogger(OTPServer.class);
 
     // will replace graphService
     private final Map<String, Router> routers = Maps.newHashMap();
@@ -57,12 +65,20 @@ public class OTPServer {
     public SurfaceCache surfaceCache;
     public PointSetCache pointSetCache;
 
+    /**
+     *  Separate logger for incoming requests. This should be handled with a Logback logger rather than something
+     *  simple like a PrintStream because requests come in multi-threaded.
+     */
+    public Logger requestLogger = null;
+
     public Router getRouter(String routerId) {
         return routers.get(routerId);
     }
 
     public OTPServer (CommandLineParameters params, GraphService gs) {
         LOG.info("Wiring up and configuring server.");
+
+        this.requestLogger = createLogger(); 
 
         // Core OTP modules
         graphService = gs;
@@ -112,6 +128,50 @@ public class OTPServer {
                 bind(graphService).to(GraphService.class);
             }
         };
+    }
+
+/**
+     * Programmatically (i.e. not in XML) create a Logback logger for requests happening on this router.
+     * http://stackoverflow.com/a/17215011/778449
+     */
+    private static Logger createLogger() {
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        PatternLayoutEncoder ple = new PatternLayoutEncoder();
+        ple.setPattern("%d{yyyy-MM-dd'T'HH:mm:ss.SSS} %msg%n");
+        ple.setContext(lc);
+        ple.start();
+
+        DefaultTimeBasedFileNamingAndTriggeringPolicy<ILoggingEvent> timeBasedTriggeringPolicy = new DefaultTimeBasedFileNamingAndTriggeringPolicy<ILoggingEvent>();
+        timeBasedTriggeringPolicy.setContext(lc);
+
+        TimeBasedRollingPolicy<ILoggingEvent> timeBasedRollingPolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
+        timeBasedRollingPolicy.setContext(lc);
+        timeBasedRollingPolicy.setFileNamePattern("requests.%d{yyyy-MM-dd}.log");
+        timeBasedRollingPolicy.setTimeBasedFileNamingAndTriggeringPolicy(timeBasedTriggeringPolicy);
+        timeBasedRollingPolicy.setMaxHistory(7);
+        timeBasedTriggeringPolicy.setTimeBasedRollingPolicy(timeBasedRollingPolicy);
+
+        RollingFileAppender<ILoggingEvent> rollingFileAppender = new RollingFileAppender<ILoggingEvent>();
+        rollingFileAppender.setAppend(true);
+        rollingFileAppender.setContext(lc);
+        rollingFileAppender.setEncoder(ple);
+        rollingFileAppender.setFile("requests.log");
+        rollingFileAppender.setName("REQ_LOG Appender");
+        rollingFileAppender.setPrudent(false);
+        rollingFileAppender.setRollingPolicy(timeBasedRollingPolicy);
+        rollingFileAppender.setTriggeringPolicy(timeBasedTriggeringPolicy);
+
+        timeBasedRollingPolicy.setParent(rollingFileAppender);
+
+        ple.start();
+        timeBasedRollingPolicy.start();
+        rollingFileAppender.start();
+
+        Logger logger = (Logger) LoggerFactory.getLogger("REQ_LOG");
+        logger.addAppender(rollingFileAppender);
+        logger.setLevel(Level.INFO);
+        logger.setAdditive(false);
+        return logger;
     }
 
 }
