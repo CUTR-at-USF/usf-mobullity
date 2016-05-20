@@ -103,8 +103,6 @@ otp.util.Time = {
 
         // step 5b: cast m back into a string
         m = "" + m + "";
-        if(m.length != 2)
-            console.log("ERROR: we have problem with our minutes string:== " + m);
 
         // step 6: rationalize the a/p stuff...
         if(am)

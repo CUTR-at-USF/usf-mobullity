@@ -82,7 +82,6 @@ otp.modules.fieldtrip.FieldTripManagerWidget =
         
         for(var i = 0; i < requests.length; i++) {
             var req = requests[i];
-            //console.log(req);
             //$('<div class="otp-fieldTripRequests-listRow">'+req.teacherName+", "+req.schoolName+'</div>').appendTo(this.requestsList);
             
             var row = ich['otp-fieldtrip-requestRow'](otp.util.FieldTrip.getRequestContext(req));
@@ -125,21 +124,18 @@ otp.modules.fieldtrip.FieldTripManagerWidget =
         var selectRow = $('<div class="notDraggable otp-fieldTripManager-callListHeader"></div>').appendTo(tripListContainer);
         $('<input type="radio" name="'+this.id+'+-selectGroup" checked />').appendTo(selectRow)
         .click(function() {
-            console.log("all");
             this_.selectedDate = null;
             this_.module.refreshTrips();
         });
         $('<span>&nbsp;Show all trips&nbsp;&nbsp;<br></span>').appendTo(selectRow);
         this.dateRadio = $('<input type="radio" name="'+this.id+'+-selectGroup" />').appendTo(selectRow)
         .click(function() {
-            console.log("date");
             this_.selectedDate = this_.datePicker.val();
             this_.module.refreshTrips();
         });
         $('<span>&nbsp;Show trips on:&nbsp;</span>').appendTo(selectRow);
         this.datePicker = $('<input type="text" style="font-size:11px; width: 60px;" />').datepicker({
             onSelect: function(date) {
-                console.log(date);
                 this_.selectedDate = date;
                 this_.dateRadio.prop('checked',true);
                 this_.module.refreshTrips();

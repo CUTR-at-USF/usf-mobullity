@@ -343,12 +343,6 @@ var bullRunnerIconFSW = L.Icon.extend({
 });
 
 var vehicles = {};
-var stopsA = {};
-var stopsB = {};
-var stopsC = {};
-var stopsD = {};
-var stopsE = {};
-var stopsF = {};
 
 otp.layers.BusPositionsLayer = 
 	otp.Class(L.LayerGroup, {
@@ -368,13 +362,6 @@ otp.layers.BusPositionsLayer =
 
 			this.module.addLayer("buses", this);
 			
-			//Get the stops for each Bull Runner Route to draw the route...
-			stopsA = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_1');
-			stopsB = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_3');
-			stopsC = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_5');
-			stopsD = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_8');
-			stopsE = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_11');
-			stopsF = this.module.webapp.transitIndex.getTripRoute('USF Bull Runner_13');
 
 			//Use patterns API to load geometries
 			for (var x=0; x < this.routes.length; x++) {
@@ -404,7 +391,7 @@ otp.layers.BusPositionsLayer =
                                     || this.visible.indexOf('C') != -1 || this.visible.indexOf('D') != -1
                                     || this.visible.indexOf('E') != -1 || this.visible.indexOf('F') != -1;
 
-			if(lmap.getZoom() >= this.minimumZoomForStops && busRouteVisible) {
+			if(busRouteVisible) {
 				this.liveMap(); //need to get updated vehicle positions
 				this.setRoutes(); //need to reset routes display on the map
 			}
@@ -785,60 +772,6 @@ otp.layers.BusPositionsLayer =
 		},
 		
 		setRoutes : function(){			
-			//for route A:
-			var routeA = new Array();
-			//console.log(stopsA);
-			for (var a = 0; a < stopsA.length; a++){
-				var lat = stopsA[a].lat;
-				var lng = stopsA[a].lon;
-				var latlng = L.latLng(lat, lng);
-				routeA.push(latlng);
-			}
-			
-			//for route B:
-			var routeB = new Array();
-			for (var b = 0; b < stopsB.length; b++){
-				var lat = stopsB[b].lat;
-				var lng = stopsB[b].lon;
-				var latlng = L.latLng(lat, lng);
-				routeB.push(latlng);
-			}
-			
-			//for route C:
-			var routeC = new Array();
-			for (var c = 0; c < stopsC.length; c++){
-				var lat = stopsC[c].lat;
-				var lng = stopsC[c].lon;
-				var latlng = L.latLng(lat, lng);
-				routeC.push(latlng);
-			}
-			
-			//for route D:
-			var routeD = new Array();
-			for (var d = 0; d < stopsD.length; d++){
-				var lat = stopsD[d].lat;
-				var lng = stopsD[d].lon;
-				var latlng = L.latLng(lat, lng);
-				routeD.push(latlng);
-			}			
-			
-			//for route E:
-			var routeE = new Array();
-			for (var e = 0; e < stopsE.length; e++){
-				var lat = stopsE[e].lat;
-				var lng = stopsE[e].lon;
-				var latlng = L.latLng(lat, lng);
-				routeE.push(latlng);
-			}
-						
-			//for route F:
-			var routeF = new Array();
-			for (var f = 0; f < stopsF.length; f++){
-				var lat = stopsF[f].lat;
-				var lng = stopsF[f].lon;
-				var latlng = L.latLng(lat, lng);
-				routeF.push(latlng);
-			}
 
 			if (this.visible.indexOf('A') != -1) this.drawRoutePolyline(this.route_polylines['A'], {color: '#00573C'} );
 

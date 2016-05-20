@@ -26,11 +26,9 @@ otp.core.TrinetSessionManager = otp.Class({
     
         // initialize the session
         if(_.has(webapp.urlParams, 'sessionId')) {
-            console.log("received session id: " + webapp.urlParams['sessionId']);
             this.checkSession(webapp.urlParams['sessionId'], checkSessionSuccessCallback);
         }
         else { // no sessionId passed in; must request one from server
-            console.log("creating new session..");
             this.newSession(verifyLoginUrl, redirectUrl);
         }
     },
@@ -43,15 +41,11 @@ otp.core.TrinetSessionManager = otp.Class({
             dataType: 'json',
             
             success: function(data) {
-                console.log("newSession success: "+data.sessionId);
                 var windowUrl = verifyLoginUrl + "?session=" + data.sessionId + "&redirect=" + redirectUrl;
-                console.log("redirecting to: "+windowUrl);
                 window.location = windowUrl;
             },
             
             error: function(data) {
-                console.log("newSession error");
-                console.log(data);
             }
         });
     },
@@ -72,17 +66,12 @@ otp.core.TrinetSessionManager = otp.Class({
                     this_.username = data.username;
                     this_.role = data.role;
                     checkSessionSuccessCallback.call(this);
-                    //console.log('logged in as '+data.username);
-                    //console.log(data);
                 }
                 else {
-                    console.log("bad session id: " + sessionId);
                 }
             },
             
             error: function(data) {
-                console.log("checkSession error");
-                console.log(data);
             }
         });
     },

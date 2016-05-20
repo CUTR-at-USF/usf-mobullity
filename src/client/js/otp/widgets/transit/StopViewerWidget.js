@@ -110,7 +110,6 @@ otp.widgets.transit.StopViewerWidget =
             var time = this.times[i];            
             time.formattedTime = time.arrival.format(otp.config.timeFormat);
             ich['otp-stopViewer-timeListItem'](time).appendTo(this.timeList);
-            console.log(time);
             var diff = Math.abs(this.activeTime - time.arrival.unix()*1000);
             if(diff < minDiff) {
                 minDiff = diff;

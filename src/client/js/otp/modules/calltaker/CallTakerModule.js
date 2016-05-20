@@ -37,7 +37,6 @@ otp.modules.calltaker.CallTakerModule =
     
     activate : function() {    
         if(this.activated) return;
-        console.log("activate ctm: " + this.tripOptionsWidgetCssClass);
         otp.modules.multimodal.MultimodalPlannerModule.prototype.activate.apply(this);
         
         // use app-wide session manager
@@ -63,15 +62,11 @@ otp.modules.calltaker.CallTakerModule =
             dataType: 'json',
             
             success: function(data) {
-                console.log("newSession success: "+data.sessionId);
                 var redirectUrl = this_.options.trinet_verify_login_url + "?session=" + data.sessionId + "&redirect=" + this_.options.module_redirect_url;
-                console.log("redirect url: "+redirectUrl);
                 window.location = redirectUrl;
             },
             
             error: function(data) {
-                console.log("newSession error");
-                console.log(data);
             }
         });
     },
@@ -92,14 +87,9 @@ otp.modules.calltaker.CallTakerModule =
                     this_.username = data.username;
                     this_.showHistoryWidget();
                 }
-                else {
-                    console.log("bad session id: " + sessionId);
-                }
             },
             
             error: function(data) {
-                console.log("checkSession error");
-                console.log(data);
             }
         });
     },*/
@@ -159,8 +149,6 @@ otp.modules.calltaker.CallTakerModule =
     },
             
     saveModel : function(model, successCallback) {
-        //console.log("saveModel");
-        //console.log(model);
         
         var data = {
             sessionId : this.sessionManager.sessionId,
@@ -168,25 +156,20 @@ otp.modules.calltaker.CallTakerModule =
         
         
         for(var attr in model.attributes){
-            //console.log(attr + ': ' + model.attributes[attr]);
             data[model.playName+"."+attr] = model.attributes[attr];
         }
         
-        console.log(data);
         $.ajax(model.url, {
             type: 'POST',
             
             data: data,
                 
             success: function(data) {
-                console.log("success saving model");
-                //console.log(data);
                 model.id = data;
                 if(successCallback) successCallback.call(this, model);
             },
             
             error: function(data) {
-                console.log("error logging call");
             }
         });
         

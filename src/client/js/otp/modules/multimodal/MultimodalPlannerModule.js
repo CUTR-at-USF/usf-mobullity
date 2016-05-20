@@ -50,7 +50,6 @@ otp.modules.multimodal.MultimodalPlannerModule =
         };
         
         if(typeof this.tripOptionsWidgetCssClass !== 'undefined') {
-            console.log("set tripOptionsWidgetCssClass: " + this.tripOptionsWidgetCssClass); 
             optionsWidgetConfig['cssClass'] = this.tripOptionsWidgetCssClass;
         }
         

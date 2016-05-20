@@ -533,7 +533,6 @@ otp.modules.planner.PlannerModule =
     	
     	if(this.currentRequest !== null)
         {
-    		//console.log("Canceling current request.");
         	this.currentRequest.abort();
         	this.currentRequest = null;
         }
@@ -633,7 +632,6 @@ otp.modules.planner.PlannerModule =
                                 if(otp.util.Itin.isTransit(leg.mode)) {
                                     var tripId = leg.agencyId + "_"+leg.tripId;
                                     if(!this_.checkTripValidity(tripId, leg, itin)) {
-                                        //console.log("INVALID TRIP");
                                         invalidTrips.push(tripId);
                                     }
                                 } 
@@ -717,7 +715,6 @@ otp.modules.planner.PlannerModule =
             
             polyline.on('mouseover', function(e) {
                 if(e.target.hover) return;
-                console.log('mouseover');
                 this_.highlightLeg(e.target.leg);
                 this_.pathMarkerLayer.clearLayers();
                 this_.drawStartBubble(e.target.leg, true);
@@ -730,7 +727,6 @@ otp.modules.planner.PlannerModule =
                     var dist = L.LineUtil.pointToSegmentDistance(lpt, e.target._parts[0][p], e.target._parts[0][p+1]);
                     minDist = Math.min(minDist, dist)
                 }
-                console.log("minDist: "+minDist);
                 if(minDist < weight/2) return;
                 this_.clearHighlights();
                 this_.pathMarkerLayer.clearLayers();

@@ -42,7 +42,6 @@ otp.modules.planner.Itinerary = otp.Class({
 
     getFirstStopID : function() {
         if(this.firstStopIDs.length == 0) return null;
-        //console.log(this.firstStopIDs[0].agencyId+"_"+this.firstStopIDs[0].id);
         return this.firstStopIDs[0].agencyId+"_"+this.firstStopIDs[0].id;
     },
 
@@ -176,7 +175,6 @@ otp.modules.planner.Itinerary = otp.Class({
                     }
                 }
                 tripString += leg.to.stopIndex;
-                //console.log("leg "+l+": "+tripString);
                 segments.push(tripString);
             } 
         }

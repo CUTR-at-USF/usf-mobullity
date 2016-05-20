@@ -18,7 +18,7 @@ var bullrunnerStopIcon = L.Icon.extend({
     options: {
         iconUrl: resourcePath + 'images/busStopButton.png',
         shadowUrl: null,
-        iconSize: new L.Point(8,8),
+        iconSize: new L.Point(10,10),
         iconAnchor: new L.Point(10, 10),
         popupAnchor: new L.Point(0, -5)
     }
@@ -28,7 +28,7 @@ var hartStopIcon = L.Icon.extend({
     options: {
         iconUrl: resourcePath + 'images/stop20.png',
         shadowUrl: null,
-        iconSize: new L.Point(8,8),
+        iconSize: new L.Point(10,10),
         iconAnchor: new L.Point(10, 10),
         popupAnchor: new L.Point(0, -5)
     }
@@ -46,34 +46,72 @@ otp.layers.StopsLayer =
         this.module = module;
 
         this.module.stopViewerWidget = new otp.widgets.transit.StopViewerWidget('otp-'+this.id+'-StopViewerWidget', this.module);
-        
-        this.stopsLookup = {};
-       
+    
+        this.markers = {};
         this.stopsLayer = this.module.addLayer("stops", this);
+
+        this.hartLayer = L.layerGroup();
+        this.hartLayer.addTo( this );
+        this.addTo( webapp.map.lmap );
+
+        this.stopsLookup = {};
         
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
         
     },
     
     refresh : function() {
-        this.clearLayers();                
         var lmap = this.module.webapp.map.lmap;
-        if(lmap.getZoom() >= this.minimumZoomForStops) {
-            this.module.webapp.transitIndex.loadStopsInRadius(null, lmap.getCenter(), this, function(data) {
-                this.stopsLookup = {};
-                for(var i = 0; i < data.length; i++) {
+        var loadStops = false;
+
+        /* If bullrunner active, load stops regardless of zoom */
+        if (webapp.modules[0].busLayers.visible.length > 0) {
+            loadStops = true;
+            lmap.addLayer( this );
+        }
+        else {
+            lmap.removeLayer( this );
+        }
+
+        /* If HART active, check zoom first */
+        if (otp.config.showHartBusStops) {
+
+            /* If zoom is OK, hide zoom error, show layer, and load stops */
+            if (lmap.getZoom() >= this.minimumZoomForStops) {
+                webapp.modules[0].layerWidget.hideZoomError();
+                webapp.map.lmap.addLayer( this.hartLayer );
+                loadStops = true;
+            }
+            else {
+                /* Otherwise, remove HART stops from map, and show zoom error */
+                webapp.map.lmap.removeLayer( this.hartLayer );
+                webapp.modules[0].layerWidget.displayZoomError();
+            }
+
+        }
+        else {
+                webapp.modules[0].layerWidget.hideZoomError();
+                webapp.map.lmap.removeLayer( this.hartLayer );
+        }
+
+        if (loadStops) {
+                this.module.webapp.transitIndex.loadStopsInRadius(null, lmap.getCenter(), this, function(data) {
+                    this.stopsLookup = {};
+                    for(var i = 0; i < data.length; i++) {
                     var agencyAndId = data[i].agency + "_" + data[i].id;
                     this.stopsLookup[agencyAndId] = data[i];
                 }
                 this.updateStops();
             });
         }
+
     },
     
     updateStops : function(stops) {
         var stops = _.values(this.stopsLookup);
         var this_ = this;
         var routeData = this.module.webapp.transitIndex.routes;
+        var m = {};
 
        	// USF Bull Runner_A index, routeData
  
@@ -137,21 +175,49 @@ otp.layers.StopsLayer =
             }
 
             if(stop.agency == "USF Bull Runner" && otp.config.showBullRunnerStops == true){
-            	//only want to display USF BullRunner stops in this layer
-            	L.marker([stop.lat, stop.lon], {
-            		icon : bullIcon,
-            	}).addTo(this_)
-            	.bindPopup(popupContent.get(0));
+
+                if (this_.markers[ stop.id ] == undefined) {
+                    //only want to display USF BullRunner stops in this layer
+                    m[stop.id] = L.marker([stop.lat, stop.lon], {
+                        icon : bullIcon,
+                        ZIndexOffset : 1000,
+                    }).bindPopup(popupContent.get(0));
+
+                    this_.addLayer( m[stop.id] );
+                    this_.markers[stop.id] = m[stop.id];
+                }
+                else m[stop.id] = this_.markers[stop.id]; // don't remove it
+
             }
             
             else if(stop.agency == "Hillsborough Area Regional Transit" && otp.config.showHartBusStops == true){
-            	//only want to display Hart stops in this layer
-            	L.marker([stop.lat, stop.lon], {
-            		icon : hartIcon,
-            	}).addTo(this_)
-            	.bindPopup(popupContent.get(0));
-            }
-            
+
+                if (this_.markers[ stop.id ] == undefined) {
+
+                     //only want to display Hart stops in this layer
+                    m[stop.id] = L.marker([stop.lat, stop.lon], {
+                        icon : hartIcon,
+                        ZIndexOffset : 1000,
+                    }).bindPopup(popupContent.get(0));
+
+                    this_.hartLayer.addLayer( m[stop.id] );
+                    this_.markers[stop.id] = m[stop.id];
+                }
+                else m[stop.id] = this_.markers[stop.id]; // don't remove it
+
+             }
+
         }
+
+        // Check if markers were added or deleted and update layer accordingly
+        for (var x in this_.markers) {
+            if (m[x] == undefined) {
+                this_.hartLayer.removeLayer(this_.markers[x]);
+                this_.removeLayer(this_.markers[x]);
+            }
+        }
+
+        this_.markers = m;
+
     },
 });

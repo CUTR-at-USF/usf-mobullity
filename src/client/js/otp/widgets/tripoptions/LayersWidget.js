@@ -18,6 +18,7 @@ otp.widgets.LayersWidget =
     otp.Class(otp.widgets.Widget, {
 
     module : null,
+    minimumZoom : 15,
     
     toggle_bus_layer : function(rte) {
     	
@@ -39,6 +40,13 @@ otp.widgets.LayersWidget =
 
     },
         
+    hideZoomError : function() {
+        $('#zoom-notice').hide();
+    },
+    displayZoomError : function() {
+        $('#zoom-notice').show();
+    },
+
     initialize : function(id, module) {
     
         otp.widgets.Widget.prototype.initialize.call(this, id, module, {

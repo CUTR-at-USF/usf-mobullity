@@ -1,11 +1,9 @@
 $(document).ready(function() {
-    console.log("init form");
     
     $.support.cors = true;
     $("#travelDate").datepicker();
     
     $("#submitBtn").button().click(function() {
-        console.log("submit: " + $("#teacherName").val());
         
         var data = {
             userName : 'admin',
@@ -22,12 +20,9 @@ $(document).ready(function() {
                 
             success: function(data) {
                 if((typeof data) == "string") data = jQuery.parseJSON(data);
-                console.log('success');
             },
             
             error: function(data) {
-                console.log("error saving trip");
-                console.log(data);
             }
         });
                 
