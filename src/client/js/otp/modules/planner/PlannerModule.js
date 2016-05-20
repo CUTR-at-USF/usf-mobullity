@@ -496,7 +496,8 @@ otp.modules.planner.PlannerModule =
     }
 
     // The following block of code decompose the date manually entered and make sure this date is valid.
-    var comp = this.date.split('/');
+    if (this.date.indexOf('-') != -1) var comp = this.date.split("-"); // OTP sends dates back as %m-%d-%Y
+    else var comp = this.date.split('/');
     var m = parseInt(comp[0], 10);
     var d = parseInt(comp[1], 10);
     var y = parseInt(comp[2], 10);
