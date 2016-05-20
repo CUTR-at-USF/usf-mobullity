@@ -92,7 +92,7 @@ public class OTPConfigurator {
             /* Create a conventional GraphService that loads graphs from disk. */
             GraphServiceImpl graphService = new GraphServiceImpl();
             if (params.graphDirectory != null) {
-                graphService.setPath(params.graphDirectory);
+                graphService.setPath(params.graphDirectory.getAbsolutePath());
             }
             if (params.routerIds.size() > 0) {
                 graphService.setDefaultRouterId(params.routerIds.get(0));

@@ -34,6 +34,7 @@ public class CommandLineParameters {
 
     private static final int DEFAULT_PORT = 8080;
     private static final int DEFAULT_SECURE_PORT = 8081;
+    private static final String DEFAULT_BASE_PATH  = "/var/otp";
     private static final String DEFAULT_GRAPH_DIRECTORY  = "/path/to/store/graph-bundle";
     private static final String DEFAULT_CACHE_DIRECTORY  = "/var/otp/cache";
     private static final String DEFAULT_POINTSET_DIRECTORY  = "/var/otp/pointsets";
@@ -57,7 +58,7 @@ public class CommandLineParameters {
     
     @Parameter(names = { "-c", "--cache"}, validateWith = ReadWriteDirectory.class,
             description = "the directory under which to cache OSM and NED tiles")
-    String cacheDirectory;
+    public File cacheDirectory;
 
     @Parameter(names = { "-e", "--elevation"},
             description = "download and use elevation data for the graph")
@@ -118,10 +119,13 @@ public class CommandLineParameters {
             description = "path to graph configuration file")
     String graphConfigFile;
 
-    // --basePath (rather than --graphs). Maybe just eliminate most short options.
+    @Parameter(names = {"--basePath"}, validateWith = ReadWriteDirectory.class,
+            description = "Set the path under which graphs, caches, etc. are stored by default.")
+    public String basePath = DEFAULT_BASE_PATH;
+
     @Parameter( names = { "-g", "--graphs"}, validateWith = ReadableDirectory.class,
             description = "path to graph directory")
-    String graphDirectory;
+    public File graphDirectory;
 
     @Parameter( names = { "-l", "--longDistance"}, 
             description = "use an algorithm tailored for long-distance routing")
@@ -133,7 +137,7 @@ public class CommandLineParameters {
 
     @Parameter( names = { "-P", "--pointSet"}, validateWith =  ReadableDirectory.class, 
     		description = "path to pointSet directory")
-    String pointSetDirectory;
+    public File pointSetDirectory;
     
     @Parameter( names = { "-r", "--router"}, validateWith = RouterId.class,
     		description = "Router ID, first one being the default")
@@ -154,10 +158,14 @@ public class CommandLineParameters {
     /** Set some convenience parameters based on other parameters' values. */
     public void infer () {
         server |= ( inMemory || port != null );
-        if (graphDirectory  == null) graphDirectory  = DEFAULT_GRAPH_DIRECTORY;
+
+         /* If user has not overridden these paths, use default locations under the base path. */
+        if (cacheDirectory == null) cacheDirectory = new File(basePath, "cache");
+        if (graphDirectory == null) graphDirectory = new File(basePath, "graphs");
+        if (pointSetDirectory == null) pointSetDirectory = new File(basePath, "pointsets");
+
         if (routerIds == null) routerIds = Arrays.asList(DEFAULT_ROUTER_ID);
-        if (cacheDirectory == null) cacheDirectory = DEFAULT_CACHE_DIRECTORY;
-        if (pointSetDirectory == null) pointSetDirectory = DEFAULT_POINTSET_DIRECTORY;
+
         if (server && port == null) {
             port = DEFAULT_PORT;
             new AvailablePort().validate(port);
