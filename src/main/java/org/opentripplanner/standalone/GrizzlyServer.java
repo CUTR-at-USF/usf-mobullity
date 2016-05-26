@@ -9,6 +9,10 @@ import org.glassfish.grizzly.http.server.CLStaticHttpHandler;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.http.server.Request;
+import org.glassfish.grizzly.http.server.Response;
+import org.glassfish.grizzly.http.util.HttpStatus;
+import org.glassfish.grizzly.http.util.Header;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
@@ -77,15 +81,70 @@ public class GrizzlyServer {
         );
 
         // For both HTTP and HTTPS listeners: enable gzip compression, set thread pool, add listener to httpServer.
-        for (NetworkListener listener : new NetworkListener[] {httpListener, httpsListener}) {
-            CompressionConfig cc = listener.getCompressionConfig();
-            cc.setCompressionMode(CompressionConfig.CompressionMode.ON);
-            cc.setCompressionMinSize(50000); // the min number of bytes to compress
-            cc.setCompressableMimeTypes("application/json", "text/json"); // the mime types to compress
-            listener.getTransport().setWorkerThreadPoolConfig(threadPoolConfig);
-            httpServer.addListener(listener);
-        }
+        CompressionConfig cc = httpsListener.getCompressionConfig();
+        cc.setCompressionMode(CompressionConfig.CompressionMode.ON);
+        cc.setCompressionMinSize(50000); // the min number of bytes to compress
+        cc.setCompressableMimeTypes("application/json", "text/json"); // the mime types to compress
+        httpsListener.getTransport().setWorkerThreadPoolConfig(threadPoolConfig);
+        httpServer.addListener(httpsListener);        
 
+        HttpServer httpRedirect = new HttpServer();
+        httpRedirect.addListener(httpListener);
+
+        httpRedirect.getServerConfiguration().addHttpHandler(new HttpHandler() {
+            
+            @Override
+            public void service(Request request, Response response) throws Exception {
+
+                StringBuilder str = new StringBuilder();
+
+                str.append( "https://" );
+
+                // Determine the correct host to redirect to based on local server name, and host parameter
+                if (request.getHeader("Host") != null) {
+
+                    switch (request.getHeader("Host").replace(String.format(":%d", params.port), "").toLowerCase()) {
+                    default:
+                    case "mobullity.forest.usf.edu":
+                        str.append( "mobullity.forest.usf.edu" );
+                        break;
+                    case "maps.usf.edu":
+                        str.append( "maps.usf.edu" );
+                        break;
+                    case "localhost":
+                        str.append( "localhost" );
+                    }
+                }
+                else {
+                    switch (request.getLocalName().toLowerCase()) {
+                    default:
+                    case "mobullity.forest.usf.edu":
+                        str.append( "mobullity.forest.usf.edu" );
+                        break;
+                    case "mobullity2.forest.usf.edu":
+                    case "mobullity3.forest.usf.edu":
+                        str.append( "maps.usf.edu" );
+                        break;
+                    case "localhost":
+                        str.append( "localhost" );
+                    }
+                }
+
+                if (params.securePort != 443)
+                    str.append( String.format(":%d", params.securePort) );
+
+                str.append( request.getRequestURI() );
+
+                if (request.getQueryString() != null) {
+                    str.append( "?" );
+                    str.append( request.getQueryString() );
+                }
+
+                response.setStatus(HttpStatus.MOVED_PERMANENTLY_301);
+                response.setHeader(Header.Location, str.toString() );
+            }
+        }, "");
+        
         /* Add a few handlers (~= servlets) to the Grizzly server. */
 
         /* 1. A Grizzly wrapper around the Jersey Application. */
@@ -106,6 +165,7 @@ public class GrizzlyServer {
         /* RELINQUISH CONTROL TO THE SERVER THREAD */
         try {
             httpServer.start(); 
+            httpRedirect.start();
             LOG.info("Grizzly server running.");
             Thread.currentThread().join();
         } catch (BindException be) {
@@ -116,6 +176,7 @@ public class GrizzlyServer {
             LOG.info("Interrupted, shutting down.");
         }
         httpServer.shutdown();
+        httpRedirect.shutdown();
 
     }
 }
