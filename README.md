@@ -60,10 +60,11 @@ We would like to acknowledge the support and funding assistance provided by the 
   Manual Configuration:
 
   1) Secure the Tomcat manager application to localhost by adding the following to context.xml:
-	```
+	
+```
 	<Valve className="org.apache.catalina.valves.RemoteAddrValve"
          allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
-         ```
+```
 
   2) Set your manager username and password in tomcat-users.xml:
 
