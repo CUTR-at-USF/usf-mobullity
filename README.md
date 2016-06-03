@@ -62,21 +62,22 @@ We would like to acknowledge the support and funding assistance provided by the 
   1) Secure the Tomcat manager application to localhost by adding the following to context.xml:
 	```
 	<Valve className="org.apache.catalina.valves.RemoteAddrValve"
-         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />```
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+         ```
 
   2) Set your manager username and password in tomcat-users.xml:
 
-  <user username="USER" password="PASS" roles="manager-gui"/>
+	<user username="USER" password="PASS" roles="manager-gui"/>
 
   3) Configure the HTTP/HTTPS ports in server.xml by adding or editing the following lines:
 
-  ```
+```
   <Connector port="8181" protocol="HTTP/1.1" connectionTimeout="20000"         redirectPort="8443" />
-  ```
+```
 
-  ```
+```
   <Connector port="8443" maxThreads="150" scheme="https" secure="true" SSLEnabled="true" keystoreFile="/path/to/keystore" keystorePass="PASSPHRASE" clientAuth="false" sslProtocol="TLS" />
-  ```
+```
 
   Note the keystoreFile and keystorePass - these should match what your SSL certificate was created with.  See the SSL section for more information.
 
