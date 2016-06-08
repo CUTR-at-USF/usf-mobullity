@@ -191,7 +191,7 @@ We would like to acknowledge the support and funding assistance provided by the 
 
   `-Djdk.tls.ephemeralDHKeySize=2048`
 
-  More information @ www.weakdh.org
+  More information @ www.weakdh.org and some other discussion of solutions at http://serverfault.com/questions/722182/how-to-generate-new-2048-bit-diffie-hellman-parameters-with-java-keytool
 
 ## Build-Config.json
 
