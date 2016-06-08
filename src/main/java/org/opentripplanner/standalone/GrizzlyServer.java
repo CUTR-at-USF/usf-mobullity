@@ -105,11 +105,11 @@ public class GrizzlyServer {
 
                     switch (request.getHeader("Host").replace(String.format(":%d", params.port), "").toLowerCase()) {
                     default:
-                    case "mobullity.forest.usf.edu":
-                        str.append( "mobullity.forest.usf.edu" );
-                        break;
                     case "maps.usf.edu":
                         str.append( "maps.usf.edu" );
+                        break;
+                    case "mobullity.forest.usf.edu":
+                        str.append( "mobullity.forest.usf.edu" );
                         break;
                     case "localhost":
                         str.append( "localhost" );
