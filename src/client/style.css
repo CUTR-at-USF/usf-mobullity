@@ -675,7 +675,7 @@ div#otp-planner-optionsWidget-scollPanel {
 /* Layer widget */
 .otp-layerView { 
 	width:40%;
-	min-width: 160px;
+	min-width: 195px;
 	max-width: 200px;
 	min-height:100px;
 	background-color: white;
