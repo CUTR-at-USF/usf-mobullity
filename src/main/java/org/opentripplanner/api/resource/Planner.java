@@ -69,7 +69,7 @@ public class Planner extends RoutingResource {
          * TODO: org.opentripplanner.routing.impl.PathServiceImpl has COOORD parsing. Abstract that
          *       out so it's used here too...
          */
-        
+      
         // create response object, containing a copy of all request parameters
         Response response = new Response(uriInfo);
         RoutingRequest request = null;
@@ -92,7 +92,7 @@ public class Planner extends RoutingResource {
                 sb.append(' ');
                 sb.append(LocalDateTime.ofInstant(Instant.ofEpochSecond(request.dateTime), ZoneId.systemDefault()));
                 sb.append(' ');
-                sb.append(request.modes.getAsStr());
+                sb.append(modes.get(0).asString());
                 sb.append(' ');
                 sb.append(request.from.getLat());
                 sb.append(' ');
