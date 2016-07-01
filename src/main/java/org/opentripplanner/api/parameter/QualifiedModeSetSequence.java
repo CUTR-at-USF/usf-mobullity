@@ -26,6 +26,7 @@ public class QualifiedModeSetSequence {
     public List<Set<QualifiedMode>> sets = Lists.newArrayList();
 
     public QualifiedModeSetSequence(String s) {
+
         for (String seg : s.split(";")) {
             Set<QualifiedMode> qModeSet = Sets.newHashSet();
             for (String qMode : seg.split(",")) {
@@ -48,6 +49,7 @@ public class QualifiedModeSetSequence {
         req.modes = new TraverseModeSet();
         /* Use only the first set of qualified modes for now. */
         if (sets.isEmpty()) return;
+
         Set<QualifiedMode> qModes = sets.get(0);
         // First, copy over all the modes
         for (QualifiedMode qMode : qModes) {
@@ -72,6 +74,21 @@ public class QualifiedModeSetSequence {
                 }
             }
         }
+    }
+
+    public String asString() {
+        StringBuilder sb = new StringBuilder();
+
+        /* Use only the first set of qualified modes for now. */
+        if (sets.isEmpty()) return null;
+        Set<QualifiedMode> qModes = sets.get(0);
+ 
+        for (QualifiedMode qm : qModes) {
+            sb.append(qm.mode);
+            sb.append(",");
+        }
+
+        return sb.toString();
     }
 
 }
