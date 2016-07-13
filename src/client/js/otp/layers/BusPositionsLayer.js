@@ -1,347 +1,5 @@
 otp.namespace("otp.layers");
 
-var bullRunnerIconAS = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/A.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconAN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ANorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconAE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/AEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconAW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/AWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconANE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ANorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconANW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ANorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconASE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ASouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconASW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ASouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
-var bullRunnerIconBS = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/B.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BNorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBNE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BNorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBNW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BNorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBSE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BSouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconBSW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/BSouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
-var bullRunnerIconCS = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/C.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CNorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCNE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CNorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCNW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CNorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCSE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CSouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconCSW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/CSouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
-var bullRunnerIconDS = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/D.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DNorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDNE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DNorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDNW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DNorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDSE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DSouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconDSW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/DSouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
-var bullRunnerIconES = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/E.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconEN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ENorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconEE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/EEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconEW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/EWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconENE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ENorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconENW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ENorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconESE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ESouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconESW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/ESouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
-var bullRunnerIconFS = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/F.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFN = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FNorth.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFNE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FNorthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFNW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FNorthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFSE = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FSouthEast.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-var bullRunnerIconFSW = L.Icon.extend({
-	options: {
-		angle: 0,
-		iconUrl : resourcePath + 'images/FSouthWest.svg',
-		iconSize: new L.Point(40,70)
-	}
-});
-
 var vehicles = {};
 
 otp.layers.BusPositionsLayer = 
@@ -355,27 +13,34 @@ otp.layers.BusPositionsLayer =
 	
 		route_polylines : [],
 		routes: ['A', 'B', 'C', 'D', 'E', 'F'],
+
+        colors: {'A': '#00573C', 'B': '#0077D1', 'C':'#AC49D0', 'D':'#F70505', 'E':'#bca510', 'F':'#8F6A51'},
+        icons: {},
 	
 		initialize : function(module) {
 			L.LayerGroup.prototype.initialize.apply(this);
 			this.module = module;
 
 			this.module.addLayer("buses", this);
-			
+
+            // Initialize layergroups for each route ID
+            this.groups = {};
+            for (x in this.routes) 
+                this.groups[ this.routes[x] ] = L.layerGroup();			
 
 			//Use patterns API to load geometries
 			for (var x=0; x < this.routes.length; x++) {
 				route = this.routes[x];
 
-				// XXX use defined agency and detect the tripid (01) ?
-			        $.ajax({
+		   		// XXX use defined agency and detect the tripid (01) ?
+		        $.ajax({
                 		url: otp.config.hostname + '/otp/routers/default/index/patterns/USF Bull Runner_'+route+'_01/geometries',
                 		this_: this,
-				rte: route,
+        				rte: route,
 		                dataType: 'json',
                 		success: function(data) {
-					this.this_.route_polylines[this.rte] = data;
-				},
+		           			this.this_.route_polylines[this.rte] = data;
+	    		    	},
 				});
 			}
 
@@ -384,8 +49,69 @@ otp.layers.BusPositionsLayer =
 			setInterval($.proxy(this.refresh,this),5000);
 		},
 
+        getIconForRouteAndDirection : function(rte, dir) {
+
+            switch (dir) {
+            default:
+                dir = "";
+                break
+            case "S": case "South":
+                dir = "south";
+                break;
+            case "SW": case "SouthWest":
+                dir = "se";
+                break;
+            case "W": case "West":
+                dir = "west";
+                break;
+            case "NW": case "NorthWest":
+                dir = "nw";
+                break;
+            case "N": case "North":
+                dir = "north";
+                break;
+            case "NE": case "NorthEast":
+                dir = "ne";
+                break;
+            case "E": case "East":
+                dir = "east";
+                break;
+            case "SE": case "SouthEast":
+                dir = "se";
+                break;
+            }
+
+            icon_html = ich['busicon-bullrunner'];
+
+            if (dir != "") bearing = ich['busicon-bearing-' + dir]({}).html();
+            else bearing = "";
+
+            icon_pre = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' ;
+            icon_html = icon_pre + icon_html({'color': this.colors[rte], 'route': rte, 'bearing': bearing}).html();
+
+            key = rte + "_" + dir;
+            if (key in this.icons) {
+                var icon = this.icons[key];
+            }
+            else {
+               var icon = L.divIcon({
+                     html : icon_html,
+                     className : 'bullrunnericon',
+                     iconSize: new L.Point(60,60),
+                     iconAnchor: new L.Point(30,60),
+                     popupAnchor: new L.Point(0,-60),
+               });
+
+               this.icons[key] = icon;
+            }
+
+            var lmap = this.module.webapp.map.lmap;
+//            if(lmap.getZoom() <= 15) icon.options['iconSize'] = new L.Point(40,40);
+
+           return icon;
+       },  
+
 		refresh : function() {
-			this.clearLayers();
 			var lmap = this.module.webapp.map.lmap;
             var busRouteVisible = this.visible.indexOf('A') != -1 || this.visible.indexOf('B') != -1 
                                     || this.visible.indexOf('C') != -1 || this.visible.indexOf('D') != -1
@@ -395,404 +121,113 @@ otp.layers.BusPositionsLayer =
 				this.liveMap(); //need to get updated vehicle positions
 				this.setRoutes(); //need to reset routes display on the map
 			}
+            else this.clearLayers();
+
 		},
 
 		liveMap : function() {
 			this_ = this;
 			this.module.webapp.transitIndex.loadBusPositions(this, function(data){
-				this_.vehicles = data.vehicles;
-				this_.setMarkers();
+				this.vehicles = data.vehicles;
+				this.setMarkers();
+                this.setRoutes();
 			});
 		},
 
 		setMarkers: function(){
-			var this_ = this;
-			var v;
-			var a = new Array();
-			var b = new Array();
-			var c = new Array();
-			var d = new Array();
-			var e = new Array();
-			var f = new Array();
-			for(v=0; v < this_.vehicles.length; v++){		
-				var coord = L.latLng(this_.vehicles[v].lat,this_.vehicles[v].lon);
-				var bearing = this_.vehicles[v].bearing;
-				var route = this_.vehicles[v].routeId;
+
+			for(v=0; v < this.vehicles.length; v++) {		
+				var coord = L.latLng(this.vehicles[v].lat,this.vehicles[v].lon);
+				var bearing = this.vehicles[v].bearing;
+				var route = this.vehicles[v].routeId;
 				var marker;
 
-				//A Route Markers initiation
-				var iconAN = new bullRunnerIconAN();
-				var iconAS = new bullRunnerIconAS();
-				var iconAE = new bullRunnerIconAE();
-				var iconAW = new bullRunnerIconAW();
-				var iconANE = new bullRunnerIconANE();
-				var iconANW = new bullRunnerIconANW();
-				var iconASE = new bullRunnerIconASE();
-				var iconASW = new bullRunnerIconASW();
-				
-				//B Route Markers initiation
-				var iconBN = new bullRunnerIconBN();
-				var iconBS = new bullRunnerIconBS();
-				var iconBE = new bullRunnerIconBE();
-				var iconBW = new bullRunnerIconBW();
-				var iconBNE = new bullRunnerIconBNE();
-				var iconBNW = new bullRunnerIconBNW();
-				var iconBSE = new bullRunnerIconBSE();
-				var iconBSW = new bullRunnerIconBSW();
-				
-				//C Route Markers initiation
-				var iconCN = new bullRunnerIconCN();
-				var iconCS = new bullRunnerIconCS();
-				var iconCE = new bullRunnerIconCE();
-				var iconCW = new bullRunnerIconCW();
-				var iconCNE = new bullRunnerIconCNE();
-				var iconCNW = new bullRunnerIconCNW();
-				var iconCSE = new bullRunnerIconCSE();
-				var iconCSW = new bullRunnerIconCSW();
-				
-				//D Route Markers initiation
-				var iconDN = new bullRunnerIconDN();
-				var iconDS = new bullRunnerIconDS();
-				var iconDE = new bullRunnerIconDE();
-				var iconDW = new bullRunnerIconDW();
-				var iconDNE = new bullRunnerIconDNE();
-				var iconDNW = new bullRunnerIconDNW();
-				var iconDSE = new bullRunnerIconDSE();
-				var iconDSW = new bullRunnerIconDSW();
-				
-				//E Route Markers initiation
-				var iconEN = new bullRunnerIconEN();
-				var iconES = new bullRunnerIconES();
-				var iconEE = new bullRunnerIconEE();
-				var iconEW = new bullRunnerIconEW();
-				var iconENE = new bullRunnerIconENE();
-				var iconENW = new bullRunnerIconENW();
-				var iconESE = new bullRunnerIconESE();
-				var iconESW = new bullRunnerIconESW();
-				
-				//F Route Markers initiation
-				var iconFN = new bullRunnerIconFN();
-				var iconFS = new bullRunnerIconFS();
-				var iconFE = new bullRunnerIconFE();
-				var iconFW = new bullRunnerIconFW();
-				var iconFNE = new bullRunnerIconFNE();
-				var iconFNW = new bullRunnerIconFNW();
-				var iconFSE = new bullRunnerIconFSE();
-				var iconFSW = new bullRunnerIconFSW();
-				
-				
-				switch (route){
-				case 'A':
-					switch(bearing){
+				switch(bearing){
 					case 0:
-						marker =  L.marker(coord,{icon : iconAN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "N";
 						break;
 					case 45:
-						marker=L.marker(coord,{icon : iconANE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "NE";
 						break;
 					case 90:
-						marker = L.marker(coord,{icon : iconAE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "E";
 						break;
 					case 135:
-						marker = L.marker(coord,{icon : iconASE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "SE";
 						break;
 					case 180:
-						marker = L.marker(coord,{icon : iconAS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "S";
 						break;
 					case 225:
-						marker = L.marker(coord,{icon : iconASW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "SW";
 						break;
 					case 270:
-						marker = L.marker(coord,{icon : iconAW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "W";
 						break;
 					case 315:
-						marker = L.marker(coord,{icon : iconANW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						a.push(marker);
+						dir = "NW";
 						break;
 					default:
 						console.log("Error no dir available: " + route);
+
+                        continue;
 					}
-					break;
-				case 'B':
-					switch(bearing){
-					case 0:
-						marker =  L.marker(coord,{icon : iconBN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 45:
-						marker=L.marker(coord,{icon : iconBNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 90:
-						marker = L.marker(coord,{icon : iconBE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 135:
-						marker = L.marker(coord,{icon : iconBSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 180:
-						marker = L.marker(coord,{icon : iconBS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 225:
-						marker = L.marker(coord,{icon : iconBSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 270:
-						marker = L.marker(coord,{icon : iconBW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					case 315:
-						marker = L.marker(coord,{icon : iconBNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						b.push(marker);
-						break;
-					default:
-						console.log("Error no dir available: " + route);
-					}
-					break;
-				case 'C':
-					switch(bearing){
-					case 0:
-						marker =  L.marker(coord,{icon : iconCN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 45:
-						marker=L.marker(coord,{icon : iconCNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 90:
-						marker = L.marker(coord,{icon : iconCE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 135:
-						marker = L.marker(coord,{icon : iconCSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 180:
-						marker = L.marker(coord,{icon : iconCS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 225:
-						marker = L.marker(coord,{icon : iconCSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 270:
-						marker = L.marker(coord,{icon : iconCW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					case 315:
-						marker = L.marker(coord,{icon : iconCNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						c.push(marker);
-						break;
-					default:
-						console.log("Error no dir available: " + route);
-					}
-					break;
-				case 'D':
-					switch(bearing){
-					case 0:
-						marker =  L.marker(coord,{icon : iconDN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 45:
-						marker=L.marker(coord,{icon : iconDNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 90:
-						marker = L.marker(coord,{icon : iconDE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 135:
-						marker = L.marker(coord,{icon : iconDSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 180:
-						marker = L.marker(coord,{icon : iconDS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 225:
-						marker = L.marker(coord,{icon : iconDSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 270:
-						marker = L.marker(coord,{icon : iconDW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					case 315:
-						marker = L.marker(coord,{icon : iconDNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						d.push(marker);
-						break;
-					default:
-						console.log("Error no dir available: " + route);
-					}
-					break;
-				case 'E':
-					switch(bearing){
-					case 0:
-						marker =  L.marker(coord,{icon : iconEN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 45:
-						marker=L.marker(coord,{icon : iconENE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 90:
-						marker = L.marker(coord,{icon : iconEE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 135:
-						marker = L.marker(coord,{icon : iconESE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 180:
-						marker = L.marker(coord,{icon : iconES,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 225:
-						marker = L.marker(coord,{icon : iconESW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 270:
-						marker = L.marker(coord,{icon : iconEW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					case 315:
-						marker = L.marker(coord,{icon : iconENW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						e.push(marker);
-						break;
-					default:
-						console.log("Error no dir available: " + route);
-					}
-					break;
-				case 'F':
-					switch(bearing){
-					case 0:
-						marker =  L.marker(coord,{icon : iconFN,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 45:
-						marker=L.marker(coord,{icon : iconFNE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 90:
-						marker = L.marker(coord,{icon : iconFE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 135:
-						marker = L.marker(coord,{icon : iconFSE,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 180:
-						marker = L.marker(coord,{icon : iconFS,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 225:
-						marker = L.marker(coord,{icon : iconFSW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 270:
-						marker = L.marker(coord,{icon : iconFW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					case 315:
-						marker = L.marker(coord,{icon : iconFNW,}).bindPopup('Bus: ' + this_.vehicles[v].id + " Route: " + route);
-						marker.on('mouseover', marker.openPopup.bind(marker));
-						f.push(marker);
-						break;
-					default:
-						console.log("Error no dir available: " + route);
-					}
-					break;
-				default:
-					console.log("Error no route available: " + route);
-				}
-			}
-			
-			if (this.visible.indexOf('A') != -1) L.layerGroup(a).addTo(this_);
-			if (this.visible.indexOf('B') != -1) L.layerGroup(b).addTo(this_);
-			if (this.visible.indexOf('C') != -1) L.layerGroup(c).addTo(this_);
-			if (this.visible.indexOf('D') != -1) L.layerGroup(d).addTo(this_);
-			if (this.visible.indexOf('E') != -1) L.layerGroup(e).addTo(this_);
-			if (this.visible.indexOf('F') != -1) L.layerGroup(f).addTo(this_);
+
+                   var icon = this.getIconForRouteAndDirection(route, dir);
+                   marker = L.marker(coord,{icon : icon,}).bindPopup('Bus: ' + this.vehicles[v].id + " Route: " + route + "<br>Moving: " + dir);
+                   marker._leaflet_id = this.vehicles[v].id;
+                   marker.on('click', marker.openPopup.bind(marker));
+
+                   if ( ! this.groups[route].hasLayer(marker))
+                       this.groups[route].addLayer(marker);
+                   else {
+                        m = this.groups[route]['_layers'][marker._leaflet_id];
+
+                        m.bindPopup( marker.getPopup() );
+
+                        m.setLatLng( marker.getLatLng() );
+                        m.setIcon( icon );
+                        m.update();		
+	
+                  }
+
+            } // end of vehicle loop
+
 		},
 		
 		setRoutes : function(){			
 
-			if (this.visible.indexOf('A') != -1) this.drawRoutePolyline(this.route_polylines['A'], {color: '#00573C'} );
+           for (x in this.routes) {
 
-			if (this.visible.indexOf('B') != -1) this.drawRoutePolyline(this.route_polylines['B'], {color: '#0077D1'} );
+                rte = this.routes[x];
 
-			if (this.visible.indexOf('C') != -1) this.drawRoutePolyline(this.route_polylines['C'], {color: '#AC49D0'} );
+               if (this.visible.indexOf(rte) == -1) {
+                    if (this.hasLayer( this.groups[rte] )) this.removeLayer( this.groups[rte] );    
+                    continue;
+               }
 
-			if (this.visible.indexOf('D') != -1) this.drawRoutePolyline(this.route_polylines['D'], {color: '#F70505'} );
+               polylines = this.drawRoutePolyline( this.route_polylines[rte], {'color': this.colors[rte]} );
+               polylines._leaflet_id = "polyline_" + rte;
 
-			if (this.visible.indexOf('E') != -1) this.drawRoutePolyline(this.route_polylines['E'], {color: '#bca510'} );
+               layer = this.groups[rte];
+               if (!layer.hasLayer(polylines)) layer.addLayer(polylines);
 
-			if (this.visible.indexOf('F') != -1) this.drawRoutePolyline(this.route_polylines['F'], {color: '#8F6A51'} );
+               if (!this.hasLayer(layer)) this.addLayer( this.groups[rte] );
+
+           }
 
 		},
 
 		drawRoutePolyline : function(route, opts) {
+            opts['clickable'] = false;
+            p = L.layerGroup();
 
 			for (x in route) {
-				line = route[x]
-				L.polyline(otp.util.Geo.decodePolyline(line['points']), opts).addTo(this);
-			}
+               line = route[x];
+               p.addLayer( L.polyline(otp.util.Geo.decodePolyline(line['points']), opts) );
+    		}
+
+            return p;
 		},
 
 	});
