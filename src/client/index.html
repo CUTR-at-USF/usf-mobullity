@@ -186,11 +186,11 @@
 
 
 <!-- load ICH templates and create the webapp at startup -->
-<script type="text/javascript" language="javascript">
+<script type="text/javascript" defer>
 
 var webapp = null;
 
-$(document).ready(function() {
+$(window).load(function() {
     var templateUrls = [ //new Array(
         'js/otp/layers/layers-templates.html',
         'js/otp/widgets/widget-templates.html',
