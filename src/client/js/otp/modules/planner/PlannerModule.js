@@ -517,7 +517,9 @@ otp.modules.planner.PlannerModule =
     },
  
     planTrip : function(existingQueryParams, apiMethod) {
-    
+   
+    logGAEvent('click', 'link', 'plan trip');
+
         if(typeof this.planTripStart == 'function') this.planTripStart();
 
 	this._queryParams = existingQueryParams;

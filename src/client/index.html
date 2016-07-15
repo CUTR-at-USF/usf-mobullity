@@ -233,26 +233,26 @@ $(document).ready(function() {
             onClick=" document.cookie = 'widgetUsed=trip; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
                      document.location.hash = 'trip';
                      jQuery('#layersButton').removeClass('selected_item'); jQuery('#tripPlannerButton').addClass('selected_item');
-                     javascript:webapp.modules[0].optionsWidget.show();"> 
+                     javascript:webapp.modules[0].optionsWidget.show(); logGAEvent('click', 'link', 'trip planner'); "> 
             <i class="material-icons" >directions</i>
                 Trip planner</li>
             <li class="mdl-menu__item" id="layersButton"
                 onClick=" document.cookie = 'widgetUsed=layers; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
                           document.location.hash = 'layers';
                           jQuery('#tripPlannerButton').removeClass('selected_item'); jQuery('#layersButton').addClass('selected_item');
-                          javascript:webapp.modules[0].layerWidget.show();">
+                          javascript:webapp.modules[0].layerWidget.show(); logGAEvent('click', 'link', 'layers'); ">
             <i class="material-icons" >layers</i>
                 Layers</li>
             <li><hr class="menu_separator"></li>
             <li class="mdl-menu__item" 
                 onClick="javascript:webapp.infoWidgets['otp-infoWidget-0'].show();
                          jQuery('#layersButton').removeClass('selected_item'); 
-                         jQuery('#tripPlannerButton').removeClass('selected_item');"
+                         jQuery('#tripPlannerButton').removeClass('selected_item'); logGAEvent('click', 'link', 'help widget');"
                 >Help</li> 
             <li class="mdl-menu__item" 
                 onClick="javascript:webapp.infoWidgets['otp-infoWidget-1'].show();
                          jQuery('#layersButton').removeClass('selected_item');
-                         jQuery('#tripPlannerButton').removeClass('selected_item');" 
+                         jQuery('#tripPlannerButton').removeClass('selected_item'); logGAEvent('click', 'link', 'feedback widget');" 
                 >Send feedback</li> 
             <!-- the button help need to be link to the icon legend pop up -->
         </ul>
@@ -270,19 +270,27 @@ $(document).ready(function() {
 
 <div id="otp-spinner"><img src="images/spinner.gif"></div>
 
+<!-- Google Analytics -->
 <script type="text/javascript">
+function logGAEvent(action, category, label) {
+    ga('send', 'event', category, action, label);
+}
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-69486080-1']);
-  _gaq.push(['_trackPageview']);
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+ga('create', 'UA-69486080-1', 'auto');
+
+is_myusf = navigator.userAgent.toLowerCase().indexOf('pyxismobile') > 0;
+if (is_myusf) ga('set', 'campaignSource', 'MyUSF Android');
+
+ga('send', 'pageview');
 
 </script>
+<!-- End Google Analytics -->
+
 
 </body>
 </html>

@@ -77,22 +77,34 @@ otp.widgets.LayersWidget =
         
 	// Bullrunner bus stops+routes
         $('#usf_A').bind('click', {'this_': this}, function(ev) {
-        	this_.toggle_bus_layer("A");        	        
+        	this_.toggle_bus_layer("A");
+
+            logGAEvent('click', 'link', 'layers bullrunner A'); 
         });
         $('#usf_B').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("B");        	        
+
+            logGAEvent('click', 'link', 'layers bullrunner B');
         });
         $('#usf_C').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("C");        	        
+
+            logGAEvent('click', 'link', 'layers bullrunner C');
         });
         $('#usf_D').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("D");        	        
+
+            logGAEvent('click', 'link', 'layers bullrunner D');
         });
         $('#usf_E').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("E");        	        
+
+            logGAEvent('click', 'link', 'layers bullrunner E');
         });
         $('#usf_F').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("F");        	        
+
+            logGAEvent('click', 'link', 'layers bullrunner F');
         });
       
 	// HART bus stops
@@ -109,6 +121,7 @@ otp.widgets.LayersWidget =
 
 		ev.data.module.stopsLayer.refresh();
 
+        logGAEvent('click', 'link', 'layers hart stops');
 	});
   
 	// Bike rental layers
@@ -126,7 +139,8 @@ otp.widgets.LayersWidget =
 	    }
 		
     	ev.data.module.bikeLayers.setMarkers(); // refresh
-        	
+
+        logGAEvent('click', 'link', 'layers bike stations');        	
     });
 
     $('#bike_lanes').bind('click', {'module': this.module}, function(ev) {
@@ -141,6 +155,8 @@ otp.widgets.LayersWidget =
 		}
 
 		ev.data.module.bikeLanes.refresh(); 
+
+        logGAEvent('click', 'link', 'layers bike lanes');
                	
     });
 
@@ -183,6 +199,8 @@ otp.widgets.LayersWidget =
                 }   
 
                 ev.data.module[activeName] = ! ev.data.module[activeName];
+
+                logGAEvent('click', 'link', 'layers ' + ev.data.layer['name']);
             })
         }
 
