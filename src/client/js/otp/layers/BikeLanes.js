@@ -31,7 +31,6 @@ otp.layers.BikeLanesLayer =
         this.module = module;
         
         this.bikeLanes = []
-        this.module.addLayer("bikelanes", this);        
         this.module.webapp.map.lmap.on('dragend zoomend', $.proxy(this.refresh, this));
         
         $.ajax({
@@ -47,30 +46,33 @@ otp.layers.BikeLanesLayer =
         			
         			this.this_.bikeLanes.push( p );        			        			        	
         		}
+
+		        i = 0;	
+            	for (p in this.this_.bikeLanes) {
+
+    		    	// For first four segments of bounding box
+    	    		if (i < 4) opts = {color: '#006747', dashArray: '5, 5'};
+	    	    	else opts = {color: '#006747'};
+
+    	    		ret=L.polyline(this.this_.bikeLanes[p], opts);    			
+
+    		    	this.this_.addLayer(ret);
+    				
+            		i++;
+        	    }
         	},
         });
         
     },
     
     refresh : function() {
-        this.clearLayers();                
         var lmap = this.module.webapp.map.lmap;
         if(this.visible) {
-	
-		i = 0;	
-        	for (p in this.bikeLanes) {
-
-			// For first four segments of bounding box
-			if (i < 4) opts = {color: '#006747', dashArray: '5, 5'};
-			else opts = {color: '#006747'};
-
-    			ret=L.polyline(this.bikeLanes[p], opts);    			
-
-    			this.addLayer(ret).addTo(lmap);
-    				
-            		i++;
-        	}
+            lmap.addLayer( this );
         }
+        else {
+            lmap.removeLayer( this );
+         }
     },
     
 });
