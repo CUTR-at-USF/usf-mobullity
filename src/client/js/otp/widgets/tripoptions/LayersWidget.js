@@ -24,7 +24,10 @@ otp.widgets.LayersWidget =
     	
     	var id = L.stamp( this.module.busLayers );
     	var obj = this.module.busLayers;
-    	        	
+
+        var on_off = (obj.visible.indexOf(rte) != -1) ? "OFF" : "ON";
+        logGAEvent('click', 'link', 'layers bullrunner ' + rte + ' ' + on_off);
+
     	if (obj.visible.indexOf(rte) != -1) { 
     		obj.visible.splice(obj.visible.indexOf(rte), 1);
     		$('#usf_'+rte+' .box').removeClass('active');
@@ -77,7 +80,7 @@ otp.widgets.LayersWidget =
         
 	// Bullrunner bus stops+routes
         $('#usf_A').bind('click', {'this_': this}, function(ev) {
-        	this_.toggle_bus_layer("A");        	        
+        	this_.toggle_bus_layer("A");
         });
         $('#usf_B').bind('click', {'this_': this}, function(ev) {
         	this_.toggle_bus_layer("B");        	        
@@ -98,6 +101,9 @@ otp.widgets.LayersWidget =
 	// HART bus stops
 	$('#bus_hart').bind('click', {'module': this.module}, function(ev) {
 
+        var on_off = (otp.config.showHartBusStops) ? "OFF" : "ON";
+        logGAEvent('click', 'link', 'layers hart stops ' + on_off);
+
 		if (otp.config.showHartBusStops) {
 			otp.config.showHartBusStops = false;
                         $("#bus_hart .box").removeClass('active');
@@ -108,14 +114,16 @@ otp.widgets.LayersWidget =
 		}
 
 		ev.data.module.stopsLayer.refresh();
-
 	});
   
 	// Bike rental layers
     $('#bike_stations').bind('click', {'module': this.module}, function(ev) {
 
         var id = L.stamp( ev.data.module.bikeLayers );
-        	                	
+
+        var on_off = (ev.data.module.bikeLayers.visible) ? "OFF" : "ON";        	                	
+        logGAEvent('click', 'link', 'layers bike stations ' + on_off);        	
+
        	if (ev.data.module.bikeLayers.visible) {
        		ev.data.module.bikeLayers.visible = false;
 	   		$("#bike_stations .box").removeClass('active');
@@ -126,11 +134,13 @@ otp.widgets.LayersWidget =
 	    }
 		
     	ev.data.module.bikeLayers.setMarkers(); // refresh
-        	
     });
 
     $('#bike_lanes').bind('click', {'module': this.module}, function(ev) {
-       
+
+        var on_off = (ev.data.module.bikeLanes.visible) ? "OFF" : "ON";       
+        logGAEvent('click', 'link', 'layers bike lanes ' + on_off);
+
 		if (ev.data.module.bikeLanes.visible) {
 			ev.data.module.bikeLanes.visible = false;
 			$("#bike_lanes .box").removeClass('active');
@@ -140,8 +150,7 @@ otp.widgets.LayersWidget =
 			$("#bike_lanes .box").addClass('active');
 		}
 
-		ev.data.module.bikeLanes.refresh(); 
-               	
+		ev.data.module.bikeLanes.refresh();               	
     });
 
         // dynamic static/poi layers
@@ -183,6 +192,9 @@ otp.widgets.LayersWidget =
                 }   
 
                 ev.data.module[activeName] = ! ev.data.module[activeName];
+
+                var on_off = (isLayerActive) ? "OFF" : "ON";
+                logGAEvent('click', 'link', 'layers ' + ev.data.layer['name'] + ' ' + on_off);
             })
         }
 
