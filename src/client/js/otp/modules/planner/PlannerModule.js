@@ -701,8 +701,15 @@ otp.modules.planner.PlannerModule =
             if (leg.agencyId == "Hillsborough Area Regional Transit") {
                 polyline.setStyle({ color : '#0000FF', weight: weight });
             }
-            else if (leg.agencyId == "USF Bull Runner") { 
-                polyline.setStyle({ color: '#080', weight: weight });
+            else if (leg.agencyId == "USF Bull Runner") {
+                var colour = '#080';
+                if (leg.routeShortName == 'A') colour = '#00573C';
+                else if (leg.routeShortName == 'B') colour = '#0077D1';
+                else if (leg.routeShortName == 'C') colour = '#AC49D0';
+                else if (leg.routeShortName == 'D') colour = '#F70505';
+                else if (leg.routeShortName == 'E') colour = '#bca510';
+                else if (leg.routeShortName == 'F') colour = '#8F6A51';
+                polyline.setStyle({ color: colour, weight: weight });
             }
             else polyline.setStyle({ color : this.getModeColor(leg.mode), weight: weight });
 
@@ -808,7 +815,7 @@ otp.modules.planner.PlannerModule =
     
     getModeColor : function(mode) {
         if(mode === "WALK") return '#444';
-        if(mode === "BICYCLE") return '#9944DD';
+        if(mode === "BICYCLE") return '#080';
         if(mode === "SUBWAY") return '#f00';
         if(mode === "RAIL") return '#b00';
         if(mode === "BUS") return '#FF7700';
