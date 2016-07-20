@@ -259,14 +259,17 @@ otp.widgets.ItinerariesWidget =
         var div = $('<div style="position: relative; height: 20px;"></div>').appendTo(parentDiv);
         div.append('<div class="otp-itinsAccord-header-number">'+(index+1)+'.</div>');
         
-        var maxSpan = itin.tripPlan.latestEndTime - itin.tripPlan.earliestStartTime;
-        var startPct = (itin.itinData.startTime - itin.tripPlan.earliestStartTime) / maxSpan;
-        var itinSpan = itin.getEndTime() - itin.getStartTime();
+        //var maxSpan = itin.tripPlan.latestEndTime - itin.tripPlan.earliestStartTime;
+        var maxSpan = itin.itinData.endTime - itin.itinData.startTime;
+        //var startPct = (itin.itinData.startTime - itin.tripPlan.earliestStartTime) / maxSpan;
+        //var itinSpan = itin.getEndTime() - itin.getStartTime();
         var timeWidth = 50;
         var startPx = 20+timeWidth, endPx = div.width()-timeWidth - (itin.groupSize ? 48 : 0);
         var pxSpan = endPx-startPx;
-        var leftPx = startPx + startPct * pxSpan;
-        var widthPx = pxSpan * (itinSpan / maxSpan);
+        //var leftPx = startPx + startPct * pxSpan;
+        var leftPx = startPx;
+        //var widthPx = pxSpan * (itinSpan / maxSpan);
+        var widthPx = pxSpan;
 
         div.append('<div style="position:absolute; width: '+(widthPx+5)+'px; height: 2px; left: '+(leftPx-2)+'px; top: 9px; background: black;" />');
         
@@ -279,23 +282,36 @@ otp.widgets.ItinerariesWidget =
         div.append('<div class="otp-itinsAccord-header-time" style="left: '+(leftPx+widthPx+2)+'px;">' + timeStr + '</div>');
         
         for(var l=0; l<itin.itinData.legs.length; l++) {
+            var minimumIconlength = ((itin.itinData.legs.length * 20) > pxSpan) ? (pxSpan / itin.itinData.legs.length) : 20;
             var leg = itin.itinData.legs[l];
-            var startPct = (leg.startTime - itin.tripPlan.earliestStartTime) / maxSpan;
+            var startPct = (leg.startTime - itin.itinData.startTime) / maxSpan;
+            //var startPct = (leg.startTime - itin.tripPlan.earliestStartTime) / maxSpan;
             var endPct = (leg.endTime - itin.tripPlan.earliestStartTime) / maxSpan;
-            var leftPx = startPx + startPct * pxSpan + 1;
-            var widthPx = pxSpan * (leg.endTime - leg.startTime) / maxSpan - 1;
+            //var leftPx = startPx + startPct * pxSpan + 1;
+            var leftPx = startPx + startPct * (pxSpan - minimumIconlength * itin.itinData.legs.length) + l * minimumIconlength + 1;
+            var widthPx = (pxSpan - minimumIconlength * itin.itinData.legs.length) * (leg.endTime - leg.startTime) / maxSpan + minimumIconlength - 2;
     
             //div.append('<div class="otp-itinsAccord-header-segment" style="width: '+widthPx+'px; left: '+leftPx+'px; background: '+this.getModeColor(leg.mode)+' url(images/mode/'+leg.mode.toLowerCase()+'.png) center no-repeat;"></div>');
-            if (leg.mode == "BICYCLE") darkmode = "_darkbg";
-            else darkmode = "";
- 
+            //if (leg.mode == "BICYCLE") darkmode = "_darkbg";
+            //else darkmode = "";
+            darkmode = "";
+            var colour = this.getModeColor(leg.mode);
+            if (leg.agencyId == "Hillsborough Area Regional Transit") colour = '#0084fc';
+            else if (leg.agencyId == "USF Bull Runner") {
+				if (leg.routeShortName == 'A') colour = '#00883c';
+                else if (leg.routeShortName == 'B') colour = '#00a1d1';
+                else if (leg.routeShortName == 'C') colour = '#AC49D0';
+                else if (leg.routeShortName == 'D') colour = '#F70505';
+                else if (leg.routeShortName == 'E') colour = '#bca510';
+                else if (leg.routeShortName == 'F') colour = '#8F6A51';
+            }                
             var showRouteLabel = widthPx > 40 && otp.util.Itin.isTransit(leg.mode) && leg.routeShortName && leg.routeShortName.length <= 6;
             var segment = $('<div class="otp-itinsAccord-header-segment" />')
             .css({
                 width: widthPx,
                 left: leftPx,
                 //background: this.getModeColor(leg.mode)
-                background: this.getModeColor(leg.mode)+' url('+otp.config.resourcePath+'images/mode/'+leg.mode.toLowerCase()+darkmode+'.png) center no-repeat'
+                background: colour +' url('+otp.config.resourcePath+'images/mode/'+leg.mode.toLowerCase()+darkmode+'.png) center no-repeat'
             })
             .appendTo(div);
             if(showRouteLabel) segment.append('<div style="margin-left:'+(widthPx/2+9)+'px;">'+leg.routeShortName+'</div>');
@@ -311,7 +327,7 @@ otp.widgets.ItinerariesWidget =
 
     getModeColor : function(mode) {
         if(mode === "WALK") return '#bbb';
-        if(mode === "BICYCLE") return '#44f';
+        if(mode === "BICYCLE") return '#00eb00';
         if(mode === "SUBWAY") return '#f00';
         if(mode === "RAIL") return '#b00';
         if(mode === "BUS") return '#0f0';
