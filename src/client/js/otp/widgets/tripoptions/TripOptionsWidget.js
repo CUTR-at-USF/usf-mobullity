@@ -306,7 +306,7 @@ otp.widgets.tripoptions.LocationsSelector =
        input.autocomplete({
              autoFocus: true,
              source: function(request, response) {
-                 this_.geocoders[this_.activeIndex].geocode(request.term, function(results) {
+                 this_.geocoders[this_.activeIndex].geocode(request.term.trim(), function(results) {
 
                      input.data("results", this_.getResultLookup(results));
 
