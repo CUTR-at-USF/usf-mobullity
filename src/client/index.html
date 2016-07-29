@@ -281,12 +281,20 @@ function logGAEvent(action, category, label) {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-69486080-1', 'auto');
+function init_ga() {
 
 is_myusf = navigator.userAgent.toLowerCase().indexOf('pyxismobile') > 0;
 if (is_myusf) ga('set', 'campaignSource', 'MyUSF Android');
 
 ga('send', 'pageview');
+
+}
+
+if (location.host == "maps.usf.edu") propId = 'UA-69486080-2';
+else if (location.host == "mobullity.forest.usf.edu") propId = 'UA-69486080-1';
+
+ga('create', propId, 'auto');
+init_ga();
 
 </script>
 <!-- End Google Analytics -->
