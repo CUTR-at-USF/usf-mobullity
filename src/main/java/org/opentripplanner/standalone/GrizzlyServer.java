@@ -83,8 +83,8 @@ public class GrizzlyServer {
         // For both HTTP and HTTPS listeners: enable gzip compression, set thread pool, add listener to httpServer.
         CompressionConfig cc = httpsListener.getCompressionConfig();
         cc.setCompressionMode(CompressionConfig.CompressionMode.ON);
-        cc.setCompressionMinSize(50000); // the min number of bytes to compress
-        cc.setCompressableMimeTypes("application/json", "text/json"); // the mime types to compress
+        cc.setCompressionMinSize(500); // the min number of bytes to compress
+        cc.setCompressableMimeTypes("text/plain", "text/html", "text/javascript", "text/css", "application/json", "text/json"); // the mime types to compress
         httpsListener.getTransport().setWorkerThreadPoolConfig(threadPoolConfig);
         httpServer.addListener(httpsListener);        
 
@@ -152,8 +152,24 @@ public class GrizzlyServer {
         HttpHandler dynamicHandler = ContainerFactory.createContainer(HttpHandler.class, app);
         httpServer.getServerConfiguration().addHttpHandler(dynamicHandler, "/otp/");
 
-        /* 2. A static content handler to serve the client JS apps etc. from the classpath. */
-        HttpHandler staticHandler = new CLStaticHttpHandler(GrizzlyServer.class.getClassLoader(), "/client/");
+class NewStatic extends CLStaticHttpHandler {
+
+
+    NewStatic(ClassLoader cls, String docRoot) {
+        super(cls, docRoot);
+    }
+    
+    protected boolean handle(String uri, Request req, Response resp) throws Exception {
+
+        resp.setHeader("Cache-Control", "max-age=604800");
+
+        return super.handle(uri, req, resp);
+    }
+
+}
+         /* 2. A static content handler to serve the client JS apps etc. from the classpath. */
+        CLStaticHttpHandler staticHandler = new NewStatic(GrizzlyServer.class.getClassLoader(), "/client/");
+
         httpServer.getServerConfiguration().addHttpHandler(staticHandler, "/");
 
         /* 3. Test alternate method (no Jersey). */
