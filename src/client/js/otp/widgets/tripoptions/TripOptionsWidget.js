@@ -192,11 +192,17 @@ otp.widgets.tripoptions.LocationsSelector =
         }).appendTo(this.$());
         
         this.tripWidget.module.on("startChanged", $.proxy(function(latlng, name) {
-            $("#"+this.id+"-start").val(name || '(' + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + ')');
+            if (latlng != null) 
+                $("#"+this.id+"-start").val(name || '(' + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + ')');
+            else
+                $('#'+this.id+'-start').val(name);
         }, this));
 
         this.tripWidget.module.on("endChanged", $.proxy(function(latlng, name) {
-            $("#"+this.id+"-end").val(name || '(' + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + ')');
+            if (latlng != null) 
+                $("#"+this.id+"-end").val(name || '(' + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + ')');
+            else
+                $("#"+this.id+"-end").val(name);
         }, this));
 
     },
