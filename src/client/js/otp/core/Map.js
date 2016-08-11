@@ -38,13 +38,21 @@ otp.core.Map = otp.Class({
                 
         //var baseLayers = {};
         var defaultBaseLayer = null;
-        
+
+        // http://stackoverflow.com/questions/19689715/what-is-the-best-way-to-detect-retina-support-on-a-device-using-javascript
+        function isRetina(){
+            return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+        }
+ 
         for(var i=0; i<otp.config.baseLayers.length; i++) { //otp.config.baseLayers.length-1; i >= 0; i--) {
             var layerConfig = otp.config.baseLayers[i];
 
             var layerProps = { };
             if(layerConfig.attribution) layerProps['attribution'] = layerConfig.attribution;
             if(layerConfig.subdomains) layerProps['subdomains'] = layerConfig.subdomains;
+
+            if (isRetina()) layerConfig.tileUrl = layerConfig.tileUrl.replace("{retina}", "@2x");
+            else layerConfig.tileUrl = layerConfig.tileUrl.replace("{retina}", "");
 
             var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
             L.stamp(layer);
