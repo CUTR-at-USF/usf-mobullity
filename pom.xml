@@ -142,6 +142,7 @@
                         </goals>
                     </execution>
                 </executions>
+
                 <configuration>
                     <!-- change this to wherever you want the docs -->
                     <docsDir>${project.build.directory}/site/enunciate</docsDir>
@@ -171,6 +172,43 @@
             <!-- There used to be a dependency-plugin:copy-dependencies plugin entry
               here, but the shade-plugin will explode the dependencies even if they aren't
               manually copied in. -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>0.0.27</version>
+
+                <configuration>
+                    <installDirectory>target</installDirectory>
+                </configuration>
+
+                <executions>
+                <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v5.3.0</nodeVersion>
+                            <npmVersion>3.3.12</npmVersion>
+                        </configuration>
+               </execution>
+
+                <execution>
+                <id>npm install</id>
+                <goals>
+                    <goal>npm</goal>
+                </goals>
+                </execution>
+
+                <execution>
+                <id>gulp build</id>
+                <goals>
+                    <goal>gulp</goal>
+                </goals>
+
+                </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <!-- We want to create a standalone jar that can be run on the command
