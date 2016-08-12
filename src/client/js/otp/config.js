@@ -223,7 +223,7 @@ otp.config = {
         },
         {	
         title: 'Send Feedback',
-        content: sendfeedback() + '<p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p> <p>Please review our <a style="color:white" href="https://raw.githubusercontent.com/CUTR-at-USF/usf-mobullity/mobullityrebase/privacy_policy.md" target="_blank">Privacy Policy</a>.</p>'
+        content: sendfeedback() + '<p>Suggest and vote on new features on <a target="_blank" href="http://feathub.com/CUTR-at-USF/usf-mobullity" style="color:white">FeatHub</a></p> <p>Like hacking things? This project is open-source - see how you can help at <a style="color:white" href="https://github.com/CUTR-at-USF/usf-mobullity">usf-mobullity on Github</a>. </p> <p>Please review our <a style="color:white" href="https://raw.githubusercontent.com/CUTR-at-USF/usf-mobullity/mobullityrebase/privacy_policy.md" target="_blank">Privacy Policy</a>.</p>'
 
         },
 
