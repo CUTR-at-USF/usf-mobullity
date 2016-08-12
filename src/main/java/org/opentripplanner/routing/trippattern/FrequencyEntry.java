@@ -65,6 +65,7 @@ public class FrequencyEntry implements Serializable {
             // this would work better for time window edges.
             if (dep < beg) return beg; // not quite right
             if (dep < end) return dep;
+            if (dep > end && time <= end) return end; 
         }
         return -1;
     }
@@ -82,6 +83,7 @@ public class FrequencyEntry implements Serializable {
             int dep = t - headway;
             if (dep > end) return end; // not quite right
             if (dep > beg) return dep;
+             if (dep < beg && t >= beg) return beg;
         }
         return -1;
     }
