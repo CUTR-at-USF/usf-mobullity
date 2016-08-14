@@ -151,7 +151,22 @@ otp.widgets.ItinerariesWidget =
         });
 
         this.$().draggable({ cancel: "#"+divId });
-        
+        if (window.matchMedia("screen and (max-width: 768px)").matches){
+            this.minimize();
+            if(this.title.match(new RegExp(".*Itineraries.*")))
+            {
+                for (i in this.owner.getWidgetManager().widgets) 
+                {
+                    x = this.owner.getWidgetManager().widgets[i];
+                    if (x.title.match(new RegExp("Trip planner")))
+                    {
+                        x.minimize();
+                        x.isMinimized = true;
+                    }
+                    if(x.title.match(new RegExp("Layers"))) x.close();
+                }
+            }
+        }
     },
     
     clear : function() {
