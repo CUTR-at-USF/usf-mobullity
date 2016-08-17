@@ -54,20 +54,24 @@
 				<entry key="(ACS) Hope Lodge - American Cancer Society" value="28.06316 -82.42010" />
 				<entry key="(ALC) Sam B Martha Gibbons Alumni Center" value="28.05620 -82.41024" />
 				<entry key="(ALN) John &amp; Grace Allen Building, Welcome Center (formerly Admistration (ADM))" value="28.0617 -82.4133" />
+				<entry key="(ALZ) Johnnie B. Byrd, Sr. Alzheimer's Center" value="28.06831 -82.41775" />
 				<entry key="(AOC) Andros Office Classroom Building" value="28.06691 -82.41124" />
-				<entry key="(ATH) Lee Roy Selmon Athletic Center" value="28.06080 -82.40523" />
+				<entry key="(ATH) Lee Roy Selmon Athletics Center" value="28.06080 -82.40523" />
 				<entry key="(AUX) Auxiliary Services Building" value="28.06817 -82.40778" />
 
+				<entry key="(BBP) Pam &amp; Les Muma Basketball Practice Center" value="28.05864 -82.40654" />
 				<entry key="(BCD) Baseball Complex a Dugouts" value="28.05858 -82.40470" />
 				<entry key="(BEH) Behavioral Sciences Building" value="28.0621 -82.4101" />
 				<entry key="(BKS) Bookstore" value="28.0634 -82.4125" />
 				<entry key="(BPB) Business Partnership Building" value="28.05603 -82.41509" />
+				<entry key="(BPT) Baptist Student Center" value="28.06494 -82.40239" />
 				<entry key="(BSF) Bio-Science Building " value="28.0608 -82.4146" />
 				<entry key="(BSN) C.H. Ferguson Hall (Business Administration Building)" value="28.0583 -82.4101" />
 
 				<entry key="(CAM) Contemporary Art Museum" value="28.0636 -82.4156" />
 				<entry key="(CEE) Stavros Center for Economic Education" value="28.0612 -82.4108" />
 				<entry key="(CGS) Patel Center for Global Solutions" value="28.0552 -82.4084" />
+				<entry key="(CHA) Chapel Center" value="28.06334 -82.40233"/>
 				<entry key="(CHE) Chemistry Building" value="28.0613 -82.4153" />
 				<entry key="(CHG) Crescent Hill Parking Facility" value="28.06512 -82.41210" />
 				<entry key="(CIC) Campus Information Center" value="28.055706 -82.412572" />
@@ -76,23 +80,32 @@
 				<entry key="(CMS) Children's Medical Services Building" value="28.0663 -82.42524" />
 				<entry key="(CPR) Russell M. Cooper Hall (Arts &amp; Sciences)" value="28.0597 -82.4108" />
 				<entry key="(CPT) Central Plant" value="28.06522 -82.41585" />
+				<entry key="(CRU) Credit Union" value="28.06681 -82.41389" />
+				<entry key="(CTH) Catholic Center" value="28.06437 -82.40127" />
 				<entry key="(CUT) Center for Urban Transportation Research" value="28.0586 -82.4161" />
 				<entry key="(CUTR) Center for Urban Transportation Research" value="28.0586 -82.4161" />
 				<entry key="(CWY) C.W. BillYoung Hall" value="28.06138 -82.40826" />
 
 				<entry key="(DAC) David C. Anchin Center" value="28.0607 -82.4105" />
-				<entry key="(DUP) Transportation Office" value="28.066877 -82.417053" />
+				<entry key="(DHB) Department of Health Building (DHB)" value="28.05749 -82.42033" />
+				<entry key="(DIN) Champion's Choice Dining" value="28.05975 -82.40733" />
+				<entry key="(DUP) Bull Runner Office" value="28.066877 -82.417053" />
 
 				<entry key="(EDU) Education Building" value="28.0604 -82.4106" />
 				<entry key="(ENA) Engineering Teaching Auditorium" value="28.0601 -82.4159" />
 				<entry key="(ENB) Engineering Building II" value="28.0587 -82.4152" />
 				<entry key="(ENC) Engineering Building III" value="28.0589 -82.4145" />
 				<entry key="(ENG) Engineering Building I (Edgar w. Kopp Building)" value="28.0596 -82.4159" />
+				<entry key="(ENL) Engineering Lab" value="28.06599 -82.41641" />
+				<entry key="(ENR) Engineering Research" value="28.06630 -82.41677" />
+				<entry key="(ESH) Embassy Suites Hotel" value="28.055784 -82.417285" />
 
 				<entry key="(FAD) Fine Arts - Dance Building" value="28.0639 -82.4151" />
 				<entry key="(FAH) Fine Arts Building" value="28.0631 -82.4165" />
 				<entry key="(FAO) Faculty Office Building" value="28.0616 -82.4101" />
 				<entry key="(FAS) Fine Arts Studio" value="28.0640 -82.4167" />
+				<entry key="FFB" value="28.05608 -82.40543" />
+				<entry key="FFP" value="28.05613 -82.40595" />
 				<entry key="(FPC) Facilities Planning &amp; Construction" value="28.06549 -82.41500" />
 				<entry key="(FSB) Food Service Building" value="28.06032 -82.40978" />
 
@@ -110,6 +123,7 @@
 				<entry key="(HAJ) Holly J" value="28.06547 -82.41010" />
 				<entry key="(HAL) Holly L" value="28.06621 -82.41043" />
 				<entry key="(HAM) Holly M" value="28.06622 -82.41089" />
+				<entry key="(HIL) Hillel Jewish Student Center" value="28.06416 -82.40233" />
 
 				<entry key="(IDR) Interdisciplinary Research Building" value="28.05680 -82.41552" />
 				<entry key="(ISA) Interdisciplinary Sciences Building" value="28.06143 -82.41417" />
@@ -123,8 +137,19 @@
 
 				<entry key="(MAA) Magnolia Apts. A" value="28.05832 -82.41895" />
 				<entry key="(MAB) Magnolia Apts. B" value="28.05833 -82.41808" />
+				<entry key="(MCB) Muriel Rothman Clinic Building" value="28.06495 -82.42170" />
+				<entry key="(MCC) H. Lee Moffitt Cancer Center" value="28.06408 -82.42149" />
 				<entry key="(MDA) USF Health-Shared Student Administration" value="28.06498 -82.42500" />
+				<entry key="(MDC) USF Health Morsani College of Medicine" value="28.06377 -82.42444" />
+				<entry key="(MDF) Medical Faculty Office Building" value="28.06633 -82.41961" />
+				<entry key="(MDH) Carol &amp; Frank Morsani Center for Advanced Health Care" value="28.06701 -82.41964" />
+				<entry key="(MDL) USF Health Student Group Learning" value="28.06300 -82.42450" />
 				<entry key="(MDN) USF Health-Nursing Building" value="28.06482 -82.42406" />
+				<entry key="(MDO) Eye Institute" value="28.06498 -82.41942" />
+				<entry key="(MDT) USF Health - Psychiatry, School of Physical Therapy" value="28.06808 -82.41871" />
+				<entry key="(MFB) Moffitt Faculty Bldg" value="28.06338 -82.42172" />
+				<entry key="(MFC) Magnolia Fields Complex" value="28.05865 -82.42127" />
+				<entry key="(MGS) Moffitt Parking Garage #2" value="28.06319 -82.42142" />
 				<entry key="(MGX) Social Work, Kinship Center" value="28.06628 -82.42097" />
 				<entry key="(MGY) CBCS - CARD Building" value="28.06628 -82.42166" />
 				<entry key="(MGZ) USF Family Center" value="28.06674 -82.42162" />
@@ -135,24 +160,27 @@
 				<entry key="(MPA) Maple Suites A" value="28.06515 -82.40841" />
 				<entry key="(MPB) Maple Suites B" value="28.06537 -82.40873" />
 				<entry key="(MPC) Maple Suites C" value="28.06516 -82.40927" />
+				<entry key="(MRC) Moffitt Research Building" value="28.06559 -82.41957" />
 				<entry key="(MSC) Marshall Student Center" value="28.0638 -82.4135" />
 				<entry key="(MUS) Music Building" value="28.0646 -82.4182" />
 
-				<entry key="(NEC) Northwest Educational Complex" value="28.0618 -82.4152" />
-				<entry key="(NES) Natural and Environmental Sciences Building" value="28.06797 -82.42516" />
+				<entry key="(NEC) Continuing Education" value="28.06830 -82.42499" />
+				<entry key="(NES) Natural &amp; Environmental Sciences" value="28.06172 -82.41514" />
 				<entry key="(NTA) Nanotech I Facility" value="28.0599 -82.4162" />
 
 				<entry key="(OPM) Physical Plant Operations Building" value="28.06528 -82.41505" />
 
 				<entry key="(PCD) Psych. /Communication Sci. &amp; Disorders Bldg." value="28.06373 -82.41878" />
 				<entry key="(PED) Physical Education Building" value="28.06132 -82.40768" />
+				<entry key="(PIZ) Anthony Pizzo Elementary School" value="28.05529 -82.40439" />
 				<entry key="(PPA) USF Post Office" value="28.06548 -82.41463" />
+				<entry key="(PPB) Grounds and Transportation" value="28.06667 -82.41500" />
 				<entry key="(PPC) Maintenance and Service Shops" value="28.06575 -82.41439" />
 				<entry key="(PTA) Parking and Transportation Services" value="28.066000 -82.41704" />
 				<entry key="(PTB) Parking and Transportation Services" value="28.0660253 -82.4167627" />
 				<entry key="(PRS) Lifsey House" value="28.0557 -82.4114" />
 
-				<entry key="(RAN) Aandros Center" value="28.06727 -82.41214" />
+				<entry key="(RAN) Andros Center" value="28.06727 -82.41214" />
 				<entry key="(RAR) Argos Center" value="28.06432 -82.41044" />
 				<entry key="(RBC) Castor Hall" value="28.06390 -82.41109" />
 				<entry key="(RBE) Beta Hall" value="28.06494 -82.40939" />
@@ -174,9 +202,15 @@
 				<entry key="(RZE) Zeta Hall" value="28.06670 -82.41264" />
 
 				<entry key="(SCA) Science Center" value="28.0605 -82.4158" />
+				<entry key="(SCD) Softball Stadium" value="28.05796 -82.40445" />
+				<entry key="(SEC) SE Chiller Plant" value="28.05923 -82.40744" />
+				<entry key="(SHR) Shriners Hospital for Children" value="28.06163 -82.42278" />
 				<entry key="(SHS) Student Health Services Building" value="28.0636 -82.4119" />
 				<entry key="(SOC) Social Science Building" value="28.0615 -82.4092" />
-				<entry key="(SPS) Corbett Soccer Park Stadium" value="28.06007 -82.40383" />
+				<entry key="(SPS) Soccer Stadium" value="28.06007 -82.40383" />
+				<entry key="(SRB) Stabile Research Building" value="28.06565 -82.42144" />
+				<entry key="(STA) Stadium" value="28.06302 -82.40670" />
+				<entry key="(SUN) Sun Dome" value="28.05917 -82.40654" />
 				<entry key="(SVC) Student Services Building" value="28.0625 -82.4124" />
 
 				<entry key="(TAR) Theatre Centre" value="28.0640 -82.4145" />
@@ -184,11 +218,15 @@
 				<entry key="(THR) Theatre II" value="28.0636 -82.4149" />
 				<entry key="(TVB) WUSF Television Station" value="28.0623 -82.4118" />
 
+				<entry key="(UDI) University Diagnostic Institute (UDI)" value="28.05721 -82.42123  " />
 				<entry key="(ULH) University Lecture Hall" value="28.0606 -82.4098" />
 				<entry key="(UPB) University Police" value="28.06850 -82.40810" />
+				<entry key="USF Health Sciences Bookstore &amp; Cafe" value="28.06336 -82.42410" />
 				<entry key="(UTA) University Technology Center A" value="28.0564 -82.4174" />
 
+				<entry key="(WFC) Crosswinds Wesley Foundation" value="28.06269 -82.40233" />
 				<entry key="(WRB) WUSF - FM 89.7 Radio Building" value="28.0627 -82.4115" />
+				<entry key="(WSF) Water Tower" value="28.06640 -82.41573" />
 
                 <!-- Parking lot/garages -->
                 <entry key="Apple (Hourly parking lot)" value="28.060087 -82.412438" />
@@ -245,7 +283,7 @@
                 <entry key="Lot 17A (R,S)" value="28.063535 -82.410019" />
                 <entry key="Lot 17B (R,S)" value="28.063388 -82.409151" />
 
-                <entry key="Lot 18 (Y,S,R,E,GZ,D)" value="28.060180 -82.402663" />
+                <entry key="Lot 18 (Y,S,R,GZ,E,D)" value="28.060180 -82.402663" />
 
                 <entry key="Lot 19E (E,S,D)" value="28.061739 -82.419761" />
                 <entry key="Lot 19W (E,S,D)" value="28.061881 -82.420775" />
@@ -289,7 +327,7 @@
 
                 <entry key="Lot 38A (E,S)" value="28.068014 -82.421264" />
                 <entry key="Lot 38B (E)" value="28.066809 -82.425441" />
-                <entry key="Lot 38C (E,S,D)" value="28.068655 -82.425441" />
+                <entry key="Lot 38C (E,S,D)" value="28.06849 -82.42538" />
                 <entry key="Lot 38D (E,S)" value="28.067235 -82.422233" />
                 <entry key="Lot 38E (E)" value="28.066951 -82.422759" />
                 <entry key="Lot 38G (E)" value="28.067831 -82.422040" />
@@ -302,7 +340,7 @@
                 <entry key="Lot 40 (E)" value="28.057283 -82.405045" />
                 <entry key="Lot 41 (E)" value="28.060451 -82.409245" />
                 <entry key="Lot 42 (E,D)" value="28.066240 -82.418171" />
-                <entry key="Lot 43 (Y,S,R,E,GZ,D)" value="28.067953 -82.416468" />
+                <entry key="Lot 43 (Y,S,R,GZ,E,D)" value="28.067953 -82.416468" />
                 <entry key="Lot 44 (R,S,E,D)" value="28.067347 -82.415062" />
                 <entry key="Lot 45 (E,D,S)" value="28.056457 -82.404262" />
                 <entry key="Lot 46 (E)" value="28.063300 -82.419638" />
@@ -320,12 +358,19 @@
 
                 <!-- Surrounding point of interest -->
 				<entry key="Adventure Island" value="28.04079 -82.41599" />
+				<entry key="Basketball Courts" value="28.06178 -82.40557" />
 				<entry key="Busch Gardens" value="28.03445 -82.41634" />
 				<entry key="Bull Market" value="28.07189 -82.41420" />
+				<entry key="MLK Plaza" value="28.06257 -82.41473" />
 				<entry key="(MOSI) Museum of Science and Industry" value="28.05350 -82.40463" />
 				<entry key="Publix, E Fowler ave." value="28.05352 -82.39673" />
 				<entry key="Publix, Tampa Palms" value="28.09971 -82.39893" />
+				<entry key="Recreation Fields (Fowler Fields)" value="28.05574 -82.40698" />
+				<entry key="Sessums Mall" value="28.06012 -82.41031" />
 				<entry key="Target, E Fletcher ave." value="28.07196 -82.42810" />
+				<entry key="Tarek's Cafe" value="28.06787 -82.42479" />
+				<entry key="Tennis Courts" value="28.06156 -82.40664" />
+				<entry key="The Meadows" value="28.06697 -82.40293" />
 				<entry key="University  Mall" value="28.05897 -82.43441" />
 				<entry key="USF Post Office" value="28.06548 -82.41463" />
 				<entry key="USF the Claw Golf Course" value="28.07247 -82.40973" />
