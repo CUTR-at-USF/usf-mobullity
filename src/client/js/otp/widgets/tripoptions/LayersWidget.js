@@ -19,7 +19,8 @@ otp.widgets.LayersWidget =
 
     module : null,
     minimumZoom : 15,
-    
+    layersUsed : [],
+ 
     toggle_bus_layer : function(rte) {
     	
     	var id = L.stamp( this.module.busLayers );
@@ -70,6 +71,69 @@ otp.widgets.LayersWidget =
         var this_ = this;
 
         ich['usf-layer-menu']({}).appendTo(this.mainDiv);
+
+        $('.otp-layerView-inner .legend').bind('click', function(ev) {
+
+            var is_on = $(this).next().css('display') != 'none'; 
+            var id = $(this).parent()[0].id;
+
+            var id_to_ga_name = {"fieldset_usf_routes": "USF Bus Routes", "fieldset_city_bus": "City Bus", "fieldset_usf_bikes": "Bike & Carshare", "fieldset_other": "Parking", "fieldset_campus_living": "On-Campus Living", "fieldset_help": "Help"};
+            var ga_name = (id in id_to_ga_name) ? id_to_ga_name[id] : id;
+
+            if (is_on) {
+                logGAEvent("click", "link", "layers closed: " + ga_name);
+                if (this_.layersUsed.indexOf( id ) >= 0) this_.layersUsed.splice( this_.layersUsed.indexOf(id), 1 );
+
+                $(this).parent().find('.chevron').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                $(this).next().css('display', 'none');
+            }
+            else {
+                logGAEvent("click", "link", "layers opened: " + ga_name);
+                if (this_.layersUsed.indexOf( id ) < 0) this_.layersUsed.push( id );
+
+                $(this).parent().find('.chevron').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                $(this).next().css('display', 'block');
+            }
+
+            document.cookie = 'layersUsed='+ this_.layersUsed.join(',') +'; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
+
+            return false;
+        });
+        $('.otp-layerView-inner').css({'max-height': ($('#map').height() * 0.90) + 'px'});
+
+        // on load, check for layersUsed cookie and isMobile
+        var items = $('.otp-layerView-inner fieldset');
+        this.layersUsed = [];
+
+        // Mobile only sees usf routes by default, otherwise all are open
+        if (isMobile()) this.layersUsed = ['fieldset_usf_routes']; 
+        else {
+            for (x=0; x < items.length; x++) this.layersUsed.push( items[x].id );
+        }
+        
+        // load cookie
+        cookieLoaded = false;
+        var parts = document.cookie.split("; ");
+        for (part in parts) {
+            cookie = parts[part].split("=");
+            if (cookie[0] != "layersUsed") continue;
+
+            this.layersUsed = cookie[1].split(",");
+            cookieLoaded = true;
+            break;
+        }
+
+        // set cookie
+        if (false == cookieLoaded) {
+            document.cookie = 'layersUsed='+ this.layersUsed.join(',') +'; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
+        }
+
+        for (x=0; x < items.length; x++) {
+            if (this.layersUsed.indexOf( items[x].id ) >= 0) continue;
+
+            $( '#' + items[x].id + ' > div').next().css('display', 'none');
+            $( '#' + items[x].id ).find('.chevron').removeClass('fa-chevron-up').addClass( 'fa-chevron-down' );
+        }
 
         // remove layer checkbox if config is disabled for i.e: busPositions
         if (this.module.stopsLayer == undefined) $('.otplayerView-inner .stops').remove();

@@ -308,6 +308,10 @@ window.onpopstate = function() {
 
 <!-- Google Analytics -->
 <script type="text/javascript">
+function isMobile() {
+    return window.matchMedia("screen and (max-width: 768px)").matches;
+}
+
 function logGAEvent(action, category, label) {
     ga('send', 'event', category, action, label);
 }
