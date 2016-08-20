@@ -86,7 +86,9 @@ otp.config = {
     baseLayers: [
         {
             name: 'Map',
-            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqelzkgo000dcem78xyg4ll6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            type: 'mvt',
+            token: 'pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            tileUrl: '/streets.json',
             attribution : "&copy; <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
         },
         {
@@ -96,7 +98,9 @@ otp.config = {
         },  
         {
             name: 'Hybrid',
-            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqe3awnp0001c7nkk713k81b/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            type: 'mvt',
+            token: 'pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            tileUrl: '/hybrid.json',
             attribution : "&copy; <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
         }, 
     ],

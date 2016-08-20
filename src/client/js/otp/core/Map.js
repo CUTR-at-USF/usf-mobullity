@@ -38,7 +38,7 @@ otp.core.Map = otp.Class({
                 
         //var baseLayers = {};
         var defaultBaseLayer = null;
-        
+
         for(var i=0; i<otp.config.baseLayers.length; i++) { //otp.config.baseLayers.length-1; i >= 0; i--) {
             var layerConfig = otp.config.baseLayers[i];
 
@@ -46,7 +46,16 @@ otp.core.Map = otp.Class({
             if(layerConfig.attribution) layerProps['attribution'] = layerConfig.attribution;
             if(layerConfig.subdomains) layerProps['subdomains'] = layerConfig.subdomains;
 
-            var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
+            if ('type' in layerConfig && layerConfig.type == 'mvt') {
+                var layer = L.mapboxGL({
+                    accessToken: layerConfig.token,
+                    style: layerConfig.tileUrl //'mapbox://styles/mapbox/streets-v8'
+                });
+
+            }
+            else {
+                var layer = new L.TileLayer(layerConfig.tileUrl, layerProps);
+            }
             L.stamp(layer);
 
             if ('overlayUrl' in layerConfig) {
