@@ -14,13 +14,28 @@
 <!--  Mobile Viewport Fix -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<link href="/otp.min.css" rel="stylesheet" type="text/css" >
-<script src="/otp.min.js" type="text/javascript"></script>
-
+  
 <!-- Google WebFonts -->
 <link href='//fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
 
+<!-- jquery -->
+<script src="js/lib/jquery/jquery-1.9.1.js"></script>
+
+<!-- jquery-ui -->
+<script src="js/lib/jquery-ui/js/jquery-ui-1.9.1.custom.min.js"></script>
+<link rel="stylesheet" href="js/lib/jquery-ui/css/smoothness/jquery-ui-1.9.1.custom.css" />
+<script src="js/lib/jquery-ui/addons/jquery-ui-timepicker.js"></script>
+<link rel="stylesheet" href="js/lib/jquery-ui/addons/jquery-ui-timepicker.css" />
+
+<script src="js/hammer.min.js" /></script>
+
+<!-- backbone -->
+<script src="js/lib/underscore.js"></script>
+<script src="js/lib/backbone.js"></script>
+
+<!-- leaflet -->
+<script src="js/lib/leaflet/leaflet.js"></script>
+<link rel="stylesheet" href="js/lib/leaflet/leaflet.css" />
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="js/lib/leaflet/leaflet.ie.css" />
 <![endif]-->
@@ -28,17 +43,147 @@
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css' rel='stylesheet' />
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />
 
+
 <!-- Material Design Lite -->
-<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.4.57/css/materialdesignicons.min.css">
+
+<!-- json support -->
+<script src="js/lib/json2.js"></script>
+
+
+<!-- moment.js -->
+<script src="js/lib/moment.min.js"></script>
+
+<!-- raphael -->
+<script src="js/lib/raphael/raphael-min.js"></script>
+
+<!-- Mustache/ICanHaz -->
+<script src="js/lib/mustache.js"></script>
+<script src="js/lib/ICanHaz.js"></script>
+
+<!-- jsPDF -->
+<script src="js/lib/jspdf.min.js"></script>
+
+
+<!-- otp-specific imports -->
+<script src="js/otp/otp.js?v=1"></script>
+
+<!-- otp-locales -->
+<script src="js/otp/locale/English.js?v=1"></script>
+<script src="js/otp/locale/French.js?v=1"></script>
+<script src="js/otp/locale/German.js?v=1"></script>
+
+<script src="js/otp/config.js?v=1"></script>
+
+<script src="js/otp/debug.js?v=1"></script>
+<script src="js/otp/templates.js?v=1"></script>
+
+<script src="js/otp/util/DataStorage.js?v=1"></script>
+<script src="js/otp/util/Geo.js?v=1"></script>
+<script src="js/otp/util/Itin.js?v=1"></script>
+<script src="js/otp/util/Logger.js?v=1"></script>
+<script src="js/otp/util/Text.js?v=1"></script>
+<script src="js/otp/util/Time.js?v=1"></script>
+<script src="js/otp/util/Imperial.js?v=1"></script>
+
+<script src="js/otp/core/Webapp.js?v=1"></script>
+<script src="js/otp/core/Map.js?v=1"></script>
+<script src="js/otp/core/QueryLogger.js?v=1"></script>
+<script src="js/otp/core/PopupMenu.js?v=1"></script>
+<script src="js/otp/core/ContextMenu.js?v=1"></script>
+<script src="js/otp/core/MapContextMenu.js?v=1"></script>
+<script src="js/otp/core/WidgetManagerMenu.js?v=1"></script>
+<script src="js/otp/core/Geocoder.js?v=1"></script>
+<script src="js/otp/core/GeocoderBuiltin.js?v=1"></script>
+<script src="js/otp/core/SOLRGeocoder.js?v=1"></script>
+<script src="js/otp/core/TransitIndex.js?v=1"></script>
+<script src="js/otp/core/TrinetSessionManager.js?v=1"></script>
+
+<script src="js/otp/widgets/Widget.js?v=1"></script>
+<script src="js/otp/widgets/WidgetManager.js?v=1"></script>
+<script src="js/otp/widgets/Dialogs.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/widgets/widget-style.css?v=1" />
+
+<script src="js/otp/modules/Module.js?v=1"></script>
+
+<script src="js/otp/modules/planner/PlannerModule.js?v=1"></script>
+<script src="js/otp/modules/planner/IconFactory.js?v=1"></script>
+<script src="js/otp/modules/planner/TripPlan.js?v=1"></script>
+<script src="js/otp/modules/planner/Itinerary.js?v=1"></script>
+<script src="js/otp/modules/planner/ItinerariesWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/planner/planner-style.css?v=1" />
+
+<script src="js/otp/modules/bikeshare/BikeShareModule.js?v=1"></script>
+<script src="js/otp/modules/bikeshare/BikeStationsWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/bikeshare/bikeshare-style.css?v=1" />
+
+<script src="js/otp/modules/multimodal/MultimodalPlannerModule.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/multimodal/multimodal-style.css?v=1" />
+
+<script src="js/otp/modules/calltaker/CallTakerModule.js?v=1"></script>
+<script src="js/otp/modules/calltaker/CallHistoryWidget.js?v=1"></script>
+<script src="js/otp/modules/calltaker/MailablesWidget.js?v=1"></script>
+<script src="js/otp/modules/calltaker/calltaker-models.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/calltaker/calltaker-style.css?v=1" />
+
+<script src="js/otp/modules/annotations/AnnotationsModule.js?v=1"></script>
+
+<script src="js/otp/modules/analyst/AnalystModule.js?v=1"></script>
+<script src="js/otp/modules/analyst/AnalystLegendWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/analyst/analyst-style.css?v=1" />
+
+<script src="js/otp/modules/alerts/AlertsModule.js?v=1"></script>
+<script src="js/otp/modules/alerts/EntitiesWidget.js?v=1"></script>
+<script src="js/otp/modules/alerts/EditAlertWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/alerts/alerts-style.css?v=1" />
+
+<script src="js/otp/modules/alerts/AlertsModule.js?v=1"></script>
+<script src="js/otp/modules/alerts/AlertsWidget.js?v=1"></script>
+<script src="js/otp/modules/alerts/EntitiesWidget.js?v=1"></script>
+<script src="js/otp/modules/alerts/EditAlertWidget.js?v=1"></script>
+<script src="js/otp/modules/alerts/alerts-models.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/alerts/alerts-style.css?v=1" />
+
+
+<script src="js/otp/modules/fieldtrip/FieldTripModule.js?v=1"></script>
+<script src="js/otp/modules/fieldtrip/FieldTripManagerWidget.js?v=1"></script>
+<script src="js/otp/modules/fieldtrip/FieldTripRequestWidget.js?v=1"></script>
+<script src="js/otp/modules/fieldtrip/FieldTripGeocoderWidget.js?v=1"></script>
+<script src="js/otp/modules/fieldtrip/SaveFieldTripWidget.js?v=1"></script>
+<script src="js/otp/modules/fieldtrip/SearchWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/modules/fieldtrip/fieldtrip-style.css?v=1" />
+
+<script src="js/otp/widgets/InfoWidget.js?v=1"></script>
+<script src="js/otp/widgets/tripoptions/RoutesSelectorWidget.js?v=1"></script>
+<script src="js/otp/widgets/tripoptions/TripOptionsWidget.js?v=1"></script>
+<script src="js/otp/widgets/tripoptions/LayersWidget.js?v=1"></script>
+<script src="js/otp/widgets/tripoptions/BikeTrianglePanel.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/widgets/tripoptions/tripoptions-style.css?v=1" />
+
+<script src="js/otp/widgets/transit/RouteBasedWidget.js?v=1"></script>
+<script src="js/otp/widgets/transit/StopViewerWidget.js?v=1"></script>
+<script src="js/otp/widgets/transit/StopFinderWidget.js?v=1"></script>
+<script src="js/otp/widgets/transit/TripViewerWidget.js?v=1"></script>
+<link rel="stylesheet" href="js/otp/widgets/transit/widgets-transit-style.css?v=1" />
+
+<script src="js/otp/layers/StopsLayer.js?v=1"></script>
+<script src="js/otp/layers/HartStopsLayer.js?v=1"></script>
+<script src="js/otp/layers/BusPositionsLayer.js?v=1"></script>
+<script src="js/otp/layers/BikeStationsLayer.js?v=1"></script>
+
+<script src="js/otp/layers/BikeLanes.js?v=1"></script>
+
+<link rel="stylesheet" href="style.css?v=1" />
 
 <!-- make legacy Internet Explorer play nice(r) -->
 <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <script src="js/lib/respond.min.js"></script>
 <![endif]-->
+
 
 <!-- load ICH templates and create the webapp at startup -->
 <script type="text/javascript" defer>
