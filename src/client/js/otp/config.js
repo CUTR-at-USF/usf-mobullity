@@ -86,17 +86,17 @@ otp.config = {
     baseLayers: [
         {
             name: 'Map',
-            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqelzkgo000dcem78xyg4ll6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqelzkgo000dcem78xyg4ll6/tiles/256/{z}/{x}/{y}{retina}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
             attribution : "&copy; <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
         },
         {
             name: 'Satellite',
-            tileUrl: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            tileUrl: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}{retina}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
             attribution : "&copy; <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
         },  
         {
             name: 'Hybrid',
-            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqe3awnp0001c7nkk713k81b/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
+            tileUrl: 'https://api.mapbox.com/styles/v1/opentripplannerhigh/ciqe3awnp0001c7nkk713k81b/tiles/256/{z}/{x}/{y}{retina}?access_token=pk.eyJ1Ijoib3BlbnRyaXBwbGFubmVyaGlnaCIsImEiOiIyT2xxdVRjIn0.1n9CkukOWpsIgExzdcWfJg',
             attribution : "&copy; <a href='https://www.mapbox.com/map-feedback/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
         }, 
     ],
