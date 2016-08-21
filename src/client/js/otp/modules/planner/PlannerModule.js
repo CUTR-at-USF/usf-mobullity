@@ -197,9 +197,11 @@ otp.modules.planner.PlannerModule =
     
     restore : function() {
         // check URL params for restored trip
-        if("fromPlace" in this.webapp.urlParams && "toPlace" in this.webapp.urlParams) {
+        if("fromPlace" in this.webapp.urlParams || "toPlace" in this.webapp.urlParams) {
             if("itinIndex" in this.webapp.urlParams) this.restoredItinIndex = this.webapp.urlParams["itinIndex"];
-            this.restoreTrip(_.omit(this.webapp.urlParams, ["module", "itinIndex"]));
+            if("mode" in this.webapp.urlParams) 
+                this.restoreTrip(_.omit(this.webapp.urlParams, ["module", "itinIndex"]));
+            else this.restoreMarkers(this.webapp.urlParams);
         }
     },
     
@@ -207,9 +209,11 @@ otp.modules.planner.PlannerModule =
         var this_ = this;
         this.webapp.map.addContextMenuItem("Set as Start Location", function(latlng) {
             this_.setStartPoint(latlng, true);
+            this_.optionsWidget.updateURL();
         });
         this.webapp.map.addContextMenuItem("Set as End Location", function(latlng) {
             this_.setEndPoint(latlng, true);
+            this_.optionsWidget.updateURL();
         });
     },
 
@@ -224,7 +228,7 @@ otp.modules.planner.PlannerModule =
 
         if(this.startMarker == null && this.startLatLng != null) {
             this.startMarker = new L.Marker(this.startLatLng, {icon: this.icons.startFlag, draggable: true});
-            this.startMarker.bindPopup('<strong>Start</strong>');
+            this.startMarker.bindPopup('<strong>Start</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().startLocationLink()">Link to the location</a>');
             this.startMarker.on('dragend', $.proxy(function() {
                 this.webapp.hideSplash();
                 this.startLatLng = this.startMarker.getLatLng();
@@ -255,7 +259,7 @@ otp.modules.planner.PlannerModule =
         this.endLatLng = (typeof latlng !== 'undefined') ? latlng : null;    	 
         if(this.endMarker == null && this.endLatLng != null) {
             this.endMarker = new L.Marker(this.endLatLng, {icon: this.icons.endFlag, draggable: true}); 
-            this.endMarker.bindPopup('<strong>Destination</strong>');
+            this.endMarker.bindPopup('<strong>Destination</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().endLocationLink()">Link to the location</a>');
             this.endMarker.on('dragend', $.proxy(function() {
                 this.webapp.hideSplash();
                 this.endLatLng = this.endMarker.getLatLng();
@@ -279,6 +283,35 @@ otp.modules.planner.PlannerModule =
         }
     },
     
+    startLocationLink : function(){
+        var url;
+        if(window.location.href.match("toPlace"))
+            url = window.location.href.substring(0, window.location.href.indexOf("toPlace"));
+        else url = window.location.href;
+        
+        var newTab = window.open(url, '_blank');
+        newTab.focus();
+    },
+    
+    endLocationLink : function(){
+        var newTab;
+        if(window.location.href.match("fromPlace"))
+        {
+            var parts = location.href.split("&");
+            for (var i = 0; i < parts.length; i++)
+            {
+                var part = parts[i];
+                if (part.match("toPlace"))
+                {
+                    var url = parts[0] + '&' + part;
+                    break;
+                }
+            }
+            newTab = window.open(url, '_blank');
+        }
+        else newTab = window.open(window.location.href, '_blank');
+        newTab.focus();
+    },
     
     getStartOTPString : function() {
         return (this.startName !== null ? this.startName + "::" : "")
@@ -297,11 +330,15 @@ otp.modules.planner.PlannerModule =
     },
     
     restoreMarkers : function(queryParams) {
-      	this.startLatLng = otp.util.Geo.stringToLatLng(otp.util.Itin.getLocationPlace(queryParams.fromPlace));
-    	this.setStartPoint(this.startLatLng, false);
-    	
-      	this.endLatLng = otp.util.Geo.stringToLatLng(otp.util.Itin.getLocationPlace(queryParams.toPlace));
-    	this.setEndPoint(this.endLatLng, false);
+        if(queryParams.fromPlace){
+      		this.startLatLng = otp.util.Geo.stringToLatLng(otp.util.Itin.getLocationPlace(queryParams.fromPlace));
+    		this.setStartPoint(this.startLatLng, false);
+        }
+        
+    	if(queryParams.toPlace){
+      		this.endLatLng = otp.util.Geo.stringToLatLng(otp.util.Itin.getLocationPlace(queryParams.toPlace));
+    		this.setEndPoint(this.endLatLng, false);
+        }
     },
     
     checkAutocomplete: function(results, obj, inputSelected) {

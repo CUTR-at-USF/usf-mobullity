@@ -124,8 +124,20 @@ otp.widgets.tripoptions.TripOptionsWidget =
         if(this.autoPlan) {
             this.module.planTrip();
         }
+        else 
+            this.updateURL();
     },
     
+    updateURL : function() {
+        var params = {             
+                fromPlace: this.owner.startLatLng ? this.module.getStartOTPString() : undefined,
+                toPlace: this.owner.endLatLng ? this.module.getEndOTPString() : undefined,                
+            };
+        var link = otp.config.siteUrl + '?module=' + this.module.id + "&" +  
+        otp.util.Text.constructUrlParamString(_.extend(_.clone(params), {}));
+        if(window.history.state == null ||window.history.state.page != link)
+            window.history.pushState({page:link}, null, link);
+    },
     
     CLASS_NAME : "otp.widgets.TripWidget"
 });
