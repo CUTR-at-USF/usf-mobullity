@@ -211,7 +211,13 @@ $(window).load(function() {
             }
         });
     }
-        
+    
+    window.addEventListener('popstate', function(event) {
+        if(!location.hash){
+            if(event.state) window.location = event.state.page;
+                else window.location = location.href;
+            }
+    }, false);
 });
 
 </script>
@@ -231,14 +237,12 @@ $(window).load(function() {
         for="main-menu">
             <li class="mdl-menu__item" id="tripPlannerButton"
             onClick=" document.cookie = 'widgetUsed=trip; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
-                     document.location.hash = 'trip';
                      jQuery('#layersButton').removeClass('selected_item'); jQuery('#tripPlannerButton').addClass('selected_item');
                      javascript:webapp.modules[0].optionsWidget.show(); logGAEvent('click', 'link', 'trip planner'); "> 
             <i class="material-icons" >directions</i>
                 Trip planner</li>
             <li class="mdl-menu__item" id="layersButton"
                 onClick=" document.cookie = 'widgetUsed=layers; expires=' + moment().add(moment.duration({'years':1})).format('ddd, D MMM YYYY HH:mm:ss zz') + ' UTC';
-                          document.location.hash = 'layers';
                           jQuery('#tripPlannerButton').removeClass('selected_item'); jQuery('#layersButton').addClass('selected_item');
                           javascript:webapp.modules[0].layerWidget.show(); logGAEvent('click', 'link', 'layers'); ">
             <i class="material-icons" >layers</i>

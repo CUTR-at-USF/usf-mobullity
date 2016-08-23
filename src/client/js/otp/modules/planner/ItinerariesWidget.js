@@ -483,7 +483,9 @@ otp.widgets.ItinerariesWidget =
         
         tripSummaryFooter.append('Valid ' + moment().format(otp.config.locale.time.format));
         
-        var itinLink = this.constructLink(itin.tripPlan.queryParams, { itinIndex : index });
+        var itinLink = this.constructLink(itin.tripPlan.queryParams, { itinIndex : index});
+        if(window.history.state == null || !this.isURLPushedInHistory(itin.tripPlan.queryParams, window.history.state.page))
+        window.history.pushState({page:itinLink}, null, itinLink);
         if(this.showItineraryLink) {
             tripSummaryFooter.append(' | <a href="'+itinLink+'">Link to Itinerary</a>');
         }
@@ -699,6 +701,12 @@ otp.widgets.ItinerariesWidget =
             otp.util.Text.constructUrlParamString(_.extend(_.clone(queryParams), additionalParams));
     },
         
+    isURLPushedInHistory : function(queryParams, pageLink) {
+        var dLink = decodeURIComponent(pageLink);
+        return (dLink.includes(queryParams.fromPlace)
+                && dLink.includes(queryParams.toPlace) && dLink.includes("mode"))
+           ? true : false;
+    },    
     newMunicoderRequest : function(lat, lon) {
     
         this.municoderResultId++;
