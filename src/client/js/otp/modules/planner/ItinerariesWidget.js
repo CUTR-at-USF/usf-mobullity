@@ -36,12 +36,13 @@ otp.widgets.ItinerariesWidget =
     
     initialize : function(id, module) {
         this.module = module;
-
+        var closeOrMin = (window.matchMedia("screen and (max-width: 768px)").matches);
         otp.widgets.Widget.prototype.initialize.call(this, id, module, {
             title : otp.config.locale.widgets.ItinerariesWidget.title,
             cssClass : module.itinerariesWidgetCssClass || 'otp-defaultItinsWidget',
             resizable : true,
-            closeable : true,
+            closeable : !closeOrMin,
+            minimizable : closeOrMin,
             persistOnClose : true,
         });
         //this.$().addClass('otp-itinsWidget');
@@ -151,21 +152,14 @@ otp.widgets.ItinerariesWidget =
         });
 
         this.$().draggable({ cancel: "#"+divId });
-        if (window.matchMedia("screen and (max-width: 768px)").matches){
-            this.minimize();
-            if(this.title.match(new RegExp(".*Itineraries.*")))
+        if (window.matchMedia("screen and (max-width: 768px)").matches && this.title.match(new RegExp(".*Itineraries.*"))){
+            for (i in this.owner.getWidgetManager().widgets) 
             {
-                for (i in this.owner.getWidgetManager().widgets) 
-                {
-                    x = this.owner.getWidgetManager().widgets[i];
-                    if (x.title.match(new RegExp("Trip planner")))
-                    {
-                        x.minimize();
-                        x.isMinimized = true;
-                    }
-                    if(x.title.match(new RegExp("Layers"))) x.close();
-                }
+                x = this.owner.getWidgetManager().widgets[i];
+                if (x.title.match(new RegExp("Trip planner")))
+                    x.minimize();
             }
+            this.minimize();
         }
     },
     
