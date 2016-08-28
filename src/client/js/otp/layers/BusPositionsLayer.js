@@ -174,7 +174,7 @@ otp.layers.BusPositionsLayer =
 					}
 
                    var icon = this.getIconForRouteAndDirection(route, dir);
-                   marker = L.marker(coord,{icon : icon,}).bindPopup('Bus: ' + this.vehicles[v].id + " Route: " + route + "<br>Moving: " + dir);
+                   marker = L.marker(coord,{icon : icon,}).bindPopup('Bus: ' + this.vehicles[v].id + " Route: " + route + "<br>Moving: " + dir + "<br>Occupancy Status: " + this.vehicles[v].occupancyStatus);
                    marker._leaflet_id = this.vehicles[v].id;
                    marker.on('click', marker.openPopup.bind(marker));
 
