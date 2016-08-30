@@ -193,12 +193,29 @@ otp.widgets.Widget = otp.Class({
     minimize : function() {
         var this_ = this;
         this.hide();
+        
+        // To close Layers widget in mobile only, whenever it's minimized also
+        if(window.matchMedia("screen and (max-width: 768px)").matches && this.title.match(new RegExp("Layers"))) {
+            this.close();
+            return;
+        }
         this.minimizedTab = $('<div class="otp-minimized-tab">'+this.title+'</div>')
         .appendTo($('#otp-minimize-tray'))
         .click(function () {
             this_.unminimize();
         });
         this.isMinimized = true;
+        
+        // To get Itineraries minimized tab placed after Trip planner tab in mobile only.
+        if(window.matchMedia("screen and (max-width: 768px)").matches && this.title.match(new RegExp("Trip planner"))) {
+            for (i in this.owner.getWidgetManager().widgets) {
+                x = this.owner.getWidgetManager().widgets[i];
+                if (x.title.match(new RegExp(".*Itineraries.*")) && x.isMinimized) {
+                    x.minimizedTab.hide();
+                    x.minimize();
+                }
+            }
+        }
     },
 
     unminimize : function(tab) {
