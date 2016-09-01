@@ -100,11 +100,13 @@ otp.core.Map = otp.Class({
         L.Map.include(!L.DomUtil.TRANSITION ? {} : {
         	_viewActions: [],
         	queueView: function(latlng, zoom) {
-        		if (this._animatingZoom) {
-        			this._viewActions.push([latlng, zoom]);
-        		}
-        		else {
-        			this.setView(latlng, zoom);
+        		if (!(location.href.includes("fromPlace") || location.href.includes("toPlace"))) {
+        			if (this._animatingZoom) {
+        				this._viewActions.push([latlng, zoom]);
+        			}
+        			else {
+        				this.setView(latlng, zoom);
+        			}
         		}
         	}
         });
