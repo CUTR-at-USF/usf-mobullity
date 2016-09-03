@@ -1,11 +1,17 @@
 Set objArgs = WScript.Arguments
 ZipFile = objArgs(1)
 Wscript.echo ZipFile
-Dim zip
-Set zip = CreateObject("Shell.Application").NameSpace(ZipFile)
 
 Dim objFSO
 Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+'If zip file doesn't exist create a new one
+If (Not objFSO.fileExists(ZipFile)) then
+	objFSO.CreateTextFile(ZipFile, True).Write ""
+    End If
+
+Dim zip
+Set zip = CreateObject("Shell.Application").NameSpace(ZipFile)
 
 Set re = New RegExp
 re.Global     = True
