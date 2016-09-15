@@ -211,16 +211,6 @@ otp.modules.planner.Itinerary = otp.Class({
         return 0;
     },
     
-    
-    /* returns [[south, west], [north, east]] */    
-    
-    getBoundsArray : function() {
-        var start = this.itinData.legs[0].from;
-        var end = this.itinData.legs[this.itinData.legs.length-1].to;
-        return [[Math.min(start.lat, end.lat), Math.min(start.lon, end.lon)],
-                [Math.max(start.lat, end.lat), Math.max(start.lon, end.lon)]];
-    },
-    
     getHtmlNarrative : function() {
         var html = "";
         html += '<link rel="stylesheet" href="js/otp/modules/planner/planner-style.css" />';

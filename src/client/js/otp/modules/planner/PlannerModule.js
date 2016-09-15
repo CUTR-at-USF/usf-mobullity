@@ -201,7 +201,10 @@ otp.modules.planner.PlannerModule =
             if("itinIndex" in this.webapp.urlParams) this.restoredItinIndex = this.webapp.urlParams["itinIndex"];
             if("mode" in this.webapp.urlParams) 
                 this.restoreTrip(_.omit(this.webapp.urlParams, ["module", "itinIndex"]));
-            else this.restoreMarkers(this.webapp.urlParams);
+            else {
+                this.restoreMarkers(this.webapp.urlParams);
+                this.zoomOnMarkers(this.webapp.urlParams);
+            }
         }
     },
     
@@ -338,6 +341,21 @@ otp.modules.planner.PlannerModule =
     	if(queryParams.toPlace){
       		this.endLatLng = otp.util.Geo.stringToLatLng(otp.util.Itin.getLocationPlace(queryParams.toPlace));
     		this.setEndPoint(this.endLatLng, false);
+        }
+    },
+    
+    zoomOnMarkers : function(params) {
+        if (otp.config.zoomToFitResults) {
+            this.webapp.map.initialGeolocation = false;
+            if("fromPlace" in params && "toPlace" in params)
+                this.webapp.map.lmap.fitBounds(otp.util.Itin.getBoundsArray(this.startLatLng, this.endLatLng), { padding: [60, 60] });
+            else {
+                if("fromPlace" in params)
+                    var latLng = this.startLatLng;                
+                else 
+                    latLng = this.endLatLng;
+                this.webapp.map.lmap.setView(latLng, otp.config.gpsZoom);
+            }
         }
     },
     
@@ -812,7 +830,7 @@ otp.modules.planner.PlannerModule =
         }
         if (otp.config.zoomToFitResults) {
 		this.webapp.map.initialGeolocation = false; // Make sure we aren't waiting for our initial GPS fix - only zoom/pan to the trip, NOT the location too
-		this.webapp.map.lmap.fitBounds(itin.getBoundsArray());
+		this.webapp.map.lmap.fitBounds(otp.util.Itin.getBoundsArray(this.startLatLng, this.endLatLng), { padding: [60, 60] });
 	}
 
     },

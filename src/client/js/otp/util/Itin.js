@@ -152,5 +152,11 @@ otp.util.Itin = {
     
     getRouteShortReference : function(routeData) {
         return routeData.routeShortName || routeData.id.id;
-    },    
+    },
+    
+    /* returns [[south, west], [north, east]] */   
+    getBoundsArray : function(start, end) {
+        return [[Math.min(start.lat, end.lat), Math.min(start.lng, end.lng)],
+                [Math.max(start.lat, end.lat), Math.max(start.lng, end.lng)]];
+    },
 }
