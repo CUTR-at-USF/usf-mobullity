@@ -410,6 +410,13 @@
 		<property name="resultLimit" value="50" />
 	</bean>
 
+	<bean id="geocoderPelias" class="org.opentripplanner.geocoder.pelias.PeliasGeocoder">
+                <property name="apiKey" value="search-hAyPn56" />		
+                <property name="focusPoint" value="28.061062,-82.413200" />
+		<property name="viewBox" value="27.279,-82.851;28.375,-82.012" />
+		<property name="resultLimit" value="50" />
+	</bean>
+
 	<bean id="geocoderAlternatingService" class="org.opentripplanner.geocoder.AlternatingGeocoderModified">
 		<constructor-arg ref="geocoderManual" />
 		<constructor-arg ref="geocoderNominatim" />

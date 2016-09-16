@@ -31,6 +31,18 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+<!-- CUTR SNAPSHOTs/RELEASES -->
+<repositories>
+    <repository>
+        <id>cutr-snapshots</id>
+        <url>https://raw.githubusercontent.com/CUTR-at-USF/cutr-mvn-repo/master/snapshots</url>
+    </repository>        
+    <repository>
+        <id>cutr-releases</id>
+        <url>https://raw.githubusercontent.com/CUTR-at-USF/cutr-mvn-repo/master/releases</url>
+    </repository>  
+</repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.vividsolutions</groupId>
@@ -43,6 +55,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <version>2.7.3</version>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -121,6 +134,12 @@
       <version>2.0</version>
       <type>jar</type>
       <scope>compile</scope>
-    </dependency>
-  </dependencies>
+    </dependency>    
+    <!-- Pelias Client Library -->
+    <dependency>
+      <groupId>edu.cutr.pelias</groupId>    
+      <artifactId>pelias-client-library</artifactId>    
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency> 
+ </dependencies>
 </project>
