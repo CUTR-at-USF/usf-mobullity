@@ -51,6 +51,19 @@ otp.util.Text = {
         return encodedParams.join("&");
     },
 
+    getUrlParameters : function() {
+        var urlParams = null;
+        urlParams = {};
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1);
+    
+        while (match = search.exec(query))
+            urlParams[decode(match[1])] = decode(match[2]);
+        return urlParams;
+    },
 
     // LZW functions adaped from jsolait library (LGPL)
     // via http://stackoverflow.com/questions/294297/javascript-implementation-of-gzip

@@ -231,7 +231,8 @@ otp.modules.planner.PlannerModule =
 
         if(this.startMarker == null && this.startLatLng != null) {
             this.startMarker = new L.Marker(this.startLatLng, {icon: this.icons.startFlag, draggable: true});
-            this.startMarker.bindPopup('<strong>Start</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().startLocationLink()">Link to the location</a>');
+            this.startMarker.bindPopup('<strong>Start</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().markerLocationLink(\'start\')">Link to the location</a> </br> \n\
+                                        <a href="javascript:new otp.modules.planner.PlannerModule().showStreetView(\'start\')">go to Street View</a>');
             this.startMarker.on('dragend', $.proxy(function() {
                 this.webapp.hideSplash();
                 this.startLatLng = this.startMarker.getLatLng();
@@ -262,7 +263,8 @@ otp.modules.planner.PlannerModule =
         this.endLatLng = (typeof latlng !== 'undefined') ? latlng : null;    	 
         if(this.endMarker == null && this.endLatLng != null) {
             this.endMarker = new L.Marker(this.endLatLng, {icon: this.icons.endFlag, draggable: true}); 
-            this.endMarker.bindPopup('<strong>Destination</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().endLocationLink()">Link to the location</a>');
+            this.endMarker.bindPopup('<strong>Destination</strong> </br> <a href="javascript:new otp.modules.planner.PlannerModule().markerLocationLink(\'end\')">Link to the location</a> </br> \n\
+                                      <a href="javascript:new otp.modules.planner.PlannerModule().showStreetView(\'end\')">go to Street View</a>');
             this.endMarker.on('dragend', $.proxy(function() {
                 this.webapp.hideSplash();
                 this.endLatLng = this.endMarker.getLatLng();
@@ -286,34 +288,23 @@ otp.modules.planner.PlannerModule =
         }
     },
     
-    startLocationLink : function(){
-        var url;
-        if(window.location.href.match("toPlace"))
-            url = window.location.href.substring(0, window.location.href.indexOf("toPlace"));
-        else url = window.location.href;
-        
-        var newTab = window.open(url, '_blank');
-        newTab.focus();
+    markerLocationLink : function(marker){
+        var params = otp.util.Text.getUrlParameters();
+        var url = otp.config.siteUrl + '?module=' + params.module + '&';
+        if(marker == 'start')
+            url += 'fromPlace=' + encodeURIComponent(params.fromPlace);
+        else url += 'toPlace=' + encodeURIComponent(params.toPlace);
+        window.open(url, '_blank').focus();
     },
     
-    endLocationLink : function(){
-        var newTab;
-        if(window.location.href.match("fromPlace"))
-        {
-            var parts = location.href.split("&");
-            for (var i = 0; i < parts.length; i++)
-            {
-                var part = parts[i];
-                if (part.match("toPlace"))
-                {
-                    var url = parts[0] + '&' + part;
-                    break;
-                }
-            }
-            newTab = window.open(url, '_blank');
-        }
-        else newTab = window.open(window.location.href, '_blank');
-        newTab.focus();
+    showStreetView : function(marker) {
+        var params = otp.util.Text.getUrlParameters();
+        if(marker == 'start') 
+            var place = params.fromPlace;
+        else place = params.toPlace;
+        var latlng = otp.util.Itin.getLocationPlace(place);
+        var url = "http://maps.google.com/maps?q=&layer=c&cbll=" + latlng;
+        window.open(url, '_blank').focus();
     },
     
     getStartOTPString : function() {
