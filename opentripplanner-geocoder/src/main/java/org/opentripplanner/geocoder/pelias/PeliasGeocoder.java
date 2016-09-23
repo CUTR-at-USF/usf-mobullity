@@ -29,10 +29,11 @@ import org.opentripplanner.geocoder.GeocoderResult;
 import org.opentripplanner.geocoder.GeocoderResults;
 
 import com.vividsolutions.jts.geom.Envelope;
-import edu.cutr.pelias.PeliasRequest;
-import edu.cutr.pelias.PeliasResponse;
+import edu.usf.cutr.pelias.SearchRequest;
+import edu.usf.cutr.pelias.SearchResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.geojson.Feature;
 import org.geojson.Point;
 
@@ -79,7 +80,7 @@ public class PeliasGeocoder implements Geocoder {
     
     @Override 
     public GeocoderResults geocode(String address, Envelope bbox) {
-        PeliasResponse response = null;
+        SearchResponse response = null;
         
         try {
 
@@ -107,7 +108,7 @@ public class PeliasGeocoder implements Geocoder {
                 rectMaxLon = viewBox.split(";")[1].split(",")[1];        
             }
             
-            response = new PeliasRequest.Builder(apiKey, address)
+            response = new SearchRequest.Builder(apiKey, address)
                     .setSources("osm")
                     .setSize(resultLimit)
                     .setFocusPoint(focusLat, focusLon)
