@@ -39,6 +39,10 @@ L.layersIcon = L.DivIcon.extend({
 otp.config = {
     debug: false,
     locale: otp.locale.English,
+
+    // in EM (4.615em is 60px on regular desktop browsers) - converted to PX in index.html by jQuery function
+    // Used by js/otp/modules/planner/PlannerModule.js zoomOnMarkers, and drawItinerary
+    zoomPadding: [4.615, 4.615],  
     
     //All available locales
     //key is translation name. Must be the same as po file or .json file

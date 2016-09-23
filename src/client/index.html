@@ -191,6 +191,33 @@
 var webapp = null;
 
 $(window).load(function() {
+
+    // http://stackoverflow.com/questions/10305993/jquery-javascript-convert-pixels-to-em-in-a-easy-way/13230903#13230903
+    // https://github.com/arasbm/jQuery-Pixel-Em-Converter
+    $.fn.toEm = function(settings){
+        settings = jQuery.extend({
+            scope: 'body'
+        }, settings);
+        var that = parseInt(this[0],10),
+            scopeTest = jQuery('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(settings.scope),
+            scopeVal = scopeTest.height();
+        scopeTest.remove();
+        return (that / scopeVal).toFixed(8) + 'em';
+    };
+    $.fn.toPx = function(settings){
+        settings = jQuery.extend({
+            scope: 'body'
+        }, settings);
+        var that = parseFloat(this[0]),
+            scopeTest = jQuery('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(settings.scope),
+            scopeVal = scopeTest.height();
+        scopeTest.remove();
+        return Math.round(that * scopeVal) + 'px';
+    };
+
+    otp.config['zoomPadding'][0] = parseInt(jQuery(otp.config['zoomPadding'][0]).toPx().replace("px", ""));
+    otp.config['zoomPadding'][1] = parseInt(jQuery(otp.config['zoomPadding'][1]).toPx().replace("px", ""));
+
     var templateUrls = [ //new Array(
         'js/otp/layers/layers-templates.html',
         'js/otp/widgets/widget-templates.html',
