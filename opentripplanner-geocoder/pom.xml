@@ -142,9 +142,9 @@
     </dependency>    
     <!-- Pelias Client Library -->
     <dependency>
-      <groupId>edu.usf.cutr.pelias</groupId>    
+      <groupId>edu.usf.cutr</groupId>    
       <artifactId>pelias-client-library</artifactId>    
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency> 
  </dependencies>
 </project>
