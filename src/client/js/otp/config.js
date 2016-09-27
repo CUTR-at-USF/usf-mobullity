@@ -117,6 +117,7 @@ otp.config = {
     //if user does not allow location finding default location set
     initLatLng : new L.LatLng(28.061062, -82.413200), 
     mapBoundary: false,
+    usfTampaBounds: new L.latLngBounds(new L.latLng(28.054512, -82.426146), new L.latLng(28.069156, -82.401856)),
     initZoom : 15, /* Default zoom w/o GPS (15 = entire viewport big enough for Tampa campus) */
     minZoom : 13, /* Smaller numbers allow farther zooms (zoom OUT) */
     maxZoom : 18, /* Larger numbers allow closer zooms (zoom IN) */
