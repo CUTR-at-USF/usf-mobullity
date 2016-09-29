@@ -410,10 +410,17 @@
 		<property name="resultLimit" value="50" />
 	</bean>
 
+    <bean id="TampaBBox" class="com.vividsolutions.jts.geom.Envelope">
+        <constructor-arg value="27.279" /> <!-- x1 -->
+        <constructor-arg value="28.375" /> <!-- x2 -->
+        <constructor-arg value="-82.851" /> <!-- y1 -->
+        <constructor-arg value="-82.012" /> <!-- y2 -->
+    </bean>
+
 	<bean id="geocoderPelias" class="org.opentripplanner.geocoder.pelias.PeliasGeocoder">
                 <property name="apiKey" value="search-zso6JBE" />		
                 <property name="focusPoint" value="28.061062,-82.413200" />
-		<property name="viewBox" value="27.279,-82.851;28.375,-82.012" />
+		<property name="viewBox" ref="TampaBBox" /> 
 		<property name="resultLimit" value="50" />
 	</bean>
 

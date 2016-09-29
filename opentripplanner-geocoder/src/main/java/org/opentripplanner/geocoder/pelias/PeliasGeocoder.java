@@ -40,7 +40,7 @@ import org.geojson.Point;
 public class PeliasGeocoder implements Geocoder {
     private String apiKey;
     private Integer resultLimit;
-    private String viewBox;
+    private Envelope viewBox;
     private String focusPoint;
     
     public PeliasGeocoder() {
@@ -70,12 +70,12 @@ public class PeliasGeocoder implements Geocoder {
         this.resultLimit = resultLimit;
     }
 
-    public String getViewBox() {
+    public Envelope getViewBox() {
         return viewBox;
     }
 
-    public void setViewBox(String viewBox) {
-        this.viewBox = viewBox;
+    public void setViewBox(Envelope param) {
+        this.viewBox = param;
     }   
     
     @Override 
@@ -93,19 +93,19 @@ public class PeliasGeocoder implements Geocoder {
                 focusLon = new Double(focusPoint.split(",")[1]);
             }
 
-            String rectMinLat, rectMinLon, rectMaxLat, rectMaxLon;
+            Double rectMinLat, rectMinLon, rectMaxLat, rectMaxLon;
             
             if (bbox != null) {
-                rectMinLat = Double.toString(bbox.getMinX());
-                rectMinLon = Double.toString(bbox.getMinY());
-                rectMaxLat = Double.toString(bbox.getMinX() + bbox.getWidth());
-                rectMaxLon = Double.toString(bbox.getMinY() + bbox.getHeight());                
+                rectMinLat = bbox.getMinX();
+                rectMinLon = bbox.getMinY();
+                rectMaxLat = bbox.getMinX() + bbox.getWidth();
+                rectMaxLon = bbox.getMinY() + bbox.getHeight();                
             }
             else {
-                rectMinLat = viewBox.split(";")[0].split(",")[0];
-                rectMinLon = viewBox.split(";")[0].split(",")[1];
-                rectMaxLat = viewBox.split(";")[1].split(",")[0];
-                rectMaxLon = viewBox.split(";")[1].split(",")[1];        
+                rectMinLat = viewBox.getMinX();
+                rectMinLon = viewBox.getMinY();
+                rectMaxLat = viewBox.getMinX() + viewBox.getWidth();
+                rectMaxLon = viewBox.getMinY() + viewBox.getHeight();
             }
             
             response = new SearchRequest.Builder(apiKey, address)
