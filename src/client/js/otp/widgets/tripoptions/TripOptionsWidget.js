@@ -279,10 +279,9 @@ otp.widgets.tripoptions.LocationsSelector =
 	e = webapp.map.currentLocation;
 
 	var result = $(obj).data('results');
-	result['My Location'].lat = e.latlng.lat;
-	result['My Location'].lng = e.latlng.lng;
+	result.unshift( {'description': "My Location", 'lat': e.latlng.lat, 'lng': e.latlng.lng} );
 	$(obj).data('results', result);
-	$(obj)[0].selectItem( "My Location" );	
+	$(obj)[0].selectItem( 0 );	
 
 	// Remove callback 
 	for (i=0; i < webapp.map.geolocateCallbacks.length; i++) {
@@ -299,9 +298,10 @@ otp.widgets.tripoptions.LocationsSelector =
 
                var result = $(this).data("results")[key];
                $(this).data('selected-item', result);
-  	       $(this).val( key );
 
-		if (key == "My Location" && result.lat == 0) {
+  	       $(this).val( result.description );
+
+		if (result.description == "My Location" && result.lat == 0) {
 
 			webapp.map.geolocateCallbacks.push( [ this_.saveMyLocation, {'obj': $(this) }] );
 
@@ -328,16 +328,13 @@ otp.widgets.tripoptions.LocationsSelector =
 
                      input.data("results", this_.getResultLookup(results));
 
-		     e = webapp.map.currentLocation
-	             lat = e.latlng.lat;
-   	             lng = e.latlng.lng;
-          	     results.unshift({'description': 'My Location', 'lat':lat, 'lng':lng});
-	
-                     response.call(this, _.pluck(results, 'description'));
+                     response.call(this, input.data("results")); 
                  });
              },
              select: function(event, ui) {
+                  event.preventDefault();
                  $(this)[0].selectItem( ui.item.value );
+
              },
          })
          .change(function() {
@@ -347,16 +344,20 @@ otp.widgets.tripoptions.LocationsSelector =
     },
     
     getResultLookup : function(results) {
-        var resultLookup = {};
+        var resultLookup = [];
 
-	e = webapp.map.currentLocation
-	lat = e.latlng.lat;
-	lng = e.latlng.lng;
-	resultLookup['My Location'] = {'description': 'My Location', 'lat':lat, 'lng':lng};
+    	e = webapp.map.currentLocation
+    	lat = e.latlng.lat;
+	    lng = e.latlng.lng;
+    	resultLookup.push( {'value': 0, 'label': 'My Location', 'description': 'My Location', 'lat':lat, 'lng':lng} );
 
         for(var i=0; i<results.length; i++) {
-            resultLookup[results[i].description] = results[i];
+            results[i].value = i+1;
+            results[i].label = results[i].description;
+
+            resultLookup.push( results[i] );
         }
+
         return resultLookup;
     },
     
