@@ -223,7 +223,7 @@ otp.widgets.LayersWidget =
                        v = y['locations'].split(',');
                        latlng = [ parseFloat(v[0]), parseFloat(v[1]) ];
 
-                       vals['inTampaCampus'] = otp.config.usfTampaBounds.contains(L.latLng(latlng[0], latlng[1])) ? true : false;
+                       vals['inTampaCampus'] = otp.config.usfTampaBounds.contains(L.latLng(latlng[0], latlng[1]));
                     }
                     else continue;
 
