@@ -478,8 +478,10 @@ otp.widgets.ItinerariesWidget =
         tripSummaryFooter.append('Valid ' + moment().format(otp.config.locale.time.format));
         
         var itinLink = this.constructLink(itin.tripPlan.queryParams, { itinIndex : index});
-        if(window.history.state == null || !this.isURLPushedInHistory(itin.tripPlan.queryParams, window.history.state.page))
-        window.history.pushState({page:itinLink}, null, itinLink);
+        if(window.history.state == null || !this.isURLPushedInHistory(itin.tripPlan.queryParams, window.history.state.page)) {
+            window.history.pushState({page:itinLink}, null, itinLink);
+            sessionStorage.setItem("previousURL", itinLink);
+        }
         if(this.showItineraryLink) {
             tripSummaryFooter.append(' | <a href="'+itinLink+'">Link to Itinerary</a>');
         }

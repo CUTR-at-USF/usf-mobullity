@@ -135,8 +135,10 @@ otp.widgets.tripoptions.TripOptionsWidget =
             };
         var link = otp.config.siteUrl + '?module=' + this.module.id + "&" +  
         otp.util.Text.constructUrlParamString(_.extend(_.clone(params), {}));
-        if(window.history.state == null ||window.history.state.page != link)
+        if(window.history.state == null ||window.history.state.page != link) {
             window.history.pushState({page:link}, null, link);
+            sessionStorage.setItem("previousURL", link);
+        }
     },
     
     CLASS_NAME : "otp.widgets.TripWidget"
