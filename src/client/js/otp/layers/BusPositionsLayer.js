@@ -173,8 +173,41 @@ otp.layers.BusPositionsLayer =
                         continue;
 					}
 
+                   switch (this.vehicles[v].occupancyStatus) {
+                   case "EMPTY":
+                        occupancyClass = "green";
+                        occupancyWidth = 25;
+                        occupancyText = "Empty";
+                        break;
+                   case "MANY_SEATS_AVAILABLE":
+                        occupancyClass = "green";
+                        occupancyWidth = 50;
+                        occupancyText = "Many Seats Available";
+                        break;
+                   case "FEW_SEATS_AVAILABLE":
+                        occupancyClass = "yellow";
+                        occupancyWidth = 75;
+                        occupancyText = "Few Seats Available";
+                        break;
+                   case "STANDING_ROOM_ONLY":
+                        occupancyClass = "red";
+                        occupancyWidth = 90;
+                        occupancyText = "Standing Room Only";
+                        break;
+                   case "CRUSHED_STANDING_ROOM_ONLY":
+                        occupancyClass = "red";
+                        occupancyWidth = 92;
+                        occupancyText = "Crushed Standing Room Only";
+                        break;
+                   case "FULL":
+                        occupancyClass = "red";
+                        occupancyWidth = 95;
+                        occupancyText = "Full";
+                        break;
+                   }
+
                    var icon = this.getIconForRouteAndDirection(route, dir);
-                   marker = L.marker(coord,{icon : icon,}).bindPopup('Bus: ' + this.vehicles[v].id + " Route: " + route + "<br>Moving: " + dir + "<br>Occupancy Status: " + this.vehicles[v].occupancyStatus);
+                   marker = L.marker(coord,{icon : icon,}).bindPopup( ich['bullrunner-popup']({'bus': this.vehicles[v], 'route': route, 'dir': dir, 'occupancyClass': occupancyClass, 'occupancyWidth': occupancyWidth, "occupancyText": occupancyText}).html() );
                    marker._leaflet_id = this.vehicles[v].id;
                    marker.on('click', marker.openPopup.bind(marker));
 
