@@ -359,6 +359,19 @@ Pay with your Smart Phone using ParkMobile App! (<a href="http://www.usf.edu/adm
 </div>
 </script>
 
+<script id="bullrunner-popup" type="text/html">
+<div>
+Bus: {{ bus.id }} Route: {{ route }} Moving: {{ dir }}<br>
+
+<br>
+<div class="text-center">Occupancy Status:</div>
+<div class="text-center">{{ occupancyText }}</div>
+<div class="progress">
+<div class="progress-bar progress-{{ occupancyClass }}" style="width: {{ occupancyWidth }}%"></div>
+</div>
+</div>
+</script>
+
 <!-- Base SVG Icon Template: Accepts Route:String, Color:css, Bearing:SVG -->
 <script id="busicon-bullrunner" type="text/html">
 <div>
