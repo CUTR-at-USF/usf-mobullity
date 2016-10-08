@@ -24,24 +24,25 @@ otp.core.Geocoder = otp.Class({
         this.addressParam = addressParam;
     },
     
-    geocode : function(address, setResultsCallback, currentUrl) {
+    geocode : function(address, setResultsCallback, currentIndex) {
 
         var params = { }; 
         params[this.addressParam] = address;
 
         /* Rudimentary URL failover */               
         if (typeof this.url == "object") {
-            if (currentUrl == undefined) url = this.url[0];
-            else url = currentUrl;
+            if (currentIndex == undefined) {
+                url = this.url[0];
+                currentIndex = 0;
+            }
+            else url = this.url[currentIndex];
             
-            i = this.url.indexOf(url);
-            if (i in this.url && i+1 < this.url.length) nextUrl = this.url[i+1];
-            else nextUrl = "";
-
+            if (currentIndex+1 < this.url.length) nextIndex = currentIndex+1;
+            else nextIndex = "";
         }
         else {
             url = this.url;
-            nextUrl = "";
+            nextIndex = "";
         }
 
         args = {'address': address, 'callback': setResultsCallback};
@@ -49,7 +50,7 @@ otp.core.Geocoder = otp.Class({
         $.ajax(url, {
             data : params,
 
-            context: $.extend(this, {'args': args, 'nextUrl': nextUrl}),
+            context: $.extend(this, {'args': args, 'nextIndex': nextIndex}),
 
             success: function(data) {
                 if((typeof data) == "string") data = jQuery.parseXML(data);
@@ -70,7 +71,8 @@ otp.core.Geocoder = otp.Class({
             },
 
             error: function() {
-                if (this.nextUrl != "") this.geocode(this.args['address'], this.args['callback'], this.nextUrl);
+                if (this.nextIndex != "") this.geocode(this.args['address'], this.args['callback'], this.nextIndex);
+                else alert("The geocoding service had an unexpected error. Please try again.");
             },
 
         });        
