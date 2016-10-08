@@ -351,43 +351,45 @@ otp.modules.planner.PlannerModule =
     },
     
     checkAutocomplete: function(results, obj, inputSelected) {
-	// Array of autocomplete results, user input jquery object, start or end
-	// Look for a match in the autocomplete results with the value of the input box and verify that the latlng matches
+        // Array of autocomplete results, user input jquery object, start or end
+        // Look for a match in the autocomplete results with the value of the input box and verify that the latlng matches
 
-	ret = {};
-	resultsList = results['result']; // from validate
+        ret = {};
+        resultsList = results['result']; // from validate
 
         for (var key in resultsList) {
                 tmp = key;
+                desc = resultsList[key].description;
 
-		resultLatLng = "(" + parseFloat(resultsList[key].lat).toFixed(5) + ', ' + parseFloat(resultsList[key].lng).toFixed(5) + ")";
+                resultLatLng = "(" + parseFloat(resultsList[key].lat).toFixed(5) + ', ' + parseFloat(resultsList[key].lng).toFixed(5) + ")";
 
-		// Either an exact match, or (BUILDING) match, and "My Location"
-                if (key == obj.val() ||
-                    key.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
-		
+                // Either an exact match, or (BUILDING) match, and "My Location"
+                if (desc == obj.val() ||
+                    desc.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
+
         	        // Name matches, but latlng doesn't. Update the result
-			if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
-			else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
+                    if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
+                    else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
 
-	        	ret['pos'] = resultsList[key];
-			break;
-        	}
-                // The input is somewhere in the key 
-		// 1 result + 'my location'
-                else if (tmp.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(resultsList).length == 2) {
+                    ret['pos'] = resultsList[key];
+                    break;
+                }
 
-			obj[0].selectItem( key );
-			
-                        ret['pos'] = resultsList[key];
-			break;
+                // The input is somewhere in the key
+                // 1 result + 'my location'
+                else if (desc.toLowerCase().indexOf( obj.val().toLowerCase() ) != -1 && Object.keys(resultsList).length == 2) {
+
+                    obj[0].selectItem( key );
+
+                    ret['pos'] = resultsList[key];
+                    break;
                 }
                 // XXX Input is in the key AND results.length > 1 (maybe more than 1 match) ... ask
-	}
+        }
 
-	if (typeof(ret) == "object" && ret['pos'] != undefined) return ret;
-	
-	return false;
+        if (typeof(ret) == "object" && ret['pos'] != undefined) return ret;
+
+        return false;
     },
   
     validate : function() {
