@@ -189,6 +189,7 @@
 <script type="text/javascript" defer>
 
 var webapp = null;
+var previousURL = null;
 
 $(window).load(function() {
 
@@ -238,14 +239,18 @@ $(window).load(function() {
             }
         });
     }
-    
-    window.addEventListener('popstate', function(event) {
-        if(!location.hash){
-            if(event.state) window.location = event.state.page;
-                else window.location = location.href;
-            }
-    }, false);
 });
+
+window.onpopstate = function() {
+    var onclick = document.activeElement.onclick;
+    if(!onclick) {
+        previousURL = sessionStorage.getItem("previousURL");
+        if(!previousURL) previousURL = location.origin+'/';
+        if(previousURL != (location.origin + '/' + location.search))
+            location.reload();
+        sessionStorage.setItem("previousURL", location.origin + '/' + location.search);
+    }
+};
 
 </script>
 
