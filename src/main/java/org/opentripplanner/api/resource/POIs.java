@@ -50,15 +50,21 @@ public class POIs {
             // Map of matching POI keys 
             Map<String, ArrayList<PoiNode>> q = new HashMap<String, ArrayList<PoiNode>>();
 
-            // Exact match on POI Key
-            if (g.pois.containsKey( query )) {
-                q.put( query, g.pois.get(query) );
-            }
-            // iterative matching for e.g: key:value* queries
-            else {
-                for (String k : g.pois.keySet()) {
-                    if ( query != null && ! k.toLowerCase().contains( query.toLowerCase() )) continue;
-                    q.put( k, g.pois.get(k) );
+            // Handle OR matching if query has multiple tokens delimited by ','
+            String[] query_arr = query.split(",");
+            for(String queryValue : query_arr)
+            {
+            
+                // Exact match on POI Key
+                if (g.pois.containsKey( queryValue )) {
+                    q.put( queryValue, g.pois.get(queryValue) );
+                }
+                // iterative matching for e.g: key:value* queries
+                else {
+                    for (String k : g.pois.keySet()) {
+                        if ( queryValue != null && ! k.toLowerCase().contains( queryValue.toLowerCase() )) continue;
+                        q.put( k, g.pois.get(k) );
+                    }
                 }
             }
 
