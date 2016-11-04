@@ -710,6 +710,7 @@ div#otp-planner-optionsWidget-scollPanel {
     top: 0.9em;
     z-index: 1;
     width: 90%;
+    border-color: gray;
 }
 .otp-layerView-inner .legend h3 {
     width: 95%;
@@ -731,6 +732,7 @@ div#otp-planner-optionsWidget-scollPanel {
     padding-top: 0.2em;
     position: relative;
     z-index: 100;
+    color: gray;
 }
 
 .otp-layerView-inner fieldset .legend:hover {
@@ -740,7 +742,7 @@ div#otp-planner-optionsWidget-scollPanel {
     font-size: 13px;
     font-weight: normal;
     background-color: white;
-    padding: 0 0.2em 0 0.2em;
+    padding: 0 0.3em 0 0.3em;
 }
 .routes, .stops, .bikes, .other {
 }
