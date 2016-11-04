@@ -15,6 +15,7 @@ L.layersIcon = L.DivIcon.extend({
         icon: '',
         className: 'layersIcon',
         color: 'blue',
+	iconContent: '',
     },
 
     initialize: function(opts) {
@@ -23,7 +24,7 @@ L.layersIcon = L.DivIcon.extend({
 
     createIcon: function() {
         var div = document.createElement("div");
-        div.innerHTML = "<i class='"+this.options.icon+"'></i>";
+        div.innerHTML = "<i class='"+this.options.icon+"'>"+this.options.iconContent+"</i>";
 
         div.style = "width: "+this.options.iconSize[0]+"px; height:  "+this.options.iconSize[1]+"px";
 
