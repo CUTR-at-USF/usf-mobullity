@@ -14,6 +14,6 @@ What did you expect the skill to do?
 
 What happened instead?  Describe your issue in detail here.
 
-**Plaftorm:** 
+**Platform:** 
 
 What is the operating system and Java version of your machine?
