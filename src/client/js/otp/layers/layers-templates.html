@@ -24,6 +24,19 @@
     </div>
 </script>
 
+<script id="bikeracks-template" type="text/html">
+<div>
+Bicycle Rack<br>
+
+{{#note}}Note: {{note}}<br>{{/note}}
+
+{{#capacity}}
+Capacity: {{capacity}}<br>
+{{/capacity}}
+
+</div>
+</script>
+
 <script id="otp-stopsLayer-popupRoute" type="text/html">
     <li style="margin: 0px;">
         {{#routeShortName}}
@@ -239,12 +252,6 @@
 </div>
 <div class=bikes>
 
-<div id="help_kiosks" class="route-menu-item selected">
-<div class="box"></div><div class="color"></div>
-<div class="name">Info Kiosks</div>
-</div>
-<div style="clear:left;"></div>
-
 <div id="smart_kiosks" class="route-menu-item selected">
 <div class="box"></div><div class="color"></div>
 <div class="name">Smart Kiosks</div>
@@ -406,6 +413,57 @@ Pay with your Smart Phone using ParkMobile App! (<a href="http://www.usf.edu/adm
 
 </div>
 </script>
+
+
+<script id="sports-template" type="text/html">
+<div>
+Sports{{#name}}: {{name}}{{/name}}<br>
+
+Type: {{sport}}
+
+</div>
+</script>
+
+<script id="dining-template" type="text/html">
+<div>
+Dining{{#name}}: {{name}}{{/name}}<br>
+
+{{#cuisine}}Cuisine: {{cuisine}}{{/cuisine}}<br>
+
+{{#addr:street}}
+Address: {{#addr:housenumber}}{{addr:housenumber}}&nbsp;{{/addr:housenumber}} {{addr:street}}<br>
+{{/addr:street}}
+
+{{#addr:city}}City: {{addr:city}}<br>{{/addr:city}}
+{{#addr:state}}State: {{addr:state}}<br>{{/addr:state}}
+{{#addr:postcode}}Zip: {{addr:postcode}}<br>{{/addr:postcode}}
+
+{{#phone}}
+Phone: {{phone}}<br>
+{{/phone}}
+
+{{#website}}
+Website: {{website}}<br>
+{{/website}}
+
+{{#opening_hours}}
+Hours: {{opening_hours}}<br>
+{{/opening_hours}}
+
+</div>
+</script>
+
+<script id="mailing-template" type="text/html">
+<div>
+Mailing Services<br>
+
+{{#operator}}Operator: {{operator}}<br>{{/operator}}
+
+{{#note}}Note: {{note}}<br>{{/note}}
+
+</div>
+</script>
+
 
 <script id="busicon-bearing-north" type="text/html">
 <div>

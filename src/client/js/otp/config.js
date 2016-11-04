@@ -242,21 +242,22 @@ otp.config = {
         { name: 'car_share', target: '#carshare', icon: new L.layersIcon({icon: 'mdi mdi-car', color: 'red'}), type: 'static', title: 'Enterprise CarShare', popup: "<a target='_blank' href='https://www.enterprisecarshare.com/us/en/programs/university/usf.html'>Reserve a car</a>", locations: [[28.059951, -82.417575], [28.064287, -82.412130]], color: 'green' },
 
         { name: 'bike_repair', target: '#bikerepair', icon: new L.layersIcon({icon: 'mdi mdi-wrench', color: 'green'}), type: 'poi', search: 'bicycle_repair_station', popupTemplate: 'bikeRepair-template', color: '#006747' },
-        { name: 'bike_rack', target: '#bikeracks', icon: new L.layersIcon({icon: 'mdi mdi-bike', color: 'green'}), type: 'poi', search: 'bicycle_parking', color: '#006747' },
+
+        { name: 'bike_rack', target: '#bikeracks', icon: new L.icon({iconUrl: '/images/icon_bikerack.svg', iconSize: [20, 20]}), type: 'poi', search: 'bicycle_parking', color: '#006747', popupTemplate: 'bikeracks-template' },
 
         { name: 'car_charging', target: '#carcharging', icon: new L.layersIcon({icon: 'mdi mdi-battery-charging', color: 'red'}), type: 'poi', search: 'charging_station', popupTemplate: 'carCharging-template', color: "red" },
 
         { name: 'parking', target: '#parkinglots', icon: new L.layersIcon({icon: 'mdi mdi-parking', color: 'red'}), type: 'poi', search: 'amenity:parking', popupTemplate: 'parkingLots-template', condition: "permits", color: "red" },
 
-        { name: 'athletics', target: '#athletics', icon: new L.layersIcon({icon: 'mdi mdi-', color: 'green'}), type: 'poi', search: 'amenity:athletics, sport', color: 'green' },
-        { name: 'dining', target: '#dining', icon: new L.layersIcon({icon: 'mdi ', color: 'green'}), type: 'poi', search: 'fast_food, restaurant', color: "green" },
+        { name: 'athletics', target: '#athletics', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xEB43;', color: 'green'}), type: 'poi', search: 'amenity:athletics,sport', color: 'green', popupTemplate: 'sports-template' },
 
-        { name: 'mailing', target: '#mailing', icon: new L.layersIcon({icon: 'mdi mdi-', color: 'green'}), type: 'poi', search: 'post_box', color: 'green' },
+        { name: 'dining', target: '#dining', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE56C;', color: 'green'}), type: 'poi', search: 'fast_food, restaurant', color: "green", popupTemplate: 'dining-template' },
 
-        { name: 'copiers', target: '#copiers', icon: new L.layersIcon({icon: 'mdi mdi-', color: 'green'}), type: 'poi', search: 'copy_machine', popupTemplate: 'copymachine-template', color: 'green' },
+        { name: 'mailing', target: '#mailing', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE554;', color: 'green'}), type: 'poi', search: 'post_box', color: 'green', popupTemplate: 'mailing-template' },
 
-        { name: 'info_kiosks', target: '#help_kiosks', icon: new L.layersIcon({icon: 'mdi mdi-', color: 'green'}), type: 'poi', search: 'tourism:information', color: 'blue' },
-        { name: 'smart_kiosks', target: '#smart_kiosks', icon: new L.layersIcon({icon: 'mdi mdi-', color: 'green'}), type: 'poi', search: 'tourism:board', color: 'blue' },
+        { name: 'copiers', target: '#copiers', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE555;', color: 'green'}), type: 'poi', search: 'copyshop', popupTemplate: 'copymachine-template', color: 'green' },
+
+        { name: 'smart_kiosks', target: '#smart_kiosks', icon: new L.layersIcon({icon: 'mdi mdi-monitor', color: 'blue'}), type: 'poi', search: 'tourism:terminal', color: 'blue' },
 
     ],
  
