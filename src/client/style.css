@@ -1025,16 +1025,12 @@ p#splash-text span {
 	background-color: #8f6a51;
 }
 
-.bikes div#bike_stations .box.active {
-	background-color: green;
-}
-
-.bikes div#bike_lanes .box.active {
-	background-color: #006747;
-}
-
 .stops div#bus_hart .box.active {
 	background-color: green;
+}
+
+#fieldset_usf_bikes .box.active {
+	background-color: #006747;
 }
 
 #fieldset_campus_living .box.active {
