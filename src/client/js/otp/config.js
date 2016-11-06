@@ -243,7 +243,7 @@ otp.config = {
 
         { name: 'bike_repair', target: '#bikerepair', icon: new L.layersIcon({icon: 'mdi mdi-wrench', color: 'green'}), type: 'poi', search: 'bicycle_repair_station', popupTemplate: 'bikeRepair-template', color: '#006747' },
 
-        { name: 'bike_rack', target: '#bikeracks', icon: new L.icon({iconUrl: '/images/icon_bikerack.svg', iconSize: [20, 20]}), type: 'poi', search: 'bicycle_parking', color: '#006747', popupTemplate: 'bikeracks-template' },
+        { name: 'bike_rack', target: '#bikeracks', icon: new L.icon({iconUrl: '/images/icon_bikerack.svg', iconSize: [20, 50]}), type: 'poi', search: 'bicycle_parking', color: '#006747', popupTemplate: 'bikeracks-template' },
 
         { name: 'car_charging', target: '#carcharging', icon: new L.layersIcon({icon: 'mdi mdi-battery-charging', color: 'red'}), type: 'poi', search: 'charging_station', popupTemplate: 'carCharging-template', color: "red" },
 
