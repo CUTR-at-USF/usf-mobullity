@@ -24,6 +24,27 @@
     </div>
 </script>
 
+<script id="kiosk-template" type="text/html">
+<div>
+<p><b>Smart Kiosk</b></p>
+
+<p>An interactive digital display with various helpful functions like wayfinding.</p>
+</div>
+</script>
+
+<script id="bikeracks-template" type="text/html">
+<div>
+Bicycle Rack<br>
+
+{{#note}}Note: {{note}}<br>{{/note}}
+
+{{#capacity}}
+Capacity: {{capacity}}<br>
+{{/capacity}}
+
+</div>
+</script>
+
 <script id="otp-stopsLayer-popupRoute" type="text/html">
     <li style="margin: 0px;">
         {{#routeShortName}}
@@ -33,11 +54,17 @@
     </li>
 </script>
 
+<!-- fa-chevron-down &#xf078; fa-chevron-up &#\x4077  -->
 <script id="usf-layer-menu" type="text/html">
+
 <div class='otp-layerView-inner'>
 
-<fieldset>
-<legend>USF Bus Routes</legend>
+<fieldset id="fieldset_usf_routes">
+<div class=legend>
+<h3><span>USF Bus Routes</span></h3>
+<div class="chevron fa-chevron-up"></div>
+<div class=border></div>
+</div>
 <div class="routes">
 
 <div id="usf_A" class="route-menu-item selected">
@@ -75,25 +102,31 @@
 <div class="name">Route F</div>
 </div>
 <div style="clear:left;"></div>
-
 </div>
 </fieldset>
 
-<fieldset>
-<legend>Bus Stops</legend>
+<fieldset id="fieldset_city_bus">
+<div class=legend>
+<h3><span>City Bus</span></h3>
+<div class="chevron fa-chevron-up"></div>
+<div class=border></div>
+</div>
 <div class=stops>
 
 <div id="bus_hart" class="route-menu-item selected">
 <div class="box"></div><div class="color"></div>
-<div class="name">HART</div>
+<div class="name">HART Stops</div>
 </div>
 <div style="clear:left;"></div>
-
 </div>
 </fieldset>
 
-<fieldset>
-<legend>USF Bike Info</legend>
+<fieldset id="fieldset_usf_bikes">
+<div class=legend>
+<h3><span>Bike & Carshare</span></h3>
+<div class="chevron fa-chevron-up"></div>
+<div class=border></div>
+</div>
 <div class=bikes>
 
 <div id="bike_stations" class="route-menu-item selected">
@@ -112,18 +145,21 @@
 </div>
 <div style="clear:left;"></div>
 
+<div id="bikeracks" class="route-menu-item selected">
+<table border=0 cellspacing=0 cellpadding=3 width=100%>
+<tr>
+<td class=box_col align=center><div class='box'></div><div class=color></div></td>
+<td width=90%><div class="name">Bike Racks</div></td>
+</tr>
+</table>
+</div>
+<div style="clear:left;"></div>
+
 <div id="bike_lanes" class="route-menu-item selected">
 <div class="box"></div><div class="color"></div>
 <div class="name">Bike Lanes</div>
 </div>
 <div style="clear:left;"></div>
-
-</div>
-</fieldset>
-
-<fieldset>
-<legend>Other</legend>
-<div class=other>
 
 <div id="carshare" class="route-menu-item selected">
 <table border=0 cellspacing=0 cellpadding=3 width=100%>
@@ -134,6 +170,17 @@
 </table>
 </div>
 <div style="clear:left;"></div>
+
+</div>
+</fieldset>
+
+<fieldset id="fieldset_other">
+<div class=legend>
+<h3><span>Parking</h3></span>
+<div class="chevron fa-chevron-up"></div>
+<div class=border></div>
+</div>
+<div class=other>
 
 <div id="parkinglots" class="route-menu-item selected">
 <div class="box"></div><div class="color"></div>
@@ -150,6 +197,74 @@
 </table>
 </div>
 <div style="clear:left;"></div>
+</fieldset>
+
+
+<fieldset id="fieldset_campus_living">
+<div class=legend>
+    <h3><span>On-Campus Living</span></h3>
+    <div class="chevron fa-chevron-up"></div>
+    <div class=border></div>    
+</div>
+<div class=campusliving>
+
+<div id="athletics" class="route-menu-item selected">
+<table border=0 cellspacing=0 cellpadding=3 width=100%>
+<tr>
+<td class=box_col align=center><div class='box'></div><div class=color></div></td>
+<td width=90%><div class=name>Athletics</div></td>
+</tr>
+</table>
+</div>
+<div style="clear:left;"></div>
+
+<div id="dining" class="route-menu-item selected">
+<table border=0 cellspacing=0 cellpadding=3 width=100%>
+<tr>
+<td class=box_col align=center><div class='box'></div><div class=color></div></td>
+<td width=90%><div class=name>Dining</div></td>
+</tr>
+</table>
+</div>
+<div style="clear:left;"></div>
+
+<div id="mailing" class="route-menu-item selected">
+<table border=0 cellspacing=0 cellpadding=3 width=100%>
+<tr>
+<td class=box_col align=center><div class='box'></div><div class=color></div></td>
+<td width=90%><div class=name>Mailing Services</div></td>
+</tr>
+</table>
+</div>
+<div style="clear:left;"></div>
+
+<div id="copiers" class="route-menu-item selected">
+<table border=0 cellspacing=0 cellpadding=3 width=100%>
+<tr>
+<td class=box_col align=center><div class='box'></div><div class=color></div></td>
+<td width=90%><div class=name>Copiers</div></td>
+</tr>
+</table>
+</div>
+<div style="clear:left;"></div>
+
+</div>
+</fieldset>
+
+
+<fieldset id="fieldset_help">
+<div class=legend>
+<h3><span>Help</span></h3>
+<div class="chevron fa-chevron-up"></div>
+<div class=border></div>
+</div>
+<div class=bikes>
+
+<div id="smart_kiosks" class="route-menu-item selected">
+<div class="box"></div><div class="color"></div>
+<div class="name">Smart Kiosks</div>
+</div>
+<div style="clear:left;"></div>
 
 <div id="bluephone" class="route-menu-item selected">
 <table border=0 cellspacing=0 cellpadding=3 width=100%>
@@ -160,10 +275,11 @@
 </table>
 
 </div>
+<br>
+</div>
 </fieldset>
 
 </div>
-
 </script>
 
 <script id="otp-bikesLayer-popup" type="text/html">
@@ -293,6 +409,69 @@ Pay with your Smart Phone using ParkMobile App! (<a href="http://www.usf.edu/adm
 
 </div>
 </script>
+
+<script id="copymachine-template" type="text/html">
+<div>
+
+{{#note}}
+<p>{{note}}</p>
+{{/note}}
+
+<p>For more information see <a href="http://www.usf.edu/it/class-prep/free-printing-locations.aspx" target="_blank">here</a>.</p>
+
+</div>
+</script>
+
+
+<script id="sports-template" type="text/html">
+<div>
+Sports{{#name}}: {{name}}{{/name}}<br>
+
+Type: {{sport}}
+
+</div>
+</script>
+
+<script id="dining-template" type="text/html">
+<div>
+Dining{{#name}}: {{name}}{{/name}}<br>
+
+{{#cuisine}}Cuisine: {{cuisine}}{{/cuisine}}<br>
+
+{{#addr:street}}
+Address: {{#addr:housenumber}}{{addr:housenumber}}&nbsp;{{/addr:housenumber}} {{addr:street}}<br>
+{{/addr:street}}
+
+{{#addr:city}}City: {{addr:city}}<br>{{/addr:city}}
+{{#addr:state}}State: {{addr:state}}<br>{{/addr:state}}
+{{#addr:postcode}}Zip: {{addr:postcode}}<br>{{/addr:postcode}}
+
+{{#phone}}
+Phone: {{phone}}<br>
+{{/phone}}
+
+{{#website}}
+Website: {{website}}<br>
+{{/website}}
+
+{{#opening_hours}}
+Hours: {{opening_hours}}<br>
+{{/opening_hours}}
+
+</div>
+</script>
+
+<script id="mailing-template" type="text/html">
+<div>
+Mailing Services<br>
+
+{{#operator}}Operator: {{operator}}<br>{{/operator}}
+
+{{#note}}Note: {{note}}<br>{{/note}}
+
+</div>
+</script>
+
 
 <script id="busicon-bearing-north" type="text/html">
 <div>

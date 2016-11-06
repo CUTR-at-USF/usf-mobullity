@@ -694,11 +694,58 @@ div#otp-planner-optionsWidget-scollPanel {
 	border:none;
 	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
 	text-align:left;
-	padding:10px;
+	padding: 0 10px 10px 10px;
 }
 
-.otp-layerView-inner fieldset { border-top:1px solid gray; }
-.otp-layerView-inner fieldset legend { text-align:center; }
+.otp-layerView-inner fieldset { 
+}
+
+.legend .border { 
+  border-top: 1px solid black;
+}
+.otp-layerView-inner .legend {
+}
+.otp-layerView-inner .legend .border {
+    position: relative;
+    top: 0.9em;
+    z-index: 1;
+    width: 90%;
+    border-color: gray;
+}
+.otp-layerView-inner .legend h3 {
+    width: 95%;
+    float: left;
+    position: relative;
+    z-index: 100;
+    line-height: 1em;
+    text-align:center;
+}
+
+.otp-layerView-inner .legend .chevron {
+    float: left;
+    width: 5%;
+    font-family: FontAwesome;
+    content: "\f077"; /* chevron-up to close */
+    background-color: white;
+    font-weight: normal;
+    height: 15px;
+    padding-top: 0.2em;
+    position: relative;
+    z-index: 100;
+    color: gray;
+}
+
+.otp-layerView-inner fieldset .legend:hover {
+    cursor: pointer;
+}
+.legend span {
+    font-size: 13px;
+    font-weight: normal;
+    background-color: white;
+    padding: 0 0.3em 0 0.3em;
+}
+.routes, .stops, .bikes, .other {
+}
 
 .layerView .bus, .layerView .bikes, .layerView .parking { padding: 5px; text-align:left; }
 /* .layerView .bus li { } */
@@ -937,7 +984,8 @@ p#splash-text span {
 .other div .box,
 .routes div .box,
 .bikes div .box,
-.stops div .box {
+.stops div .box,
+#fieldset_campus_living div .box {
 	border: 1px solid #b0acac;
 	border-radius: 3px;
 	height: 15px; width: 15px;
@@ -950,7 +998,8 @@ p#splash-text span {
 .other div .name,
 .routes div .name,
 .bikes div .name,
-.stops div .name {
+.stops div .name,
+#fieldset_campus_living div .name {
 	color: black;
 	float:left;
 	padding-left: 5px;
@@ -976,16 +1025,20 @@ p#splash-text span {
 	background-color: #8f6a51;
 }
 
-.bikes div#bike_stations .box.active {
+.stops div#bus_hart .box.active {
 	background-color: green;
 }
 
-.bikes div#bike_lanes .box.active {
+#fieldset_usf_bikes .box.active {
 	background-color: #006747;
 }
 
-.stops div#bus_hart .box.active {
-	background-color: green;
+#fieldset_campus_living .box.active {
+    background-color: green;
+}
+
+#fieldset_help .box.active {
+    background-color: green;
 }
 
 .box_col {

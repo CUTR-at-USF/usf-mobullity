@@ -2037,12 +2037,34 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
 
             // Add POI-relevant nodes to data store
             if (node.getTags() != null) {
+
+                Envelope usfEnvelope = new Envelope(-82.430611, -82.401308, 28.080497, 28.043430);
+
                 for (String k : node.getTags().keySet()) {
                     String v = node.getTag(k);
                     String key = String.format("%s:%s", k, v);
 
                     if (buildPOIs.containsKey( key )) {
                 
+                        boolean flag = true;
+                        for (JsonNode condition : buildPOIs.get(key) ) {
+                            if ("inTampaCampus".equals(condition.asText())) {
+                                if (! usfEnvelope.contains(node.getLon(), node.getLat())) flag = false;
+                            }
+                            else {
+                                // key=value condition
+                                if (condition.asText().contains("=")) {
+                                    String tagSearch = condition.asText().split("=")[0], tagValue = condition.asText().split("=")[1];
+
+                                    if (node.getTags().containsKey(tagSearch) && ! tagValue.equals(node.getTags().get(tagSearch).toString())) flag = false;                                    
+                                    else if (! node.getTags().containsKey(tagSearch)) flag = false;
+                                                                        
+                                }
+                            }                            
+                        }
+                        
+                        if (! flag) continue;
+                        
                         PoiNode p = new PoiNode();
                         p.type = "node";
                         p.tags = node.getTags();
