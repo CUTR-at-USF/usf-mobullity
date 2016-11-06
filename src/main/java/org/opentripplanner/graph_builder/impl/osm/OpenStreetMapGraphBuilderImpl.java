@@ -2029,42 +2029,58 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
             return new Coordinate(osmNode.getLon(), osmNode.getLat());
         }
 
-        public void addNode(OSMNode node) {
-            if (node.isTag("amenity", "bicycle_rental")) {
-                _bikeRentalNodes.add(node);
-                return;
-            }
+        /** checkPOIConditions
+         * 
+         * @param lat
+         * @param lon
+         * @param node/way tags
+         * @param conditions List of JsonNodes from build-config
+         * 
+         * @return true if conditions are OK, false if not
+         */
+        private boolean checkPOIConditions(double lat, double lon, Map<String, String> tags, JsonNode conditions) {
 
-            // Add POI-relevant nodes to data store
-            if (node.getTags() != null) {
-
-                Envelope usfEnvelope = new Envelope(-82.430611, -82.401308, 28.080497, 28.043430);
-
-                for (String k : node.getTags().keySet()) {
-                    String v = node.getTag(k);
-                    String key = String.format("%s:%s", k, v);
-
-                    if (buildPOIs.containsKey( key )) {
+                Envelope usfEnvelope = new Envelope(28.043430, 28.080497, -82.401308, -82.430611);                
+                boolean flag = true;
                 
-                        boolean flag = true;
-                        for (JsonNode condition : buildPOIs.get(key) ) {
+                for (JsonNode condition : conditions ) {
                             if ("inTampaCampus".equals(condition.asText())) {
-                                if (! usfEnvelope.contains(node.getLon(), node.getLat())) flag = false;
+                                if (! usfEnvelope.contains(lat, lon)) flag = false;
                             }
                             else {
                                 // key=value condition
                                 if (condition.asText().contains("=")) {
                                     String tagSearch = condition.asText().split("=")[0], tagValue = condition.asText().split("=")[1];
 
-                                    if (node.getTags().containsKey(tagSearch) && ! tagValue.equals(node.getTags().get(tagSearch).toString())) flag = false;                                    
-                                    else if (! node.getTags().containsKey(tagSearch)) flag = false;
+                                    if (tags.containsKey(tagSearch) && ! tagValue.equals(tags.get(tagSearch).toString())) flag = false;                                    
+                                    else if (!tags.containsKey(tagSearch)) flag = false;
                                                                         
                                 }
                             }                            
-                        }
-                        
-                        if (! flag) continue;
-                        
+            }
+                
+            return flag;
+        }
+                
+        public void addNode(OSMNode node) {
+            if (node.isTag("amenity", "bicycle_rental")) {
+                _bikeRentalNodes.add(node);
+                return;
+            }
+
+            boolean poi_flags = true;
+            
+            // Add POI-relevant nodes to data store
+            if (node.getTags() != null) {
+
+                for (String k : node.getTags().keySet()) {
+                    String v = node.getTag(k);
+                    String key = String.format("%s:%s", k, v);
+
+                    if (! buildPOIs.containsKey( key )) continue;
+                    
+                    poi_flags = checkPOIConditions(node.getLat(), node.getLon(), node.getTags(), buildPOIs.get( key ));
+                    if (poi_flags) {                        
                         PoiNode p = new PoiNode();
                         p.type = "node";
                         p.tags = node.getTags();
@@ -2073,16 +2089,28 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                         if (!graph.pois.containsKey( key )) graph.pois.put( key, new ArrayList<PoiNode>() );
 
                         graph.pois.get(key).add( p );
-
                     }
                 }
             }
 
-            if (POINodeRefs.containsKey( node.getId() )) {
+            if (POINodeRefs.containsKey( node.getId() ) && poi_flags) {
                 PoiNode p = POINodeRefs.get(node.getId());
 
-                if (p.locations != "") p.locations += ";";
-                p.locations += String.format("%s,%s", node.getLat(), node.getLon());
+                if (p.tags != null) {
+                    for (String k : p.tags.keySet()) {
+                        String v = p.tags.get(k);
+                        String key = String.format("%s:%s", k, v);
+                    
+                        if (!buildPOIs.containsKey( key )) continue;
+                     
+                        if (! checkPOIConditions(node.getLat(), node.getLon(), p.tags, buildPOIs.get(key))) poi_flags = false;
+                    }                    
+                }
+                
+                if (poi_flags) {
+                    if (p.locations != "") p.locations += ";";
+                    p.locations += String.format("%s,%s", node.getLat(), node.getLon());
+                }
 
             }            
 
@@ -2114,8 +2142,9 @@ public class OpenStreetMapGraphBuilderImpl implements GraphBuilder {
                 for (String k : way.getTags().keySet()) {
                     String v = way.getTag(k);
                     String key = String.format("%s:%s", k, v);
-
-                    if (buildPOIs.containsKey( key )) {
+                    
+                    // Check key=value conditions, and check geofence in addNode
+                    if (buildPOIs.containsKey( key )) {                        
 
                         PoiNode p = new PoiNode();
                         p.type = "way";
