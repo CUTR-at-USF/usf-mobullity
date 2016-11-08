@@ -695,6 +695,7 @@ div#otp-planner-optionsWidget-scollPanel {
 	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;	
 	text-align:left;
 	padding: 0 10px 10px 10px;
+	overflow: scroll;
 }
 
 .otp-layerView-inner fieldset { 
