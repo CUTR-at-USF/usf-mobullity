@@ -176,22 +176,22 @@ otp.layers.BusPositionsLayer =
                    switch (this.vehicles[v].occupancyStatus) {
                    case "EMPTY":
                         occupancyClass = "green";
-                        occupancyWidth = 25;
+                        occupancyWidth = 0;
                         occupancyText = "Empty";
                         break;
                    case "MANY_SEATS_AVAILABLE":
                         occupancyClass = "green";
-                        occupancyWidth = 50;
+                        occupancyWidth = 25;
                         occupancyText = "Many Seats Available";
                         break;
                    case "FEW_SEATS_AVAILABLE":
                         occupancyClass = "yellow";
-                        occupancyWidth = 75;
+                        occupancyWidth = 60;
                         occupancyText = "Few Seats Available";
                         break;
                    case "STANDING_ROOM_ONLY":
                         occupancyClass = "red";
-                        occupancyWidth = 90;
+                        occupancyWidth = 80;
                         occupancyText = "Standing Room Only";
                         break;
                    case "CRUSHED_STANDING_ROOM_ONLY":
@@ -201,7 +201,7 @@ otp.layers.BusPositionsLayer =
                         break;
                    case "FULL":
                         occupancyClass = "red";
-                        occupancyWidth = 95;
+                        occupancyWidth = 100;
                         occupancyText = "Full";
                         break;
                    }
