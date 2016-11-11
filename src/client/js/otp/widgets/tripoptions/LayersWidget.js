@@ -221,7 +221,21 @@ otp.widgets.LayersWidget =
         for (x in otp.config.layersWidget) {
             opts = otp.config.layersWidget[x];
 
-            this[opts['name'] + "_layer"] = L.layerGroup();
+	    if (opts['cluster'] == true) {
+		    fn = (function() {
+			var options = opts;
+	
+			return function(cluster) {
+				c = options['clusterColor'];
+
+				return new L.DivIcon({ html: '<div><span>' + cluster.getChildCount() + '</span></div>', className: 'marker-cluster marker-cluster-' + c, iconSize: new L.Point(40, 40) });			
+			}
+		    })();
+
+	            this[opts['name'] + "_layer"] = L.markerClusterGroup({chunkedLoading: true, iconCreateFunction: fn});
+	    }
+	    else this[opts['name'] + '_layer'] = L.layerGroup();
+
             this[opts['name'] + "_active"] = false;
 
             if (opts['type'] == "static") this.setLayerMarkers( opts, opts['locations'] );

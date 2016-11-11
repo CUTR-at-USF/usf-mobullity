@@ -241,19 +241,19 @@ otp.config = {
 
         { name: 'car_share', target: '#carshare', icon: new L.layersIcon({icon: 'mdi mdi-car', color: 'green'}), type: 'static', title: 'Enterprise CarShare', popup: "<a target='_blank' href='https://www.enterprisecarshare.com/us/en/programs/university/usf.html'>Reserve a car</a>", locations: [[28.059951, -82.417575], [28.064287, -82.412130]], color: '#006747' },
 
-        { name: 'bike_repair', target: '#bikerepair', icon: new L.layersIcon({icon: 'mdi mdi-wrench', color: 'green'}), type: 'poi', search: 'bicycle_repair_station', popupTemplate: 'bikeRepair-template', color: '#006747' },
+        { name: 'bike_repair', target: '#bikerepair', icon: new L.layersIcon({icon: 'mdi mdi-wrench', color: 'green'}), type: 'poi', search: 'bicycle_repair_station', popupTemplate: 'bikeRepair-template', color: '#006747', clusterColor: 'green', cluster: true },
 
-        { name: 'bike_rack', target: '#bikeracks', icon: new L.icon({iconUrl: '/images/icon_bikerack.svg', iconSize: [20, 50]}), type: 'poi', search: 'bicycle_parking', color: '#006747', popupTemplate: 'bikeracks-template' },
+        { name: 'bike_rack', target: '#bikeracks', icon: new L.icon({iconUrl: '/images/icon_bikerack.svg', iconSize: [20, 50]}), type: 'poi', search: 'bicycle_parking', color: '#006747', popupTemplate: 'bikeracks-template', clusterColor: 'green', cluster: true },
 
         { name: 'car_charging', target: '#carcharging', icon: new L.layersIcon({icon: 'mdi mdi-battery-charging', color: 'red'}), type: 'poi', search: 'charging_station', popupTemplate: 'carCharging-template', color: "red" },
 
         { name: 'parking', target: '#parkinglots', icon: new L.layersIcon({icon: 'mdi mdi-parking', color: 'red'}), type: 'poi', search: 'amenity:parking', popupTemplate: 'parkingLots-template', condition: "permits", color: "red" },
 
-        { name: 'athletics', target: '#athletics', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xEB43;', color: 'green'}), type: 'poi', search: 'amenity:athletics,sport', popupTemplate: 'sports-template', color: '#006747' },
+        { name: 'athletics', target: '#athletics', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xEB43;', color: 'green'}), type: 'poi', search: 'amenity:athletics,sport', popupTemplate: 'sports-template', color: '#006747', clusterColor: 'green', cluster: true },
 
-        { name: 'dining', target: '#dining', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE56C;', color: 'green'}), type: 'poi', search: 'fast_food, restaurant', popupTemplate: 'dining-template', color: '#006747' },
+        { name: 'dining', target: '#dining', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE56C;', color: 'green'}), type: 'poi', search: 'fast_food, restaurant', popupTemplate: 'dining-template', color: '#006747', clusterColor: 'green', cluster: true },
 
-        { name: 'mailing', target: '#mailing', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE554;', color: 'green'}), type: 'poi', search: 'post_box', popupTemplate: 'mailing-template', color: '#006747' },
+        { name: 'mailing', target: '#mailing', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE554;', color: 'green'}), type: 'poi', search: 'post_box', popupTemplate: 'mailing-template', color: '#006747', clusterColor: 'green', cluster: true },
 
         { name: 'copiers', target: '#copiers', icon: new L.layersIcon({icon: 'material-icons', iconContent: '&#xE555;', color: 'green'}), type: 'poi', search: 'copyshop', popupTemplate: 'copymachine-template', color: '#006747' },
 

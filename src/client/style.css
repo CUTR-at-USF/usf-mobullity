@@ -957,6 +957,28 @@ p#splash-text span {
   display: none;
 }
 
+.marker-cluster-blue {
+        background-color: rgba(16, 171, 233, 0.6);
+}
+.marker-cluster-blue div {
+        background-color: rgba(16, 171, 233, 0.3);
+}
+
+.marker-cluster-green {
+        background-color: rgba(0, 103, 71, 0.6);
+  	color: white;
+}
+.marker-cluster-green div {
+        background-color: rgba(0, 103, 71, 0.4);
+}
+
+.marker-cluster-red {
+        background-color: rgba(255, 0, 0, 0.6);
+}
+.marker-cluster-red div {
+        background-color: rgba(255, 0, 0, 0.4);
+}
+
 .layersIcon-blue {
     background: url('/images/marker-blue.svg') no-repeat 0 0;
 }
