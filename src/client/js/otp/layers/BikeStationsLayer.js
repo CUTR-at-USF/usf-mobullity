@@ -27,9 +27,15 @@ otp.layers.BikeStationsLayer =
 		initialize : function(module) {
 			L.LayerGroup.prototype.initialize.apply(this);
 			this.module = module;
-			
-			this.module.addLayer("bikes", this);
 
+			this.bikeLayer = L.markerClusterGroup({chunkedLoading: true, iconCreateFunction: function(cluster) {
+				return new L.DivIcon({ html: '<div><span>' + cluster.getChildCount() + '</span></div>', className: 'marker-cluster marker-cluster-blue', iconSize: new L.Point(40, 40) });
+			}});
+			this.hubLayer = L.layerGroup();
+
+			this.module.addLayer("bikes", this.bikeLayer);
+			this.module.addLayer("hubs", this.hubLayer);
+			
 			this.markers = {};
 
 			// We only need to handle zoom events to remove/add markers if the level is too high or low
@@ -38,7 +44,7 @@ otp.layers.BikeStationsLayer =
 			// Refresh data every 5 seconds
                         setInterval($.proxy(this.liveMap,this),5000);
 		
-            this.firstloaded = true;	
+   	                this.firstloaded = true;	
 			this.liveMap();
 		},
 
@@ -69,13 +75,18 @@ otp.layers.BikeStationsLayer =
 			var this_ = this;
 
 			if (!this.visible) {
-				this.clearLayers();
+				this.bikeLayer.clearLayers();
+				this.hubLayer.clearLayers();
 				this.markers = {};
 				return;
 			}
 
 			var lmap = this.module.webapp.map.lmap;
 			var zoom = lmap.getZoom();
+
+			var bikeMarkers = {};
+			layers = this.bikeLayer.getLayers();
+			for (x in layers) bikeMarkers[ layers[x]._leaflet_id ] = layers[x];
 
 			opts = {};
 			if (zoom < 17) {
@@ -113,15 +124,19 @@ otp.layers.BikeStationsLayer =
 				marker.bindPopup(bikePopup, {'minWidth': 200});
 				marker._leaflet_id = this_.stations[v].id;
 
-				if (!this.hasLayer(marker)) this.addLayer(marker);
+				if (is_hub) target_layer = this_.hubLayer;
+				else target_layer = this_.bikeLayer;
+
+				if (this.markers[ marker._leaflet_id ] == undefined) target_layer.addLayer(marker);
 				else {
 					// if the marker exists, check that the position didnt change from previously
-					oldmarker = this._layers[marker._leaflet_id];
-	
+					if (is_hub) oldmarker = this.markers[ marker._leaflet_id ];
+					else oldmarker = bikeMarkers[ marker._leaflet_id ];
+
 					// If the new position is different
 					if ( ! oldmarker._latlng.equals(marker._latlng)) {				
-						this.removeLayer(oldmarker);
-						this.addLayer(marker);
+						target_layer.removeLayer(oldmarker);
+						target_layer.addLayer(marker);
 					}
 					// if the position isn't different and the station is a hub, update the popup info
 					else if (is_hub) {
@@ -137,8 +152,19 @@ otp.layers.BikeStationsLayer =
 			// remove layers present but not in new set of markers
 			for (var i in this.markers) {
 				id = this.markers[i]._leaflet_id;
+
+                                var is_hub = id.substring(0,3) == "hub";
+				if (is_hub) {
+					target_layer = this_.hubLayer;
+					m = this.markers[i];
+				}
+				else {
+					target_layer = this_.bikeLayer;
+					m = bikeMarkers[i];
+				}
+
 				if (added[id] == undefined) {
-					this.removeLayer( this.markers[i] );
+					target_layer.removeLayer( m );
 				}
 			}
 
