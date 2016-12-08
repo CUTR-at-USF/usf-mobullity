@@ -368,8 +368,12 @@ otp.modules.planner.PlannerModule =
                     desc.indexOf( "(" + obj.val().toUpperCase() + ")" ) == 0) {
 
         	        // Name matches, but latlng doesn't. Update the result
-                    if (inputSelected == 'start' && this.startLatLng != resultLatLng) obj[0].selectItem( key );
-                    else if (inputSelected == 'end' && this.endLatLng != resultLatLng) obj[0].selectItem( key );
+		    need_select = false;
+                    if (inputSelected == 'start' && this.startLatLng != resultLatLng) need_select = true;
+                    else if (inputSelected == 'end' && this.endLatLng != resultLatLng) need_select = true;
+
+		    // prevent clicking my location twice
+		    if (need_select && (desc != "My Location" || this._valid.indexOf(inputSelected + "_geocode") == -1)) obj[0].selectItem( key );
 
                     ret['pos'] = resultsList[key];
                     break;
