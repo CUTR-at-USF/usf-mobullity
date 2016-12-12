@@ -320,8 +320,6 @@ Ports that should be opened to internal servers:
 
 Since we use standalone Java files, we have to wrap these in another application - like NSSM - to be managed like a Windows service.
 
-More information available at https://docs.google.com/document/d/1AIgj9t7q_e2vD6kppMh1g6v5xt88FlHI2SiQdylm9vA/edit
-
 Chef stores cookbook files @ Amazon S3 (knife cookbook show otp 1.0.4)
 
 The structure of these cookbooks files/default:
@@ -358,6 +356,23 @@ tomcat_path: "/path/to/tomcat"
 * JKS specifies which keyStore to use (for maps.usf.edu, or mobullity.forest.usf.edu).
 * Tomcat_Path just specifies the full path to Tomcat in case it is different on a given node.
 
+## Eclipse Development Environment
+
+Although Netbeans is probably easier and less painful to setup, the following steps should work to help get a dev environment working with Eclipse.  More information @ https://docs.google.com/document/d/1xn5RZmfijAqedt8asEMcIBS33rtDzvXlpVUTbuqXOSo (Documentation of how to setup various OTP versions with api.citybik.es)
+
+1. Ensure your Eclipse workspace is clean.  It might also be helpful to ensure it is not within a directory that Google Drive or similar is monitoring (as building/cleaning processes can cause unexpected behavior)
+1. Ensure your JDK is properly configured in Eclipse.  Window - Prefs - Java - Installed JREs  i.e: not just a JRE - I used jdk1.7.0_51
+1. Follow the OTP guides to setting up Eclipse with plugins and the lombok.jar
+1. Clone the target OTP repository 
+1. Perform the Maven update process.  Right-click on the opentripplanner project - Maven - Update Project
+1. May be unnecessary, but I found that also performing a maven package helped: Run - Run As - Maven build…   -- Goals: package -- also, skip tests to save some time.
+1. Create the tomcat instance and add the otp-webapp and otp-api-webapp modules as described in the installation tutorial (https://readthedocs.org/projects/opentripplanner/)
+1. NOTE: You may also need to “Clean work directory” from tomcat by right-clicking on the server within the servers tab especially if you have tested other versions recently.
+1. Configure OTP - Graph, and Bicycle data source
+
+Each version of OTP needs a corresponding graph object to be built.  You can either download a region, or build an object from an openstreetmap extract.
+
+How to configure and perform the other various tasks are documented in the other sections.
 
 ## MapBox Styles
 
