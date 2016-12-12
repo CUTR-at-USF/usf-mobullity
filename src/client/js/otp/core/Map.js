@@ -207,8 +207,7 @@ otp.core.Map = otp.Class({
              * Binds the actions to the map events.
              */
             bindEvents: function(map) {
-                map.on('locationfound', this._onLocationFound, this);
-                map.on('locationerror', this._onLocationError, this);
+                map.on('locationerror', this.onLocationError, this);
                 map.on('unload', this.stop, this);
             },
 
