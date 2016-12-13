@@ -28,6 +28,9 @@ import org.opentripplanner.routing.graph.Graph;
 import org.opentripplanner.routing.services.GraphService;
 import org.opentripplanner.util.model.EncodedPolylineBean;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
 @Path("/routers/{routerId}/pois")
 @XmlRootElement
 public class POIs {
@@ -38,12 +41,12 @@ public class POIs {
 
 		@GET
 		@Produces({ MediaType.APPLICATION_JSON })
-		public Map<String, ArrayList<PoiNode>> get(@PathParam("routerId") String routerId,
+		public Response get(@PathParam("routerId") String routerId,
             @QueryParam("query") String query) {
 
 			Graph g = graphService.getGraph(routerId);
 			if (g == null) return null;
-		
+	
             // Map for result
             Map<String, ArrayList<PoiNode>> res = new HashMap<String, ArrayList<PoiNode>>();
             
@@ -69,7 +72,10 @@ public class POIs {
             }
 
             // Find all matching PoiNodes, and create JSON string
-            return q;
+
+	    // Allow POI response to be cached for up to a week
+            return Response.ok(q).header("Cache-Control", "max-age=86400").build();
+
 		}
 	
 }
