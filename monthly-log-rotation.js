@@ -1,8 +1,10 @@
+var objArgs = WScript.Arguments;
+path = objArgs(0);
 
 WScript.Echo("Monthly request log rotation started...");
 
 var fso = WScript.CreateObject("Scripting.FileSystemObject");
-var file = fso.GetFile("requests.zip");
+var file = fso.GetFile(path + "\\requests.zip");
 
 WScript.Echo(file.Name);
 
