@@ -16,8 +16,6 @@ var hubIcon = L.Icon.extend({
         }
 });
 
-var stations = {};
-
 otp.layers.BikeStationsLayer = 
 	otp.Class(L.LayerGroup, {
 
@@ -27,6 +25,7 @@ otp.layers.BikeStationsLayer =
 		initialize : function(module) {
 			L.LayerGroup.prototype.initialize.apply(this);
 			this.module = module;
+			this.stations = {};
 
 			this.bikeLayer = L.markerClusterGroup({chunkedLoading: true, iconCreateFunction: function(cluster) {
 				return new L.DivIcon({ html: '<div><span>' + cluster.getChildCount() + '</span></div>', className: 'marker-cluster marker-cluster-blue', iconSize: new L.Point(40, 40) });

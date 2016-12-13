@@ -101,6 +101,13 @@ otp.modules.multimodal.MultimodalPlannerModule =
 
         // Layer Selector		
         this.layerWidget = new otp.widgets.LayersWidget('otp-'+this.id+'-layersWidget', this);		
+
+        // load state from URL on load and reset backbone router
+        var qx = Object.keys(this.layerWidget.router.state);
+        for (x in qx) {
+	        $('#' + qx[x]).click();
+        }
+
              
         // The following block of code open the widget depending on the user "config"
         if (location.hash == "#trip")
