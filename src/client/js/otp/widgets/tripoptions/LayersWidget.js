@@ -14,6 +14,38 @@
 
 otp.namespace("otp.widgets.layers");
 
+otp.widgets.LayersWidgetRouter = Backbone.Router.extend({
+	state: {},
+
+        routes: { "layers/:query": "activate" },
+
+        activate: function(query) {
+		qx = query.split(",");
+		for (x in qx) {
+			this.state[qx[x]] = "on";
+		}
+        },
+
+	doNavigate: function(id, is_on) {
+		if (this.state == undefined) {
+			self = this_.router;
+			console.log(self);
+		}
+		else self = this;
+
+		if (self.state[id] == undefined) self.state[id] = null;
+
+		if (is_on) self.state[id] = "on";
+		else if (!is_on) delete self.state[id];
+
+		var fragment = "layers/" + Object.keys(self.state).join(",");
+
+		self.navigate( fragment );
+	}
+
+});
+
+
 otp.widgets.LayersWidget = 
     otp.Class(otp.widgets.Widget, {
 
@@ -52,7 +84,10 @@ otp.widgets.LayersWidget =
     },
 
     initialize : function(id, module) {
-    
+
+	this.router = new otp.widgets.LayersWidgetRouter();    
+        Backbone.history.start();
+
         otp.widgets.Widget.prototype.initialize.call(this, id, module, {
 			title : 'Layers',
 			customHeader : true, // use a custom header
@@ -65,12 +100,22 @@ otp.widgets.LayersWidget =
             //openInitially : false,
             persistOnClose : true,
         });
-        
+
         this.module = module;
         
         var this_ = this;
 
         ich['usf-layer-menu']({}).appendTo(this.mainDiv);
+
+	$('.route-menu-item').bind('click', function(ev) {
+
+	    // if false now, it is turning on
+	    var is_on = ! $(this).find(".box.active").length > 0; 
+	    var id = $(this)[0].id;
+
+	    this_.router.doNavigate(id, is_on);
+	});
+
 
         $('.otp-layerView-inner .legend').bind('click', function(ev) {
 
