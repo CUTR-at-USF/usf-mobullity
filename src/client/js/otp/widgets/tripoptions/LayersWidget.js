@@ -40,6 +40,8 @@ otp.widgets.LayersWidgetRouter = Backbone.Router.extend({
 
 		var fragment = "layers/" + Object.keys(self.state).join(",");
 
+	        sessionStorage.setItem("previousURL", location.origin + "/" + location.search);
+
 		self.navigate( fragment );
 	}
 
