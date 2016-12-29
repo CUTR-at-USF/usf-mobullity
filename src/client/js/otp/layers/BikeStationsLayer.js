@@ -114,6 +114,7 @@ otp.layers.BikeStationsLayer =
 
 				name = this_.stations[v].name || this_.stations[v].id;
 				context = {'name': name, 'station': this_.stations[v], 'reserve_link': link};
+				context['pos'] = coord;
 
 				if (is_hub) 
 					var bikePopup = ich['otp-bikesLayer-hub-popup'](context).get(0);

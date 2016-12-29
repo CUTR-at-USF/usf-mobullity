@@ -54,6 +54,19 @@ otp.widgets.LayersWidget =
     module : null,
     minimumZoom : 15,
     layersUsed : [],
+
+    setPlannerMarker : function(marker, this_) {
+	    pos = L.latLng( $(this_).data("lat"), $(this_).data("lng") );
+console.log(pos);
+
+	    if (marker == 'start')
+	            webapp.planner.setStartPoint(pos, true);
+	    else 
+		    webapp.planner.setEndPoint(pos, true);
+
+            webapp.planner.optionsWidget.updateURL();
+
+    },
  
     toggle_bus_layer : function(rte) {
     	
@@ -360,11 +373,14 @@ otp.widgets.LayersWidget =
                     vals = {};
                 }
 
-                marker =  L.marker(L.latLng(latlng[0], latlng[1]), {icon: opts['icon']} );
+		pos = L.latLng(latlng[0], latlng[1]);
+                marker =  L.marker(pos, {icon: opts['icon']} );
                 marker._leaflet_id = L.stamp(marker);
 
+		vals['pos'] = pos;
+
                 var html = false;
-                if ('popup' in opts) html = opts['popup'];
+                if ('popup' in opts) html = Mustache.to_html( opts['popup'], vals );
                 else if ('popupTemplate' in opts) {
                     html = ich[ opts['popupTemplate'] ]( vals ).html();
                 }
