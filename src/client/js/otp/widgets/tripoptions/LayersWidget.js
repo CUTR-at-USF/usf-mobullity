@@ -29,7 +29,6 @@ otp.widgets.LayersWidgetRouter = Backbone.Router.extend({
 	doNavigate: function(id, is_on) {
 		if (this.state == undefined) {
 			self = this_.router;
-			console.log(self);
 		}
 		else self = this;
 
@@ -57,7 +56,6 @@ otp.widgets.LayersWidget =
 
     setPlannerMarker : function(marker, this_) {
 	    pos = L.latLng( $(this_).data("lat"), $(this_).data("lng") );
-console.log(pos);
 
 	    if (marker == 'start')
 	            webapp.planner.setStartPoint(pos, true);
