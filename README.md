@@ -35,6 +35,8 @@ Table of Contents
    * [Steps to Install/Provision Servers w/ Chef:](#steps-to-installprovision-servers-w-chef)
       * [Install NSSM for OTP,GTFS:](#install-nssm-for-otpgtfs)
       * [Chef](#chef)
+      * [Install Chef Client Development Kit](#install-chef-client-development-kit)
+      * [Production Network Policies](#production-network-policies)
    * [Manual Deployment Steps](#manual-deployment-steps)
 
 
@@ -1207,8 +1209,65 @@ After this, you just have to specify which environment this node is in (producti
 
 Every 30 minutes (the default), chef-client will run and process the cookbook recipes specified in the environment. Upgrading or downgrading versions and files as necessary.
 
+## Install Chef Client Development Kit
+
+These were done in a stock debian docker container, but are similar for other platforms.
+
+```
+dpkg -i chefdk_1.1.16-1_amd64.deb
+chef verify
+apt-get install git
+
+create a directory for chef repo
+copy knife.rb, user.pem, org-validator.pem into (chef repo)\.chef
+knife download .
+```
+
+Now you can make changes to the cookbook recipes, files, or anything you can change in the manage.chef.io interface and upload them with knife.
+
+knife cookbook show  will output the direct Amazon S3 links to view the files.
+
+## Production Network Policies
+
+We use a Netscaler appliance managed by USF IT to load balance requests to the production servers.  It is configured to remember the server used by a particular session (sticky routing) for cases where that might be necessary or benefit performance (e.g. trip plans are faster after the first request, so using the same server will benefit a bit on subsequent requests).
+
+Public-facing ports balanced by Netscaler appliance:
+
+OpenTripPlanner - 80, 443
+Geocoder - 8181, 8443
+GTFS-RT - 8088
+
+SSL is enabled on the 443 and 8443 ports, the others are standard HTTP endpoints.
+
+The ACLs should allow 80, 443, 8181, 8443, and 8088 between mobullity.forest.usf.edu, mobullity2.forest.usf.edu, and mobullity3.forest.usf.edu)
+
 
 # Manual Deployment Steps
 
 In case you cannot or don't want to wait until midnight to push a new version to each of the servers:
+
+1. Push the desired changes to GitHub, PR and merge.
+2. RDP into Mobullity
+3. Login to Jenkins (http://localhost:8080/)
+4. Click on the "OTP" project
+5. On the left, click "Build Now"
+6. When the build is finished, check the log (at the bottom) and make sure the Chef build hooks ran.
+7. Restart chef client service
+
+To update the production environment with the latest changes ahead of schedule:
+1. Login to Manage.chef.io
+2. Policy - Cookbooks - OTP (make a note of the latest version #)
+3. Policy - Environments - Production
+4. Cookbook Constraints - Edit: OTP (update the version to the version saved in step 2)
+5. Optionally RDP into mobullity2 and mobullity3 to manually restart the chef client service
+
+The steps are the same for the gtfsrealtime, and geocoder_tomcat cookbooks.
+
+For OTP, you may also need to rebuild the graph depending on the changes needed.  This should automatically schedule for midnight, but you can run them immediately:
+
+1. RDP into each server
+2. From a command prompt, run: schtasks /run /tn mapbuild
+
+NOTE: This will cause service interruption while it builds, so try to do one at a time.  You will know when the process is finished because the "Java" process will consume 99% CPU while processing the graph.
+
 
