@@ -8,7 +8,7 @@ How can we reproduce the issue?
 
 **Expected behavior:** 
 
-What did you expect the skill to do?
+What did you expect the app to do?
 
 **Observed behavior:** 
 
