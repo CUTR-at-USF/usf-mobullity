@@ -394,7 +394,7 @@ The original search was:
 // gather results
 (
   // query part for: “barrier=bollard”
-  node["barrier"="bollard"]({{bbox}});
+  node["barrier"="bollard"](28.05081075453498,-82.43016242980957,28.072586166612016,-82.39806175231934);  
 );
 // print results
 out body;
