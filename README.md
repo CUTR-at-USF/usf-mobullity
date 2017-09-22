@@ -634,9 +634,9 @@ Non-sucking Service Manager (NSSM) is configured on the 3 mobullity servers to m
 
 `nssm.exe edit mobullityOTP`
 
-OTP: -Xmx2G -jar c:\otpfiles\otp.jar -g c:\otpfiles -s --port 80
-GTFS: -jar c:\bullrunner-gtfs-realtime-generator\target\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions
-NOTE: GTFS must be in startup directory \target\ because of hard-coded ../myGTFS/ path.
+* OTP: `-Xmx2G -jar c:\otpfiles\otp.jar -g c:\otpfiles -s --port 80`
+* GTFS: `-jar c:\bullrunner-gtfs-realtime-generator\target\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions`
+  * *NOTE: GTFS must be in startup directory \target\ because of hard-coded ../myGTFS/ path.*
 
 Tomcat7 is used to host the old-style geocoder WAR on the following paths:
 
