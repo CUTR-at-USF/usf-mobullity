@@ -181,7 +181,7 @@ In order to test the local geocoder from a local deployment of OTP, you must all
 
   This is an internal service used by OTP to read vehicle positions and trip updates converted from the Bullrunner AVL system (Synchromatics).
 
-  It requires the Bullrunner GTFS data to be stored in myGTFS/ one level below the JAR file.
+  It requires the Bullrunner GTFS data to be stored in `bullrunner-gtfs/` one level below the JAR file.
 
   * To build:
 
@@ -189,12 +189,12 @@ In order to test the local geocoder from a local deployment of OTP, you must all
 
   2) Navigate to `bullrunner-gtfs-realtime-generator` folder
 
-  3) Use command `mvn clean package`.  This creates the `cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar` file in the target folder that is used to run the server
+  3) Use command `mvn clean package`.  This creates the `bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar` file in the target folder that is used to run the server
 
   * To run: (from the base directory)
 
   ```
-  java -jar \target\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions
+  java -jar \target\bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions
   ```
 
 4. Deployment Testing: (From https://github.com/CUTR-at-USF/test/tree/WIP-jmfield2)
@@ -376,7 +376,7 @@ geocoder_tomcat:
 
 gtfsrealtime:
 * bullrunner-gtfs.zip  
-* cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar  
+* bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT
 
 otp:
 * Graph.properties  
@@ -617,7 +617,7 @@ Copies the new otp.jar from the Jenkins workspace, bumps the patch version of th
 ```
 C:/OTPFiles/chef-gtfs.bat:
 REM Copy JAR from jenkins workspace
-copy "C:\Program Files (x86)\Jenkins\jobs\GTFS-RT\workspace\target\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar" c:\chef-repo\cookbooks\gtfsrealtime\files\default\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar
+copy "C:\Program Files (x86)\Jenkins\jobs\GTFS-RT\workspace\target\bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT" c:\chef-repo\cookbooks\gtfsrealtime\files\default\bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT
 
 cd c:\chef-repo
 
@@ -635,8 +635,8 @@ Non-sucking Service Manager (NSSM) is configured on the 3 mobullity servers to m
 `nssm.exe edit mobullityOTP`
 
 * OTP: `-Xmx2G -jar c:\otpfiles\otp.jar -g c:\otpfiles -s --port 80`
-* GTFS: `-jar c:\bullrunner-gtfs-realtime-generator\target\cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions`
-  * *NOTE: GTFS must be in startup directory \target\ because of hard-coded ../myGTFS/ path.*
+* GTFS: `-jar c:\bullrunner-gtfs-realtime-generator\target\bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions`
+  * *NOTE: GTFS must be in startup directory \target\ because of hard-coded `../bull-runner/` path.*
 
 Tomcat7 is used to host the old-style geocoder WAR on the following paths:
 
@@ -1108,10 +1108,10 @@ web.xml
 
 ## GTFSRealtime: ##
 
-This copies new bullrunner GTFS data to the working directory and extracts the zipfile (as expected by the server) to myGTFS.
+This copies new bullrunner GTFS data to the working directory and extracts the zipfile (as expected by the server) to `bullrunner-gtfs`.
 
 ```
-windows_zipfile "c:/bullrunner-gtfs-realtime-generator/myGTFS" do
+windows_zipfile "c:/bullrunner-gtfs-realtime-generator/bullrunner-gtfs" do
 	source "c:/bullrunner-gtfs-realtime-generator/bullrunner-gtfs.zip"
 	action :nothing
 	notifies :restart, "windows_service[mobullityGTFS]"
@@ -1121,7 +1121,7 @@ cookbook_file "c:/bullrunner-gtfs-realtime-generator/bullrunner-gtfs.zip" do
 	source "bullrunner-gtfs.zip"
 	action :create
 	
-	notifies :unzip, "windows_zipfile[c:/bullrunner-gtfs-realtime-generator/myGTFS]"
+	notifies :unzip, "windows_zipfile[c:/bullrunner-gtfs-realtime-generator/bullrunner-gtfs]"
 end
 ```
 
@@ -1130,16 +1130,16 @@ As above, copy any new gtfsrealtime jars to a staging area, stop the service, co
 ```
 execute "copy_jar" do
 
-	command "copy /y cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar.stage cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar"
+	command "copy /y bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar.stage bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar"
 	cwd "C:/bullrunner-gtfs-realtime-generator/target"
 
 	action :nothing
 	notifies :start, "windows_service[mobullityGTFS]"
 end
 
-cookbook_file "c:/bullrunner-gtfs-realtime-generator/target/cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar.stage" do
+cookbook_file "c:/bullrunner-gtfs-realtime-generator/target/bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar.stage" do
 	
-	source "cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar"
+	source "bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar"
 	action :create
 
 	notifies :stop, "windows_service[mobullityGTFS]", :immediately
@@ -1158,7 +1158,7 @@ end
 ```
 
 files/:
-cutr-gtfs-realtime-bullrunner-0.9.0-SNAPSHOT.jar
+bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar
 
 
 # Steps to Install/Provision Servers w/ Chef:
@@ -1178,7 +1178,7 @@ Install the following software manually:
 nssm install mobullityotp java -jar c:\otpfiles\otp.jar -g c:\otpfiles -s --port 80
 nssm set mobullityotp AppDirectory c:\otpfiles # for startup dir
 
-nssm install mobullitygtfs java -jar c:\bullrunner-gtfs-realtime-generator\target\cutr-gtfs-realtime-generator-0.9.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions
+nssm install mobullitygtfs java -jar c:\bullrunner-gtfs-realtime-generator\target\bullrunner-gtfs-realtime-generator-1.0.0-SNAPSHOT.jar --tripUpdatesUrl=http://localhost:8088/trip-updates --vehiclePositionsUrl=http://localhost:8088/vehicle-positions
 ```
 "Service "mobullitygtfs" installed successfully!"
 
