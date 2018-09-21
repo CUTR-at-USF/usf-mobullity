@@ -181,7 +181,7 @@ In order to test the local geocoder from a local deployment of OTP, you must all
 
   This is an internal service used by OTP to read vehicle positions and trip updates converted from the Bullrunner AVL system (Synchromatics).
 
-  It requires the Bullrunner GTFS data to be stored in `bullrunner-gtfs/` one level below the JAR file.
+  It requires the Bullrunner GTFS data to be stored in `bullrunner-gtfs/` one level below the JAR file.  Additionally, a file `key.txt` should also be in a folder one level below the JAR file and should contain the API key for the Syncromatics API.
 
   * To build:
 
