@@ -230,7 +230,7 @@ In order to test the local geocoder from a local deployment of OTP, you must all
 
   openssl req -new -newkey rsa:2048 -nodes -out mobullity_usf_edu.csr -keyout mobullity_usf_edu.key -subj "/C=US/ST=Florida/L=Tampa/O=University of South Florida/OU=CUTR/CN=mobullity.usf.edu"
 
-  2) Have USF IT create the certificates and download the "as x509, base64 encoded" file, or self-sign for internal testing and import into Java Keystore:
+  2) Have USF IT create the certificates and download the "as x509, base64 encoded" file, or self-sign for internal testing and import into Java Keystore at `C:/OTPFiles/keyStore`:
 
   USF IT:
   * Use the `as X509, Base64 encoded` CER file.
