@@ -222,7 +222,7 @@ In order to test the local geocoder from a local deployment of OTP, you must all
 
   SSL:
 
-  Note: keyStore must be in basePath, otherwise the SSL won't be properly initialized and connections will 'abort' (because of no matching ciphers, etc)
+  Note: keyStore must be in basePath, otherwise the SSL won't be properly initialized and connections will 'abort' (because of no matching ciphers, etc).  Note that there are two SSL keystores - one for Tomcat (for geocoder) and one for embedded Jetty server from running OTP JAR.
 
   1) Generate CSRs:
 
@@ -242,6 +242,9 @@ In order to test the local geocoder from a local deployment of OTP, you must all
   * openssl pkcs12 -export -in cert.pem -inkey mobullity_forest_usf_edu.pem -passout pass:PASS > server.p12
   * keytool -importkeystore -srckeystore server.p12 -destkeystore server.jks -srcstoretype pkcs12
 
+  The cert is also managed via Chef for OTP Jetty server, so you'll need to log into development machine and import key into `C:\chef\cache\cookbooks\otp\files\default\maps.jks`.  Then run `C:\opscode\chef\bin\knife spork bump otp && c:\opscode\chef\bin\kni
+fe cookbook upload otp` to update the cookbook.  Then, log into both mobullity2 and 3 and delete the contents of `C:\chef\backup` and `C:\chef\cache`, and then reboot the machines to force a pickup of the new cookbook from Chef.io (for some reason the machines aren't actively checking in on their own).
+  
   To test, you can run the following nmap script to list all available ciphers which should yield something like:
 
   nmap --script +ssl-enum-ciphers -p 8081 localhost
