@@ -277,15 +277,50 @@ otp.core.Map = otp.Class({
 
 		// 40 accuracy for wifi, 22000 for wired/city center approximations
 		if (e.accuracy >= 22000) {
-			e.latlng = otp.config.initLatLng;
-			this.queueView(e.latlng, otp.config.initZoom);
+
+			dialogYesFn = (function(e, ctx) {
+				var original_pos = e;
+				var this_ = ctx;
+				return function() {
+					this_.queueView(original_pos.latlng, otp.config.initZoom);
+					webapp.map.geoLocationFound( original_pos );
+				}
+			})(e, this);
+		
+			dialogNoFn = (function(e) {
+				var this_ = e;
+				return function() {
+					this_.queueView(otp.config.initLatLng, otp.config.initZoom);
+				}
+			})(this);
+
+	                otp.widgets.Dialogs.showYesNoDialog("An inaccurate location was provided by your device.  Would you like to use this anyway?", "Location Unavailable", dialogYesFn, dialogNoFn );
+
 			return; // dont bother adding a marker 
 		}
 				
 		// if e.latlng is outside of map boundaries (tampa), recenter on USF			
 		if ( ! otp.config.mapBoundary.contains(e.latlng)) {
-			e.latlng = otp.config.initLatLng;
-			this.queueView(e.latlng, otp.config.initZoom);
+
+                        dialogYesFn = (function(e, ctx) {
+                                var original_pos = e;
+				var this_ = ctx;
+                                return function() {
+                                        this_.queueView(original_pos.latlng, otp.config.initZoom);
+                                        webapp.map.geoLocationFound( original_pos );
+                                
+                                }
+                        })(e, this);
+
+                        dialogNoFn = (function(e) {
+                                var this_ = e;
+                                return function() {
+                                        this_.queueView(otp.config.initLatLng, otp.config.initZoom);
+                                }
+                        })(this);
+                        
+                        otp.widgets.Dialogs.showYesNoDialog("You appear to be outside of the Tampa area.  Move the map to your current location now?", "Location Out of Range", dialogYesFn, dialogNoFn );
+
 			return; // and don't add a marker on first load
 		}				
 
