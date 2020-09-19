@@ -213,6 +213,7 @@ otp.core.Webapp = otp.Class({
                     defaultModule = module;
                 }
 
+		this[id] = module;
                 this.addModule(module);
             }
             if(!defaultModule) defaultModule = this.modules[0];
@@ -260,7 +261,7 @@ otp.core.Webapp = otp.Class({
             wrapDiv: true,
             divId: 'otp-spinner'
         }));
-                
+               
         // retrieve a saved trip, if applicable
                 //if(window.location.hash !== "")
                 //        otp.util.DataStorage.retrieve(window.location.hash.replace("#", ""), this.activeModule);
