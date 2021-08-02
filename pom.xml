@@ -537,7 +537,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.0</version>
+            <version>1.21</version>
         </dependency>
         <!-- Used in DegreeGridNEDTileSource to fetch tiles from Amazon S3 -->
         <dependency>
